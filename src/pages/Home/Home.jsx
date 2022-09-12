@@ -1,8 +1,13 @@
+import CardContainer from "../../components/CardContainer/CardContainer";
+import Pagination from "../../components/Pagination/Pagination";
 
 
-export default function Home () {
+export default function Home() {
 
-  return(
-    <h1>Home</h1>
+  return (
+    <>
+      <CardContainer />
+      <Pagination />
+    </>
   )
 }
