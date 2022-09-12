@@ -1,5 +1,7 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
+import Footer from './components/Footer/Footer';
+import NavBar from './components/NavBar/NavBar';
 import AboutUs from './pages/AboutUs/AboutUs';
 import ContactUs from './pages/ContactUs/ContactUs';
 import Favorites from './pages/Favorites/Favorites';
@@ -12,6 +14,7 @@ import ShopCart from './pages/ShopCart/ShopCart';
 function App() {
   return (
     <Router>
+      <NavBar />
       <Routes>
         <Route exact path="/" element={<LandingPage />} />
         <Route path='/home' element={<Home />} />
@@ -21,6 +24,7 @@ function App() {
         <Route exact path='/about' element={<AboutUs />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
+      <Footer />
     </Router>
   );
 }

@@ -37,19 +37,8 @@ export default function ContactUs() {
           <option value="service" >Service</option>
           <option value="other">Other</option>
         </select>
-        <input value={input.name} onChange={(e) => handleChange(e)}
-          type='text'
-          placeholder="Your name"
-          name="name"
-          required
-        />
-        <input
-          value={input.email} onChange={(e) => handleChange(e)}
-          type='email'
-          placeholder="Your email"
-          name="email"
-          required
-        />
+        <input value={input.name} onChange={(e) => handleChange(e)} type='text' placeholder="Your name" name="name" required />
+        <input value={input.email} onChange={(e) => handleChange(e)} type='email' placeholder="Your email" name="email" required />
         <label>Message</label>
         <textarea type="textarea" name="message" value={input.message} onChange={(e) => handleChange(e)} cols="30" rows="10"></textarea>
         <button type="submit" onClick={handleSubmit}>Send</button>
