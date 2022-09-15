@@ -5,22 +5,23 @@ import '../CreateProduct/CreateProduct.css';
 import { createPost, getCelulares } from '../../redux/actions';
 // import { Link } from 'react-router-dom';
 
-const validations = (input) => {
-  const errors = {};
-  if (!input.line) errors.line = "errors found";
-  // if (!input.image.trim()) errors.image = "image not found";
-  if (!input.description) errors.description = "description not found";
-  if (!input.model) errors.model = "model not found";
-  // if (!input.price.trim()) errors.price = "price not found";
-  // if (!input.spec.trim()) errors.spec = "spec not found";
-  return errors;
-}
+// const validations = (input) => {
+//   const errors = {};
+//   if (!input.line) errors.line = "errors found";
+//   // if (!input.image.trim()) errors.image = "image not found";
+//   if (!input.description) errors.description = "description not found";
+//   if (!input.model) errors.model = "model not found";
+//   // if (!input.price.trim()) errors.price = "price not found";
+//   // if (!input.spec.trim()) errors.spec = "spec not found";
+//   return errors;
+// }
+
 
 const CreateProduct = () => {
   const dispatch = useDispatch();
   // const typeMarca = useSelector((state) => state.celulares);
 
-  const [errors, setErrors] = useState({});
+  // const [errors, setErrors] = useState({});
   const [input, setInput] = useState({
     line: "",
     image: "",
@@ -41,11 +42,11 @@ const CreateProduct = () => {
       ...input,
       [name]: value,
     });
-    setErrors(
-      validations({
-        ...errors,
-        [name]: value
-      }));
+    // setErrors(
+    //   validations({
+    //     ...errors,
+    //     [name]: value
+    //   }));
   }
 
   // const handleSelect = (e) => {
