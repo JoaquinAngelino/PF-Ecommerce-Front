@@ -97,20 +97,20 @@ const CreateProduct = () => {
             <input type="text" name="text" id="text" class="form-control"></input>
           </div>
           <div class="form-group m-2">
-            <label for="text">Description</label>
+            <label for="text">Model</label>
             <input type="text" name="text" id="text" class="form-control"></input>
           </div>
           <div class="form-group m-2">
-            <label for="text">Model</label>
-            <input type="text" name="text" id="text" class="form-control"></input>
+            <label for="text">Description</label>
+            <textarea type="text" name="text" id="text" class="form-control"></textarea>
           </div>
           <div class="form-group m-2">
             <label for="">Specs</label>
             <textarea type="text" name="text" id="text" class="form-control"></textarea>
           </div>
           <div class="d-grid gap-2 d-md-flex justify-content-md-end ">
-              <button type="submit" class="btn btn-outline-success">Back</button>
-              <button type="submit" class="btn btn-outline-success">Submit</button>
+            <button type="submit" class="btn btn-outline-success">Back</button>
+            <button type="submit" class="btn btn-outline-success">Submit</button>
           </div>
         </form>
       </div>
