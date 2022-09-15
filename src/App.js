@@ -1,5 +1,5 @@
 import React from 'react'
-import CreateProduct from './component/CreateProduct';
+import CreateProduct from './component/CreateProduct.jsx';
 
 const App = () => {
   return (
