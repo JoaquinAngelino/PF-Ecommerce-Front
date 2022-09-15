@@ -1,0 +1,8 @@
+.card {
+   width: 22rem;
+   height: 26rem;
+   justify-content: center;
+   align-items: center;
+   display: flex;
+   border-radius: 12px;
+}

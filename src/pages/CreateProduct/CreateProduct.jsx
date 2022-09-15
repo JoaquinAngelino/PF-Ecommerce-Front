@@ -50,12 +50,17 @@ const CreateProduct = () => {
       allbrand: [...input.brand, e.target.value]
     })
   }
-  const handleDelete = (e) => {
-    setInput({
-      ...input,
-      allbrand: input.brand.filter((g) => g !== e)
-    })
-  }
+  // const handleDelete = (e) => {
+  //   setInput({
+  //     ...input,
+  //     allbrand: input.brand.filter((g) => g !== e)
+  //   })
+  // }
+
+  // const handleEdit = () => {
+  //   setInput({
+  //   })
+  // }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -68,7 +73,7 @@ const CreateProduct = () => {
     )
     if (Object.keys(errors).length === 0) {
       dispatch(createPost(input))
-      console.log(input, 'soy lo que se envia desde el front')
+      // console.log(input, 'soy lo que se envia desde el front')
       alert("your cell phone was created")
       setInput({
         line: "",
@@ -92,8 +97,8 @@ const CreateProduct = () => {
       <h1 className="title text-center">Create Product</h1>
       <div className="abs-center">
         <form onSubmit={(e) => handleSubmit(e)} className="border row g-3 needs-validation p-3 form border-info ">
-          <div className="form-group m-2">
-            <label htmlFor="text">line</label>
+          <div className="form-group">
+            <label htmlFor="text">Line</label>
             <input type="text" onChange={(e) => handleChange(e)} name="line" className="form-control"
               value={input.line}></input>
             {errors.line && <h4 className='errors'>{errors.line}</h4>}
@@ -114,7 +119,7 @@ const CreateProduct = () => {
             {errors.description ? <h4 className="errors">{errors.description}</h4> : ""}
           </div>
           <div className="form-group m-2">
-            <label htmlFor="text">all Brand</label>
+            <label htmlFor="text">All Brand</label>
             <select id='brand' type="text" onChange={(e) => handleSelect(e)} name="brand" value={input.brand} className="form-control">
               <option value="brand">Brands</option>
               {
