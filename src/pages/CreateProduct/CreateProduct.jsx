@@ -7,10 +7,10 @@ import { Link } from 'react-router-dom';
 
 const validations = (input) => {
   const errors = {};
-  if (!input.line) errors.line = "errors found";
-  if (!input.image) errors.image = "image not found";
-  if (!input.description) errors.description = "description not found";
-  if (!input.model) errors.model = "model not found";
+  if (!input.line) errors.line = "a name is needed";
+  if (!input.image) errors.image = "a picture is needed";
+  if (!input.description) errors.description = "of a description";
+  if (!input.model) errors.model = "model needed";
   // if (!input.price.trim()) errors.price = "price not found";
   // if (!input.spec.trim()) errors.spec = "spec not found";
   return errors;
@@ -19,7 +19,8 @@ const validations = (input) => {
 
 const CreateProduct = () => {
   const dispatch = useDispatch();
-  const allBorad = useSelector((state) => state.allCell);//a esta variable la mapeo los brand o spec !!!
+  const allbrand = useSelector((state) => state.allCell);
+  console.log(allbrand, 'data de front')
   // const allSpec = useSelector((state) => state.allCell);
 
   const [input, setInput] = useState({
@@ -27,6 +28,7 @@ const CreateProduct = () => {
     image: "",
     description: "",
     model: "",
+    brand: []
   })
   const [errors, setErrors] = useState({});
 
@@ -46,13 +48,13 @@ const CreateProduct = () => {
 
   const handleSelect = (e) => {
     setInput({
-      allBorad: [...input.brand, e.target.value]
+      allbrand: [...input.brand, e.target.value]
     })
   }
   const handleDelete = (e) => {
     setInput({
       ...input,
-      allBorad: input.borad.filter((g) => g !== e)
+      allbrand: input.brand.filter((g) => g !== e)
     })
   }
 
@@ -74,6 +76,7 @@ const CreateProduct = () => {
         image: "",
         description: "",
         model: "",
+        brand: []
       })
     } else {
       alert("we could not create your cell")
@@ -81,43 +84,44 @@ const CreateProduct = () => {
   }
 
   useEffect(() => {
-    // dispatch(getCelulares());
+    dispatch(getCelulares());
+    console.log(getCelulares())
   }, [dispatch])
 
   return (
     <div className="container">
       <h1 className="title text-center">Create Product</h1>
       <div className="abs-center">
-        <form onSubmit={(e) => handleSubmit(e)} className="border p-3 form border-info">
+        <form onSubmit={(e) => handleSubmit(e)} className="border row g-3 needs-validation p-3 form border-info ">
           <div className="form-group m-2">
             <label htmlFor="text">line</label>
             <input type="text" onChange={(e) => handleChange(e)} name="line" className="form-control"
               value={input.line}></input>
+            {errors.line && <h4 className='errors'>{errors.line}</h4>}
           </div>
-          {errors.line && <h4 className=''>{errors.line}</h4>}
-          <div className="form-group m-2">
+          <div className="form-group m-0">
             <label htmlFor="text">Image</label>
             <input type="url" onChange={(e) => handleChange(e)} name="image" className="form-control" value={input.image}></input>
+            {errors.image && <h4 className="errors" >{errors.image}</h4>}
           </div>
-          {errors.image && <h4 className='' >{errors.image}</h4>}
           <div className="form-group m-2">
             <label htmlFor="text">Model</label>
             <input type="text" onChange={(e) => handleChange(e)} name="model" className="form-control" value={input.model}></input>
+            {errors.model && <h4 className="errors">{errors.model}</h4>}
           </div>
-          {errors.model && <h4 className=''>{errors.model}</h4>}
           <div className="form-group m-2">
             <label htmlFor="text">Description</label>
             <textarea type="text" onChange={(e) => handleChange(e)} name="description" value={input.description} className="form-control"></textarea>
+            {errors.description ? <h4 className="errors">{errors.description}</h4> : ""}
           </div>
-          {errors.description && <h4 className=''>{errors.description}</h4>}
           <div className="form-group m-2">
             <label htmlFor="text">all Brand</label>
-            <select type="text" onChange={(e) => handleChange(e)} name="brand" value={input.brand} className="form-control">
+            <select type="text" onChange={(e) => handleSelect(e)} name="brand" value={input.brand} className="form-control">
               <option value="brand">Brands</option>
               {
-                allBorad?.map((e, index) => {
+                allbrand?.map((e, index) => {
                   return (
-                    <option key={index} value={e.borad}>{e.name}</option>
+                    <option key={index} value={e.brand}>{e.brand}</option>
                   )
                 })
               }
@@ -128,7 +132,7 @@ const CreateProduct = () => {
             <select type="text" name="spec" id="spec" value={input.spec} className="form-control"></select>
           </div> */}
           {/* {errors.line && <h4>{errors.spec}</h4>} */}
-          <div className="d-grid gap-2 d-md-flex justify-content-md-end ">
+          <div className="d-grid gap-2 d-md-flex justify-content-md-end">
             <Link to='/home'>
               <button type="submit" className="btn btn-outline-info">Back</button>
             </Link>
