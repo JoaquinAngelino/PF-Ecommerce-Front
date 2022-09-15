@@ -1,0 +1,20 @@
+.abs-center {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   min-height: 100vh;
+
+}
+
+.form {
+   width: 30rem;
+   border-radius: 1rem;
+   height: auto;
+}
+
+.btn {
+   align-items: center;
+   justify-content: center;
+   display: flex;
+   margin-top: 1rem;
+}
