@@ -18,7 +18,7 @@ const validations = (input) => {
 
 const CreateProduct = () => {
   const dispatch = useDispatch();
-  const typeMarca = useSelector((state) => state.celulares);
+  // const typeMarca = useSelector((state) => state.celulares);
 
   const [errors, setErrors] = useState({});
   const [input, setInput] = useState({
@@ -26,9 +26,6 @@ const CreateProduct = () => {
     image: "",
     description: "",
     model: "",
-    price: "",
-    spec: [],
-    brand: ""
   })
 
   // const handleDelete = (e) => {
@@ -57,76 +54,73 @@ const CreateProduct = () => {
   //   })
   // }
 
-  const handleSubmit = (e) => {
-    console.log(e)
-    e.preventDefault();
-    setErrors(
-      validations({
-        ...input,
-        [e.target.line]: errors.target.value
-      })
-    )
-    if (Object.keys(errors).length === 0) {
+  const handleSubmit = () => {
+    // e.preventDefault();
+    // console.log(e,'soy el handleSubmit del front')
+    // setErrors(
+    //   validations({
+    //     ...input,
+    //     [e.target.name]: errors.target.value
+    //   })
+    // )
+    // if (Object.keys(errors).length === 0) {
       dispatch(createPost(input))
-      console.log(input,'soy lo que se envia desde el front')
+      console.log(input, 'soy lo que se envia desde el front')
       alert("your cell phone was created")
       setInput({
         line: "",
         image: "",
         description: "",
         model: "",
-        price: "",
-        spec: "",
-        brand: ""
       })
-    } else {
+    // } else {
       alert("we could not create your cell")
-    }
+    // }
   }
 
-  useEffect(() => {
-    dispatch(getCelulares());
-  }, [dispatch])
+  // useEffect(() => {
+  //   // dispatch(getCelulares());
+  // }, [dispatch])
 
   return (
-    <div class="container">
-      <h1 class="title text-center">Create Product</h1>
-      <div class="abs-center">
-        <form action="#" onSubmit={(e) => handleSubmit(e)} class="border p-3 form border-info">
-          <div class="form-group m-2">
-            <label for="text">line</label>
-            <input type="text" onChange={(e) => handleChange(e)} name="line" class="form-control"
-              id="line" value={input.line}></input>
+    <div className="container">
+      <h1 className="title text-center">Create Product</h1>
+      <div className="abs-center">
+        <form  onSubmit={(e) => handleSubmit(e)} className="border p-3 form border-info">
+          <div className="form-group m-2">
+            <label htmlFor="text">line</label>
+            <input type="text" onChange={(e) => handleChange(e)} name="line" className="form-control"
+              value={input.line}></input>
           </div>
-          {errors.line && <h4>{errors.line}</h4>}
-          <div class="form-group m-2">
-            <label for="text">Image</label>
-            <input type="url" onChange={(e) => handleChange(e)} name="image" class="form-control" id="image" value={input.image}></input>
+          {/* {errors.line && <h4>{errors.line}</h4>} */}
+          <div className="form-group m-2">
+            <label htmlFor="text">Image</label>
+            <input type="url" onChange={(e) => handleChange(e)} name="image" className="form-control" value={input.image}></input>
           </div>
-          {errors.line && <h4>{errors.line}</h4>}
-          <div class="form-group m-2">
-            <label for="text">Model</label>
-            <input type="text" onChange={(e) => handleChange(e)} name="model" class="form-control" id="model" value={input.model}></input>
+          {/* {errors.line && <h4>{errors.line}</h4>} */}
+          <div className="form-group m-2">
+            <label htmlFor="text">Model</label>
+            <input type="text" onChange={(e) => handleChange(e)} name="model" className="form-control" value={input.model}></input>
           </div>
-          {errors.line && <h4>{errors.model}</h4>}
-          <div class="form-group m-2">
-            <label for="text">Description</label>
-            <textarea type="text" onChange={(e) => handleChange(e)} name="description" id="description" value={input.description} class="form-control"></textarea>
+          {/* {errors.line && <h4>{errors.model}</h4>} */}
+          <div className="form-group m-2">
+            <label htmlFor="text">Description</label>
+            <textarea type="text" onChange={(e) => handleChange(e)} name="description" value={input.description} className="form-control"></textarea>
           </div>
-          {errors.line && <h4>{errors.description}</h4>}
-          <div class="form-group m-2">
-            <label for="text">Brand</label>
-            <textarea type="text" onChange={(e) => handleChange(e)} name="brand" value={input.brand} class="form-control"></textarea>
+          {/* {errors.line && <h4>{errors.description}</h4>} */}
+          <div className="form-group m-2">
+            <label htmlFor="text">Brand</label>
+            <textarea type="text" onChange={(e) => handleChange(e)} name="brand" value={input.brand} className="form-control"></textarea>
           </div>
-          {errors.line && <h4>{errors.brand}</h4>}
-          <div class="form-group m-2">
-            <label for="">Specs</label>
-            <select type="text" name="spec" id="spec" value={input.spec} class="form-control"></select>
-          </div>
+          {/* {errors.line && <h4>{errors.brand}</h4>} */}
+          {/* <div className="form-group m-2">
+            <label htmlFor="">Specs</label>
+            <select type="text" name="spec" id="spec" value={input.spec} className="form-control"></select>
+          </div> */}
           {/* {errors.line && <h4>{errors.spec}</h4>} */}
-          <div class="d-grid gap-2 d-md-flex justify-content-md-end ">
-            <button type="submit" class="btn btn-outline-info">Back</button>
-            <button type="submit" class="btn btn-outline-info">Submit</button>
+          <div className="d-grid gap-2 d-md-flex justify-content-md-end ">
+            <button type="submit" className="btn btn-outline-info">Back</button>
+            <button type="submit" className="btn btn-outline-info">Submit</button>
           </div>
         </form>
       </div>
