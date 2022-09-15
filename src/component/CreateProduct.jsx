@@ -5,7 +5,7 @@ import '../component/CreateProduct.css';
 // import { Link } from 'react-router-dom';
 // const Validate = (input) => {
 //    const errors = {};
-//    if (!input.name.trim()) errors.name = "errors found";
+//    if (!input.linea.trim()) errors.linea = "errors found";
 //    if (!input.image.trim()) errors.image = "image not found";
 //    if (!input.description.trim()) errors.description = "description not found";
 //    if (!input.modelo.trim()) errors.modelo = "modelo not found";
@@ -20,7 +20,7 @@ const CreateProduct = () => {
 
   // const [errors, setErrors] = useState({});
   // const [input, setInput] = useState({
-  //    name: "",
+  //    linea: "",
   //    image: "",
   //    description: "",
   //    modelo: "",
@@ -36,15 +36,15 @@ const CreateProduct = () => {
   // }
 
   // const handleChange = (e) => {
-  //    const { name, value } = e.target;
+  //    const { linea, value } = e.target;
   //    setInput({
   //       ...input,
-  //       [name]: value,
+  //       [linea]: value,
   //    });
   //    setErrors(
   //       Validate({
   //          ...errors,
-  //          [name]: value
+  //          [linea]: value
   //       }));
   // }
 
@@ -59,14 +59,14 @@ const CreateProduct = () => {
   //    setErrors(
   //       Validate({
   //          ...input,
-  //          [e.target.name]: errors.target.value
+  //          [e.target.linea]: errors.target.value
   //       })
   //    )
   //    if (Object.keys(errors).length === 0) {
   //       // dispatch(functionReducer(input))
   //       alert("your cell phone was created")
   //       setInput({
-  //          name: "",
+  //          linea: "",
   //          image: "",
   //          description: "",
   //          modelo: "",
@@ -89,24 +89,24 @@ const CreateProduct = () => {
       <div class="abs-center">
         <form action="#" class="border p-3 form border-success">
           <div class="form-group m-2">
-            <label for="text">Name</label>
-            <input type="text" name="text" id="text" class="form-control "></input>
+            <label for="text">Linea</label>
+            <input type="text" linea="text" id="text" class="form-control "></input>
           </div>
           <div class="form-group m-2">
             <label for="text">Image</label>
-            <input type="text" name="text" id="text" class="form-control"></input>
+            <input type="text" linea="text" id="text" class="form-control"></input>
           </div>
           <div class="form-group m-2">
             <label for="text">Model</label>
-            <input type="text" name="text" id="text" class="form-control"></input>
+            <input type="text" linea="text" id="text" class="form-control"></input>
           </div>
           <div class="form-group m-2">
             <label for="text">Description</label>
-            <textarea type="text" name="text" id="text" class="form-control"></textarea>
+            <textarea type="text" linea="text" id="text" class="form-control"></textarea>
           </div>
           <div class="form-group m-2">
             <label for="">Specs</label>
-            <textarea type="text" name="text" id="text" class="form-control"></textarea>
+            <textarea type="text" linea="text" id="text" class="form-control"></textarea>
           </div>
           <div class="d-grid gap-2 d-md-flex justify-content-md-end ">
             <button type="submit" class="btn btn-outline-success">Back</button>
