@@ -16,84 +16,85 @@ export default function Filters() {
     // Hooks
     const location = useLocation();
     const navigate = useNavigate();
-    const products = useSelector(state => state.instruments);
+    const products = useSelector(state => state.products);
     const [searchParams, setSearchParams] = useSearchParams();
     //-------------------- params
-    const marca = searchParams.get('marca');
-    const precio = searchParams.get('precio');
+    const brand = searchParams.get('brand');
+    const price = searchParams.get('price');
     const stock = searchParams.get('stock');
-    const linea = searchParams.get('linea');
+    const line = searchParams.get('line');
     // Cellphone's propierties
-    let marcaAll = [];
-    let preciosAll = [];
-    let lineaAll = [];
+    let brandAll = [];
+    let pricesAll = [];
+    let lineAll = [];
     products.forEach(product => {
-        marcaAll.push(product.marca);
-        preciosAll.push(product.precio);
-        lineaAll.push(product.linea);
+        brandAll.push(product.brand);
+        pricesAll.push(product.price);
+        lineAll.push(product.line);
     });
     // Repeated results are eliminated from the arrays then sorted
-    marcaAll = marcaAll.filter((item, index) => {
-        return marcaAll.indexOf(item) === index;
+    brandAll = brandAll.filter((item, index) => {
+        return brandAll.indexOf(item) === index;
     });
-    lineaAll = lineaAll.filter((item, index) => {
-        return lineaAll.indexOf(item) === index;
+    lineAll = lineAll.filter((item, index) => {
+        return lineAll.indexOf(item) === index;
     });
-    marcaAll.sort();
-    lineaAll.sort();
+    brandAll.sort();
+    lineAll.sort();
     // Local state
-    const [precioSlide, setPrecioSlide] = useState([Math.floor(Math.min(...preciosAll)), Math.ceil(Math.max(...preciosAll))]);
+    const [priceSlide, setPriceSlide] = useState([Math.floor(Math.min(...pricesAll)), Math.ceil(Math.max(...pricesAll))]);
     // Send selected filters
     function handlerSubmit(e) {
-        e.target.value ? e.target.name === 'precio' ?
-            setSearchParams(searchParams.set(e.target.name, `${e.target.value[0]}/${e.target.value[1]}`)) :
+        e.target.value ? e.target.name === 'price' ?
+            setSearchParams(searchParams.set(e.target.name, `${e.target.value[0]}/${e.target.value[1]}`)) : // "100/300"
             setSearchParams(searchParams.set(e.target.name, e.target.value)) :
             searchParams.delete(e.target.name);
         location.search = `?${searchParams.toString()}`;
+        console.log(location)
         navigate(location);
     }
-    // Save changes in the precio slider
-    function handlerChangeprecio(e) {
+    // Save changes in the price slider
+    function handlerChangePrice(e) {
         e.preventDefault();
-        setPrecioSlide(e.target.value);
+        setPriceSlide(e.target.value);
     }
-    // Send precio filter data
+    // Send price filter data
     function handlerRangeSubmit() {
-        const precios = {
+        const prices = {
             target: {}
         };
-        precios.target.name = 'precio';
-        precios.target.value = precioSlide;
-        handlerSubmit(precios)
+        prices.target.name = 'price';
+        prices.target.value = priceSlide;
+        handlerSubmit(prices)
     }
 
     return (
-        marca && precio && stock && linea ? null :
+        brand && price && stock && line ? null :
             <div className='filtersContainer'>
                 {
-                    !marca ? <>
-                        <b>marca: </b>
+                    !brand ? <>
+                        <b>brand: </b>
                         <FormControl className='brandFilter'>
-                            <Select name="marca" variant="filled" fullWidth size='small' onChange={(e) => handlerSubmit(e)}>
+                            <Select name="brand" variant="filled" fullWidth size='small' onChange={(e) => handlerSubmit(e)}>
                                 {
-                                    marcaAll.map((marca, i) => { return (<MenuItem key={i} value={marca}>{marca}</MenuItem>) })
+                                    brandAll.map((brand, i) => { return (<MenuItem key={i} value={brand}>{brand}</MenuItem>) })
                                 }
                             </Select>
                         </FormControl>
                     </> : null
                 }
                 {
-                    !precio ? <>
-                        <b>precio: </b>
+                    !price ? <>
+                        <b>price: </b>
                         <FormControl className='filterPrice'>
                             <Slider
-                                min={Math.floor(Math.min(...preciosAll))}
-                                max={Math.ceil(Math.max(...preciosAll))}
+                                min={Math.floor(Math.min(...pricesAll))}
+                                max={Math.ceil(Math.max(...pricesAll))}
                                 valueLabelDisplay="auto"
-                                value={precioSlide}
-                                marks={[{ value: Math.floor(Math.min(...preciosAll)), label: `$${precioSlide[0]}` },
-                                { value: Math.ceil(Math.max(...preciosAll)), label: `$${precioSlide[1]}` }]}
-                                onChange={(e) => handlerChangeprecio(e)}
+                                value={priceSlide}
+                                marks={[{ value: Math.floor(Math.min(...pricesAll)), label: `$${priceSlide[0]}` },
+                                { value: Math.ceil(Math.max(...pricesAll)), label: `$${priceSlide[1]}` }]}
+                                onChange={(e) => handlerChangePrice(e)}
                             />
                             <IconButton onClick={() => handlerRangeSubmit()} aria-label="send">
                                 <SendIcon />
@@ -113,12 +114,12 @@ export default function Filters() {
                     </> : null
                 }
                 {
-                    !linea ? <>
-                        <b>linea: </b>
+                    !line ? <>
+                        <b>line: </b>
                         <FormControl className='categoryFilter'>
-                            <Select name="linea" variant="filled" fullWidth size='small' onChange={(e) => handlerSubmit(e)}>
+                            <Select name="line" variant="filled" fullWidth size='small' onChange={(e) => handlerSubmit(e)}>
                                 {
-                                    lineaAll.map((linea, i) => { return (<MenuItem key={i} value={linea}>{linea}</MenuItem>) })
+                                    lineAll.map((line, i) => { return (<MenuItem key={i} value={line}>{line}</MenuItem>) })
                                 }
                             </Select>
                         </FormControl>

@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { NavDropdown } from 'react-bootstrap';
 import { BsCartFill, BsStarFill, BsFillPhoneFill } from 'react-icons/bs';
+import { AiOutlineUpload } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import SearchBar from '../SearchBar/SearchBar'
 import 'bootstrap/dist/css/bootstrap.css';
 import './NavBar.css'
 
@@ -27,21 +29,14 @@ export default function NavBar() {
       <div className="containerNavBar container-fluid justify-content-around ">
         <div className='BtnContainer'>
           <div className="navbar-nav hstack gap-3 NavBar-Item">
-            <Link to='/home' className="nav-link"><BsFillPhoneFill className='CardIcon' /></Link>
-            <Link to='/favorites' className="nav-link"><BsStarFill className='CardIcon' /></Link>
-            <Link to='/cart' className="nav-link"><BsCartFill className='CardIcon' /></Link>
-            <Link to='/create' className="nav-link"><strong>Sell</strong></Link>
+            <Link to='/home' className="nav-link"><BsFillPhoneFill className='NavBarIcon' /></Link>
+            <Link to='/favorites' className="nav-link"><BsStarFill className='NavBarIcon' /></Link>
+            <Link to='/cart' className="nav-link"><BsCartFill className='NavBarIcon' /></Link>
+            <Link to='/create' className="nav-link"><AiOutlineUpload className='NavBarIcon' /></Link>
           </div>
         </div>
-        <div className='BtnContainer'>
-          <div className="navbar-nav hstack gap-3 NavBar-Item">
-            <div className='containerSearchBar d-flex'>
-              <form className="d-flex input-group" role="search" onSubmit={(e) => { handleSubmit(e) }}>
-                <input className="form-control me-2" value={name} name={"name"} onChange={(e) => { handleInputChange(e) }} placeholder='Type your search...' />
-              </form>
-            </div>
-          </div>
-        </div>
+
+        <SearchBar/>
         {/* <img className="ProfileImg" src={user.picture} alt="user" referrerPolicy="no-referrer" /> */}
         {/* <NavDropdown title={user.nickname} id="navbarScrollingDropdown">
           <NavDropdown.Item href='/profile/data' className="dropDown" >Personal Data</NavDropdown.Item>

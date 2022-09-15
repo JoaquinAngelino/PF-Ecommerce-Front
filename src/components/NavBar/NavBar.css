@@ -28,3 +28,11 @@
   box-shadow: none ;
   border-color: #ced4da;
 }
+
+.NavBarIcon{
+  color: white;
+  font-size: 1.7rem;
+}
+.NavBarIcon:hover{
+  color: #175850;
+}
