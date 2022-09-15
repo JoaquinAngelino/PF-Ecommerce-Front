@@ -11,7 +11,7 @@ export const getCelulares = () => {
       const getCell = await axios.get('http://localhost:3001/celulares')
       return dispatch({
          type: GET_CELL,
-         payload: getCell
+         payload: getCell.data
       })
    }
 }

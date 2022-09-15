@@ -11,8 +11,7 @@ const validations = (input) => {
   if (!input.image) errors.image = "a picture is needed";
   if (!input.description) errors.description = "of a description";
   if (!input.model) errors.model = "model needed";
-  // if (!input.price.trim()) errors.price = "price not found";
-  // if (!input.spec.trim()) errors.spec = "spec not found";
+  if (!input.brand) errors.price = "choose a brand";
   return errors;
 }
 
@@ -20,7 +19,7 @@ const validations = (input) => {
 const CreateProduct = () => {
   const dispatch = useDispatch();
   const allbrand = useSelector((state) => state.allCell);
-  console.log(allbrand, 'data de front')
+  // console.log(allbrand, 'data de front')
   // const allSpec = useSelector((state) => state.allCell);
 
   const [input, setInput] = useState({
@@ -116,7 +115,7 @@ const CreateProduct = () => {
           </div>
           <div className="form-group m-2">
             <label htmlFor="text">all Brand</label>
-            <select type="text" onChange={(e) => handleSelect(e)} name="brand" value={input.brand} className="form-control">
+            <select id='brand' type="text" onChange={(e) => handleSelect(e)} name="brand" value={input.brand} className="form-control">
               <option value="brand">Brands</option>
               {
                 allbrand?.map((e, index) => {
