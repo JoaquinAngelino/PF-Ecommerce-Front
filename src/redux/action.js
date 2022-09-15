@@ -3,7 +3,7 @@ import {
    POST_PRODUCT
 } from './typeAction';
 
-export const postRecipe = (payload) => {
+export const postProductCel = (payload) => {
    // console.log(payload, 'soy el payload de postProduct')
    return async (dispatch) => {
       const createProduct = await axios.post("http://localhost:3001/cel", payload)
