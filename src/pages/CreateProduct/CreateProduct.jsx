@@ -99,17 +99,17 @@ const CreateProduct = () => {
             <label htmlFor="text">Image</label>
             <input type="url" onChange={(e) => handleChange(e)} name="image" className="form-control" value={input.image}></input>
           </div>
-          {errors.line && <h4 className='' >{errors.line}</h4>}
+          {errors.image && <h4 className='' >{errors.image}</h4>}
           <div className="form-group m-2">
             <label htmlFor="text">Model</label>
             <input type="text" onChange={(e) => handleChange(e)} name="model" className="form-control" value={input.model}></input>
           </div>
-          {/* {errors.line && <h4>{errors.model}</h4>} */}
+          {errors.model && <h4 className=''>{errors.model}</h4>}
           <div className="form-group m-2">
             <label htmlFor="text">Description</label>
             <textarea type="text" onChange={(e) => handleChange(e)} name="description" value={input.description} className="form-control"></textarea>
           </div>
-          {/* {errors.line && <h4>{errors.description}</h4>} */}
+          {errors.description && <h4 className=''>{errors.description}</h4>}
           <div className="form-group m-2">
             <label htmlFor="text">all Brand</label>
             <select type="text" onChange={(e) => handleChange(e)} name="brand" value={input.brand} className="form-control">
