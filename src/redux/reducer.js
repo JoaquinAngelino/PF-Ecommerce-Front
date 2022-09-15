@@ -1,6 +1,7 @@
 import { GET_CELL, POST_PRODUCT } from './typeAction';
 const initialState = {
-  celulares: []
+  cells: [],
+  allCell: []
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -8,7 +9,8 @@ const rootReducer = (state = initialState, action) => {
     case GET_CELL:
       return {
         ...state,
-        celulares: action.payload
+        cells: action.payload,
+        allCell: action.payload
       }
     case POST_PRODUCT:
       return {
