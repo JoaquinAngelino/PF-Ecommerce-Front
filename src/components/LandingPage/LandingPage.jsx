@@ -9,8 +9,8 @@ export default function LandingPage(){
     return(
         <div>
         <h1 id="h1l">Welcome to Cells Store</h1>
-        <Link id="al" to= '/home'>
-            <button>Ingresar</button>
+        <Link  to= '/home'>
+        <button type="button" className="atras">Go Back</button>
         </Link>
         </div>
     )
