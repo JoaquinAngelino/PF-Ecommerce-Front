@@ -2,8 +2,11 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCelulares } from '../../redux/actions';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
+// import Card from '../Card/Card';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../CardContainer/CardContainer.css';
 
 const CardContainer = () => {
   const dispatch = useDispatch();
@@ -14,23 +17,29 @@ const CardContainer = () => {
   })
 
   return (
-    <div>
-      <div >
-        {allCards?.map((e, index) => {
-          return (
-            <div key={index} className='card'>
-              <div>
-                <img className="card-img-top col-6" src="#" alt="Card image cap">{e.image}</img>
-              </div>
-              <div className="card-body-columns m-4">
-                <h3 className="card-title">{e.line}</h3>
-                <p className="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
-              </div>
-            </div>
-          )
-        })}
-      </div>
+    <div className="" >
+      {allCards?.map((e, index) => {
+        return (
+          <Card className="" style={{ width: '23rem' }}>
+            <Card.Img variant="top" src={e.image} />
+            <Card.Body>
+              <Card.Title>Card Title</Card.Title>
+              <Card.Text>
+                Some quick example text to build on the card title and make up the
+                bulk of the card's content.
+              </Card.Text>
+            </Card.Body>
+            <ListGroup className="list-group-flush">
+              <ListGroup.Item>Cras justo odio</ListGroup.Item>
+              <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
+              <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+            </ListGroup>
+            <Card.Body>
+              <Button variant="primary">Go somewhere</Button>
+            </Card.Body>
+          </Card>
+        )
+      })}
     </div>
   )
 }
