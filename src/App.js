@@ -10,6 +10,7 @@ import LandingPage from './pages/LandingPage/LandingPage';
 import NotFound from './pages/NotFound/NotFound';
 import ShopCart from './pages/ShopCart/ShopCart';
 import Detail from './components/Detail/Detail';
+import CreateProduct from './pages/CreateProduct/CreateProduct';
 
 
 function App() {
@@ -25,6 +26,8 @@ function App() {
         <Route  path='/about' element={<AboutUs />} />
         <Route path='*' element={<NotFound />} />
         <Route path="/detail/" element={<Detail/>}></Route>
+        <Route path='/create' element={<CreateProduct />} />
+
       </Routes>
       <Footer />
     </Router>
