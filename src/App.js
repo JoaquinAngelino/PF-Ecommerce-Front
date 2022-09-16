@@ -9,6 +9,7 @@ import Home from './pages/Home/Home';
 import LandingPage from './pages/LandingPage/LandingPage';
 import NotFound from './pages/NotFound/NotFound';
 import ShopCart from './pages/ShopCart/ShopCart';
+import Detail from './components/Detail/Detail';
 
 
 function App() {
@@ -18,11 +19,12 @@ function App() {
       <Routes>
         <Route exact path="/" element={<LandingPage />} />
         <Route path='/home' element={<Home />} />
-        <Route exact path='/favorites' element={<Favorites />} />
-        <Route exact path='/cart' element={<ShopCart />} />
-        <Route exact path='/contact' element={<ContactUs />} />
-        <Route exact path='/about' element={<AboutUs />} />
+        <Route  path='/favorites' element={<Favorites />} />
+        <Route  path='/cart' element={<ShopCart />} />
+        <Route  path='/contact' element={<ContactUs />} />
+        <Route  path='/about' element={<AboutUs />} />
         <Route path='*' element={<NotFound />} />
+        <Route path="/detail/" element={<Detail/>}></Route>
       </Routes>
       <Footer />
     </Router>
