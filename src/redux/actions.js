@@ -23,14 +23,14 @@ export const getFilteredProducts = (payload) => {
           payload: products.data
       });
   };
-  // export function getCellsById() {
-  //   return async (dispatch)=> {
+  //  export function getCellsById() {
+  //    return async (dispatch)=> {
   //       const cellDetails = await axios("http://localhost:3001/celulares"/+id);
   
   //       return dispatch({
-  //           type: GET_CELLS_BY_ID,
+  //            type: GET_CELLS_BY_ID,
   //           payload: cellDetails.data
-  //       });
-  //   };
-  // }
+  //      });
+  //    };
+  //  }
 }
