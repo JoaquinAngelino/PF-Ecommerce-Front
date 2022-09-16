@@ -1,2 +1,3 @@
 export const POST_PRODUCT = "POST_PRODUCT";
-export const GET_CELL = "GET_CELL";
+export const GET_CELLS_BY_ID = "GET_CELLS_BY_ID";
+export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";

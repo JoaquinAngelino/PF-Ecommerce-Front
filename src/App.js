@@ -9,7 +9,9 @@ import Home from './pages/Home/Home';
 import LandingPage from './pages/LandingPage/LandingPage';
 import NotFound from './pages/NotFound/NotFound';
 import ShopCart from './pages/ShopCart/ShopCart';
+import Detail from './components/Detail/Detail';
 import CreateProduct from './pages/CreateProduct/CreateProduct';
+
 
 function App() {
   return (
@@ -18,12 +20,14 @@ function App() {
       <Routes>
         <Route exact path="/" element={<LandingPage />} />
         <Route path='/home' element={<Home />} />
-        <Route path='/favorites' element={<Favorites />} />
-        <Route path='/cart' element={<ShopCart />} />
-        <Route path='/contact' element={<ContactUs />} />
-        <Route path='/about' element={<AboutUs />} />
+        <Route  path='/favorites' element={<Favorites />} />
+        <Route  path='/cart' element={<ShopCart />} />
+        <Route  path='/contact' element={<ContactUs />} />
+        <Route  path='/about' element={<AboutUs />} />
         <Route path='*' element={<NotFound />} />
+        <Route path="/detail/" element={<Detail/>}></Route>
         <Route path='/create' element={<CreateProduct />} />
+
       </Routes>
       <Footer />
     </Router>
