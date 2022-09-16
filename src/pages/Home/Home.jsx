@@ -6,8 +6,11 @@ import ProductCard from "../../components/Card/ProductCard";
 import Filters from "../../components/Filters/Filters";
 import NothingFound from "../../components/NothingFound/NothingFound";
 import Pagination from "../../components/Pagination/Pagination";
+<<<<<<< HEAD
+=======
 import { getAllProducts, getFilteredProducts } from "../../redux/actions";
 import './Home.css'
+>>>>>>> develop
 
 export default function Home() {
   const location = useLocation();
@@ -54,6 +57,12 @@ export default function Home() {
   }
 
   return (
+<<<<<<< HEAD
+    <div>
+      <CardContainer />
+      <Pagination />
+    </div>
+=======
     <>
       {filters.length ? searchName && filters.length === 1 ?
         null :
@@ -90,5 +99,6 @@ export default function Home() {
       }
       <Pagination currentPage={currentPage} postPerPage={6} totalPosts={products.length} paginate={paginate} />
     </>
+>>>>>>> develop
   )
 }
