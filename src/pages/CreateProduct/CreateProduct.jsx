@@ -27,7 +27,7 @@ const CreateProduct = () => {
     image: "",
     description: "",
     model: "",
-    brand: []
+    brand: ""
   })
   const [errors, setErrors] = useState({});
 
@@ -80,7 +80,7 @@ const CreateProduct = () => {
         image: "",
         description: "",
         model: "",
-        brand: []
+        brand: ""
       })
     } else {
       alert("we could not create your cell")
