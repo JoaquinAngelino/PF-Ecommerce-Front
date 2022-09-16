@@ -1,13 +1,94 @@
-import CardContainer from "../../components/CardContainer/CardContainer";
+import { useEffect, useState } from "react";
+import { CloseButton } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import ProductCard from "../../components/Card/ProductCard";
+import Filters from "../../components/Filters/Filters";
+import NothingFound from "../../components/NothingFound/NothingFound";
 import Pagination from "../../components/Pagination/Pagination";
-
+import { getAllProducts, getFilteredProducts } from "../../redux/actions";
+import './Home.css'
 
 export default function Home() {
+  const location = useLocation();
+  const [searchParams] = useSearchParams();
+  const searchName = searchParams.get('name');
+  const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(1);
+  const products = useSelector(state => state.products);
+  const dispatch = useDispatch()
+  const filters = []
+  searchParams.forEach((value, key) => {
+    filters.push([key, value]);
+  });
+
+  useEffect(() => {
+    if (searchParams.toString()) {
+      dispatch(getFilteredProducts(searchParams.toString()));
+    } else {
+      dispatch(getAllProducts());
+    }
+  }, [dispatch, searchParams]);
+
+  useEffect(() => {
+    window.scrollTo({ top: '0px', behavior: 'smooth' });
+  }, [currentPage])
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [products])
+
+  // Pagination logic
+  let idxLastItem = currentPage * 6;
+  let ixdFirstItem = idxLastItem - 6;
+  let pageProducts = products.slice(ixdFirstItem, idxLastItem);
+  const paginate = (number) => {
+    setCurrentPage(number)
+  };
+
+  // Clear filters
+  function clearFilter(filter) {
+    searchParams.delete(filter);
+    location.search = `?${searchParams.toString()}`;
+    navigate(location);
+  }
 
   return (
     <>
-      <CardContainer />
-      <Pagination />
+      {filters.length ? searchName && filters.length === 1 ?
+        null :
+        <div className="selectedFilters">
+          <span>Selected filters: </span>
+          {
+            filters.map(filter => {
+              return filter[0] === 'name' ?
+                null :
+                (
+                  <div key={filter[0]} className="activeFilter">
+                    {filter[0] === 'price' ? `Price range ${filter[1]}` : filter[1]}
+                    <CloseButton onClick={() => clearFilter(filter[0])} />
+                  </div>
+                )
+            })
+          }
+        </div>
+        : null}
+      <Pagination currentPage={currentPage} postPerPage={6} totalPosts={products.length} paginate={paginate} />
+      <Filters />
+      {(!products || !products.length) ? (<NothingFound />) :
+        pageProducts.map(e => <ProductCard
+          key={e.id}
+          id={e.id}
+          line={e.line}
+          model={e.model}
+          capacity={e.capacity}
+          price={e.price}
+          stock={e.stock}
+          image={e.image}
+          memoryRAM={e.memoryRAM}
+        />)
+      }
+      <Pagination currentPage={currentPage} postPerPage={6} totalPosts={products.length} paginate={paginate} />
     </>
   )
 }
