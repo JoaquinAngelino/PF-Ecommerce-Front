@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../CreateProduct/CreateProduct.css';
-import { createPost, getCelulares } from '../../redux/actions';
+import { createPost, getAllProducts } from '../../redux/actions';
 import { Link } from 'react-router-dom';
 
 const validations = (input) => {
@@ -18,7 +18,7 @@ const validations = (input) => {
 
 const CreateProduct = () => {
   const dispatch = useDispatch();
-  const allbrand = useSelector((state) => state.allCell);
+  const allbrand = useSelector((state) => state.products);
   // console.log(allbrand, 'data de front')
   // const allSpec = useSelector((state) => state.allCell);
 
@@ -88,8 +88,8 @@ const CreateProduct = () => {
   }
 
   useEffect(() => {
-    dispatch(getCelulares());
-    console.log(getCelulares())
+    dispatch(getAllProducts());
+    console.log(getAllProducts())
   }, [dispatch])
 
   return (

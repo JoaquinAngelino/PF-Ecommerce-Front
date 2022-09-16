@@ -1,0 +1,77 @@
+.containerHome .card {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 43vh;
+  transition: all ease .5s;
+}
+
+.containerHome .card:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transform: translateY(-.5em);
+}
+
+.containCardBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.containerName {
+  font-weight: 800;
+}
+
+.containerListDescription {
+  width: 8rem;
+}
+
+.card .MuiSkeleton-root {
+  height: 200px;
+  width: 200px;
+  margin: 15px;
+}
+
+.containCardImage {
+  margin: 1rem;
+  width: 15rem;
+}
+
+.cardImage {
+  height: 100%;
+  width: 15rem;
+  object-fit: contain;
+}
+
+.containerButton {
+  margin-right: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.CardIcon {
+  cursor: pointer;
+  margin: 0.5em;
+  width: 1.9em;
+  height: 1.9em;
+  color: rgb(61, 61, 61)
+}
+
+.CardIcon:hover {
+  color: #169E85;
+}
+
+.cardPrice {
+  color: #169E85;
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
+body.Dark .card{
+  background: linear-gradient( 90deg, white 45%, #0f7461);
+  border: none;
+}
+
+body.Dark .containerListDescription{
+  background-color: rgba(0, 0, 0, 0);
+}
