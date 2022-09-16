@@ -7,12 +7,16 @@ export default function Detail(){
     const dispatch= useDispatch()
     return(
     <div>
-    <h1>{celular.name}</h1>
-    <h3 >{celular.id}</h3>
-    <h4 >Celular</h4>
-    <h5 >Marca:{celular.marca}</h5>
-    <h5 >Order:{celular.order}</h5>
-    <h5 >User:{celular.user}</h5>
+     <h1>Cell</h1>   
+    {/* <h3>{Cell.line}</h3>
+    <h4 >{Cell.model}</h4>
+    <h4 >{Cell.capacity}</h4>
+    <h5 >{Cell.price}</h5>
+    <h5 >{Cell.stock}</h5>
+    <h5 >{Cell.image}</h5>
+    <h5>{Cell.spec}</h5>
+    <h5>{Cell.memoryRAM}</h5>
+    <h5>{Cell.description}</h5> */}
 
     </div>
     
