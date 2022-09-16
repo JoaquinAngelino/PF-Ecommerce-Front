@@ -7,6 +7,9 @@ import { Link } from "react-router-dom";
 export default function Detail(){
     const dispatch= useDispatch()
     const cellId= useSelector((state)=>state.details)
+    //useEffect(()=>{
+        //dispatch(getCellsById(id))
+        //},[dispatch,id])
     return(
     <div>
      <h1>Cell</h1>   
