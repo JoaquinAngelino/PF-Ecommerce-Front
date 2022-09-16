@@ -1,0 +1,14 @@
+.containerSearchBar {
+    flex-grow: 2;
+    display: flex;
+    justify-content: center;
+}
+
+.input-group {
+    width: 75%;
+}
+
+.form-control:focus{
+    box-shadow: none;
+    border-color: #ced4da;
+}
