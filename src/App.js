@@ -9,6 +9,7 @@ import Home from './pages/Home/Home';
 import LandingPage from './pages/LandingPage/LandingPage';
 import NotFound from './pages/NotFound/NotFound';
 import ShopCart from './pages/ShopCart/ShopCart';
+import Detail from './components/Detail/Detail';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route  path='/contact' element={<ContactUs />} />
         <Route  path='/about' element={<AboutUs />} />
         <Route path='*' element={<NotFound />} />
+        <Route path="/detail/" element={<Detail/>}></Route>
       </Routes>
       <Footer />
     </Router>
