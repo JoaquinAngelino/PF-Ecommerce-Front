@@ -85,7 +85,9 @@ export default function Home() {
             </div>
             : null}
           <Pagination currentPage={currentPage} postPerPage={6} totalPosts={products.length} paginate={paginate} />
+            <div className="containerContent">
           <Filters />
+          <div className="containerCards">
           {(!products || !products.length) ? (<NothingFound />) :
             pageProducts.map(e => <ProductCard
               key={e.id}
@@ -97,10 +99,12 @@ export default function Home() {
               stock={e.stock}
               image={e.image}
               memoryRAM={e.memoryRAM}
-            />)
-          }
-          <Pagination currentPage={currentPage} postPerPage={6} totalPosts={products.length} paginate={paginate} />
+              />)
+            }
+            </div>
         </div>
+        <Pagination currentPage={currentPage} postPerPage={6} totalPosts={products.length} paginate={paginate} />
+      </div>
       }
     </>
   )
