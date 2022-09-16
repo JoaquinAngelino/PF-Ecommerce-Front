@@ -18,10 +18,10 @@ function App() {
       <Routes>
         <Route exact path="/" element={<LandingPage />} />
         <Route path='/home' element={<Home />} />
-        <Route  path='/favorites' element={<Favorites />} />
-        <Route  path='/cart' element={<ShopCart />} />
-        <Route  path='/contact' element={<ContactUs />} />
-        <Route  path='/about' element={<AboutUs />} />
+        <Route exact path='/favorites' element={<Favorites />} />
+        <Route exact path='/cart' element={<ShopCart />} />
+        <Route exact path='/contact' element={<ContactUs />} />
+        <Route exact path='/about' element={<AboutUs />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
       <Footer />
