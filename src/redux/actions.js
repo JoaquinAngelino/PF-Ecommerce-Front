@@ -26,6 +26,20 @@ export const getFilteredProducts = (payload) => {
          type: GET_ALL_PRODUCTS,
          payload: products.data
       });
+
+  };
+  //  export function getCellsById() {
+  //    return async (dispatch)=> {
+  //       const cellDetails = await axios("http://localhost:3001/celulares"/+id);
+  
+  //       return dispatch({
+  //            type: GET_CELLS_BY_ID,
+  //           payload: cellDetails.data
+  //      });
+  //    };
+  //  }
+}
+
    };
 }
 export const createPost = (payload) => {
