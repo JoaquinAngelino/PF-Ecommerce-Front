@@ -21,16 +21,21 @@ export default function Filters() {
     //-------------------- params
     const brand = searchParams.get('brand');
     const price = searchParams.get('price');
-    const stock = searchParams.get('stock');
+    const capacity = searchParams.get('capacity');
+    const memory = searchParams.get('memoryRAM')
     const line = searchParams.get('line');
     // Cellphone's propierties
     let brandAll = [];
     let pricesAll = [];
     let lineAll = [];
+    let capacityAll = []
+    let memoryAll = []
     products.forEach(product => {
         brandAll.push(product.brand);
         pricesAll.push(product.price);
         lineAll.push(product.line);
+        capacityAll.push(product.capacity);
+        memoryAll.push(product.memoryRAM);
     });
     // Repeated results are eliminated from the arrays then sorted
     brandAll = brandAll.filter((item, index) => {
@@ -39,14 +44,19 @@ export default function Filters() {
     lineAll = lineAll.filter((item, index) => {
         return lineAll.indexOf(item) === index;
     });
+    memoryAll = memoryAll.filter((item, index) => {
+        return memoryAll.indexOf(item) === index;
+    });
+    memoryAll.sort()
     brandAll.sort();
     lineAll.sort();
     // Local state
     const [priceSlide, setPriceSlide] = useState([Math.floor(Math.min(...pricesAll)), Math.ceil(Math.max(...pricesAll))]);
+    const [capacitySlide, setCapacitySlide] = useState([Math.floor(Math.min(...capacityAll)), Math.ceil(Math.max(...capacityAll))]);
     // Send selected filters
     function handlerSubmit(e) {
-        e.target.value ? e.target.name === 'price' ?
-            setSearchParams(searchParams.set(e.target.name, `${e.target.value[0]}/${e.target.value[1]}`)) : // "100/300"
+        e.target.value ? (e.target.name === 'price' || e.target.name === 'capacity' ) ?
+            setSearchParams(searchParams.set(e.target.name, `${e.target.value[0]}/${e.target.value[1]}`)) :
             setSearchParams(searchParams.set(e.target.name, e.target.value)) :
             searchParams.delete(e.target.name);
         location.search = `?${searchParams.toString()}`;
@@ -58,8 +68,12 @@ export default function Filters() {
         e.preventDefault();
         setPriceSlide(e.target.value);
     }
+    function handlerChangeCapacity(e) {
+        e.preventDefault();
+        setCapacitySlide(e.target.value);
+    }
     // Send price filter data
-    function handlerRangeSubmit() {
+    function handlerPriceSubmit() {
         const prices = {
             target: {}
         };
@@ -67,9 +81,17 @@ export default function Filters() {
         prices.target.value = priceSlide;
         handlerSubmit(prices)
     }
+    function handlercapacitySubmit() {
+        const prices = {
+            target: {}
+        };
+        prices.target.name = 'capacity';
+        prices.target.value = capacitySlide;
+        handlerSubmit(prices)
+    }
 
     return (
-        brand && price && stock && line ? null :
+        brand && price && capacity && line ? null :
             <div className='filtersContainer'>
                 {
                     !brand ? <>
@@ -78,6 +100,18 @@ export default function Filters() {
                             <Select name="brand" variant="filled" fullWidth size='small' onChange={(e) => handlerSubmit(e)}>
                                 {
                                     brandAll.map((brand, i) => { return (<MenuItem key={i} value={brand}>{brand}</MenuItem>) })
+                                }
+                            </Select>
+                        </FormControl>
+                    </> : null
+                }
+                {
+                    !memory ? <>
+                        <b>RAM: </b>
+                        <FormControl className='brandFilter'>
+                            <Select name="memoryRAM" variant="filled" fullWidth size='small' onChange={(e) => handlerSubmit(e)}>
+                                {
+                                    memoryAll.map((brand, i) => { return (<MenuItem key={i} value={brand}>{brand}</MenuItem>) })
                                 }
                             </Select>
                         </FormControl>
@@ -96,20 +130,28 @@ export default function Filters() {
                                 { value: Math.ceil(Math.max(...pricesAll)), label: `$${priceSlide[1]}` }]}
                                 onChange={(e) => handlerChangePrice(e)}
                             />
-                            <IconButton onClick={() => handlerRangeSubmit()} aria-label="send">
+                            <IconButton onClick={() => handlerPriceSubmit()} aria-label="send">
                                 <SendIcon />
                             </IconButton>
                         </FormControl>
                     </> : null
                 }
                 {
-                    !stock ? <>
-                        <b>stock: </b>
-                        <FormControl className='stockFilter'>
-                            <Select name="stock" variant="filled" fullWidth size='small' onChange={(e) => handlerSubmit(e)}>
-                                <MenuItem value="yes">Aviable</MenuItem>
-                                <MenuItem value="no">Not aviable</MenuItem>
-                            </Select>
+                    !capacity ? <>
+                        <b>capacity: </b>
+                        <FormControl className='filterPrice'>
+                            <Slider
+                                min={Math.floor(Math.min(...capacityAll))}
+                                max={Math.ceil(Math.max(...capacityAll))}
+                                valueLabelDisplay="auto"
+                                value={capacitySlide}
+                                marks={[{ value: Math.floor(Math.min(...capacityAll)), label: `${capacitySlide[0]}GB` },
+                                { value: Math.ceil(Math.max(...capacityAll)), label: `${capacitySlide[1]}GB` }]}
+                                onChange={(e) => handlerChangeCapacity(e)}
+                            />
+                            <IconButton onClick={() => handlercapacitySubmit()} aria-label="send">
+                                <SendIcon />
+                            </IconButton>
                         </FormControl>
                     </> : null
                 }
