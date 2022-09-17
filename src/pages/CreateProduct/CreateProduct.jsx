@@ -1,4 +1,4 @@
-import './CreateProduct.css'
+// import './CreateProduct.css'
 
 
 export default function CreateProduct() {
@@ -11,3 +11,4 @@ export default function CreateProduct() {
     </div>
   )
 }
+

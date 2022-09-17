@@ -16,6 +16,3 @@ export default function Pagination({ postPerPage, totalPosts, paginate}) {
     </div>
   )
 }
-
-
-

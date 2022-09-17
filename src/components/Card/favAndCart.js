@@ -32,5 +32,3 @@ export const getPrice = () => {
   })
   return total.toFixed(2)
 }
-
-
