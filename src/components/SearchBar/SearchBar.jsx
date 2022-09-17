@@ -11,17 +11,17 @@ import './SearchBar.css';
 export default function SearchBar() {
     // Hooks
     const navigate = useNavigate();
-    const [name, setName] = useState('')
+    const [model, setModel] = useState('')
     // Save every change that occurs in the SearchBar
     function handleInputChange(e) {
         e.preventDefault();
-        setName(e.target.value);
+        setModel(e.target.value);
     }
     // Send the content that is in the SearchBar
     function handleSubmit(e) {
         e.preventDefault();
-        if (name) {
-            navigate(`/home?name=${name}`)
+        if (model) {
+            navigate(`/home?model=${model}`)
         }
     }
 
@@ -37,8 +37,8 @@ export default function SearchBar() {
                 </button>
                 <input
                     className="form-control me-2"
-                    value={name}
-                    name={"name"}
+                    value={model}
+                    name={"model"}
                     onChange={(e) => { handleInputChange(e) }}
                     placeholder='Type your search...'
                 />

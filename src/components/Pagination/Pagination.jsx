@@ -11,11 +11,8 @@ export default function Pagination({ postPerPage, totalPosts, paginate}) {
   return (
     <div className='Pagination' >
       <ul>
-        {pages.map(page => <li key={page} className='pagItem' onClick={()=>paginate(page)}> {page} </li>)}
+        {pages.map(page => <li key={page} className='pagItem' onClick={()=>paginate(page)}>{page}</li>)}
       </ul>
     </div>
   )
 }
-
-
-
