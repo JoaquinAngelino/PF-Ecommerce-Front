@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: all 0.4s;
 }
 
 code {
@@ -23,4 +24,23 @@ a {
 a:link {
   text-decoration: none;
   color: inherit;
+}
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+:any-link{
+  color: #333333;
+  text-decoration: none;
+}
+
+:any-link:hover{
+  color: #333333;
+}
+
+.Dark {
+  background-color: #333333;
+  color: white;
 }
