@@ -4,6 +4,7 @@ import axios from 'axios';
 // export const GET_CELLS_BY_ID = 'G'
 import {
    GET_ALL_PRODUCTS,
+   GET_ALL_BRANDS,
    ET_CELLS_BY_ID,
    POST_PRODUCT
 } from './typeAction'
@@ -18,6 +19,17 @@ export const getAllProducts = () => {
       });
    };
 };
+
+export const getAllBrands = () => {
+   return async function (dispatch) {
+      const products = await axios('http://localhost:3001/marcas');
+
+      return dispatch({
+         type: GET_ALL_BRANDS,
+         payload: products.data
+      });
+   };
+};
 export const getFilteredProducts = (payload) => {
    return async function (dispatch) {
       const products = await axios(`http://localhost:3001/celulares/${payload}`);
@@ -28,14 +40,16 @@ export const getFilteredProducts = (payload) => {
       });
    };
 }
-export const createPost = (payload) => {
-   console.log(payload, 'soy lo que llega del front')
-   return async (dispatch) => {
-      const createProduct = await axios.post('https://localhost:3001/celulares', payload)
-      console.log(createProduct, 'soy lo que llega hacia el back')
-      return dispatch({
-         type: POST_PRODUCT,
-         payload: createProduct.data
-      })
-   }
+
+export function createPost(product) {
+   return async function (dispatch) {
+     return await axios
+       .post("http://localhost:3001/celulares", product)
+       .then((response) => {
+         dispatch({
+           type: POST_PRODUCT,
+           payload: response.data,
+         });
+       });
+   };
 }

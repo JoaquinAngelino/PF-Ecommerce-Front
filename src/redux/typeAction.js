@@ -1,3 +1,4 @@
 export const POST_PRODUCT = "POST_PRODUCT";
 export const GET_CELLS_BY_ID = "GET_CELLS_BY_ID";
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
+export const GET_ALL_BRANDS = "GET_ALL_BRANDS";
