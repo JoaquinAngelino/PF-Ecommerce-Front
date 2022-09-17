@@ -1,5 +1,4 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import './App.css';
 import Footer from './components/Footer/Footer';
 import NavBar from './components/NavBar/NavBar';
 import AboutUs from './pages/AboutUs/AboutUs';
@@ -8,9 +7,8 @@ import Favorites from './pages/Favorites/Favorites';
 import Home from './pages/Home/Home';
 import LandingPage from './pages/LandingPage/LandingPage';
 import NotFound from './pages/NotFound/NotFound';
-import ShopCart from './pages/ShopCart/ShopCart';
 import Detail from './components/Detail/Detail';
-import CreateProduct from './pages/CreateProduct/CreateProduct';
+import ShoppingCart from './pages/Cart';
 
 
 function App() {
@@ -20,14 +18,12 @@ function App() {
       <Routes>
         <Route exact path="/" element={<LandingPage />} />
         <Route path='/home' element={<Home />} />
-        <Route exact path='/favorites' element={<Favorites />} />
-        <Route exact path='/cart' element={<ShopCart />} />
-        <Route exact path='/contact' element={<ContactUs />} />
-        <Route exact path='/about' element={<AboutUs />} />
+        <Route  path='/favorites' element={<Favorites />} />
+        <Route  path='/contact' element={<ContactUs />} />
+        <Route  path='/about' element={<AboutUs />} />
+        <Route  path='/cart' element={<ShoppingCart />} />
+        <Route path="/detail/" element={<Detail/>}/>
         <Route path='*' element={<NotFound />} />
-        <Route path="/detail/" element={<Detail/>}></Route>
-        <Route path='/create' element={<CreateProduct />} />
-
       </Routes>
       <Footer />
     </Router>

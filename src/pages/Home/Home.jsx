@@ -8,11 +8,14 @@ import NothingFound from "../../components/NothingFound/NothingFound";
 import Pagination from "../../components/Pagination/Pagination";
 import { getAllProducts, getFilteredProducts } from "../../redux/actions";
 import './Home.css'
+import 'bootstrap/dist/css/bootstrap.css';
+import Loading from "../../components/Loading/Loading";
 
 export default function Home() {
   const location = useLocation();
   const [searchParams] = useSearchParams();
-  const searchName = searchParams.get('name');
+  const isLoading = useSelector(state => state.isLoading);
+  const searchName = searchParams.get('model');
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const products = useSelector(state => state.products);
@@ -55,40 +58,55 @@ export default function Home() {
 
   return (
     <>
-      {filters.length ? searchName && filters.length === 1 ?
-        null :
-        <div className="selectedFilters">
-          <span>Selected filters: </span>
-          {
-            filters.map(filter => {
-              return filter[0] === 'name' ?
-                null :
-                (
-                  <div key={filter[0]} className="activeFilter">
-                    {filter[0] === 'price' ? `Price range ${filter[1]}` : filter[1]}
-                    <CloseButton onClick={() => clearFilter(filter[0])} />
-                  </div>
-                )
-            })
-          }
+      {isLoading ? <Loading /> :
+        <div className="containerHome">
+          <div className="aditionalContent">
+            <div className="numberOfResults">
+              {searchName ? <span>{searchName.toUpperCase()}</span> : null}
+              <p><b>{products.length}</b> results</p>
+            </div>
+          </div>
+          {filters.length ? searchName && filters.length === 1 ?
+            null :
+            <div className="selectedFilters">
+              <span>Selected filters: </span>
+              {
+                filters.map(filter => {
+                  return filter[0] === 'name' ?
+                    null :
+                    (
+                      <div key={filter[0]} className="activeFilter">
+                        {filter[0] === 'price' ? `Price range ${filter[1]}` : filter[1]}
+                        <CloseButton onClick={() => clearFilter(filter[0])} />
+                      </div>
+                    )
+                })
+              }
+            </div>
+            : null}
+          <Pagination currentPage={currentPage} postPerPage={6} totalPosts={products.length} paginate={paginate} />
+            <div className="containerContent">
+          <Filters />
+          <div className="containerCards">
+          {(!products || !products.length) ? (<NothingFound />) :
+            pageProducts.map(e => <ProductCard
+              key={e.id}
+              id={e.id}
+              line={e.line}
+              model={e.model}
+              capacity={e.capacity}
+              price={e.price}
+              stock={e.stock}
+              image={e.image}
+              brand={e.brand}
+              memoryRAM={e.memoryRAM}
+              />)
+            }
+            </div>
         </div>
-        : null}
-      <Pagination currentPage={currentPage} postPerPage={6} totalPosts={products.length} paginate={paginate} />
-      <Filters />
-      {(!products || !products.length) ? (<NothingFound />) :
-        pageProducts.map(e => <ProductCard
-          key={e.id}
-          id={e.id}
-          line={e.line}
-          model={e.model}
-          capacity={e.capacity}
-          price={e.price}
-          stock={e.stock}
-          image={e.image}
-          memoryRAM={e.memoryRAM}
-        />)
+        <Pagination currentPage={currentPage} postPerPage={6} totalPosts={products.length} paginate={paginate} />
+      </div>
       }
-      <Pagination currentPage={currentPage} postPerPage={6} totalPosts={products.length} paginate={paginate} />
     </>
   )
 }
