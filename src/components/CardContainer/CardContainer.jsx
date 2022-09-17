@@ -1,7 +1,9 @@
+import React from 'react'
 
-export default function CardContainer(){
-
-  return(
-    <h1>CardContainer</h1>
+const CardContainer = () => {
+  return (
+    <div>CardContainer</div>
   )
 }
+
+export default CardContainer/*  */
