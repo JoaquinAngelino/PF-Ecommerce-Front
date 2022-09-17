@@ -98,6 +98,7 @@ export default function Home() {
               price={e.price}
               stock={e.stock}
               image={e.image}
+              brand={e.brand}
               memoryRAM={e.memoryRAM}
               />)
             }
