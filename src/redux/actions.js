@@ -1,3 +1,4 @@
+
 import axios from 'axios';
 import { GET_ALL_PRODUCTS, GET_CELLS_BY_ID } from './ActionTypes';
 
@@ -52,8 +53,6 @@ export const getFilteredProducts = (payload) => {
   //    };
 }
 
-
-   
 
 export const createPost = (payload) => {
    console.log(payload, 'soy lo que llega del front')
