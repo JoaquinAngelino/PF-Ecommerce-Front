@@ -9,6 +9,7 @@ import LandingPage from './pages/LandingPage/LandingPage';
 import NotFound from './pages/NotFound/NotFound';
 import Detail from './components/Detail/Detail';
 import ShoppingCart from './pages/Cart';
+import CreateProduct from './pages/CreateProduct/CreateProduct';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route  path='/about' element={<AboutUs />} />
         <Route  path='/cart' element={<ShoppingCart />} />
         <Route path="/detail/" element={<Detail/>}/>
+        <Route path="/create" element={<CreateProduct/>}/>
         <Route path='*' element={<NotFound />} />
       </Routes>
       <Footer />
