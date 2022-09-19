@@ -7,6 +7,7 @@ import React from 'react';
 //   CarouselCaption
 // } from 'reactstrap';
 import { Link } from 'react-router-dom';
+//import './LandingPage.css';
 
 // const items = [
 //   {
@@ -46,7 +47,7 @@ const LandingPage = (props) => {
   return (
     <div className='contenedor'>
       <div className="tituloLanding">
-        <h1 className="ejemplo">Una experiencia gustativa unica</h1>
+        <h1 className="ejemplo">Tienda Online</h1>
       </div>
       <div className="tituloLanding">
         <Link to={'/home'}>
