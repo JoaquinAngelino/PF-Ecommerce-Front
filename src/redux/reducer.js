@@ -1,8 +1,9 @@
 // import { POST_PRODUCT } from './typeAction.js'
+// import { CELL_DETAIL } from './actions.js'
 
 const {
   GET_ALL_PRODUCTS,
-  GET_CELLS_BY_ID,
+  CELL_DETAIL,
   POST_PRODUCT
 } = require('./typeAction.js')
 
@@ -18,15 +19,20 @@ function rootReducer(state = initialState, action) {
         ...state,
         products: action.payload
       }
-    case GET_CELLS_BY_ID:
-      return {
+    case CELL_DETAIL:
+      return ({
         ...state,
-        details: { ...action.payload },
-      }
+        details:action.payload 
+      })
     case POST_PRODUCT:
       return {
         ...state,
       }
+      case "clean estado":
+        return({
+          ...state,
+          details:[]
+        })
     default:
       return state
   }

@@ -1,11 +1,15 @@
 import axios from 'axios';
 
+// export const RUTA_ID="http://localhost:3001/celulares/"
+// export const CELL_DETAIL="DOG DETAIL"
+
 // export const GET_ALL_PRODUCTS = ''
 // export const GET_CELLS_BY_ID = 'G'
 import {
    GET_ALL_PRODUCTS,
-   ET_CELLS_BY_ID,
-   POST_PRODUCT
+   POST_PRODUCT,
+   CELL_DETAIL,
+   RUTA_ID
 } from './typeAction'
 
 export const getAllProducts = () => {
@@ -39,3 +43,25 @@ export const createPost = (payload) => {
       })
    }
 }
+
+//CELL_DETAIL
+export function cellDetail(id){
+   return async function(dispatch){
+      try{
+         var cellDetail=await axios.get(RUTA_ID +id)
+         return dispatch({
+            type:CELL_DETAIL,
+            payload:cellDetail.data
+         })
+      }catch(error){
+         console.log(error)
+      }
+   }
+}
+export function cleanStatus(payload){
+   return {
+      type:"clean estado",
+      payload
+   }
+}
+//CELL_DETAIL

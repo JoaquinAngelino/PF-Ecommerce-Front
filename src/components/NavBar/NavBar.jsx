@@ -3,12 +3,21 @@ import { useNavigate } from 'react-router-dom';
 import { NavDropdown } from 'react-bootstrap';
 import { BsCartFill, BsStarFill, BsFillPhoneFill } from 'react-icons/bs';
 import { AiOutlineUpload } from 'react-icons/ai';
+import {AiOutlineUserAdd} from "react-icons/ai"
 import { Link } from 'react-router-dom';
 import SearchBar from '../SearchBar/SearchBar'
 import 'bootstrap/dist/css/bootstrap.css';
 import './NavBar.css'
+//LOGIN
+import { useAuth0 } from '@auth0/auth0-react';
+import LoginButton from "../Login/LoginButton";
+import LogoutButton from '../Logout/LogoutButton';
+//LOGIN
 
 export default function NavBar() {
+  //login
+const{isAuthenticated}=useAuth0()
+  //login
   const navigate = useNavigate();
   const [name, setName] = useState('')
 
@@ -33,6 +42,18 @@ export default function NavBar() {
             <Link to='/favorites' className="nav-link"><BsStarFill className='NavBarIcon' /></Link>
             <Link to='/cart' className="nav-link"><BsCartFill className='NavBarIcon' /></Link>
             <Link to='/create' className="nav-link"><AiOutlineUpload className='NavBarIcon' /></Link>
+          
+        
+            {/* LOGIN */}
+            {isAuthenticated ?    <Link to='Profile' className='nav-link'><AiOutlineUserAdd className='NavBarIcon' /></Link> : null}
+            {
+              isAuthenticated 
+              ? <LogoutButton/> 
+              : <LoginButton/>
+            }
+           
+          
+            {/* LOGIN */}
           </div>
         </div>
 
