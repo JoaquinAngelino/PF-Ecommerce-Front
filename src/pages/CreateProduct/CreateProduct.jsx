@@ -4,24 +4,27 @@ import { useSelector, useDispatch } from 'react-redux';
 import { createPost, getAllBrands } from '../../redux/actions';
 import { Link } from 'react-router-dom';
 
-
+// const validations = (input) => {
+//    const errors = {};
+//    if
+// }
 
 export default function CreateProduct() {
   const dispatch = useDispatch();
   const allBrandData = useSelector((state) => state.brands);
 
   const [input, setInput] = useState({
-    line:"",
+    line: "",
     model: "",
     image: "",
     description: "",
     spec: [],
     brand: "",
     capacity: 0,
-    memoryRAM:0,
-    stock:0,
-    price:0
-})
+    memoryRAM: 0,
+    stock: 0,
+    price: 0
+  })
 
 
   useEffect(() => {
@@ -73,7 +76,7 @@ export default function CreateProduct() {
       spec: [],
       brand: "",
       capacity: "",
-      memoryRAM:"",
+      memoryRAM: "",
       price: "",
     })
     // } else {
