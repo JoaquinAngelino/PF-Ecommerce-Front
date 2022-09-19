@@ -1,28 +1,32 @@
-// import { POST_PRODUCT } from './typeAction.js'
-// import { CELL_DETAIL } from './actions.js'
-
 const {
   GET_ALL_PRODUCTS,
+  ACTIVE_LOADING,
+  GET_ALL_BRANDS,
   CELL_DETAIL,
   POST_PRODUCT
-} = require('./typeAction.js')
+  
+} = require('./actions.js')
 
 const initialState = {
   products: [],
-  details: []
+  isLoading: true,
+  brands:[]
 }
 
-function rootReducer(state = initialState, action) {
-  switch (action.type) {
+export default function rootReducer(state = initialState, { type, payload }) {
+  switch (type) {
     case GET_ALL_PRODUCTS:
+      if (!payload) { return state }
       return {
         ...state,
-        products: action.payload
+        products: payload,
+        isLoading: false
       }
+
     case CELL_DETAIL:
       return ({
         ...state,
-        details:action.payload 
+        details:payload 
       })
     case POST_PRODUCT:
       return {
@@ -33,9 +37,22 @@ function rootReducer(state = initialState, action) {
           ...state,
           details:[]
         })
+
+    //-----------------
+    //-----------------
+    case ACTIVE_LOADING:
+      return {
+        ...state,
+        isLoading: true
+      }
+
+    case GET_ALL_BRANDS:
+      return {
+        ...state,
+        brands: payload
+      }   
+
     default:
       return state
   }
 }
-
-export default rootReducer;

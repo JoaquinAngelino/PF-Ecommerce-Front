@@ -7,11 +7,13 @@ import { cellDetail } from "../../redux/actions";
 import { cleanStatus } from "../../redux/actions";
 import { useEffect } from "react";
 
+
 export default function Detail(props){
 
     const dispatch=useDispatch();
     // let id=props.match.params.id;
     const {id}=useParams()
+
 
     function handleClearStatus(e){
         dispatch(cleanStatus())
