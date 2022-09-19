@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ShopCard from "./ShopCard";
 import './Card.css'
 import { getPrice } from "../../components/Card/favAndCart";
+import {Link} from "react-router-dom";
 
 export default function ShoppingCart() {
 
     const [cartItem, setCartItem] = useState(JSON.parse(localStorage.getItem('cartList')))
     const [totalPrice, setTotalPrice] = useState(getPrice());
+
+    useEffect(()=>{
+        localStorage.setItem("totalPrice", JSON.stringify(totalPrice));
+    },[totalPrice])
 
     const deleteItem = (id) => {
         let arr = cartItem.filter(e => e.id !== id)
@@ -18,6 +23,7 @@ export default function ShoppingCart() {
     const updateQuantity = () => {
         setTotalPrice(getPrice())
     }
+
 
     if (!cartItem) {
         return (
@@ -49,6 +55,8 @@ export default function ShoppingCart() {
             <div className="principalSC">
                 {cartItemMap}
             </div>
+            <hr />
+            <Link to={"/cart/paymentForm"}><button>Buy now !</button></Link>
         </div>
     );
 }
