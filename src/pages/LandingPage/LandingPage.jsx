@@ -7,38 +7,32 @@ import {
   CarouselIndicators,
   CarouselCaption
 } from 'reactstrap';
-// import { Link } from 'react-router-dom';
 
 const items = [
   {
-    src: 'https://media.rawg.io/media/games/456/456dea5e1c7e3cd07060c14e96612001.jpg',
-    altText: 'Slide 1',
-    caption: 'Slide 2',
+    src: 'https://apple2fan.com/wp-content/uploads/2020/10/Captura-de-pantalla-2020-10-13-a-las-19.46.59.png',
+    // altText: 'Slide 1',
+    // caption: 'Slide 1',
   },
   {
-    src: 'https://cdn.memorykings.pe/files/2022/03/26/325854-MK026454-GRANDE.jpg',
-    altText: 'Slide 1',
-    caption: 'Slide 2',
+    src: 'https://depor.com/resizer/O77xSXFS32q6W_y3F147RtBfp1Q=/1200x675/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/ECBYORMINFGF3HOTNUQCQ7QCXI.webp',
+
   },
   {
-    id: 'https://images-eu.ssl-images-amazon.com/images/G/30/CE/Electronica/PC2018/murclara/amazon-banner-gaming-days_1.png',
-    altText: 'Slide 1',
-    caption: 'Slide 2',
+    src: 'https://i0.wp.com/apperlas.com/wp-content/uploads/2016/09/iPhone-7-agua.jpg?ssl=1',
+
   },
   {
-    src: 'https://mesajil.com/wp-content/uploads/elementor/thumbs/Banner-Desktop-Sorteo-Cougar-SillaCase-1-pfxuu8hr2ksftp8338ji2fjmenpws04vzfus93xsvk.jpg',
-    altText: 'Slide 1',
-    caption: 'Slide 2',
+    src: 'https://hd2.tudocdn.net/893603?w=1920',
+
   },
   {
-    src: 'https://www.cm-soluciones.com.ar/static/media/banner-4.c5f21dec.jpeg',
-    altText: 'Slide 1',
-    caption: 'Slide 2',
+    src: 'https://clongeek.com/wp-content/uploads/2021/03/iPhone-13-1.jpg',
+
   },
   {
-    src: 'https://www.lg.com/ar/images/plp-b2c/b2c-2/banner-webD.jpg',
-    altText: 'Slide 1',
-    caption: 'Slide 2',
+    src: 'https://www.cined.com/content/uploads/2020/02/galaxy_s20_ultra_2-1300x750.jpg',
+
   },
 ];
 
@@ -72,13 +66,13 @@ const LandingPage = () => {
         onExited={() => setAnimating(false)}
         key={item.src}
       >
-        <img src={item.src} alt={item.altText} />
-        <CarouselCaption captionText={item.caption} captionHeader={item.caption} />
+        <img src={item.src} width="100%" height="460px" />
+        <CarouselCaption />
       </CarouselItem>
     )
   })
   return (
-    <div>
+    <div className=''>
       <Carousel
         activeIndex={activeIndex}
         next={next}
