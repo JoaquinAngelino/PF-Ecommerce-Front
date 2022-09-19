@@ -14,7 +14,7 @@ const validations = (input) => {
     errors.image = "need a picture"
   } else if (!input.description.trim()) {
     errors.description = "no description"
-  } else if (!input.brand.trim()) {
+  } else if (!input.brand.length ===0) {
     errors.brand = "does not contain brand"
   } else if (!input.capacity.trim()) {
     errors.capacity = "does not contain capacity"
@@ -36,10 +36,10 @@ export default function CreateProduct() {
     description: "",
     spec: [],
     brand: "",
-    capacity: 0,
-    memoryRAM: 0,
-    stock: 0,
-    price: 0
+    capacity: "",
+    memoryRAM: "",
+    stock: "",
+    price: ""
   })
 
   const handleChange = (e) => {
@@ -69,7 +69,7 @@ export default function CreateProduct() {
       })
     );
     if (!input.model && !input.line && !input.image && !input.description && !input.brand && !input.capacity) return alert("does not contain fields");
-    if (Object.keys(errors).length === 0) {
+    //if (Object.keys(errors).length === 0) {
       dispatch(createPost(input))
       alert("your cell phone was created")
       setInput({
@@ -83,10 +83,10 @@ export default function CreateProduct() {
         memoryRAM: "",
         price: "",
       })
-    } else {
+   /* } else {
       alert("we could not create your cell");
     }
-    return;
+    return;*/
   }
   useEffect(() => {
     dispatch(getAllBrands(allBrandData))

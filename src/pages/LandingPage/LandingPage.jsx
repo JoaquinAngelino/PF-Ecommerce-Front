@@ -1,5 +1,5 @@
-import React, { useState } from 'react'; //
-// import { Link } from 'react-router-dom';
+
+import React, { useState } from 'react'; 
 import {
   Carousel,
   CarouselItem,
@@ -7,6 +7,7 @@ import {
   CarouselIndicators,
   CarouselCaption
 } from 'reactstrap';
+
 
 const items = [
   {
