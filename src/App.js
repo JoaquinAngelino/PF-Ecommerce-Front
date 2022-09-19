@@ -10,7 +10,9 @@ import NotFound from './pages/NotFound/NotFound';
 import Detail from './components/Detail/Detail';
 import ShoppingCart from './pages/Cart';
 import CreateProduct from './pages/CreateProduct/CreateProduct';
-
+//login
+import Profile from './components/Profile/Profile';
+//login
 
 function App() {
   return (
@@ -26,6 +28,13 @@ function App() {
         <Route path="/detail/" element={<Detail/>}/>
         <Route path="/create" element={<CreateProduct/>}/>
         <Route path='*' element={<NotFound />} />
+
+        <Route path="/detail/:id" element={<Detail/>}/>
+        <Route path='/create' element={<CreateProduct />} />
+        <Route path='/Profile' element={<Profile/>}/>
+        
+
+
       </Routes>
       <Footer />
     </Router>
