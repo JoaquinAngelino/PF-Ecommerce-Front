@@ -6,6 +6,8 @@ export const POST_PRODUCT = "POST_PRODUCT";
 export const GET_ALL_BRANDS = "GET_ALL_BRANDS"; 
 export const CELL_DETAIL="CELL_DETAIL"
 export const RUTA_ID="http://localhost:3001/celulares/"
+export const POST_QUESTION = "POST_QUESTION";
+export const GET_ADMIN ="GET_ADMIN";
 
 
 // export const RUTA_ID="http://localhost:3001/celulares/"
@@ -90,3 +92,29 @@ export function createPost(product) {
   };
 }
 
+export function createQuestion(question, cellId) {
+   return async function (dispatch) {
+     return await axios
+       .post(`http://localhost:3001/questions/${cellId}`, question)
+       .then((response) => {
+         dispatch({
+           type: POST_QUESTION,
+           payload: response.data,
+         });
+       });
+   };
+}
+
+export function getRole(email){
+   return async function(dispatch){
+      try{
+         var admin=await axios.get(`http://localhost:3001/questions/role/${email}`)
+         return dispatch({
+            type:GET_ADMIN,
+            payload:admin.data
+         })
+      }catch(error){
+         console.log(error)
+      }
+   }
+}

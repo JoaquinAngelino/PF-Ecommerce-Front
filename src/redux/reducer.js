@@ -3,14 +3,16 @@ const {
   ACTIVE_LOADING,
   GET_ALL_BRANDS,
   CELL_DETAIL,
-  POST_PRODUCT
+  POST_PRODUCT,
+  GET_ADMIN
   
 } = require('./actions.js')
 
 const initialState = {
   products: [],
   isLoading: true,
-  brands:[]
+  brands:[],
+  admin: false
 }
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -32,6 +34,11 @@ export default function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
       }
+    case GET_ADMIN:
+      return {
+        ...state,
+        admin:payload
+      }  
       case "clean estado":
         return({
           ...state,
