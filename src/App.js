@@ -18,6 +18,11 @@ const stripePromise=loadStripe("pk_test_51LaZvGBnw8Rgt2NjQI3zwuWRhuXnnGKWZNCgHwz
 
 
 
+import CreateProduct from './pages/CreateProduct/CreateProduct';
+//login
+import Profile from './components/Profile/Profile';
+//login
+
 function App() {
   return (
     <Router>
@@ -33,7 +38,15 @@ function App() {
         <Route path='/cart/paymentForm' element={<Elements stripe={stripePromise}><PaymentForm></PaymentForm></Elements>}/>
         {/* <Route path="/paymentForm" element={<PaymentForm/>}/> */}
         
+        <Route path="/create" element={<CreateProduct/>}/>
         <Route path='*' element={<NotFound />} />
+
+        <Route path="/detail/:id" element={<Detail/>}/>
+        <Route path='/create' element={<CreateProduct />} />
+        <Route path='/Profile' element={<Profile/>}/>
+        
+
+
       </Routes>
       <Footer />
     </Router>

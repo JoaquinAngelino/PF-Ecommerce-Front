@@ -2,6 +2,18 @@ import axios from "axios";
 
 export const GET_ALL_PRODUCTS  = 'GET_ALL_PRODUCTS'
 export const ACTIVE_LOADING = "ACTIVE_LOADING";
+export const POST_PRODUCT = "POST_PRODUCT";
+export const GET_ALL_BRANDS = "GET_ALL_BRANDS"; 
+export const CELL_DETAIL="CELL_DETAIL"
+export const RUTA_ID="http://localhost:3001/celulares/"
+
+
+// export const RUTA_ID="http://localhost:3001/celulares/"
+// export const CELL_DETAIL="DOG DETAIL"
+
+// export const GET_ALL_PRODUCTS = ''
+// export const GET_CELLS_BY_ID = 'G'
+
 
 
 export const getAllProducts = () => {
@@ -30,3 +42,51 @@ export const activeLoading = () => {
       });
   };
 }
+
+
+//CELL_DETAIL
+export function cellDetail(id){
+   return async function(dispatch){
+      try{
+         var cellDetail=await axios.get(RUTA_ID +id)
+         return dispatch({
+            type:CELL_DETAIL,
+            payload:cellDetail.data
+         })
+      }catch(error){
+         console.log(error)
+      }
+   }
+}
+export function cleanStatus(payload){
+   return {
+      type:"clean estado",
+      payload
+   }
+}
+//CELL_DETAIL
+
+export const getAllBrands = () => {
+  return async function (dispatch) {
+     const products = await axios('http://localhost:3001/marcas');
+
+     return dispatch({
+        type: GET_ALL_BRANDS,
+        payload: products.data
+     });
+  };
+};
+
+export function createPost(product) {
+  return async function (dispatch) {
+    return await axios
+      .post("http://localhost:3001/celulares", product)
+      .then((response) => {
+        dispatch({
+          type: POST_PRODUCT,
+          payload: response.data,
+        });
+      });
+  };
+}
+
