@@ -89,7 +89,7 @@ export default function CreateProduct() {
     return;*/
   }
   useEffect(() => {
-    dispatch(getAllBrands(allBrandData))
+    dispatch(getAllBrands())
   }, [dispatch])
 
   return (
