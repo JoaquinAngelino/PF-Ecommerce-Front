@@ -67,13 +67,13 @@ const LandingPage = () => {
         onExited={() => setAnimating(false)}
         key={item.src}
       >
-        <img src={item.src} width="100%" height="460px" />
+        <img src={item.src} width="100%" height="460px" alt='landing_image' />
         <CarouselCaption />
       </CarouselItem>
     )
   })
   return (
-    <div className=''>
+    <div className='container'>
       <Carousel
         activeIndex={activeIndex}
         next={next}

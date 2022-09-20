@@ -5,15 +5,20 @@ import {useParams} from "react-router-dom"
 import {useDispatch, useSelector} from "react-redux"
 import { cellDetail } from "../../redux/actions";
 import { cleanStatus } from "../../redux/actions";
-import { useEffect } from "react";
-
+import { useEffect, useState} from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+import { getRole, createQuestion} from "../../redux/actions";
 
 export default function Detail(props){
 
     const dispatch=useDispatch();
     // let id=props.match.params.id;
     const {id}=useParams()
-
+    const {user, isAuthenticated}=useAuth0();
+    const [question, setQuestion] = useState({ 
+        question:"",
+        emailUser:""
+    })
 
     function handleClearStatus(e){
         dispatch(cleanStatus())
@@ -21,12 +26,35 @@ export default function Detail(props){
 
     useEffect(()=>{
         dispatch(cellDetail(id))
+        if(isAuthenticated){
+            dispatch(getRole(user.email));
+            setQuestion({
+                ...question,
+                emailUser: user.name
+            })
+        }
     },[dispatch,id])
 
     const myCell=useSelector((state)=>state.details)
+    const admin = useSelector((state)=>state.admin)
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setQuestion({
+          ...question,
+          [name]: value,
+        });
+    }
+
+    const createQuestion = () => {
     
+            dispatch(createQuestion(question, id));
+            window.alert("Question sent!")
+    }
+
+
     return(
-       
+       <div>
        <div className="container">
             
             {
@@ -86,6 +114,18 @@ export default function Detail(props){
 
        
 
+        </div>
+        <div className="container">
+            {isAuthenticated?
+            <div>
+                <h1>Ask your question</h1>
+                <h3>{user.name}:</h3>
+                <input type="text" onChange={(e) => handleChange(e)} name="question" value={question.question}></input>
+                <button type="button" className="btn btn-outline-primary" onClick={()=> createQuestion()}>Create Question</button>
+            </div>
+            :<h2>Inicie Sesion</h2>}
+
+        </div>
         </div>
     )
 }

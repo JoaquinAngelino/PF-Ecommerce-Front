@@ -14,7 +14,7 @@ const Profile=()=>{
             <div className="row">
               <div className="col-12 my-3 pt-3 shadow">
                 {/* {JSON.stringify(user)} */}
-                <img  className="ProfileImg" src={user.picture} />
+                <img  className="ProfileImg" src={user.picture} alt='profile_image' />
                 <h4>{user.name}</h4>
                 <h5>{user.email}</h5>
                 {/* "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJHVLf9CA9-Aga5SAXLHh0evd-Zrsn3l0Wlg&usqp=CAU" */}

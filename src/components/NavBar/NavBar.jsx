@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { NavDropdown } from 'react-bootstrap';
+//import { useState } from 'react';
+//import { useNavigate } from 'react-router-dom';
+//import { NavDropdown } from 'react-bootstrap';
 import { BsCartFill, BsStarFill, BsFillPhoneFill } from 'react-icons/bs';
 import { AiOutlineUpload } from 'react-icons/ai';
 import {AiOutlineUserAdd} from "react-icons/ai"
@@ -18,20 +18,20 @@ export default function NavBar() {
   //login
 const{isAuthenticated}=useAuth0()
   //login
-  const navigate = useNavigate();
-  const [name, setName] = useState('')
+  //const navigate = useNavigate();
+  //const [name, setName] = useState('')
 
-  function handleInputChange(e) {
-    e.preventDefault();
-    setName(e.target.value);
-  }
+  //function handleInputChange(e) {
+    //e.preventDefault();
+    //setName(e.target.value);
+  //}
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    if (name) {
-      navigate(`/home?name=${name}`)
-    }
-  }
+  //function handleSubmit(e) {
+   // e.preventDefault();
+    //if (name) {
+     // navigate(`/home?name=${name}`)
+    //}
+  //}
 
   return (
     <nav className='NavBar mb-2 p-2 bg-dark'>

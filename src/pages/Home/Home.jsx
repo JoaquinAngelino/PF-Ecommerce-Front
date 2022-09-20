@@ -87,7 +87,7 @@ export default function Home() {
           <Pagination currentPage={currentPage} postPerPage={6} totalPosts={products.length} paginate={paginate} />
             <div className="containerContent">
           <Filters />
-          <div className="containerCards">
+          <div className="containerCards" >
           {(!products || !products.length) ? (<NothingFound />) :
             pageProducts.map(e => <ProductCard
               key={e.id}
