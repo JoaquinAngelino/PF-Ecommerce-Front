@@ -9,6 +9,15 @@ import LandingPage from './pages/LandingPage/LandingPage';
 import NotFound from './pages/NotFound/NotFound';
 import Detail from './components/Detail/Detail';
 import ShoppingCart from './pages/Cart';
+import PaymentForm from './pages/PaymentForm/PaymentForm'
+
+// PaymentForm
+import {Elements} from "@stripe/react-stripe-js";
+import {loadStripe} from "@stripe/stripe-js"
+const stripePromise=loadStripe("pk_test_51LaZvGBnw8Rgt2NjQI3zwuWRhuXnnGKWZNCgHwz0UPBxh6t0l0SlRlMVMwTWvQUGfgyh9e4D0b7MD8sGiArVOQMg00JrfIx5p5")
+
+
+
 import CreateProduct from './pages/CreateProduct/CreateProduct';
 //login
 import Profile from './components/Profile/Profile';
@@ -26,6 +35,9 @@ function App() {
         <Route  path='/about' element={<AboutUs />} />
         <Route  path='/cart' element={<ShoppingCart />} />
         <Route path="/detail/" element={<Detail/>}/>
+        <Route path='/cart/paymentForm' element={<Elements stripe={stripePromise}><PaymentForm></PaymentForm></Elements>}/>
+        {/* <Route path="/paymentForm" element={<PaymentForm/>}/> */}
+        
         <Route path="/create" element={<CreateProduct/>}/>
         <Route path='*' element={<NotFound />} />
 

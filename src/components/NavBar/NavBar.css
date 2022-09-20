@@ -1,6 +1,6 @@
 .NavBar {
   background: red;
-  width: 100vw;
+  width: 100%;
   justify-content: space-between;
 }
 
