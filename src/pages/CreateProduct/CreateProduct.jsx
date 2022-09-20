@@ -69,7 +69,7 @@ export default function CreateProduct() {
       })
     );
     if (!input.model && !input.line && !input.image && !input.description && !input.brand && !input.capacity) return alert("does not contain fields");
-    //if (Object.keys(errors).length === 0) {
+    if (Object.keys(errors).length === 0) {
       dispatch(createPost(input))
       alert("your cell phone was created")
       setInput({
@@ -83,11 +83,12 @@ export default function CreateProduct() {
         memoryRAM: "",
         price: "",
       })
-   /* } else {
-      alert("we could not create your cell");
+    } else {
+       alert("we could not create your cell");
     }
-    return;*/
+    // return ;
   }
+
   useEffect(() => {
     dispatch(getAllBrands())
   }, [dispatch])

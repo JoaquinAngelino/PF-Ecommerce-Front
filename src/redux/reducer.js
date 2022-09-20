@@ -4,15 +4,16 @@ const {
   GET_ALL_BRANDS,
   CELL_DETAIL,
   POST_PRODUCT,
-  GET_ADMIN
-  
+  GET_ADMIN,
+  GET_ALL_QUESTION
 } = require('./actions.js')
 
 const initialState = {
   products: [],
   isLoading: true,
-  brands:[],
-  admin: false
+  brands: [],
+  admin: false,
+  resQuestion: []
 }
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -28,7 +29,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
     case CELL_DETAIL:
       return ({
         ...state,
-        details:payload 
+        details: payload
       })
     case POST_PRODUCT:
       return {
@@ -37,13 +38,13 @@ export default function rootReducer(state = initialState, { type, payload }) {
     case GET_ADMIN:
       return {
         ...state,
-        admin:payload
-      }  
-      case "clean estado":
-        return({
-          ...state,
-          details:[]
-        })
+        admin: payload
+      }
+    case "clean estado":
+      return ({
+        ...state,
+        details: []
+      })
 
     //-----------------
     //-----------------
@@ -57,8 +58,12 @@ export default function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         brands: payload
-      }   
-
+      }
+    case GET_ALL_QUESTION:
+      return {
+        ...state,
+        resQuestion: payload
+      }
     default:
       return state
   }
