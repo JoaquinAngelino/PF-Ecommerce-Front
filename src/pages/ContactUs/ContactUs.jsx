@@ -1,11 +1,11 @@
+import axios from "axios";
 import { useState } from "react"
 import './ContactUs.css'
 
 export default function ContactUs() {
 
-
   const [input, setInput] = useState({
-    subject: "",
+    subject: "product",
     name: "",
     email: "",
     message: "",
@@ -18,10 +18,11 @@ export default function ContactUs() {
     })
   }
 
-  function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    await axios.post('http://localhost:3001/send-claim', input)
     setInput({
-      subject: "",
+      subject: "product",
       name: "",
       email: "",
       message: "",
