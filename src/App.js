@@ -10,6 +10,7 @@ import NotFound from './pages/NotFound/NotFound';
 import Detail from './components/Detail/Detail';
 import ShoppingCart from './pages/Cart';
 import CreateProduct from './pages/CreateProduct/CreateProduct';
+import PostUser from './components/PostUser/PostUser'
 //login
 import Profile from './components/Profile/Profile';
 //login
@@ -25,12 +26,10 @@ function App() {
         <Route  path='/contact' element={<ContactUs />} />
         <Route  path='/about' element={<AboutUs />} />
         <Route  path='/cart' element={<ShoppingCart />} />
-        <Route path="/detail/" element={<Detail/>}/>
+        <Route path="/detail/:id" element={<Detail/>}/>
         <Route path="/create" element={<CreateProduct/>}/>
         <Route path='*' element={<NotFound />} />
-
-        <Route path="/detail/:id" element={<Detail/>}/>
-        <Route path='/create' element={<CreateProduct />} />
+        <Route path='/postUser' element={<PostUser/>} />
         <Route path='/Profile' element={<Profile/>}/>
         
 

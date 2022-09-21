@@ -3,7 +3,8 @@ const {
   ACTIVE_LOADING,
   GET_ALL_BRANDS,
   CELL_DETAIL,
-  POST_PRODUCT
+  POST_PRODUCT,
+  POST_USER
   
 } = require('./actions.js')
 
@@ -32,14 +33,16 @@ export default function rootReducer(state = initialState, { type, payload }) {
       return {
         ...state,
       }
+      case POST_USER:
+        return{
+          ...state,
+        }
       case "clean estado":
         return({
           ...state,
           details:[]
         })
 
-    //-----------------
-    //-----------------
     case ACTIVE_LOADING:
       return {
         ...state,

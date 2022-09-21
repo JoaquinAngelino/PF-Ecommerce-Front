@@ -6,6 +6,8 @@ export const POST_PRODUCT = "POST_PRODUCT";
 export const GET_ALL_BRANDS = "GET_ALL_BRANDS"; 
 export const CELL_DETAIL="CELL_DETAIL"
 export const RUTA_ID="http://localhost:3001/celulares/"
+export const POST_USER="POST USER"
+export const RUTA_USER="http://localhost:3001/users"
 
 
 // export const RUTA_ID="http://localhost:3001/celulares/"
@@ -65,7 +67,19 @@ export function cleanStatus(payload){
    }
 }
 //CELL_DETAIL
-
+//POST USER
+export function postUser(user){
+return async function(dispatch){
+   return await axios.post(RUTA_USER, user)
+   .then((response)=>{
+      dispatch({
+         type:POST_USER,
+         payload:response.data
+      })
+   })
+}
+}
+//POST USER
 export const getAllBrands = () => {
   return async function (dispatch) {
      const products = await axios('http://localhost:3001/marcas');

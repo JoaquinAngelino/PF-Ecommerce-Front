@@ -2,10 +2,12 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import LogoutButton from '../Logout/LogoutButton';
-
+import { Link } from 'react-router-dom';
 
 const Profile=()=>{
+ 
     const {user, isAuthenticated}=useAuth0()
+    console.log(isAuthenticated)
 
     return (
      
@@ -28,11 +30,15 @@ const Profile=()=>{
             <h5>email:</h5>
             <p>{user.email}</p> */}
           <LogoutButton/>
+          <Link to='/postUser'>
+          <button >Update</button>
+          </Link>
           </div>
 
        
       )     
     )
-
+    
  }
+ 
  export default Profile;
