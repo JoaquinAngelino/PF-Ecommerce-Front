@@ -95,7 +95,6 @@ export function createPost(product) {
 }
 
 export function createQuestion(question) {
-   // console.log(question, 'esto es lo que llega del front', cellId, 'soy el id del cel')
    return async function (dispatch) {
       try {
          return await axios

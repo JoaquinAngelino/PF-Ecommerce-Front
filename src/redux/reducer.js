@@ -5,7 +5,7 @@ const {
   CELL_DETAIL,
   POST_PRODUCT,
   GET_ADMIN,
-  PUT_QUESTION
+  // PUT_QUESTION
 } = require('./actions.js')
 
 const initialState = {

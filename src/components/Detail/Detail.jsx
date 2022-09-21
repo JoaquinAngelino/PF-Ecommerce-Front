@@ -52,7 +52,6 @@ export default function Detail(props) {
                                     <div className="container-6 p-3 d-flex flex-column align-items-start justify-content-around border-start border-dark border-opacity-10">
                                         {/* <div className="d-flex flex-column align-items-start justify-content-around border-start border-dark border-opacity-10 ps-4" style={{ width: '35%' }}> */}
                                         <div className="d-flex flex-column align-items-start justify-content-around" >
-
                                             <h1 className="d-flex flex-column align-items-start tx4">{`${myCell.brand} ${myCell.model} ${myCell.capacity}`}</h1>
                                             <h4>Brand:{myCell.brand}</h4>
                                             <h4>Model:{myCell.model}</h4>
