@@ -9,6 +9,7 @@ export const ACTIVE_LOADING = "ACTIVE_LOADING";
 export const CELL_DETAIL = "CELL_DETAIL"
 export const POST_PRODUCT = "POST_PRODUCT";
 export const POST_QUESTION = "POST_QUESTION";
+export const PUT_QUESTION = "PUST_QUESTION";
 
 
 // export const RUTA_ID="http://localhost:3001/celulares/"
@@ -96,24 +97,31 @@ export function createPost(product) {
 export function createQuestion(question) {
    // console.log(question, 'esto es lo que llega del front', cellId, 'soy el id del cel')
    return async function (dispatch) {
-      return await axios
-         .post(`http://localhost:3001/questions/${question.id}`, question)
-         .then((response) => {
-            dispatch({
-               type: POST_QUESTION,
-               payload: response.data,
+      try {
+         return await axios
+            .post(`http://localhost:3001/questions/${question.id}`, question)
+            .then((response) => {
+               dispatch({
+                  type: POST_QUESTION,
+                  payload: response.data,
+               });
             });
-         });
+      } catch (error) {
+         console.log(error)
+      }
    };
 }
 
-export const getQuestion = (id) => {
+export function createAnswer(a) {
    return async function (dispatch) {
-      const allQuestion = await axios.get(`http://localhost:3001/questions/${id}`);
-      return dispatch({
-         type: GET_ALL_QUESTION,
-         payload: allQuestion.data
-      });
+      return await axios
+         .put(`http://localhost:3001/questions/${a.id}`, a)
+         .then((response) => {
+            dispatch({
+               type: PUT_QUESTION,
+               payload: response.data,
+            });
+         });
    };
 }
 

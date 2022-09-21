@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { cellDetail, cleanStatus } from "../../redux/actions";
 import { useEffect, useState } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
+// import { useAuth0 } from "@auth0/auth0-react";
 import Questions from "../Questions/Questions.jsx";
 export default function Detail(props) {
 
@@ -69,11 +69,11 @@ export default function Detail(props) {
                                         <button type="submit" className="btn btn-primary button3 bg3 border-0">Add to cart</button>
                                     </div>
                                 </div>
+                                <Questions cellId={myCell.id} q={myCell.questions} />
                             </div>
                         </div> : <p>cargando...</p>
                 }
             </div>
-            <Questions id={id} />
         </div>
     )
 }
