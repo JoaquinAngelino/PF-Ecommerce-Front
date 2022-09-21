@@ -20,6 +20,7 @@ export default function AboutUs() {
               <BsLinkedin className='CardIcon' />
             </a>
           </div>
+          </div>
           <div className='TeamCard'>
           <img className='imageAboutUs' src="https://avatars.githubusercontent.com/u/77042064?v=4" alt="Andres Sanchez de La Fuente" />
           <p>Andres Sanchez de la Fuente</p>
@@ -30,6 +31,8 @@ export default function AboutUs() {
             <a rel="noreferrer" target="_blank" href="https://www.linkedin.com/in/andres-sanchez-de-la-fuente/">
               <BsLinkedin className='CardIcon' />
             </a>
+            </div>
+            </div>
             <div className='TeamCard'>
           <img className='imageAboutUs' src="frank.jpeg" alt="Frank Smith" />
           <p>Frank Smith</p>
@@ -40,6 +43,7 @@ export default function AboutUs() {
             <a rel="noreferrer" target="_blank" href="https://www.linkedin.com/in/frank-smith-bocangelino-rojas-351157168/">
               <BsLinkedin className='CardIcon' />
             </a>
+            </div>
             </div>
             <div className='TeamCard'>
           <img className='imageAboutUs' src="https://avatars.githubusercontent.com/u/83725367?v=4" alt="Federico Valdez" />
@@ -52,6 +56,7 @@ export default function AboutUs() {
               <BsLinkedin className='CardIcon' />
             </a>
             </div>
+            </div>
             <div className='TeamCard'>
           <img className='imageAboutUs' src="https://avatars.githubusercontent.com/u/94063603?v=4" alt="Ayrton Acevedo" />
           <p>Ayrton Acevedo</p>
@@ -62,6 +67,7 @@ export default function AboutUs() {
             <a rel="noreferrer" target="_blank" href="https://www.linkedin.com/in/ayrton-nahir-arroyo-acevedo-b795b0212">
               <BsLinkedin className='CardIcon' />
             </a>
+            </div>
             </div>
             <div className='TeamCard'>
           <img className='imageAboutUs' src="https://avatars.githubusercontent.com/u/72768487?v=4" alt="Juan David Pabon" />
@@ -78,11 +84,11 @@ export default function AboutUs() {
 
             </div>
             </div>
-            </div>
-          </div>
-          </div>
-        </div>
-      </div>
-    </div>
+            
+          
+          
+        
+      
+    
   )
 }
