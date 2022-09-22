@@ -1,9 +1,22 @@
 import { useState } from "react"
 import './ContactUs.css'
+import * as yup from 'yup';
+import axios from "axios";
 
 export default function ContactUs() {
+  yup.setLocale({
+    string: {
+      min: 'Message must be longer than ${min}',
+    },
+  });
+  let schema = yup.object().shape({
+    subject: yup.string().required(),
+    name: yup.string().required(),
+    email: yup.string().email().required(),
+    message: yup.string().min(10).required()
+  })
 
-
+  const [error, setError] = useState("")
   const [input, setInput] = useState({
     subject: "",
     name: "",
@@ -18,14 +31,18 @@ export default function ContactUs() {
     })
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    setInput({
-      subject: "",
-      name: "",
-      email: "",
-      message: "",
-    })
+    schema.validate(input)
+      .then(async (value) => {
+        await axios.post("http://localhost:3001/send-claim", value)
+        setInput({ subject: "", name: "", email: "", message: "" })
+        setError("")
+      }
+      )
+      .catch((err) => {
+        setError(err.message)
+      })
   }
 
   return (
@@ -40,20 +57,13 @@ export default function ContactUs() {
           <option value="other">Other</option>
         </select>
         <input className="FormInput" value={input.name} onChange={(e) => handleChange(e)}
-          type='text'
-          placeholder="Your name"
-          name="name"
-          required
-        />
+          type='text' placeholder="Your name" name="name" required />
         <input
           className="FormInput" value={input.email} onChange={(e) => handleChange(e)}
-          type='email'
-          placeholder="Your email"
-          name="email"
-          required
-        />
+          type='email' placeholder="Your email" name="email" required />
         <label className="FormLabel">Message</label>
         <textarea className="FormInput FormTextArea" type="textarea" name="message" value={input.message} onChange={(e) => handleChange(e)} cols="30" rows="10"></textarea>
+        <p className="inputError">{error}</p>
         <button className="SubmitBtn" type="submit" onClick={handleSubmit}>Send</button>
       </form>
     </div>
