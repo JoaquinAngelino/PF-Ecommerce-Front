@@ -2,21 +2,35 @@ import { useAuth0, user } from '@auth0/auth0-react';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { createAnswer, createQuestion, getRole } from '../../redux/actions';
+import {
+   Button,
+   Modal,
+   ModalBody,
+   FormGroup,
+   ModalFooter,
+} from "reactstrap";
+
 
 const Questions = ({ cellId, q }) => {
 
    const dispatch = useDispatch();
    const admin = useSelector((state) => state.admin)
    const { user, isAuthenticated } = useAuth0();
+
    const [question, setQuestion] = useState({
       question: "",
       emailUser: "",
       id: cellId
    })
+
+   const handleClose = () => setAnswer(false);
+   const handleChangeButton = () => setAnswer(true);
    const [answer, setAnswer] = useState({
       answer: "",
-      id: ""
+      id: "",
+      modal: false
    })
+
 
    useEffect(() => {
       if (isAuthenticated) {
@@ -72,6 +86,7 @@ const Questions = ({ cellId, q }) => {
       })
    }
 
+
    return (
       <div>
          <div className="container">
@@ -88,23 +103,43 @@ const Questions = ({ cellId, q }) => {
             {q && q.length > 0 ? q.map((c, index) => {
                return (
                   <div key={index}>
-                     <p>{c.question}</p>
-                     <p>{c.answer}</p>
-                     {
-                        admin ?
-                           <div>
+                     <div>
+                        <p>{c.question}</p>
+                        <p>{c.answer}</p>
+                     </div>
+                     <div>
+                        {
+                           admin ?
                               <div>
-                                 <input type="text" onChange={(e) => handleChangeA(e, c.id)} name="answer" value={answer.answer} placeholder='Answer..'></input>
-                                 <button type="button" className="btn btn-outline-primary" onClick={(e) => handleSubmitAnswer(e)}>submit</button>
+                                 {c.answer ?
+                                    <button type="button" className="btn btn-outline-primary" onClick={(a) => handleChangeButton(a, c.id, c.question)}>Response Answer</button>
+                                    : <button type="button" className="btn btn-outline-primary" onClick={(a) => handleChangeButton(a, c.id, c.question)}>Answer</button>
+                                 }
                               </div>
-                           </div>
-                           : ""
-                     }
+                              : ""
+                        }
+                     </div>
                   </div>
                )
             }) : <h2>No hay preguntas</h2>
             }
          </div>
+         <Modal aria-labelledby="contained-modal-title-vcenter" isOpen={answer.modal}>
+            <ModalBody>
+               <FormGroup>
+                  <label >Question:</label>
+                  <input className="form-control" type="text" readOnly value={answer.question} />
+               </FormGroup>
+               <FormGroup>
+                  <label >Answer:</label>
+                  <input className="form-control" type="text" onChange={(e) => handleChangeA(e)} value={answer.answer} />
+               </FormGroup>
+            </ModalBody>
+            <ModalFooter>
+               <Button color="primary" onClick={() => handleSubmitAnswer()}>submit</Button>
+               <Button color="danger" onClick={() => handleClose()}>cancelar</Button>
+            </ModalFooter>
+         </Modal>
       </div>
    )
 }
