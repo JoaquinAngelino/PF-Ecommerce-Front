@@ -90,3 +90,8 @@ export function createPost(product) {
   };
 }
 
+export function updateProduct(id,payload){
+   return  function(){
+       axios.put(`http://localhost:3001/celulares/${id}`,payload)
+   }
+}
