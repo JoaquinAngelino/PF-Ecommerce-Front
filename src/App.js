@@ -16,9 +16,7 @@ import LandingPage from './pages/LandingPage/LandingPage';
 import NotFound from './pages/NotFound/NotFound';
 import Detail from './components/Detail/Detail';
 import ShoppingCart from './pages/Cart';
-//login
-import Profile from './components/Profile/Profile';
-//login
+
 import PanelAdminCells from './components/PanelAdminCells/PanelAdminCells';
 import PanelAdminUsers from './components/PanelAdminUsers/PanelAdminUsers';
 import PaymentForm from './pages/PaymentForm/PaymentForm'
