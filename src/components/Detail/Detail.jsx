@@ -3,11 +3,13 @@ import React from "react";
 import { Link, useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { cellDetail, cleanStatus } from "../../redux/actions";
-import { useEffect, useState } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
+import { useEffect } from "react";
 import Questions from "../Questions/Questions.jsx";
-export default function Detail(props) {
 
+
+
+export default function Detail(props) {
+    
     const dispatch = useDispatch();
     // let id=props.match.params.id;
     const { id } = useParams()
@@ -22,11 +24,12 @@ export default function Detail(props) {
     }, [dispatch, id])
 
 
+
     return (
-        <div>
             <div className="container">
                 {
                     myCell ?
+                    <div>
                         <div className="row detailsContainer d-flex flex-column align-items-center">
                             <div className="card row detailsContainer d-flex flex-column align-items-center">
                                 <div className="d-flex flex-row justify-content-between">
@@ -70,10 +73,14 @@ export default function Detail(props) {
                                     </div>
                                 </div>
                             </div>
-                        </div> : <p>cargando...</p>
-                }
-            </div>
-            <Questions id={id} />
+                        </div>
+                        <div>
+                            <Questions key={myCell.id} cellId={myCell.id} q={myCell.questions}/>
+                        </div>
+                    </div> 
+                        
+                    : <p>cargando...</p>
+                }            
         </div>
     )
 }

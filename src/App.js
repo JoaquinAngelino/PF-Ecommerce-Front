@@ -13,6 +13,8 @@ import CreateProduct from './pages/CreateProduct/CreateProduct';
 //login
 import Profile from './components/Profile/Profile';
 //login
+import PanelAdminCells from './components/PanelAdminCells/PanelAdminCells';
+import PanelAdminUsers from './components/PanelAdminUsers/PanelAdminUsers';
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
         <Route path="/detail/:id" element={<Detail/>}/>
         <Route path='/create' element={<CreateProduct />} />
         <Route path='/Profile' element={<Profile/>}/>
+        <Route path='/panelCells' element={<PanelAdminCells/>}/>
+        <Route path='/panelUsers' element={<PanelAdminUsers/>}/>
         
 
 
