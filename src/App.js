@@ -16,6 +16,9 @@ import LandingPage from './pages/LandingPage/LandingPage';
 import NotFound from './pages/NotFound/NotFound';
 import Detail from './components/Detail/Detail';
 import ShoppingCart from './pages/Cart';
+
+import PanelAdminCells from './components/PanelAdminCells/PanelAdminCells';
+import PanelAdminUsers from './components/PanelAdminUsers/PanelAdminUsers';
 import PaymentForm from './pages/PaymentForm/PaymentForm'
 
 
@@ -44,6 +47,8 @@ function App() {
         <Route path="/detail/:id" element={<Detail/>}/>
         <Route path='/edit' element={<EditProduct />} />
         <Route path='/Profile' element={<Profile/>}/>
+        <Route path='/panelCells' element={<PanelAdminCells/>}/>
+        <Route path='/panelUsers' element={<PanelAdminUsers/>}/>
         
 
 
