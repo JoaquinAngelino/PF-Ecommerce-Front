@@ -15,10 +15,19 @@ export  default function PaymentForm(){
     const stripe = useStripe();
     const elements = useElements();
     const [loading, setLoading] = useState(false)
+    // 
     
     const totalPrice = JSON.parse(localStorage.getItem("totalPrice"));
+    var pricess=Number(totalPrice)
+    console.log(pricess);
     const items = JSON.parse(localStorage.getItem("cartList"));
-    // EMAIL Y USUARIO => FALTA
+    // const mail = user.user.mail
+    const mail="12deykerporx@gmail.com"
+    // const userIdName = "a13189e3-541b-412d-ac5f-678f839a305d"
+
+    const arr = [items.map(e => e.line)]
+    console.log(arr);
+
     let history = useNavigate();
     function handleRegresar(e){
         history("/cart");
@@ -35,18 +44,19 @@ export  default function PaymentForm(){
 
         if (!error) {
             const { id } = paymentMethod
+            console.log(id)
             try {
               const { data } = await axios.post(`http://localhost:3001/checkout`, {
                 id,
-                amount: 100,
-                // mail,
-                // arr,
-                // userIdName
+                amount:Number(totalPrice),
+                mail,
+                arr,
+              
       
               })
               console.log("Esta es la data"+data);
               alert(`You have pay $ ${totalPrice} successfully`)
-              history("/")
+              // history("/")
       
             } catch (error) {
               console.log(error.message);
