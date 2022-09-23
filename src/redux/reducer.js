@@ -12,7 +12,7 @@ const initialState = {
   products: [],
   isLoading: true,
   brands: [],
-  admin: false
+  admin: false,
 }
 
 export default function rootReducer(state = initialState, { type, payload }) {

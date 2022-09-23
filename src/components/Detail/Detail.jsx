@@ -68,11 +68,23 @@ export default function Detail(props) {
                                         <button type="submit" className="btn btn-primary button3 bg3 border-0">Add to cart</button>
                                     </div>
                                 </div>
-                                <Questions cellId={myCell.id} q={myCell.questions} />
+                                <Questions cellId={myCell.id} q={myCell?.questions} />
+                                {/* <div>
+                                    {myCell?.questions?.reverse().map((e) => (
+                                        <div key={e.id}>
+                                            <div>
+                                                <h5>Question:</h5>
+                                                <p>{e.question}</p>
+                                                <h5>Answer:</h5>
+                                                <p>{e.answer}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div> */}
                             </div>
                         </div> : <p>cargando...</p>
                 }
             </div>
-        </div>
+        </div >
     )
 }
