@@ -140,3 +140,43 @@ body.Dark .CardIcon:hover {
   stroke: black;
   fill: black;
 }
+
+@media (max-width: 600px) {
+   
+  
+  .TeamDiv {
+    /* grid-template-columns: repeat(1, 0vw); */
+    display: flex;
+    flex-direction: column;
+    margin: 0%;
+    width: 100vw;
+   
+  }
+  .TeamCard{
+    width: 60vw;
+    margin: 10% 0%
+  }
+    
+  
+}
+@media (max-width: 1000px) {
+   
+  
+  .TeamDiv {
+    /* grid-template-columns: repeat(1, 0vw); */
+    display: flex;
+    flex-direction: row;
+    margin: 0%;
+    width: 100vw;
+    flex-wrap: wrap;
+
+   
+  }
+  .TeamCard{
+    width: 35vw;
+    margin: 5vw;
+    
+  }
+    
+  
+}

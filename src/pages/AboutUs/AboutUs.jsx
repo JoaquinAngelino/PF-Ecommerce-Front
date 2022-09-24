@@ -1,5 +1,6 @@
 import { BsGithub, BsLinkedin } from 'react-icons/bs';
 import './AboutUs.css'
+import frank from "./frank.jpeg"
 
 export default function AboutUs() {
 
@@ -34,7 +35,7 @@ export default function AboutUs() {
           </div>
         </div>
         <div className='TeamCard'>
-          <img className='imageAboutUs' src="frank.jpeg" alt="Frank Smith" />
+          <img className='imageAboutUs' src={frank} alt="Frank Smith" />
           <p>Frank Smith</p>
           <div className='IconDiv'>
             <a rel="noreferrer" target="_blank" href="https://github.com/12frankporx">
