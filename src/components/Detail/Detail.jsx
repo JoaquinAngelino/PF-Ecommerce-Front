@@ -9,7 +9,7 @@ import Questions from "../Questions/Questions.jsx";
 
 
 export default function Detail(props) {
-    
+
     const dispatch = useDispatch();
     // let id=props.match.params.id;
     const { id } = useParams()
@@ -23,14 +23,14 @@ export default function Detail(props) {
         dispatch(cellDetail(id))
     }, [dispatch, id])
 
-    const get =  () => {
-        dispatch(cellDetail(id))        
+    const get = () => {
+        dispatch(cellDetail(id))
     }
 
     return (
-            <div className="container">
-                {
-                    myCell ?
+        <div className="container">
+            {
+                myCell ?
                     <div>
                         <div className="row detailsContainer d-flex flex-column align-items-center">
                             <div className="card row detailsContainer d-flex flex-column align-items-center">
@@ -77,12 +77,11 @@ export default function Detail(props) {
                             </div>
                         </div>
                         <div>
-                            <Questions key={myCell.id} cellId={myCell.id} q={myCell.questions} get={get}/>
+                            <Questions key={myCell.id} cellId={myCell.id} q={myCell.questions} get={get} />
                         </div>
-                    </div> 
-                        
-                    : <p>cargando...</p>
-                }            
+                    </div>
+                    : <p>Loanding...</p>
+            }
         </div>
     )
 }
