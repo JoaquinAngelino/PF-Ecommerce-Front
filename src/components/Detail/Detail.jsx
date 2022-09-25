@@ -23,7 +23,9 @@ export default function Detail(props) {
         dispatch(cellDetail(id))
     }, [dispatch, id])
 
-
+    const get =  () => {
+        dispatch(cellDetail(id))        
+    }
 
     return (
             <div className="container">
@@ -75,7 +77,7 @@ export default function Detail(props) {
                             </div>
                         </div>
                         <div>
-                            <Questions key={myCell.id} cellId={myCell.id} q={myCell.questions}/>
+                            <Questions key={myCell.id} cellId={myCell.id} q={myCell.questions} get={get}/>
                         </div>
                     </div> 
                         

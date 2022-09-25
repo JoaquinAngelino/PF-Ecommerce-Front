@@ -172,8 +172,20 @@ export function putUser(a) {
          });
    };
 }
+
 export function updateProduct(id,payload){
    return  function(){
        axios.put(`http://localhost:3001/celulares/${id}`,payload)
    }
 }
+
+/*
+export const getAllProductsAdmin = () => {
+   return async function (dispatch) {
+      const products = await axios('http://localhost:3001/celulares/admin');
+      return dispatch({
+         type: GET_ALL_PRODUCTS,
+         payload: products.data
+      });
+   };
+};*/

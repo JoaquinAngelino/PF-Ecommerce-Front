@@ -11,7 +11,7 @@ import {
    ModalFooter,
  } from "reactstrap";
 
-const Questions = ({cellId, q}) => {
+const Questions = ({cellId, q, get}) => {
 
    const dispatch = useDispatch();
    const admin = useSelector((state) => state.admin)
@@ -56,6 +56,7 @@ const Questions = ({cellId, q}) => {
             emailUser: "",
             id: cellId
          })
+         get();
       }
    }
 
@@ -76,6 +77,7 @@ const Questions = ({cellId, q}) => {
          answer: "",
          id:""
       })
+      get();
    }
 
    const closeModal= () => {
