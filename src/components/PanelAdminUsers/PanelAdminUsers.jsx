@@ -101,6 +101,8 @@ const PanelAdminUsers = () => {
         cerrarModal();
     
         window.alert("Edited.")
+
+        dispatch(getAllUsers());
       }else{
 
         setModals({
@@ -143,6 +145,8 @@ const PanelAdminUsers = () => {
     cerrarModal();
 
     window.alert("Removed.");
+
+    dispatch(getAllUsers());
   }
 
   
@@ -175,7 +179,7 @@ const PanelAdminUsers = () => {
 
     window.alert("Reestablished.");
 
-
+    dispatch(getAllUsers());
   }
 
 
@@ -191,7 +195,7 @@ const PanelAdminUsers = () => {
     
     return (
         <div>
-            <Table>
+            <Table bordered size="sm" striped>
                 <thead>
                 <tr>
                     <th>ID</th>

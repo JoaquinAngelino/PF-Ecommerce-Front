@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const RUTA_ID = "http://localhost:3001/celulares/"
+export const RUTA_ID = "http://localhost:3001/celulares/home/"
 export const GET_ADMIN = "GET_ADMIN";
 export const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS'
 export const GET_ALL_BRANDS = "GET_ALL_BRANDS";
@@ -25,7 +25,7 @@ export const PUT_USERS = "PUT_USERS";
 
 export const getAllProducts = () => {
    return async function (dispatch) {
-      const products = await axios('http://localhost:3001/celulares');
+      const products = await axios('http://localhost:3001/celulares/home');
       return dispatch({
          type: GET_ALL_PRODUCTS,
          payload: products.data
@@ -34,7 +34,7 @@ export const getAllProducts = () => {
 };
 export const getFilteredProducts = (payload) => {
    return async function (dispatch) {
-      const products = await axios(`http://localhost:3001/celulares?${payload}`);
+      const products = await axios(`http://localhost:3001/celulares/home?${payload}`);
       return dispatch({
          type: GET_ALL_PRODUCTS,
          payload: products.data
@@ -172,8 +172,19 @@ export function putUser(a) {
          });
    };
 }
+
 export function updateProduct(id,payload){
    return  function(){
        axios.put(`http://localhost:3001/celulares/${id}`,payload)
    }
 }
+
+export const getAllProductsAdmin = () => {
+   return async function (dispatch) {
+      const p = await axios('http://localhost:3001/celulares/panel');
+      return dispatch({
+         type: GET_ALL_PRODUCTS,
+         payload: p.data
+      });
+   };
+};

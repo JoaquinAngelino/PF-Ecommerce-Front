@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts, putCell } from "../../redux/actions";
+import { getAllProductsAdmin, putCell } from "../../redux/actions";
 import "./PanelAdminCells.css";
 import 'bootstrap/dist/css/bootstrap.css';
 import {
@@ -40,7 +40,7 @@ const PanelAdminCells = () => {
   });
 
   useEffect(() => {
-    dispatch(getAllProducts());
+    dispatch(getAllProductsAdmin());
 
   },[dispatch])
 
@@ -104,27 +104,26 @@ const PanelAdminCells = () => {
   }
 
   const editarModal2 = () => {
-    if(state.line.length > 0 && state.model.length > 0 && state.brand.length > 0 && state.stock.length > 0 && state.capacity.length > 0 && state.image.length > 
-      0 && state.price.length > 0 && state.memoryRAM.length > 0 && state.description.length > 0 && state.spec.length > 0 && state.price > 0 && state.capacity > 0 &&
+    if(state.line.length > 0 && state.model.length > 0 && state.brand.length > 0  && state.image.length > 
+      0   && state.description.length > 0 && state.spec.length > 0 && state.price > 0 && state.capacity > 0 &&
       state.memoryRAM > 0 && state.stock > 0){
 
         dispatch(putCell(state))
 
         cerrarModal();
-    
-        window.alert("Edited.")
-      }else{
 
+        window.alert("Edited.")
+        
+        dispatch(getAllProductsAdmin());
+    }else{
         setModals({
           ...modals,
           modalEditarSeguro: false
         });
-
-        window.alert("Error, check the fields.")
-      }
-
-
-  
+        
+        window.alert("Error, check the fields.")   
+        
+    }
   }
 
 
@@ -162,6 +161,7 @@ const PanelAdminCells = () => {
     cerrarModal();
 
     window.alert("Removed.");
+    dispatch(getAllProductsAdmin());
   }
 
   
@@ -195,10 +195,9 @@ const PanelAdminCells = () => {
     dispatch(putCell(state));
 
     cerrarModal();
-
+    
     window.alert("Reestablished.");
-
-
+    dispatch(getAllProductsAdmin());
   }
 
 
@@ -214,7 +213,7 @@ const PanelAdminCells = () => {
     
     return (
         <div>
-            <Table>
+            <Table bordered size="sm" striped>
                 <thead>
                 <tr>
                     <th>ID</th>
@@ -225,7 +224,7 @@ const PanelAdminCells = () => {
                     <th>Image</th>
                     <th>Price</th>
                     <th>Capacity</th>
-                    <th>Memory RAM</th>
+                    <th>RAM (GB)</th>
                     <th>Description</th>
                     <th>Spec</th>
                   </tr>
