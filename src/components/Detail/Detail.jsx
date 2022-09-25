@@ -74,10 +74,10 @@ export default function Detail(props) {
                                         <button type="submit" className="btn btn-primary button3 bg3 border-0">Add to cart</button>
                                     </div>
                                 </div>
+                                <div>
+                                    <Questions key={myCell.id} cellId={myCell.id} q={myCell.questions} get={get} />
+                                </div>
                             </div>
-                        </div>
-                        <div>
-                            <Questions key={myCell.id} cellId={myCell.id} q={myCell.questions} get={get} />
                         </div>
                     </div>
                     : <p>Loanding...</p>
