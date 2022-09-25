@@ -28,7 +28,7 @@ export default function Detail(props) {
 
     const get = () => {
         dispatch(cellDetail(id))
-
+    }
     return (
         <div className="container">
             {
@@ -58,26 +58,26 @@ export default function Detail(props) {
                                         </div>
                                     </div>
                                     <div className="container-title">
-                                    <div className="container-6 p-3 d-flex flex-column align-items-start justify-content-around border-start border-dark border-opacity-10">
-                                        {/* <div className="d-flex flex-column align-items-start justify-content-around border-start border-dark border-opacity-10 ps-4" style={{ width: '35%' }}> */}
-                                        <div className="d-flex flex-column align-items-start justify-content-around" >
+                                        <div className="container-6 p-3 d-flex flex-column align-items-start justify-content-around border-start border-dark border-opacity-10">
+                                            {/* <div className="d-flex flex-column align-items-start justify-content-around border-start border-dark border-opacity-10 ps-4" style={{ width: '35%' }}> */}
+                                            <div className="d-flex flex-column align-items-start justify-content-around" >
 
-                                            <h1 className="d-flex flex-column align-items-start tx4">{`${myCell.brand} ${myCell.model} ${myCell.capacity}`}</h1>
-                                            <h6>Brand: {myCell.brand}</h6>
-                                            <h6>Model: {myCell.model}</h6>
-                                            <h6>Capacity: {myCell.capacity}GB</h6>
-                                            <h6>Memory RAM: {myCell.memoryRAM}GB</h6>
-                                            <h3 >Price: ${myCell.price}</h3>
+                                                <h1 className="d-flex flex-column align-items-start tx4">{`${myCell.brand} ${myCell.model} ${myCell.capacity}`}</h1>
+                                                <h6>Brand: {myCell.brand}</h6>
+                                                <h6>Model: {myCell.model}</h6>
+                                                <h6>Capacity: {myCell.capacity}GB</h6>
+                                                <h6>Memory RAM: {myCell.memoryRAM}GB</h6>
+                                                <h3 >Price: ${myCell.price}</h3>
+                                            </div>
+                                            <div className="d-flex flex-column w-100">
+                                                <p className={`align-self-center ${myCell.stock < 5 ? 'text-danger fw-bold' : null}`}>{`Stock available: (${myCell.stock} available)`}</p>
+                                            </div>
+                                            <button type="submit" className="btn btn-primary button3 bg3 border-0" onClick={() => addToCart(myCell.id, myCell.brand, myCell.line, myCell.model, myCell.price, myCell.stock, myCell.capacity, myCell.image, myCell.memoryRAM)}>Add to cart</button>
                                         </div>
-                                        <div className="d-flex flex-column w-100">
-                                            <p className={`align-self-center ${myCell.stock < 5 ? 'text-danger fw-bold' : null}`}>{`Stock available: (${myCell.stock} available)`}</p>
-                                        </div>
-                                        <button type="submit" className="btn btn-primary button3 bg3 border-0"  onClick={() => addToCart(myCell.id, myCell.brand, myCell.line, myCell.model, myCell.price, myCell.stock, myCell.capacity, myCell.image, myCell.memoryRAM)}>Add to cart</button>
-                                    </div>
                                     </div>
                                 </div>
                                 <div>
-                                    <Questions key={myCell.id} cellId={myCell.id} q={myCell.questions} get={get}/>
+                                    <Questions key={myCell.id} cellId={myCell.id} q={myCell.questions} get={get} />
                                 </div>
                             </div>
                         </div>
@@ -85,7 +85,6 @@ export default function Detail(props) {
                     </div>
                     : <p>Loanding...</p>
             }
-
         </div>
     )
 }
