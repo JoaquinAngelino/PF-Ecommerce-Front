@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { postUser } from '../../redux/actions';
+import { allUser, postUser } from '../../redux/actions';
 import { useAuth0 } from "@auth0/auth0-react";
+import{useNavigate}from "react-router-dom"
 
 export default function CreateUser(){
+    const navigate=useNavigate()
     const dispatch = useDispatch();
     const {user, isAuthenticated}=useAuth0()
     console.log(isAuthenticated)
@@ -28,6 +30,12 @@ function handleChange(e){
 function handleSubmit(e){
     e.preventDefault()
     dispatch(postUser(input))
+    .then(()=>{
+        dispatch(allUser())
+    })
+    .then(()=>{
+        navigate("/home")
+    })
 }
 
 return(

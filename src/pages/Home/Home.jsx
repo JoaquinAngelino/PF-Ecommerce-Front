@@ -1,4 +1,4 @@
-import { useAuth0 } from "@auth0/auth0-react";
+
 import { useEffect, useState } from "react";
 import { CloseButton } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,7 +13,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Loading from "../../components/Loading/Loading";
 
 export default function Home() {
-  const {user, isAuthenticated}=useAuth0()
+
+ 
   const location = useLocation();
   const [searchParams] = useSearchParams();
   const isLoading = useSelector(state => state.isLoading);
@@ -42,6 +43,8 @@ export default function Home() {
   useEffect(() => {
     setCurrentPage(1);
   }, [products])
+
+
 
   // Pagination logic
   let idxLastItem = currentPage * 6;
@@ -89,7 +92,7 @@ export default function Home() {
           <Pagination currentPage={currentPage} postPerPage={6} totalPosts={products.length} paginate={paginate} />
             <div className="containerContent">
           <Filters />
-          <div className="containerCards">
+          <div className="containerCards" >
           {(!products || !products.length) ? (<NothingFound />) :
             pageProducts.map(e => <ProductCard
               key={e.id}
