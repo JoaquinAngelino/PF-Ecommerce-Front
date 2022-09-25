@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { cellDetail, cleanStatus } from "../../redux/actions";
 import { useEffect } from "react";
 import Questions from "../Questions/Questions.jsx";
+import { addToFav, addToCart } from '../Card/favAndCart';
+import { BsCartFill, BsStarFill } from 'react-icons/bs';
 
 
 
@@ -20,7 +22,9 @@ export default function Detail(props) {
     }
 
     useEffect(() => {
+        dispatch(cleanStatus());
         dispatch(cellDetail(id))
+        toast.error("Error")
     }, [dispatch, id])
 
     const get =  () => {
@@ -38,6 +42,7 @@ export default function Detail(props) {
                                     <Link to='/home' className="align-self-start">
                                         <button className="btn btn-primary bg3 border-0 m-3" style={{ width: '2.3rem' }} onClick={(e) => handleClearStatus(e)}>X</button>
                                     </Link>
+                                    <BsStarFill className='CardIcon' onClick={() => addToFav(myCell.id, myCell.brand, myCell.line, myCell.model, myCell.price, myCell.stock, myCell.capacity, myCell.image, myCell.memoryRAM)} />
                                 </div>
                                 <div className=" col-12 d-flex flex-sm-column flex-md-row align-items-center justify-content-center">
                                     <div className="d-flex flex-column" style={{ width: '65%' }}>
@@ -54,24 +59,23 @@ export default function Detail(props) {
                                             </div>
                                         </div>
                                     </div>
+                                    <div className="container-title">
                                     <div className="container-6 p-3 d-flex flex-column align-items-start justify-content-around border-start border-dark border-opacity-10">
                                         {/* <div className="d-flex flex-column align-items-start justify-content-around border-start border-dark border-opacity-10 ps-4" style={{ width: '35%' }}> */}
                                         <div className="d-flex flex-column align-items-start justify-content-around" >
 
                                             <h1 className="d-flex flex-column align-items-start tx4">{`${myCell.brand} ${myCell.model} ${myCell.capacity}`}</h1>
-                                            <h4>Brand:{myCell.brand}</h4>
-                                            <h4>Model:{myCell.model}</h4>
-                                            <h4>Price:{myCell.price}</h4>
+                                            <h6>Brand: {myCell.brand}</h6>
+                                            <h6>Model: {myCell.model}</h6>
+                                            <h6>Capacity: {myCell.capacity}GB</h6>
+                                            <h6>Memory RAM: {myCell.memoryRAM}GB</h6>
+                                            <h3 >Price: ${myCell.price}</h3>
                                         </div>
                                         <div className="d-flex flex-column w-100">
-                                            <p className={`align-self-center ${myCell.stock < 5 ? 'text-danger fw-bold' : null}`}>{`Stock available:(${myCell.stock} available)`}</p>
-                                            <div className="input-group">
-                                                <button type="button" className="btn btn-outline-primary" value={'-'}>-</button>
-                                                <input aria-label="Example text with two button addons" className="text-center form-control" value="value" />
-                                                <button type="button" className="btn btn-outline-primary" value={'+'}>+</button>
-                                            </div>
+                                            <p className={`align-self-center ${myCell.stock < 5 ? 'text-danger fw-bold' : null}`}>{`Stock available: (${myCell.stock} available)`}</p>
                                         </div>
-                                        <button type="submit" className="btn btn-primary button3 bg3 border-0">Add to cart</button>
+                                        <button type="submit" className="btn btn-primary button3 bg3 border-0"  onClick={() => addToCart(myCell.id, myCell.brand, myCell.line, myCell.model, myCell.price, myCell.stock, myCell.capacity, myCell.image, myCell.memoryRAM)}>Add to cart</button>
+                                    </div>
                                     </div>
                                 </div>
                             </div>
@@ -82,7 +86,7 @@ export default function Detail(props) {
                     </div> 
                         
                     : <p>cargando...</p>
-                }            
+                }       
         </div>
     )
 }

@@ -10,6 +10,7 @@ const {
 
 const initialState = {
   products: [],
+  allProducts: [],
   isLoading: true,
   brands: [],
   admin: false,

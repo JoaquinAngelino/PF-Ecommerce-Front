@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts, putCell } from "../../redux/actions";
+import { getAllProductsAdmin, putCell } from "../../redux/actions";
 import "./PanelAdminCells.css";
 import 'bootstrap/dist/css/bootstrap.css';
 import {
@@ -40,7 +40,7 @@ const PanelAdminCells = () => {
   });
 
   useEffect(() => {
-    dispatch(getAllProducts());
+    dispatch(getAllProductsAdmin());
 
   },[dispatch])
 
@@ -114,7 +114,7 @@ const PanelAdminCells = () => {
 
         window.alert("Edited.")
         
-        dispatch(getAllProducts());
+        dispatch(getAllProductsAdmin());
     }else{
         setModals({
           ...modals,
@@ -122,6 +122,7 @@ const PanelAdminCells = () => {
         });
         
         window.alert("Error, check the fields.")   
+        
     }
   }
 
@@ -160,7 +161,7 @@ const PanelAdminCells = () => {
     cerrarModal();
 
     window.alert("Removed.");
-    dispatch(getAllProducts());
+    dispatch(getAllProductsAdmin());
   }
 
   
@@ -196,7 +197,7 @@ const PanelAdminCells = () => {
     cerrarModal();
     
     window.alert("Reestablished.");
-    dispatch(getAllProducts());
+    dispatch(getAllProductsAdmin());
   }
 
 
