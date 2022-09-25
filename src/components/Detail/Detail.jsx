@@ -75,7 +75,7 @@ export default function Detail(props) {
                                     </div>
                                 </div>
                                 <div>
-                                    <Questions key={myCell.id} cellId={myCell.id} q={myCell.questions} get={get} />
+                                    <Questions key={myCell.id} cellId={myCell.id} q={myCell.questions} get={get}/>
                                 </div>
                             </div>
                         </div>
