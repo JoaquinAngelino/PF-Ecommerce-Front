@@ -3,11 +3,13 @@ import React from "react";
 import { Link, useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { cellDetail, cleanStatus } from "../../redux/actions";
-import { useEffect, useState } from "react";
-// import { useAuth0 } from "@auth0/auth0-react";
+import { useEffect } from "react";
 import Questions from "../Questions/Questions.jsx";
-export default function Detail(props) {
 
+
+
+export default function Detail(props) {
+    
     const dispatch = useDispatch();
     // let id=props.match.params.id;
     const { id } = useParams()
@@ -21,12 +23,15 @@ export default function Detail(props) {
         dispatch(cellDetail(id))
     }, [dispatch, id])
 
+    const get =  () => {
+        dispatch(cellDetail(id))        
+    }
 
     return (
-        <div>
             <div className="container">
                 {
                     myCell ?
+                    <div>
                         <div className="row detailsContainer d-flex flex-column align-items-center">
                             <div className="card row detailsContainer d-flex flex-column align-items-center">
                                 <div className="d-flex flex-row justify-content-between">
@@ -52,6 +57,7 @@ export default function Detail(props) {
                                     <div className="container-6 p-3 d-flex flex-column align-items-start justify-content-around border-start border-dark border-opacity-10">
                                         {/* <div className="d-flex flex-column align-items-start justify-content-around border-start border-dark border-opacity-10 ps-4" style={{ width: '35%' }}> */}
                                         <div className="d-flex flex-column align-items-start justify-content-around" >
+
                                             <h1 className="d-flex flex-column align-items-start tx4">{`${myCell.brand} ${myCell.model} ${myCell.capacity}`}</h1>
                                             <h4>Brand:{myCell.brand}</h4>
                                             <h4>Model:{myCell.model}</h4>
@@ -68,23 +74,15 @@ export default function Detail(props) {
                                         <button type="submit" className="btn btn-primary button3 bg3 border-0">Add to cart</button>
                                     </div>
                                 </div>
-                                <Questions cellId={myCell.id} q={myCell?.questions} />
-                                {/* <div>
-                                    {myCell?.questions?.reverse().map((e) => (
-                                        <div key={e.id}>
-                                            <div>
-                                                <h5>Question:</h5>
-                                                <p>{e.question}</p>
-                                                <h5>Answer:</h5>
-                                                <p>{e.answer}</p>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div> */}
                             </div>
-                        </div> : <p>cargando...</p>
-                }
-            </div>
-        </div >
+                        </div>
+                        <div>
+                            <Questions key={myCell.id} cellId={myCell.id} q={myCell.questions} get={get}/>
+                        </div>
+                    </div> 
+                        
+                    : <p>cargando...</p>
+                }            
+        </div>
     )
 }

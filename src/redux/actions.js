@@ -9,7 +9,10 @@ export const ACTIVE_LOADING = "ACTIVE_LOADING";
 export const CELL_DETAIL = "CELL_DETAIL"
 export const POST_PRODUCT = "POST_PRODUCT";
 export const POST_QUESTION = "POST_QUESTION";
-export const PUT_QUESTION = "PUST_QUESTION";
+export const PUT_QUESTION = "PUT_QUESTION";
+export const PUT_CELL = "PUT_CELL";
+export const GET_ALL_USERS = "GET_ALL_USERS";
+export const PUT_USERS = "PUT_USERS";
 
 
 // export const RUTA_ID="http://localhost:3001/celulares/"
@@ -96,28 +99,11 @@ export function createPost(product) {
 
 export function createQuestion(question) {
    return async function (dispatch) {
-      try {
-         return await axios
-            .post(`http://localhost:3001/questions/${question.id}`, question)
-            .then((response) => {
-               dispatch({
-                  type: POST_QUESTION,
-                  payload: response.data,
-               });
-            });
-      } catch (error) {
-         console.log(error)
-      }
-   };
-}
-
-export function createAnswer(a) {
-   return async function (dispatch) {
       return await axios
-         .put(`http://localhost:3001/questions/${a.id}`, a)
+         .post(`http://localhost:3001/questions/${question.id}`, question)
          .then((response) => {
             dispatch({
-               type: PUT_QUESTION,
+               type: POST_QUESTION,
                payload: response.data,
             });
          });
@@ -137,3 +123,59 @@ export function getRole(email) {
       }
    }
 }
+
+export function createAnswer(a) {
+   return async function (dispatch) {
+      return await axios
+         .put(`http://localhost:3001/questions/${a.id}`, a)
+         .then((response) => {
+            dispatch({
+               type: PUT_QUESTION,
+               payload: response.data,
+            });
+         });
+   };
+}
+
+export function putCell(a) {
+   return async function (dispatch) {
+      return await axios
+         .put(`http://localhost:3001/celulares/${a.id}`, a)
+         .then((response) => {
+            dispatch({
+               type: PUT_CELL,
+               payload: response.data,
+            });
+         });
+   };
+}
+
+export const getAllUsers = () => {
+   return async function (dispatch) {
+      const users = await axios('http://localhost:3001/users');
+      return dispatch({
+         type: GET_ALL_USERS,
+         payload: users.data
+      });
+   };
+};
+
+export function putUser(a) {
+   return async function (dispatch) {
+      return await axios
+         .put(`http://localhost:3001/users/${a.id}`, a)
+         .then((response) => {
+            dispatch({
+               type: PUT_USERS,
+               payload: response.data,
+            });
+         });
+   };
+}
+
+export function updateProduct(id,payload){
+   return  function(){
+       axios.put(`http://localhost:3001/celulares/${id}`,payload)
+   }
+}
+

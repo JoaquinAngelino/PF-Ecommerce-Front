@@ -20,9 +20,14 @@
 }
 
 .imageAboutUs {
-  width: 100%;
+ 
   margin-top: 10px;
   object-fit: cover;
+  width: 300px;
+  
+ 
+  
+ 
 }
 
 .TeamDiv {
@@ -35,6 +40,7 @@
   column-gap: 70px;
   row-gap: 20px;
   border-radius: 0.3em;
+ 
 }
 
 .TeamCard {
@@ -43,6 +49,9 @@
   width: 250px;
   padding: 0 5% 0 5%;
   background-color: #FFFFFF;
+  
+ 
+  
 }
 
 .CardIcon {
@@ -61,6 +70,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+ 
+  
 }
 
 .PageTitle {

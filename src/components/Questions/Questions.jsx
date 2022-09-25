@@ -1,7 +1,7 @@
 import { useAuth0, user } from '@auth0/auth0-react';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { createQuestion, getRole, createAnswer } from '../../redux/actions';
+import { createQuestion,  getRole, createAnswer } from '../../redux/actions';
 import 'bootstrap/dist/css/bootstrap.css';
 import {
    Button,
@@ -9,9 +9,9 @@ import {
    ModalBody,
    FormGroup,
    ModalFooter,
-} from "reactstrap";
+ } from "reactstrap";
 
-const Questions = ({ cellId, q }) => {
+const Questions = ({cellId, q, get}) => {
 
    const dispatch = useDispatch();
    const admin = useSelector((state) => state.admin)
@@ -24,7 +24,7 @@ const Questions = ({ cellId, q }) => {
    const [answer, setAnswer] = useState({
       answer: "",
       id: "",
-      modal: false
+      modal:false
    })
 
    useEffect(() => {
@@ -48,7 +48,7 @@ const Questions = ({ cellId, q }) => {
    }
 
    const createQ = () => {
-      if (question.question.length > 0) {
+      if(question.question.length > 0){
          dispatch(createQuestion(question));
          window.alert("Question sent!");
          setQuestion({
@@ -56,34 +56,34 @@ const Questions = ({ cellId, q }) => {
             emailUser: "",
             id: cellId
          })
+         get();
       }
    }
 
-
+   
    const sendDataQuestions = (e, questionId, question) => {
       setAnswer({
          ...answer,
          id: questionId,
          question: question,
-         modal: true
+         modal:true 
       });
    }
-
+   
    const createA = () => {
-      if (answer.answer.length > 0) {
-         dispatch(createAnswer(answer))
-         window.alert("Answer sent!");
-         setAnswer({
-            answer: "",
-            id: ""
-         })
-      }
+      dispatch(createAnswer(answer))
+      window.alert("Answer sent!");
+      setAnswer({
+         answer: "",
+         id:""
+      })
+      get();
    }
 
-   const closeModal = () => {
+   const closeModal= () => {
       setAnswer({
          ...answer,
-         modal: false
+         modal:false
       })
    }
 
@@ -99,6 +99,7 @@ const Questions = ({ cellId, q }) => {
 
    return (
       <div>
+
          <div className="container">
             {isAuthenticated ?
                <div>
@@ -110,41 +111,44 @@ const Questions = ({ cellId, q }) => {
                : <h2>Inicie Sesion</h2>}
          </div>
          <div>
-            {q?.length >= 0 ? q.reverse().map((c, index) => (
-               <div key={index}>
-                  <h5>Question:</h5>
-                  <p>{c.question}</p>
-                  <h5>Answer:</h5>
-                  <p>{c.answer}</p>
-                  {
-                     admin ?
-                        <div>
-                           {c.answer ?
-                              <button type="button" className="btn btn-outline-primary" onClick={(e) => sendDataQuestions(e, c.id, c.question)}>Answer the Question</button>
+            {q && q.length >= 0 ? q.map((c, index) => {
+                  return (
+                     <div key={index}>
+                        <h5>Question:</h5>
+                        <p>{c.question}</p>
+                        <h5>Answer:</h5>
+                        <p>{c.answer}</p>   
+                        {
+                           admin ?
+                              <div>
+                                 {c.answer ? 
+                                    <button type="button" onClick={(e) => sendDataQuestions(e, c.id, c.question)}>Change Answer</button>
+                                    :<button type="button" onClick={(e) => sendDataQuestions(e, c.id, c.question)}>Answer</button>
+                                 }
+                              </div>
                               : ""
-                           }
-                        </div>
-                        : ""
-                  }
-               </div>
-            )
-            )
-               : <h2>No hay preguntas</h2>}
+                        }
+                        <h3>-------------------</h3>
+                     </div>
+                  )
+               })
+            : <h2>No hay preguntas</h2>}
          </div>
          <Modal isOpen={answer.modal}>
             <ModalBody>
                <FormGroup>
                   <label>Question:</label>
-                  <input className="form-control" readOnly type="text" value={answer.question} />
+                  <input className="form-control" readOnly type="text"  value={answer.question} />
                </FormGroup>
+                                             
                <FormGroup>
                   <label>Answer:</label>
-                  <input className="form-control" type="text" onChange={(e) => handleChangeAnswer(e)} value={answer.answer} />
+                  <input className="form-control"  type="text" onChange={(e) => handleChangeAnswer(e)} value={answer.answer}/>
                </FormGroup>
             </ModalBody>
             <ModalFooter>
-               <Button color="primary" onClick={() => createA()}>Submit</Button>
-               <Button color="danger" onClick={() => closeModal()}>Cancel</Button>
+               <Button color="primary" onClick={() => createA()}>Editar</Button>
+               <Button color="danger" onClick={() => closeModal()}>Cancelar</Button>
             </ModalFooter>
          </Modal>
 
