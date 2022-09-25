@@ -14,7 +14,7 @@ const validations = (input) => {
     errors.image = "need a picture"
   } else if (!input.description.trim()) {
     errors.description = "no description"
-  } else if (!input.brand.length ===0) {
+  } else if (!input.brand.length === 0) {
     errors.brand = "does not contain brand"
   } else if (!input.capacity.trim()) {
     errors.capacity = "does not contain capacity"
@@ -42,6 +42,15 @@ export default function CreateProduct() {
     price: ""
   })
 
+  const uploadImage = async (e) => {
+    const data = new FormData();
+    data.append("file", e.target.files[0]);
+    data.append("upload_preset", "unns5r2a");
+    const res = await fetch("https://api.cloudinary.com/v1_1/dfx7so2fc/upload", { method: "POST", body: data, });
+    const file = await res.json();
+    setInput({ ...input, image: file.secure_url });
+  }
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInput({
@@ -53,6 +62,7 @@ export default function CreateProduct() {
         ...input,
         [name]: value
       }));
+      console.log(input);
   }
   const handleSelect = (e) => {
     setInput({
@@ -84,7 +94,7 @@ export default function CreateProduct() {
         price: "",
       })
     } else {
-       alert("we could not create your cell");
+      alert("we could not create your cell");
     }
     // return ;
   }
@@ -112,7 +122,7 @@ export default function CreateProduct() {
           </div>
           <div className="form-group m-0">
             <label htmlFor="text">Image</label>
-            <input type="url" onChange={(e) => handleChange(e)} name="image" className="form-control" value={input.image}></input>
+            <input type="file" onChange={uploadImage} name="image" className="form-control"></input>
             {errors.image && <h4 className="errors" >{errors.image}</h4>}
           </div>
 
