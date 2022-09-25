@@ -56,7 +56,7 @@ export  default function PaymentForm(){
               })
               console.log("Esta es la data"+data);
               alert(`You have pay $ ${totalPrice} successfully`)
-              // history("/")
+              history("/")
       
             } catch (error) {
               console.log(error.message);
