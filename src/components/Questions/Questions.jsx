@@ -14,7 +14,8 @@ import {
    ModalFooter,
 } from "reactstrap";
 
-const Questions = ({ cellId, q, get }) => {
+
+const Questions = ({cellId, q, get}) => {
 
    const dispatch = useDispatch();
    const admin = useSelector((state) => state.admin)

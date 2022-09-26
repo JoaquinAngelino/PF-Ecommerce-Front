@@ -2,10 +2,10 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 // PaymentForm
 import {Elements} from "@stripe/react-stripe-js";
 import {loadStripe} from "@stripe/stripe-js"
-import CreateProduct from './pages/CreateProduct/CreateProduct';
+
 import EditProduct from './pages/EditProduct/EditProduct';
 //login
-import Profile from './components/Profile/Profile';
+
 import Footer from './components/Footer/Footer';
 import NavBar from './components/NavBar/NavBar';
 import AboutUs from './pages/AboutUs/AboutUs';
@@ -20,6 +20,12 @@ import ShoppingCart from './pages/Cart';
 import PanelAdminCells from './components/PanelAdminCells/PanelAdminCells';
 import PanelAdminUsers from './components/PanelAdminUsers/PanelAdminUsers';
 import PaymentForm from './pages/PaymentForm/PaymentForm'
+import CreateProduct from './pages/CreateProduct/CreateProduct';
+import PostUser from './components/PostUser/PostUser'
+//login
+import Profile from './components/Profile/Profile';
+//login
+import AdminPanel from './components/AdminPanel/AdminPanel'
 
 
 const stripePromise=loadStripe("pk_test_51LaZvGBnw8Rgt2NjQI3zwuWRhuXnnGKWZNCgHwz0UPBxh6t0l0SlRlMVMwTWvQUGfgyh9e4D0b7MD8sGiArVOQMg00JrfIx5p5")
@@ -37,7 +43,11 @@ function App() {
         <Route  path='/contact' element={<ContactUs />} />
         <Route  path='/about' element={<AboutUs />} />
         <Route  path='/cart' element={<ShoppingCart />} />
-        <Route path="/detail/" element={<Detail/>}/>
+        <Route path="/detail/:id" element={<Detail/>}/>
+        <Route path="/create" element={<CreateProduct/>}/>
+        <Route path='*' element={<NotFound />} />
+        <Route path='/postUser' element={<PostUser/>} />
+        <Route path='/Profile' element={<Profile/>}/>
         <Route path='/cart/paymentForm' element={<Elements stripe={stripePromise}><PaymentForm></PaymentForm></Elements>}/>
         {/* <Route path="/paymentForm" element={<PaymentForm/>}/> */}
         
@@ -49,6 +59,7 @@ function App() {
         <Route path='/Profile' element={<Profile/>}/>
         <Route path='/panelCells' element={<PanelAdminCells/>}/>
         <Route path='/panelUsers' element={<PanelAdminUsers/>}/>
+        <Route path='/adminPanel' element={<AdminPanel/>}/>
         
 
 
