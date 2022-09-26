@@ -219,6 +219,7 @@ export function updateProduct(id,payload){
    }
 }
 
+
 export const getAllProductsAdmin = () => {
    return async function (dispatch) {
       const p = await axios('http://localhost:3001/celulares/panel');
@@ -228,3 +229,4 @@ export const getAllProductsAdmin = () => {
       });
    };
 };
+

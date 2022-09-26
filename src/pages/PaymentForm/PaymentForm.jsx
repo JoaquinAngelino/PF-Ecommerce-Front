@@ -21,8 +21,10 @@ export  default function PaymentForm(){
     var pricess=Number(totalPrice)
     console.log(pricess);
     const items = JSON.parse(localStorage.getItem("cartList"));
-    // const mail = user.user.mail
-    const mail="12deykerporx@gmail.com"
+    const user = JSON.parse(localStorage.getItem("user"))
+    console.log(user);
+    // const mai = user.user.mail
+    const mail=user
     // const userIdName = "a13189e3-541b-412d-ac5f-678f839a305d"
 
     const arr = [items.map(e => e.line)]

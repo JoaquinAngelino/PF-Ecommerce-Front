@@ -115,6 +115,7 @@ const PanelAdminCells = () => {
         window.alert("Edited.")
         
         dispatch(getAllProductsAdmin());
+
     }else{
         setModals({
           ...modals,
@@ -122,7 +123,7 @@ const PanelAdminCells = () => {
         });
         
         window.alert("Error, check the fields.")   
-        
+
     }
   }
 
@@ -161,8 +162,9 @@ const PanelAdminCells = () => {
     cerrarModal();
 
     window.alert("Removed.");
+
     dispatch(getAllProductsAdmin());
-  }
+}
 
   
   
@@ -197,7 +199,9 @@ const PanelAdminCells = () => {
     cerrarModal();
     
     window.alert("Reestablished.");
+
     dispatch(getAllProductsAdmin());
+
   }
 
 
