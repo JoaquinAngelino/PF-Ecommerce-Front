@@ -129,7 +129,7 @@ function email(){
             
               {
                 isAuthenticated && gmail!==undefined && gmail[0] && gmail[0].role==="Administrador"
-               ? <Link className="nav-link text-light fw-semibold `${}`" to="/adminpanel">Admin Panel</Link> 
+               ? <Link className="nav-link text-light fw-semibold `${}`" to="/adminPanel">Admin Panel</Link> 
                : null
               }
             
