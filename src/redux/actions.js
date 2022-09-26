@@ -13,13 +13,14 @@ export const PUT_QUESTION = "PUT_QUESTION";
 export const PUT_CELL = "PUT_CELL";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const PUT_USERS = "PUT_USERS";
+export const RUTA_USER="http://localhost:3001/users"
+export const POST_USER="POST USER"
+export const ALL_USER="ALL USER"
+export const RUTA_USER_ID="http://localhost:3001/users/"
+export const USER_ID="USER ID"
 
 
-// export const RUTA_ID="http://localhost:3001/celulares/"
-// export const CELL_DETAIL="DOG DETAIL"
 
-// export const GET_ALL_PRODUCTS = ''
-// export const GET_CELLS_BY_ID = 'G'
 
 
 
@@ -72,7 +73,31 @@ export function cleanStatus(payload) {
    }
 }
 //CELL_DETAIL
+//POST USER
+export function postUser(user){
+return async function(dispatch){
+   return await axios.post(RUTA_USER, user)
+   .then((response)=>{
+      dispatch({
+         type:POST_USER,
+         payload:response.data
+      })
+   })
+}
+}
+//POST USER
+//GET USER
+export function allUser(){
+   return async function(dispatch){
+      const allUser= await axios(RUTA_USER)
+      return dispatch({
+         type:ALL_USER,
+         payload:allUser.data
+      })
+   }
 
+}
+//GET USER
 export const getAllBrands = () => {
    return async function (dispatch) {
       const products = await axios('http://localhost:3001/marcas');
@@ -96,6 +121,21 @@ export function createPost(product) {
          });
    };
 }
+//USER ID
+export function userId(id){
+   return async function(dispatch){
+      try{
+         var userId=await axios.get(RUTA_USER_ID +id)
+         return dispatch({
+            type:USER_ID,
+            payload:userId.data
+         })
+      }catch(error){
+         console.log(error)
+      }
+   } 
+}
+//USER ID
 
 export function createQuestion(question) {
    return async function (dispatch) {

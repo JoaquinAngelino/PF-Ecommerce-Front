@@ -1,4 +1,5 @@
 
+
 import React, { useState } from 'react'; 
 import {
   Carousel,
@@ -39,6 +40,10 @@ const items = [
 
 
 const LandingPage = () => {
+  
+
+
+  
 
   const [activeIndex, setActiveIndex] = useState(0)
   const [animating, setAnimating] = useState(false)
