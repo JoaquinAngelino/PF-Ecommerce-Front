@@ -26,7 +26,7 @@ export const USER_ID="USER ID"
 
 export const getAllProducts = () => {
    return async function (dispatch) {
-      const products = await axios('/celulares/');
+      const products = await axios('/celulares/home');
       return dispatch({
          type: GET_ALL_PRODUCTS,
          payload: products.data
@@ -35,7 +35,7 @@ export const getAllProducts = () => {
 };
 export const getFilteredProducts = (payload) => {
    return async function (dispatch) {
-      const products = await axios(`/celulares/?${payload}`);
+      const products = await axios(`/celulares/home?${payload}`);
       return dispatch({
          type: GET_ALL_PRODUCTS,
          payload: products.data
