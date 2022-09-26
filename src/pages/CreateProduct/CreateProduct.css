@@ -1,0 +1,35 @@
+.abs-center {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   min-height: 100vh;
+   
+
+}
+
+.form {
+   width: 30rem;
+   border-radius: 1rem;
+   max-height: 100%;
+   align-items: center;
+   justify-content: center;
+   
+
+}
+
+.btn {
+   align-items: center;
+   justify-content: center;
+   display: flex;
+   margin-top: 1rem;
+   text-decoration: none;
+}
+
+.errors{
+   font-size: 12px;
+   color: lightcoral;
+   position: relative;
+   justify-content: left;
+   align-items: center;
+}
+

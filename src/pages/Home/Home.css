@@ -14,6 +14,7 @@
     justify-content: center;
     gap: 2em;
     margin-bottom: 1em;
+    color:grey;
 }
 
 .containerCards{
@@ -22,6 +23,7 @@
     justify-content: flex-end;
     width: 72%;
     gap: 1em;
+   
 }
 
 .cardRating {
