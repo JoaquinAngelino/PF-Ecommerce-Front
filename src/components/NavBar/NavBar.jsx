@@ -110,14 +110,15 @@ function email(){
             {/* LOGIN */}
             {isAuthenticated ?    <Link to={'Profile/'} className='nav-link'><AiOutlineUserAdd className='NavBarIcon' /></Link> : null}
             {
-              isAuthenticated && gmail!==undefined && gmail.length===0
+              isAuthenticated && gmail!==undefined 
               // && !gmail===undefined && gmail.length!==1
               //  gmail===undefined && !gmail[0] 
-              ?(
+              ?(gmail.length===0?
                     
                     <Link to='/postUser'>
                          <button>Complete sus datos de usuario</button>
                     </Link>
+                    :null
               ) 
               
               : null

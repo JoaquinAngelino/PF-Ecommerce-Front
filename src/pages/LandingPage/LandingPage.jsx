@@ -78,7 +78,7 @@ const LandingPage = () => {
     )
   })
   return (
-    <div className=''>
+    <div className='container'>
       <Carousel
         activeIndex={activeIndex}
         next={next}
