@@ -8,7 +8,7 @@ export default function CreateUser(){
     const navigate=useNavigate()
     const dispatch = useDispatch();
     const {user, isAuthenticated}=useAuth0()
-    console.log(isAuthenticated)
+    console.log("Eston es: "+isAuthenticated)
     
     const [input, setInput] = useState({
         name:user.name,
@@ -30,6 +30,7 @@ function handleChange(e){
 function handleSubmit(e){
     e.preventDefault()
     dispatch(postUser(input))
+    
     .then(()=>{
         dispatch(allUser())
     })
