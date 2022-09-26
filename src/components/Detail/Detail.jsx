@@ -24,7 +24,6 @@ export default function Detail(props) {
     useEffect(() => {
         dispatch(cleanStatus());
         dispatch(cellDetail(id))
-        toast.error("Error")
     }, [dispatch, id])
 
     const get =  () => {
