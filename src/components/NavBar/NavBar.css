@@ -1,38 +1,96 @@
-.NavBar {
-  background: red;
-  width: 100%;
-  justify-content: space-between;
+@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+
+.sticky-top {
+  margin-bottom: .5em;
+}
+
+.NavBarIcon {
+  cursor: pointer;
+  margin: 0.5em;
+  width: 1.9em;
+  height: 1.9em;
+  color: #169E85
+}
+
+.NavBarIcon:hover {
+  color: #687a77;
+}
+
+.navbar-brand {
+  color: #169E85;
+  font-family: 'Satisfy', cursive;
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: none;
+}
+
+.navbar {
+  text-transform: none;
 }
 
 .nav-link {
   color: white;
-  font-size: 1.4rem;
+  font-weight: 600;
 }
 
 .nav-link:hover {
-  color: #175850;
+  color: #dddddd;
 }
 
-.nav-link:focus{
-  color: #175850;
+.btn-outline-success {
+  color: #169E85;
+  border-color: #169E85;
+  font-weight: 600;
+  text-transform: none;
+  padding: 0.6em .8em;
 }
 
-.containerSearchBar {
-  flex-grow: 2 ;
-  display: flex ;
-  justify-content: center;
-  width: 20vw;
-}
-
-.form-control:focus{
-  box-shadow: none ;
-  border-color: #ced4da;
-}
-
-.NavBarIcon{
+.btn-outline-success:hover {
   color: white;
-  font-size: 1.7rem;
+  background-color: #169E85;
 }
-.NavBarIcon:hover{
-  color: #175850;
+
+.btn-outline-success:focus {
+  box-shadow: none;
+  background-color: #169E85;
+  color: white;
+}
+
+.btn-outline-success:active {
+  box-shadow: none;
+  background-color: #169E85;
+  color: white;
+}
+
+.btn-outline-success:active:focus {
+  box-shadow: none;
+}
+
+.ProfileImg {
+  height: 50px;
+  border-radius: 50%;
+  margin: 0 20px;
+}
+
+.Loading {
+  color: red;
+}
+
+body.Dark .navbar {
+  background: linear-gradient(45deg, #0f7461, black, #0f7461);
+}
+
+
+
+.sellStyle {
+  cursor: pointer;
+  font-weight: 900;
+  font-size: 1.4rem;
+  color: #169E85;
+  transition: all 0.3s;
+}
+
+.dropDown {
+  font-size: 1.1rem;
+  font-weight: 900;
 }
