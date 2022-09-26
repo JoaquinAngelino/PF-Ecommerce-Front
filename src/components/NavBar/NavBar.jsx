@@ -123,6 +123,23 @@ function email(){
               
               : null
             }
+
+{
+              isAuthenticated && gmail===undefined 
+              // && !gmail===undefined && gmail.length!==1
+              //  gmail===undefined && !gmail[0] 
+              ?(
+                    
+                    <Link to='/postUser'>
+                         <button>Complete sus datos de usuario</button>
+                    </Link>
+                    
+              ) 
+              
+              : null
+            }
+
+
             {
               isAuthenticated?<LogoutButton/> :<LoginButton/>
             }
