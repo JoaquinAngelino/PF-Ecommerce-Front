@@ -31,11 +31,13 @@ export default function NavBar() {
   const userRole=role()
    console.log(userRole)
    console.log(isAuthenticated)
-  
- 
+
+  //  console.log("a"+gmail)
+   localStorage.setItem('user', JSON.stringify(emailAuth0))
   
   useEffect(()=>{
     dispatch(allUser());
+    
     // dispatch(email());
     // dispatch(filterEmail());
   },[dispatch])
