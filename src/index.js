@@ -29,7 +29,7 @@ root.render(
     <Auth0Provider
     domain={DOMAIN}
     clientId={CLIENT_ID}
-    redirectUri={`http://localhost:3000`}
+    redirectUri={window.location.origin}
     //{`${window.location.origin}/home`}
     >
       <App />
