@@ -4,10 +4,15 @@ import { TiDelete } from 'react-icons/ti';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { addToCart } from '../../components/Card/favAndCart';
+import { cart, remove} from '../../components/Toast/Toast'
 import { BsCartFill } from 'react-icons/bs';
 
 export default function FavCard({ id, brand, line, model, price, stock, capacity, image, memoryRAM, deleteFav }) {
 
+  const delet = (id) =>{
+    remove()
+    deleteFav(id) 
+  }
   return (
     <Card className="card" >
       <Link className='containCardImage' to={"/detail/" + id}>
@@ -26,8 +31,8 @@ export default function FavCard({ id, brand, line, model, price, stock, capacity
         </ListGroup>
       </Card.Body>
       <div className='containerButton'>
-        <TiDelete className='CardIcon EditIcon' onClick={() => deleteFav(id)} />
-        <BsCartFill className='CardIcon' onClick={() => addToCart(id, brand, line, model, price, stock, capacity, image, memoryRAM)} />
+        <TiDelete className='CardIcon EditIcon' onClick={() => delet(id)} />
+        <BsCartFill className='CardIcon' onClick={() => cart(id, brand, line, model, price, stock, capacity, image, memoryRAM)} />
       </div>
     </Card>
   )

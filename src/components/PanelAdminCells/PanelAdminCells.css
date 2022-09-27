@@ -1,0 +1,25 @@
+.datoImg {
+    width: 60px;
+  }
+
+th{
+    text-align: center;
+}
+
+td{
+
+    text-align: center;
+}
+
+.dato{
+    margin-top: 2em;
+}
+
+.tableContainer{
+    width: 50%;
+    margin-left: 25%;
+}
+
+Button{
+    width: 5em;
+}

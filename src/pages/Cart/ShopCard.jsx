@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import { remove} from '../../components/Toast/Toast';
 
 export default function ShopCard({ id, line, model, stock, capacity, memoryRAM, price, brand, image, deleteItem, updateQuantity, quantity }) {
   const [qua, setQua] = useState(quantity);
@@ -32,6 +33,11 @@ export default function ShopCard({ id, line, model, stock, capacity, memoryRAM, 
     }
   }
 
+  const delet = (id) => {
+    remove();
+    deleteItem(id);
+  }
+
   return (
     <div className="cardShoppingCart">
       <Link className='cardContainerImageSC' to={"/detail/" + id}>
@@ -48,7 +54,7 @@ export default function ShopCard({ id, line, model, stock, capacity, memoryRAM, 
           <p>{qua}</p>
           <RemoveCircleIcon onClick={minus} />
         </div>
-        <DeleteIcon onClick={() => deleteItem(id)} />
+        <DeleteIcon onClick={() => delet(id)} />
       </div>
     </div>
   )

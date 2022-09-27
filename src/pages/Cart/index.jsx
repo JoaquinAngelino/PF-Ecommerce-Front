@@ -3,6 +3,7 @@ import ShopCard from "./ShopCard";
 import './Card.css'
 import { getPrice } from "../../components/Card/favAndCart";
 import {Link} from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 export default function ShoppingCart() {
 
@@ -57,6 +58,7 @@ export default function ShoppingCart() {
             </div>
             <hr />
             <Link to={"/cart/paymentForm"}><button>Buy now !</button></Link>
+            <Toaster position="bottom-right" reverseOrder={false}/>
         </div>
     );
 }

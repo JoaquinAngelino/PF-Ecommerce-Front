@@ -16,7 +16,7 @@ export const PUT_USERS = "PUT_USERS";
 export const RUTA_USER="http://localhost:3001/users"
 export const POST_USER="POST USER"
 export const ALL_USER="ALL USER"
-export const RUTA_USER_ID="http://localhost:3001/users/"
+export const RUTA_USER_ID="http://localhost:3001/users/id/"
 export const USER_ID="USER ID"
 
 
@@ -192,7 +192,7 @@ export function putCell(a) {
 
 export const getAllUsers = () => {
    return async function (dispatch) {
-      const users = await axios('http://localhost:3001/users');
+      const users = await axios('http://localhost:3001/users/admin');
       return dispatch({
          type: GET_ALL_USERS,
          payload: users.data
