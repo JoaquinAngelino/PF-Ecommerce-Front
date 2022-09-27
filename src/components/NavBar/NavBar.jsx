@@ -32,8 +32,8 @@ export default function NavBar() {
   console.log(userRole)
   console.log(isAuthenticated)
 
-  //  console.log("a"+gmail)
-  localStorage.setItem('user', JSON.stringify(emailAuth0))
+  //  user
+  localStorage.setItem('user', JSON.stringify(usuarios))
 
   useEffect(() => {
     dispatch(allUser());

@@ -18,6 +18,7 @@ export const POST_USER="POST USER"
 export const ALL_USER="ALL USER"
 export const RUTA_USER_ID="/users/id/"
 export const USER_ID="USER ID"
+export const DELETE_FOR_CART="DELETE_FOR_CART"
 
 
 
@@ -230,3 +231,9 @@ export const getAllProductsAdmin = () => {
    };
 };
 
+export function deleteItemFromCart(id) {
+   return {
+       type: DELETE_FOR_CART,
+       payload: id
+   }
+}
