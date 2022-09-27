@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from "react-redux"
 import { cellDetail, cleanStatus } from "../../redux/actions";
 import { useEffect } from "react";
 import Questions from "../Questions/Questions.jsx";
-import { addToFav, addToCart } from '../Card/favAndCart';
+import {fav, cart} from '../Toast/Toast'
 import { BsCartFill, BsStarFill } from 'react-icons/bs';
+import { Toaster} from 'react-hot-toast'
 
 
 
@@ -40,7 +41,7 @@ export default function Detail(props) {
                                     <Link to='/home' className="align-self-start">
                                         <button className="btn btn-primary bg3 border-0 m-3" style={{ width: '2.3rem' }} onClick={(e) => handleClearStatus(e)}>X</button>
                                     </Link>
-                                    <BsStarFill className='CardIcon' onClick={() => addToFav(myCell.id, myCell.brand, myCell.line, myCell.model, myCell.price, myCell.stock, myCell.capacity, myCell.image, myCell.memoryRAM)} />
+                                    <BsStarFill className='CardIcon' onClick={() => fav(myCell.id, myCell.brand, myCell.line, myCell.model, myCell.price, myCell.stock, myCell.capacity, myCell.image, myCell.memoryRAM)} />
                                 </div>
                                 <div className=" col-12 d-flex flex-sm-column flex-md-row align-items-center justify-content-center">
                                     <div className="d-flex flex-column" style={{ width: '65%' }}>
@@ -72,7 +73,7 @@ export default function Detail(props) {
                                             <div className="d-flex flex-column w-100">
                                                 <p className={`align-self-center ${myCell.stock < 5 ? 'text-danger fw-bold' : null}`}>{`Stock available: (${myCell.stock} available)`}</p>
                                             </div>
-                                            <button type="submit" className="btn btn-primary button3 bg3 border-0" onClick={() => addToCart(myCell.id, myCell.brand, myCell.line, myCell.model, myCell.price, myCell.stock, myCell.capacity, myCell.image, myCell.memoryRAM)}>Add to cart</button>
+                                            <button type="submit" className="btn btn-primary button3 bg3 border-0" onClick={() => cart(myCell.id, myCell.brand, myCell.line, myCell.model, myCell.price, myCell.stock, myCell.capacity, myCell.image, myCell.memoryRAM)}>Add to cart</button>
                                         </div>
                                     </div>
                                 </div>
@@ -85,6 +86,7 @@ export default function Detail(props) {
                     </div>
                     : <p>Loanding...</p>
             }
+            <Toaster position="bottom-right" reverseOrder={false}/>
         </div>
     )
 }

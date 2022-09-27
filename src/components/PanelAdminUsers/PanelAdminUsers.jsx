@@ -12,7 +12,8 @@ import {
   FormGroup,
   ModalFooter,
 } from "reactstrap";
-
+import { error, success } from "../Toast/Toast";
+import { Toaster } from "react-hot-toast";
 
 
 const PanelAdminUsers = () => {
@@ -96,13 +97,30 @@ const PanelAdminUsers = () => {
     if(state.name.length > 0 && state.email.length > 0 && state.image.length > 0 && state.location.length > 0 && state.direction.length > 0 
       && state.role.length > 0 && ((state.role === "Administrador")||(state.role === "Vendedor")||(state.role === "Cliente"))){
 
-        dispatch(putUser(state))
+        let validationEmail = users.filter((u) => {
+          return (u.email === state.email)
+        })
 
-        cerrarModal();
-    
-        window.alert("Edited.")
+        if(validationEmail.length>0){
+          setModals({
+            ...modals,
+            modalEditarSeguro: false
+          });
+  
+          error("Error. That email already exists")
 
-        dispatch(getAllUsers());
+        }else{
+
+          dispatch(putUser(state))
+
+          cerrarModal();
+
+          dispatch(getAllUsers());
+          
+          success("Edited");          
+        }
+
+
       }else{
 
         setModals({
@@ -110,7 +128,7 @@ const PanelAdminUsers = () => {
           modalEditarSeguro: false
         });
 
-        window.alert("Error, check the fields.")
+        error("Error, check the fields.")
       }
   }
 
@@ -129,7 +147,7 @@ const PanelAdminUsers = () => {
       location: dato.location,
       direction: dato.direction,   
       role: dato.role,
-      disabled: false
+      disabled: true
     });
 
     setModals({
@@ -144,9 +162,9 @@ const PanelAdminUsers = () => {
 
     cerrarModal();
 
-    window.alert("Removed.");
-
     dispatch(getAllUsers());
+
+    success("Removed.");    
   }
 
   
@@ -163,7 +181,7 @@ const PanelAdminUsers = () => {
       location: dato.location,
       direction: dato.direction,   
       role: dato.role,
-      disabled: true
+      disabled: false
     });
 
     setModals({
@@ -177,9 +195,10 @@ const PanelAdminUsers = () => {
 
     cerrarModal();
 
-    window.alert("Reestablished.");
-
     dispatch(getAllUsers());
+
+    success("Reestablished.");
+    
   }
 
 
@@ -211,30 +230,30 @@ const PanelAdminUsers = () => {
                 <tbody>
                 {users.length> 0 && users? users.map((dato) => (
                     <tr key={dato.id}>
-                    {!dato.disabled ? 
+                    {dato.disabled ? 
                     <td class="table-danger">{dato.id}</td>
                     :<td>{dato.id}</td>}
-                    {!dato.disabled ? 
+                    {dato.disabled ? 
                     <td class="table-danger">{dato.name}</td>
                     :<td>{dato.name}</td>}
-                    {!dato.disabled ? 
+                    {dato.disabled ? 
                     <td class="table-danger">{dato.email}</td>
                     :<td>{dato.email}</td>}
-                    {!dato.disabled ? 
+                    {dato.disabled ? 
                     <td class="table-danger">{dato.location}</td>
                     :<td>{dato.location}</td>}
-                    {!dato.disabled ? 
+                    {dato.disabled ? 
                     <td class="table-danger">{dato.direction}</td>
                     :<td>{dato.direction}</td>}
-                    {!dato.disabled ? 
+                    {dato.disabled ? 
                     <td class="table-danger">{dato.role}</td>
                     :<td>{dato.role}</td>}
-                    {!dato.disabled ? 
+                    {dato.disabled ? 
                     <td class="table-danger">{dato.image}</td>
                     :<td>{dato.image}</td>}
                     <td>
                         <Button color="primary" onClick={() => editar(dato)}>Editar</Button>
-                        {!dato.disabled ? 
+                        {dato.disabled ? 
                         <Button color="success" onClick={()=> reestablecer(dato)}>Restore</Button>
                         :<Button color="danger" onClick={()=> eliminar(dato)}>Delete</Button>}
                     </td>
@@ -377,6 +396,7 @@ const PanelAdminUsers = () => {
                 <Button color="danger" onClick={() => cerrarModal()}>Cancel</Button>
             </ModalFooter>
             </Modal>
+            <Toaster position="bottom-right" reverseOrder={false}/>
     
         </div>
     )

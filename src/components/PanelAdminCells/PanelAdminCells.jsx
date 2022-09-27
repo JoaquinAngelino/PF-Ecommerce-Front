@@ -12,6 +12,8 @@ import {
   FormGroup,
   ModalFooter,
 } from "reactstrap";
+import { success, remove, error } from "../Toast/Toast";
+import { Toaster } from "react-hot-toast";
 
 
 
@@ -108,13 +110,15 @@ const PanelAdminCells = () => {
       0   && state.description.length > 0 && state.spec.length > 0 && state.price > 0 && state.capacity > 0 &&
       state.memoryRAM > 0 && state.stock > 0){
 
-        dispatch(putCell(state))
+        dispatch(putCell(state)) 
+
+        .then(()=>{
+          dispatch(getAllProductsAdmin());
+        })
 
         cerrarModal();
 
-        window.alert("Edited.")
-        
-        dispatch(getAllProductsAdmin());
+        success("Cell edited.")
 
     }else{
         setModals({
@@ -122,7 +126,7 @@ const PanelAdminCells = () => {
           modalEditarSeguro: false
         });
         
-        window.alert("Error, check the fields.")   
+       error("Error, check the fields.")   
 
     }
   }
@@ -146,7 +150,7 @@ const PanelAdminCells = () => {
       memoryRAM: dato.memoryRAM,
       description: dato.description,
       spec: dato.spec,
-      disabled: false
+      disabled: true
     });
 
     setModals({
@@ -159,11 +163,13 @@ const PanelAdminCells = () => {
   const eliminarModal = () => {
     dispatch(putCell(state))
 
+    .then(()=>{
+      dispatch(getAllProductsAdmin());
+    })
+
     cerrarModal();
 
-    window.alert("Removed.");
-
-    dispatch(getAllProductsAdmin());
+    remove()
 }
 
   
@@ -184,7 +190,7 @@ const PanelAdminCells = () => {
       memoryRAM: dato.memoryRAM,
       description: dato.description,
       spec: dato.spec,
-      disabled: true
+      disabled: false
     });
 
     setModals({
@@ -194,14 +200,15 @@ const PanelAdminCells = () => {
   }
 
   const reestablecerModal = () => {
-    dispatch(putCell(state));
+    dispatch(putCell(state))
+
+    .then(()=>{
+      dispatch(getAllProductsAdmin());
+    })
 
     cerrarModal();
     
-    window.alert("Reestablished.");
-
-    dispatch(getAllProductsAdmin());
-
+    success("Reestablished.");
   }
 
 
@@ -217,71 +224,59 @@ const PanelAdminCells = () => {
     
     return (
         <div>
+          <div className="tableContainer">
             <Table bordered size="sm" striped>
                 <thead>
                 <tr>
                     <th>ID</th>
+                    <th>Image</th>
                     <th>Model</th>
                     <th>Line</th>
                     <th>Stock</th> 
                     <th>Brand</th>
-                    <th>Image</th>
-                    <th>Price</th>
-                    <th>Capacity</th>
-                    <th>RAM (GB)</th>
-                    <th>Description</th>
-                    <th>Spec</th>
+                    <th>Actions</th>                   
                   </tr>
                 </thead>
 
                 <tbody>
                 {products? products.map((dato) => (
                     <tr key={dato.id}>
-                    {!dato.disabled ? 
-                    <td class="table-danger">{dato.id}</td>
-                    :<td>{dato.id}</td>}
-                    {!dato.disabled ? 
-                    <td class="table-danger">{dato.model}</td>
-                    :<td>{dato.model}</td>}
-                    {!dato.disabled ? 
-                    <td class="table-danger">{dato.line}</td>
-                    :<td>{dato.line}</td>}
-                    {!dato.disabled ? 
-                    <td class="table-danger">{dato.stock}</td>
-                    :<td>{dato.stock}</td>}
-                    {!dato.disabled ? 
-                    <td class="table-danger">{dato.brand}</td>
-                    :<td>{dato.brand}</td>}
-                    {!dato.disabled ? 
-                    <td class="table-danger">{dato.image}</td>
-                    :<td>{dato.image}</td>}
-                    {!dato.disabled ? 
-                    <td class="table-danger">{dato.price}</td>
-                    :<td>{dato.price}</td>}
-                    {!dato.disabled ? 
-                    <td class="table-danger">{dato.capacity}</td>
-                    :<td>{dato.capacity}</td>}
-                    {!dato.disabled ? 
-                    <td class="table-danger">{dato.memoryRAM}</td>
-                    :<td>{dato.memoryRAM}</td>}
-                    {!dato.disabled ? 
-                    <td class="table-danger">{dato.description}</td>
-                    :<td>{dato.description}</td>}
-                    {!dato.disabled ? 
-                    <td class="table-danger">{dato.spec}</td>
-                    :<td>{dato.spec}</td>}
-                    <td>
-                        <Button color="primary" onClick={() => editar(dato)}>Editar</Button>
-                        {!dato.disabled ? 
+                    {dato.disabled ? 
+                    <td class="table-danger"><p className="dato">{dato.id}</p></td>
+                    :<td><p className="dato">{dato.id}</p></td>}
+                    {dato.disabled ? 
+                    <td class="table-danger"><img src={dato.image} alt="img" className="datoImg"></img></td>
+                    :<td><img src={dato.image} alt="img" className="datoImg"></img></td>}
+                    {dato.disabled ? 
+                    <td class="table-danger"><p className="dato">{dato.model}</p></td>
+                    :<td><p className="dato">{dato.model}</p></td>}
+                    {dato.disabled ? 
+                    <td class="table-danger"><p className="dato">{dato.line}</p></td>
+                    :<td><p className="dato">{dato.line}</p></td>}
+                    {dato.disabled ? 
+                    <td class="table-danger"><p className="dato">{dato.stock}</p></td>
+                    :<td><p className="dato">{dato.stock}</p></td>}
+                    {dato.disabled ? 
+                    <td class="table-danger"><p className="dato">{dato.brand}</p></td>
+                    :<td><p className="dato">{dato.brand}</p></td>}
+                    {dato.disabled ? 
+                    <td class="table-danger">
+                        <Button color="primary" onClick={() => editar(dato)}>Edit</Button>
+                        {dato.disabled ? 
                         <Button color="success" onClick={()=> reestablecer(dato)}>Restore</Button>
-                        :<Button color="danger" onClick={()=> eliminar(dato)}>Delete</Button>}
+                        :<Button color="danger" onClick={()=> eliminar(dato)}>Remove</Button>}
                     </td>
-                    
+                    :<td>
+                        <Button color="primary" onClick={() => editar(dato)}>Edit</Button>
+                        {dato.disabled ? 
+                        <Button color="success" onClick={()=> reestablecer(dato)}>Restore</Button>
+                        :<Button color="danger" onClick={()=> eliminar(dato)}>Remove</Button>}
+                    </td>}                    
                     </tr>        
                 )):<tr></tr>}
                 </tbody>
             </Table>
-
+          </div>
 
             <Modal isOpen={modals.modalEditar}>
             <ModalHeader>
@@ -388,13 +383,13 @@ const PanelAdminCells = () => {
                 </FormGroup>
 
                 <FormGroup>
-                  <h4>Are you sure you want to delete this item?</h4>
+                  <h4>Are you sure you want to remove this item?</h4>
                 </FormGroup>
                 
             </ModalBody>
 
             <ModalFooter>
-                <Button color="primary" onClick={() => eliminarModal()}>Delete</Button>
+                <Button color="primary" onClick={() => eliminarModal()}>Remove</Button>
                 <Button color="danger" onClick={() => cerrarModal()}>Cancel</Button>
             </ModalFooter>
             </Modal>
@@ -434,7 +429,8 @@ const PanelAdminCells = () => {
                 <Button color="danger" onClick={() => cerrarModal()}>Cancel</Button>
             </ModalFooter>
             </Modal>
-    
+
+            <Toaster position="bottom-right" reverseOrder={false}/>    
         </div>
     )
 }

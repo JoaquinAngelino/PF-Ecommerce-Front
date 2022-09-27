@@ -27,7 +27,8 @@ export const addToCart = (id, brand, line, model, price, stock, capacity, image,
 
 export const getPrice = () => {
   let total = 0
-  if (localStorage.getItem('cartList')) {
+
+  if (localStorage.getItem('cartList')){
     JSON.parse(localStorage.getItem('cartList')).forEach(e => {
       total += e.price * e.quantity
     })

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import './Favorites.css';
 import FavCard from "./FavCard";
-
+import { Toaster } from "react-hot-toast";
+import { cart, remove} from '../../components/Toast/Toast'
 
 export default function Favorites() {
     const [favorites, setFavorites] = useState(JSON.parse(localStorage.getItem('favList')))
@@ -17,7 +18,7 @@ export default function Favorites() {
     const deleteFav = (id) => {
         let arr = favorites.filter(e => e.id !== id)
         localStorage.setItem('favList', JSON.stringify(arr))
-        setFavorites(arr)
+        setFavorites(arr)       
     }
 
     let instrumentsMap = favorites.map((e) => <FavCard
@@ -39,6 +40,7 @@ export default function Favorites() {
             <div className="favoriteCards">
                 {instrumentsMap}
             </div>
+            <Toaster position="bottom-right" reverseOrder={false}/>            
         </div>
     );
 }

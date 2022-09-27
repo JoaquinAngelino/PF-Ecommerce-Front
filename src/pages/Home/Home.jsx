@@ -11,6 +11,7 @@ import { getAllProducts, getFilteredProducts } from "../../redux/actions";
 import './Home.css'
 import 'bootstrap/dist/css/bootstrap.css';
 import Loading from "../../components/Loading/Loading";
+import { Toaster } from "react-hot-toast";
 
 export default function Home() {
 
@@ -110,8 +111,11 @@ export default function Home() {
             </div>
         </div>
         <Pagination currentPage={currentPage} postPerPage={6} totalPosts={products.length} paginate={paginate} />
+        <Toaster position="bottom-right" reverseOrder={false}/>
       </div>
+      
       }
+        
     </>
   )
 }
