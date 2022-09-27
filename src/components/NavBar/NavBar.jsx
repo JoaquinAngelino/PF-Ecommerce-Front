@@ -114,23 +114,47 @@ export default function NavBar() {
                 : null
               )
               : null
-          }
-          {isAuthenticated ? <LogoutButton /> : <LoginButton />}
-          {isAuthenticated && gmail !== undefined && gmail[0] && gmail[0].role === "Administrador"
-            ? <Link className="nav-link text-light fw-semibold `${}`" to="/adminPanel">Admin Panel</Link> : null}
-          <SearchBar />
-          {/* <img className="ProfileImg" src={user.picture} alt="user" referrerPolicy="no-referrer" /> */}
-          {/* <NavDropdown title={user.nickname} id="navbarScrollingDropdown">
-          <NavDropdown.Item href='/profile/data' className="dropDown" >Personal Data</NavDropdown.Item>
-          {/* <NavDropdown.Item href='/profile/shop-history' className="dropDown" >Shopping history</NavDropdown.Item> */}
-          {/* <NavDropdown.Item href='/profile/my-products' className="dropDown" >My Products</NavDropdown.Item>
-          {userDetail.isAdmin && <NavDropdown.Item href='/profile/admin' className="dropDown" >Admin panel</NavDropdown.Item>} */}
-          {/* </NavDropdown> */}
-          {/* <LogOutBtn /> */}
-          {/* <LogInBtn /> */}
-          {/* <LightDarktn /> */}
+
+            }
+
+{
+              isAuthenticated && gmail===undefined 
+              // && !gmail===undefined && gmail.length!==1
+              //  gmail===undefined && !gmail[0] 
+              ?(
+                    
+                    <Link to='/postUser'>
+                         <button>Complete sus datos de usuario</button>
+                    </Link>
+                    
+              ) 
+              
+              : null
+            }
+
+
+            {
+              isAuthenticated?<LogoutButton/> :<LoginButton/>
+            }
+            
+              {
+                isAuthenticated && gmail!==undefined && gmail[0] && gmail[0].role==="Administrador"
+               ? <Link className="nav-link text-light fw-semibold `${}`" to="/adminPanel">Admin Panel</Link> 
+               : null
+              }
+            
+               
+            
+           
+          
+           
+          </div>
         </div>
-      </div>
+
+        <SearchBar/>
+        
+        
+     
     </nav>
   )
 }

@@ -3,10 +3,10 @@ export const addToFav = (id, brand, line, model, price, stock, capacity, image, 
   let favs = JSON.parse(localStorage.getItem('favList'))
   if (favs) {
     if (!favs.some(item => item.id === id)) {
-      favs.push({ id, brand, line, model, price, stock, capacity, image, memoryRAM})
+      favs.push({ id, brand, line, model, price, stock, capacity, image, memoryRAM })
     }
   } else {
-    favs = [{ id, brand, line, model, price, stock, capacity, image, memoryRAM}]
+    favs = [{ id, brand, line, model, price, stock, capacity, image, memoryRAM }]
   }
   localStorage.setItem('favList', JSON.stringify(favs))
   // handleAdded()
@@ -27,7 +27,8 @@ export const addToCart = (id, brand, line, model, price, stock, capacity, image,
 
 export const getPrice = () => {
   let total = 0
-  if(localStorage.getItem('cartList')){
+
+  if (localStorage.getItem('cartList')){
     JSON.parse(localStorage.getItem('cartList')).forEach(e => {
       total += e.price * e.quantity
     })
