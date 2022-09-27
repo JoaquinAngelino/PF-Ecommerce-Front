@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import SearchBar from '../SearchBar/SearchBar'
 import 'bootstrap/dist/css/bootstrap.css';
 import './NavBar.css'
+import Image from '../../image/logoConectCell.png';
 //LOGIN
 import { useAuth0 } from '@auth0/auth0-react';
 import LoginButton from "../Login/LoginButton";
@@ -92,69 +93,60 @@ export default function NavBar() {
 
   return (
     <nav className='NavBar mb-2 p-2 sticky-top bg-dark'>
-      <div className="containerNavBar container-fluid justify-content-around ">
-        <div className="navbar-nav hstack gap-3 NavBar-Item">
-          <Link to='/home' className="nav-link"><BsFillPhoneFill className='NavBarIcon' /></Link>
-          <Link to='/favorites' className="nav-link"><BsStarFill className='NavBarIcon' /></Link>
-          <Link to='/cart' className="nav-link"><BsCartFill className='NavBarIcon' /></Link>
-          {
-            isAuthenticated && gmail !== undefined && gmail[0] && gmail[0].role !== "Cliente"
-              ? <Link to='/create' className="nav-link"><AiOutlineUpload className='NavBarIcon' /></Link>
+      <Link to='/home'>
+        <img src={Image} alt="#" width={"110px"} height={"85px"} />
+      </Link>
+      <div className="navbar-nav hstack gap-3 NavBar-Item">
+        <SearchBar />
+        <Link to='/home' className="nav-link"><BsFillPhoneFill className='NavBarIcon' /></Link>
+        <Link to='/favorites' className="nav-link"><BsStarFill className='NavBarIcon' /></Link>
+        <Link to='/cart' className="nav-link"><BsCartFill className='NavBarIcon' /></Link>
+        {
+          isAuthenticated && gmail !== undefined && gmail[0] && gmail[0].role !== "Cliente"
+            ? <Link to='/create' className="nav-link"><AiOutlineUpload className='NavBarIcon' /></Link>
+            : null
+        }
+        {isAuthenticated ? <Link to={'Profile/'} className='nav-link'><AiOutlineUserAdd className='NavBarIcon' /></Link> : null}
+        {
+          isAuthenticated && gmail !== undefined
+            // && !gmail===undefined && gmail.length!==1
+            //  gmail===undefined && !gmail[0] 
+            ? (gmail.length === 0 ?
+              <Link to='/postUser'>
+                <button>Complete sus datos de usuario</button>
+              </Link>
               : null
-          }
-          {isAuthenticated ? <Link to={'Profile/'} className='nav-link'><AiOutlineUserAdd className='NavBarIcon' /></Link> : null}
-          {
-            isAuthenticated && gmail !== undefined
-              // && !gmail===undefined && gmail.length!==1
-              //  gmail===undefined && !gmail[0] 
-              ? (gmail.length === 0 ?
-                <Link to='/postUser'>
-                  <button>Complete sus datos de usuario</button>
-                </Link>
-                : null
-              )
-              : null
+            )
+            : null
 
-            }
+        }
 
-{
-              isAuthenticated && gmail===undefined 
-              // && !gmail===undefined && gmail.length!==1
-              //  gmail===undefined && !gmail[0] 
-              ?(
-                    
-                    <Link to='/postUser'>
-                         <button>Complete sus datos de usuario</button>
-                    </Link>
-                    
-              ) 
-              
-              : null
-            }
+        {
+          isAuthenticated && gmail === undefined
+            // && !gmail===undefined && gmail.length!==1
+            //  gmail===undefined && !gmail[0] 
+            ? (
+
+              <Link to='/postUser'>
+                <button>Complete sus datos de usuario</button>
+              </Link>
+
+            )
+
+            : null
+        }
 
 
-            {
-              isAuthenticated?<LogoutButton/> :<LoginButton/>
-            }
-            
-              {
-                isAuthenticated && gmail!==undefined && gmail[0] && gmail[0].role==="Administrador"
-               ? <Link className="nav-link text-light fw-semibold `${}`" to="/adminPanel">Admin Panel</Link> 
-               : null
-              }
-            
-               
-            
-           
-          
-           
-          </div>
-        </div>
+        {
+          isAuthenticated ? <LogoutButton /> : <LoginButton />
+        }
 
-        <SearchBar/>
-        
-        
-     
+        {
+          isAuthenticated && gmail !== undefined && gmail[0] && gmail[0].role === "Administrador"
+            ? <Link className="nav-link text-light fw-semibold `${}`" to="/adminPanel">Admin Panel</Link>
+            : null
+        }
+      </div>
     </nav>
   )
 }
