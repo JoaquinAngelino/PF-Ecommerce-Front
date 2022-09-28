@@ -5,9 +5,10 @@ import { useDispatch, useSelector } from "react-redux"
 import { cellDetail, cleanStatus } from "../../redux/actions";
 import { useEffect } from "react";
 import Questions from "../Questions/Questions.jsx";
-import {fav, cart} from '../Toast/Toast'
+import { fav, cart } from '../Toast/Toast'
 import { BsCartFill, BsStarFill } from 'react-icons/bs';
-import { Toaster} from 'react-hot-toast'
+import { Toaster } from 'react-hot-toast'
+import Ratings from "../startRatings/Ratings";
 
 
 
@@ -80,13 +81,13 @@ export default function Detail(props) {
                                 <div>
                                     <Questions key={myCell.id} cellId={myCell.id} q={myCell.questions} get={get} />
                                 </div>
+                                <Ratings />
                             </div>
                         </div>
-
                     </div>
                     : <p>Loanding...</p>
             }
-            <Toaster position="bottom-right" reverseOrder={false}/>
+            <Toaster position="bottom-right" reverseOrder={false} />
         </div>
     )
 }
