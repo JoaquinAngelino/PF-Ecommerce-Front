@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProductsAdmin, putCell } from "../../redux/actions";
+import {  getAllProductsAdmin,  getFiltersProductsAdmin, putCell } from "../../redux/actions";
 import "./PanelAdminCells.css";
 import 'bootstrap/dist/css/bootstrap.css';
 import {
@@ -14,8 +14,7 @@ import {
 } from "reactstrap";
 import { success, remove, error } from "../Toast/Toast";
 import { Toaster } from "react-hot-toast";
-
-
+import iconSearch from '../SearchBar/search_FILL0.png'
 
 
 
@@ -280,9 +279,61 @@ const PanelAdminCells = () => {
   };
 
 
-    
+
+
+
+   //filtrado
+    const [searchBar, setSearchBar] = useState('')
+    const [searchFor, setSearchFor] = useState('')
+
+    const handleSelect = (e) => {
+      setSearchFor(e.target.value)
+      if(e.target.value === "disabled"){
+        dispatch(getFiltersProductsAdmin(`disabled=true`))
+      }
+    }
+    function handleInputChange(e) {
+        e.preventDefault();
+        setSearchBar(e.target.value);
+    }
+    function handleSubmit(e) {
+        e.preventDefault();
+        if ((searchBar && searchFor) && (searchFor !== "disabled")) {
+          dispatch(getFiltersProductsAdmin(`${searchFor}=${searchBar}`))
+        }
+    }
+
+
+
     return (
         <div>
+            <div className='containerSearchBar'>
+              <select name="variable" onChange={(e) => handleSelect(e)} className="form-control" >
+                <option>Search For...</option>
+                <option value="id">ID</option>
+                <option value="model">Model</option>
+                <option value="line">Line</option>
+                <option value="brand">Brand</option>
+                <option value="disabled">Disabled</option>
+              </select>
+            <form className="d-flex input-group" role="search" onSubmit={(e) => { handleSubmit(e) }}>
+                <button
+                    className="input-group-text"
+                    id="inputGroup-sizing-default"
+                    type='submit'
+                >
+                    <img src={iconSearch} alt="search Icon" width="25" height="25" />
+                </button>
+                <input
+                    className="form-control me-2"
+                    value={searchBar}
+                    name={"searchBar"}
+                    onChange={(e) => { handleInputChange(e) }}
+                    placeholder='Type your search...'
+                />
+            </form>
+          </div>
+          <button onClick={() => dispatch(getAllProductsAdmin())}>All</button>
           <div className="tableContainer">
             <Table bordered size="sm" >
                 <thead>
@@ -339,7 +390,7 @@ const PanelAdminCells = () => {
 
             <Modal isOpen={modals.modalEditar}>
             <ModalHeader>
-              <div><h3>Editar Registro</h3></div>
+              <div><h3>Edit Form</h3></div>
             </ModalHeader>
 
             <ModalBody>
@@ -422,7 +473,7 @@ const PanelAdminCells = () => {
 
             <Modal isOpen={modals.modalEliminar}>
             <ModalHeader>
-              <div><h3>Edit record</h3></div>
+              <div><h3>Delete Form</h3></div>
             </ModalHeader>
 
             <ModalBody>
@@ -458,7 +509,7 @@ const PanelAdminCells = () => {
 
             <Modal isOpen={modals.modalReestablecer}>
             <ModalHeader>
-              <div><h3>Reset record</h3></div>
+              <div><h3>Restore Form</h3></div>
             </ModalHeader>
 
             <ModalBody>
