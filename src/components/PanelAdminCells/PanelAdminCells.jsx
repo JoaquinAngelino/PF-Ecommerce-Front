@@ -17,6 +17,9 @@ import { Toaster } from "react-hot-toast";
 
 
 
+
+
+
 const PanelAdminCells = () => {
   const products = useSelector(state => state.products);
   const dispatch = useDispatch();
@@ -40,6 +43,46 @@ const PanelAdminCells = () => {
     spec:"",
     disabled:""
   });
+
+  const useSortableData = (items, config = null) => {
+    const [sortConfig, setSortConfig] = React.useState(config);
+    
+    const sortedItems = React.useMemo(() => {
+      let sortableItems = [...items];
+      if (sortConfig !== null) {
+        sortableItems.sort((a, b) => {
+          if (a[sortConfig.key] < b[sortConfig.key]) {
+            return sortConfig.direction === 'ascending' ? -1 : 1;
+          }
+          if (a[sortConfig.key] > b[sortConfig.key]) {
+            return sortConfig.direction === 'ascending' ? 1 : -1;
+          }
+          return 0;
+        });
+      }
+      return sortableItems;
+    }, [items, sortConfig]);
+  
+    const requestSort = key => {
+      let direction = 'ascending';
+      if (sortConfig && sortConfig.key === key && sortConfig.direction === 'ascending') {
+        direction = 'descending';
+      }
+      setSortConfig({ key, direction });
+    }
+  
+    return { items: sortedItems, requestSort };
+  }
+  
+  const { items, requestSort, sortConfig } = useSortableData(products);
+  
+  const getClassNamesFor = (name) => {
+    if (!sortConfig) {
+      return;
+    }
+    return sortConfig.key === name ? sortConfig.direction : undefined;
+  };
+
 
   useEffect(() => {
     dispatch(getAllProductsAdmin());
@@ -110,15 +153,31 @@ const PanelAdminCells = () => {
       0   && state.description.length > 0 && state.spec.length > 0 && state.price > 0 && state.capacity > 0 &&
       state.memoryRAM > 0 && state.stock > 0){
 
-        dispatch(putCell(state)) 
-
-        .then(()=>{
-          dispatch(getAllProductsAdmin());
+        let validationCell = products.filter((u) => {
+          return (u.model.toUpperCase() === state.model.toUpperCase() && u.line.toUpperCase() === state.line.toUpperCase() && 
+          u.brand.toUpperCase() === state.brand.toUpperCase())
         })
 
-        cerrarModal();
+        if(validationCell.length>0){
+          setModals({
+            ...modals,
+            modalEditarSeguro: false
+          });
+  
+          error("Error. That cell already exists")
 
-        success("Cell edited.")
+        }else{
+
+          dispatch(putCell(state)) 
+
+          .then(()=>{
+            dispatch(getAllProductsAdmin());
+          })
+
+          cerrarModal();
+
+          success("Cell edited.")
+        }
 
     }else{
         setModals({
@@ -225,21 +284,21 @@ const PanelAdminCells = () => {
     return (
         <div>
           <div className="tableContainer">
-            <Table bordered size="sm" striped>
+            <Table bordered size="sm" >
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Image</th>
-                    <th>Model</th>
-                    <th>Line</th>
-                    <th>Stock</th> 
-                    <th>Brand</th>
-                    <th>Actions</th>                   
+                    <th><button type="button" onClick={() => requestSort('id')} className={getClassNamesFor('id')}>ID</button></th>
+                    <th><button type="button" >Image</button></th>
+                    <th><button type="button" onClick={() => requestSort('model')} className={getClassNamesFor('model')}>Model</button></th>
+                    <th><button type="button" onClick={() => requestSort('line')} className={getClassNamesFor('line')}>Line</button></th>
+                    <th><button type="button" onClick={() => requestSort('stock')} className={getClassNamesFor('stock')}>Stock</button></th> 
+                    <th><button type="button" onClick={() => requestSort('brand')} className={getClassNamesFor('brand')}>Brand</button></th>
+                    <th><button type="button" >Actions</button></th>                   
                   </tr>
                 </thead>
 
                 <tbody>
-                {products? products.map((dato) => (
+                {items? items.map((dato) => (
                     <tr key={dato.id}>
                     {dato.disabled ? 
                     <td class="table-danger"><p className="dato">{dato.id}</p></td>

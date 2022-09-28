@@ -23,3 +23,19 @@ td{
 Button{
     width: 5em;
 }
+
+  
+  thead th {
+    text-align: center;
+    border-bottom: 2px solid black;
+  }
+  
+  thead button {
+    border: 0;
+    border-radius: none;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: inherit;
+    padding: 0.5em;
+    margin-bottom: 1px;
+  }
