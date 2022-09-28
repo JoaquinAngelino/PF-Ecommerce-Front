@@ -12,7 +12,7 @@ import {
   FormGroup,
   ModalFooter,
 } from "reactstrap";
-import { error, success } from "../Toast/Toast";
+import { error, success, remove } from "../Toast/Toast";
 import { Toaster } from "react-hot-toast";
 
 
@@ -35,6 +35,47 @@ const PanelAdminUsers = () => {
     disabled: "",
     role: ""
   });
+
+  const useSortableData = (items, config = null) => {
+    const [sortConfig, setSortConfig] = React.useState(config);
+    
+    const sortedItems = React.useMemo(() => {
+      let sortableItems = [...items];
+      if (sortConfig !== null) {
+        sortableItems.sort((a, b) => {
+          if (a[sortConfig.key] < b[sortConfig.key]) {
+            return sortConfig.direction === 'ascending' ? -1 : 1;
+          }
+          if (a[sortConfig.key] > b[sortConfig.key]) {
+            return sortConfig.direction === 'ascending' ? 1 : -1;
+          }
+          return 0;
+        });
+      }
+      return sortableItems;
+    }, [items, sortConfig]);
+  
+    const requestSort = key => {
+      let direction = 'ascending';
+      if (sortConfig && sortConfig.key === key && sortConfig.direction === 'ascending') {
+        direction = 'descending';
+      }
+      setSortConfig({ key, direction });
+    }
+  
+    return { items: sortedItems, requestSort };
+  }
+  
+  const { items, requestSort, sortConfig } = useSortableData(users);
+  
+  const getClassNamesFor = (name) => {
+    if (!sortConfig) {
+      return;
+    }
+    return sortConfig.key === name ? sortConfig.direction : undefined;
+  };
+
+
  
 
   useEffect(() => {
@@ -98,7 +139,7 @@ const PanelAdminUsers = () => {
       && state.role.length > 0 && ((state.role === "Administrador")||(state.role === "Vendedor")||(state.role === "Cliente"))){
 
         let validationEmail = users.filter((u) => {
-          return (u.email === state.email)
+          return (u.email.toUpperCase() === state.email.toUpperCase())
         })
 
         if(validationEmail.length>0){
@@ -113,9 +154,11 @@ const PanelAdminUsers = () => {
 
           dispatch(putUser(state))
 
-          cerrarModal();
+          .then(()=>{
+            dispatch(getAllUsers());
+          })
 
-          dispatch(getAllUsers());
+          cerrarModal();
           
           success("Edited");          
         }
@@ -160,11 +203,13 @@ const PanelAdminUsers = () => {
   const eliminarModal = () => {
     dispatch(putUser(state))
 
+    .then(()=>{
+      dispatch(getAllUsers());
+    })
+
     cerrarModal();
 
-    dispatch(getAllUsers());
-
-    success("Removed.");    
+    remove();    
   }
 
   
@@ -191,11 +236,13 @@ const PanelAdminUsers = () => {
   }
 
   const reestablecerModal = () => {
-    dispatch(putUser(state));
+    dispatch(putUser(state))
+
+    .then(()=>{
+      dispatch(getAllUsers());
+    })
 
     cerrarModal();
-
-    dispatch(getAllUsers());
 
     success("Reestablished.");
     
@@ -214,55 +261,55 @@ const PanelAdminUsers = () => {
     
     return (
         <div>
-            <Table bordered size="sm" striped>
+          <div className="tableContainer">
+            <Table bordered size="sm">
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Location</th> 
-                    <th>Direction</th>
-                    <th>Role</th>
-                    <th>Image</th>
+                    <th><button type="button" onClick={() => requestSort('id')} className={getClassNamesFor('id')}>ID</button></th>
+                    <th><button type="button" >Image</button></th>
+                    <th><button type="button" onClick={() => requestSort('name')} className={getClassNamesFor('name')}>Name</button></th>
+                    <th><button type="button" onClick={() => requestSort('email')} className={getClassNamesFor('email')}>Email</button></th>
+                    <th><button type="button" onClick={() => requestSort('role')} className={getClassNamesFor('role')}>Role</button></th>
+                    <th><button type="button" >Actions</button></th>                  
                   </tr>
                 </thead>
 
                 <tbody>
-                {users.length> 0 && users? users.map((dato) => (
+                {items.length> 0 && items? items.map((dato) => (
                     <tr key={dato.id}>
                     {dato.disabled ? 
-                    <td class="table-danger">{dato.id}</td>
-                    :<td>{dato.id}</td>}
+                    <td class="table-danger"><p className="dato">{dato.id}</p></td>
+                    :<td><p className="dato">{dato.id}</p></td>}
                     {dato.disabled ? 
-                    <td class="table-danger">{dato.name}</td>
-                    :<td>{dato.name}</td>}
+                    <td class="table-danger"><img src={dato.image} alt="img" className="datoImg"></img></td>
+                    :<td><img src={dato.image} alt="img" className="datoImg"></img></td>}
                     {dato.disabled ? 
-                    <td class="table-danger">{dato.email}</td>
-                    :<td>{dato.email}</td>}
+                    <td class="table-danger"><p className="dato">{dato.name}</p></td>
+                    :<td><p className="dato">{dato.name}</p></td>}
                     {dato.disabled ? 
-                    <td class="table-danger">{dato.location}</td>
-                    :<td>{dato.location}</td>}
+                    <td class="table-danger"><p className="dato">{dato.email}</p></td>
+                    :<td><p className="dato">{dato.email}</p></td>}
                     {dato.disabled ? 
-                    <td class="table-danger">{dato.direction}</td>
-                    :<td>{dato.direction}</td>}
+                    <td class="table-danger"><p className="dato">{dato.role}</p></td>
+                    :<td><p className="dato">{dato.role}</p></td>}
                     {dato.disabled ? 
-                    <td class="table-danger">{dato.role}</td>
-                    :<td>{dato.role}</td>}
-                    {dato.disabled ? 
-                    <td class="table-danger">{dato.image}</td>
-                    :<td>{dato.image}</td>}
-                    <td>
-                        <Button color="primary" onClick={() => editar(dato)}>Editar</Button>
+                    <td class="table-danger">
+                        <Button color="primary" onClick={() => editar(dato)}>Edit</Button>
                         {dato.disabled ? 
                         <Button color="success" onClick={()=> reestablecer(dato)}>Restore</Button>
-                        :<Button color="danger" onClick={()=> eliminar(dato)}>Delete</Button>}
+                        :<Button color="danger" onClick={()=> eliminar(dato)}>Remove</Button>}
                     </td>
-                    
-                    </tr>        
+                    :<td>
+                        <Button color="primary" onClick={() => editar(dato)}>Edit</Button>
+                        {dato.disabled ? 
+                        <Button color="success" onClick={()=> reestablecer(dato)}>Restore</Button>
+                        :<Button color="danger" onClick={()=> eliminar(dato)}>Remove</Button>}
+                    </td>}                    
+                    </tr>             
                 )):<tr></tr>}
                 </tbody>
             </Table>
-
+          </div>
 
             <Modal isOpen={modals.modalEditar}>
             <ModalHeader>
