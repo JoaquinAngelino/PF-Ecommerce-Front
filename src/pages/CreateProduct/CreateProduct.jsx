@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { createPost, getAllBrands } from '../../redux/actions';
 import './CreateProduct.css';
 import { Link } from 'react-router-dom';
+import { error, success } from '../../components/Toast/Toast';
+import { Toaster } from 'react-hot-toast';
 
 const validations = (input) => {
   const errors = {};
@@ -78,10 +80,10 @@ export default function CreateProduct() {
         [e.target.name]: e.target.value
       })
     );
-    if (!input.model && !input.line && !input.image && !input.description && !input.brand && !input.capacity) return alert("does not contain fields");
+    if (!input.model && !input.line && !input.image && !input.description && !input.brand && !input.capacity) return error("Does not contain fields");
     if (Object.keys(errors).length === 0) {
       dispatch(createPost(input))
-      alert("your cell phone was created")
+      success("Your cell was created")
       setInput({
         line: "",
         image: "",
@@ -94,7 +96,7 @@ export default function CreateProduct() {
         price: "",
       })
     } else {
-      alert("we could not create your cell");
+      error("We could not create your cell");
     }
     // return ;
   }
@@ -174,6 +176,7 @@ export default function CreateProduct() {
           </div>
         </form>
       </div>
+      <Toaster position="bottom-right" reverseOrder={false}/>
     </div>
   )
 }

@@ -18,6 +18,7 @@ export const POST_USER="POST USER"
 export const ALL_USER="ALL USER"
 export const RUTA_USER_ID="/users/id/"
 export const USER_ID="USER ID"
+export const DELETE_FOR_CART="DELETE_FOR_CART"
 
 
 
@@ -220,9 +221,9 @@ export function updateProduct(id,payload){
 }
 
 
-export const getAllProductsAdmin = () => {
+export const getFiltersProductsAdmin = (filters) => {
    return async function (dispatch) {
-      const p = await axios('/celulares/panel');
+      const p = await axios(`/celulares/panel/?${filters}`);
       return dispatch({
          type: GET_ALL_PRODUCTS,
          payload: p.data
@@ -230,3 +231,19 @@ export const getAllProductsAdmin = () => {
    };
 };
 
+export function deleteItemFromCart(id) {
+   return {
+       type: DELETE_FOR_CART,
+       payload: id
+   }
+}
+
+export const getAllProductsAdmin = () => {
+   return async function (dispatch) {
+      const p = await axios(`/celulares/panel`);
+      return dispatch({
+         type: GET_ALL_PRODUCTS,
+         payload: p.data
+      });
+   };
+};
