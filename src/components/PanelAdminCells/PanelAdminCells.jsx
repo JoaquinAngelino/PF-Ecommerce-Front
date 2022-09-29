@@ -14,8 +14,8 @@ import {
 } from "reactstrap";
 import { success, remove, error } from "../Toast/Toast";
 import { Toaster } from "react-hot-toast";
+import { Link } from "react-router-dom";
 import iconSearch from '../SearchBar/search_FILL0.png'
-
 
 
 
@@ -148,10 +148,19 @@ const PanelAdminCells = () => {
   }
 
   const editarModal2 = () => {
-    if(state.line.length > 0 && state.model.length > 0 && state.brand.length > 0  && state.image.length > 
-      0   && state.description.length > 0 && state.spec.length > 0 && state.price > 0 && state.capacity > 0 &&
-      state.memoryRAM > 0 && state.stock > 0){
+    // if(state.line.length > 0 && state.model.length > 0 && state.brand.length > 0  && state.image.length > 
+    //   0   && state.description.length > 0 && state.spec.length > 0 && state.price > 0 && state.capacity > 0 &&
+    //   state.memoryRAM > 0 && state.stock > 0){
 
+    //     dispatch(putCell(state)) 
+
+    //     .then(()=>{
+    //       dispatch(getAllProductsAdmin());
+    //     })
+
+    //     cerrarModal();
+
+    //     success("Cell edited.")
         let validationCell = products.filter((u) => {
           return (u.model.toUpperCase() === state.model.toUpperCase() && u.line.toUpperCase() === state.line.toUpperCase() && 
           u.brand.toUpperCase() === state.brand.toUpperCase())
@@ -178,15 +187,18 @@ const PanelAdminCells = () => {
           success("Cell edited.")
         }
 
-    }else{
-        setModals({
-          ...modals,
-          modalEditarSeguro: false
-        });
-        
-       error("Error, check the fields.")   
 
-    }
+    // }else{
+    //     setModals({
+    //       ...modals,
+    //       modalEditarSeguro: false
+    //     });
+        
+    //    error("Error, check the fields.")   
+
+    // }
+    // history("/")
+    
   }
 
 
@@ -371,13 +383,15 @@ const PanelAdminCells = () => {
                     :<td><p className="dato">{dato.brand}</p></td>}
                     {dato.disabled ? 
                     <td class="table-danger">
-                        <Button color="primary" onClick={() => editar(dato)}>Edit</Button>
+                        {/* <Button color="primary" onClick={() => editar(dato)}>Edit</Button> */}
+                        <Link to={`/panelCells/editProduct/${dato.id}`}><Button color="primary">Edit</Button></Link>
                         {dato.disabled ? 
                         <Button color="success" onClick={()=> reestablecer(dato)}>Restore</Button>
                         :<Button color="danger" onClick={()=> eliminar(dato)}>Remove</Button>}
                     </td>
                     :<td>
-                        <Button color="primary" onClick={() => editar(dato)}>Edit</Button>
+                        {/* <Button color="primary" onClick={() => editar(dato)}>Edit</Button> */}
+                        <Link to={`/panelCells/editProduct/${dato.id}`}><Button color="primary">Edit</Button></Link>
                         {dato.disabled ? 
                         <Button color="success" onClick={()=> reestablecer(dato)}>Restore</Button>
                         :<Button color="danger" onClick={()=> eliminar(dato)}>Remove</Button>}
