@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProductsAdmin, putCell } from "../../redux/actions";
+import {  getAllProductsAdmin,  getFiltersProductsAdmin, putCell } from "../../redux/actions";
 import "./PanelAdminCells.css";
 import 'bootstrap/dist/css/bootstrap.css';
 import {
@@ -15,6 +15,7 @@ import {
 import { success, remove, error } from "../Toast/Toast";
 import { Toaster } from "react-hot-toast";
 import { Link } from "react-router-dom";
+import iconSearch from '../SearchBar/search_FILL0.png'
 
 
 
@@ -41,6 +42,46 @@ const PanelAdminCells = () => {
     spec:"",
     disabled:""
   });
+
+  const useSortableData = (items, config = null) => {
+    const [sortConfig, setSortConfig] = React.useState(config);
+    
+    const sortedItems = React.useMemo(() => {
+      let sortableItems = [...items];
+      if (sortConfig !== null) {
+        sortableItems.sort((a, b) => {
+          if (a[sortConfig.key] < b[sortConfig.key]) {
+            return sortConfig.direction === 'ascending' ? -1 : 1;
+          }
+          if (a[sortConfig.key] > b[sortConfig.key]) {
+            return sortConfig.direction === 'ascending' ? 1 : -1;
+          }
+          return 0;
+        });
+      }
+      return sortableItems;
+    }, [items, sortConfig]);
+  
+    const requestSort = key => {
+      let direction = 'ascending';
+      if (sortConfig && sortConfig.key === key && sortConfig.direction === 'ascending') {
+        direction = 'descending';
+      }
+      setSortConfig({ key, direction });
+    }
+  
+    return { items: sortedItems, requestSort };
+  }
+  
+  const { items, requestSort, sortConfig } = useSortableData(products);
+  
+  const getClassNamesFor = (name) => {
+    if (!sortConfig) {
+      return;
+    }
+    return sortConfig.key === name ? sortConfig.direction : undefined;
+  };
+
 
   useEffect(() => {
     dispatch(getAllProductsAdmin());
@@ -120,6 +161,32 @@ const PanelAdminCells = () => {
     //     cerrarModal();
 
     //     success("Cell edited.")
+        let validationCell = products.filter((u) => {
+          return (u.model.toUpperCase() === state.model.toUpperCase() && u.line.toUpperCase() === state.line.toUpperCase() && 
+          u.brand.toUpperCase() === state.brand.toUpperCase())
+        })
+
+        if(validationCell.length>0){
+          setModals({
+            ...modals,
+            modalEditarSeguro: false
+          });
+  
+          error("Error. That cell already exists")
+
+        }else{
+
+          dispatch(putCell(state)) 
+
+          .then(()=>{
+            dispatch(getAllProductsAdmin());
+          })
+
+          cerrarModal();
+
+          success("Cell edited.")
+        }
+
 
     // }else{
     //     setModals({
@@ -224,25 +291,77 @@ const PanelAdminCells = () => {
   };
 
 
-    
+
+
+
+   //filtrado
+    const [searchBar, setSearchBar] = useState('')
+    const [searchFor, setSearchFor] = useState('')
+
+    const handleSelect = (e) => {
+      setSearchFor(e.target.value)
+      if(e.target.value === "disabled"){
+        dispatch(getFiltersProductsAdmin(`disabled=true`))
+      }
+    }
+    function handleInputChange(e) {
+        e.preventDefault();
+        setSearchBar(e.target.value);
+    }
+    function handleSubmit(e) {
+        e.preventDefault();
+        if ((searchBar && searchFor) && (searchFor !== "disabled")) {
+          dispatch(getFiltersProductsAdmin(`${searchFor}=${searchBar}`))
+        }
+    }
+
+
+
     return (
         <div>
+            <div className='containerSearchBar'>
+              <select name="variable" onChange={(e) => handleSelect(e)} className="form-control" >
+                <option>Search For...</option>
+                <option value="id">ID</option>
+                <option value="model">Model</option>
+                <option value="line">Line</option>
+                <option value="brand">Brand</option>
+                <option value="disabled">Disabled</option>
+              </select>
+            <form className="d-flex input-group" role="search" onSubmit={(e) => { handleSubmit(e) }}>
+                <button
+                    className="input-group-text"
+                    id="inputGroup-sizing-default"
+                    type='submit'
+                >
+                    <img src={iconSearch} alt="search Icon" width="25" height="25" />
+                </button>
+                <input
+                    className="form-control me-2"
+                    value={searchBar}
+                    name={"searchBar"}
+                    onChange={(e) => { handleInputChange(e) }}
+                    placeholder='Type your search...'
+                />
+            </form>
+          </div>
+          <button onClick={() => dispatch(getAllProductsAdmin())}>All</button>
           <div className="tableContainer">
-            <Table bordered size="sm" striped>
+            <Table bordered size="sm" >
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Image</th>
-                    <th>Model</th>
-                    <th>Line</th>
-                    <th>Stock</th> 
-                    <th>Brand</th>
-                    <th>Actions</th>                   
+                    <th><button type="button" onClick={() => requestSort('id')} className={getClassNamesFor('id')}>ID</button></th>
+                    <th><button type="button" >Image</button></th>
+                    <th><button type="button" onClick={() => requestSort('model')} className={getClassNamesFor('model')}>Model</button></th>
+                    <th><button type="button" onClick={() => requestSort('line')} className={getClassNamesFor('line')}>Line</button></th>
+                    <th><button type="button" onClick={() => requestSort('stock')} className={getClassNamesFor('stock')}>Stock</button></th> 
+                    <th><button type="button" onClick={() => requestSort('brand')} className={getClassNamesFor('brand')}>Brand</button></th>
+                    <th><button type="button" >Actions</button></th>                   
                   </tr>
                 </thead>
 
                 <tbody>
-                {products? products.map((dato) => (
+                {items? items.map((dato) => (
                     <tr key={dato.id}>
                     {dato.disabled ? 
                     <td class="table-danger"><p className="dato">{dato.id}</p></td>
@@ -285,7 +404,7 @@ const PanelAdminCells = () => {
 
             <Modal isOpen={modals.modalEditar}>
             <ModalHeader>
-              <div><h3>Editar Registro</h3></div>
+              <div><h3>Edit Form</h3></div>
             </ModalHeader>
 
             <ModalBody>
@@ -368,7 +487,7 @@ const PanelAdminCells = () => {
 
             <Modal isOpen={modals.modalEliminar}>
             <ModalHeader>
-              <div><h3>Edit record</h3></div>
+              <div><h3>Delete Form</h3></div>
             </ModalHeader>
 
             <ModalBody>
@@ -404,7 +523,7 @@ const PanelAdminCells = () => {
 
             <Modal isOpen={modals.modalReestablecer}>
             <ModalHeader>
-              <div><h3>Reset record</h3></div>
+              <div><h3>Restore Form</h3></div>
             </ModalHeader>
 
             <ModalBody>

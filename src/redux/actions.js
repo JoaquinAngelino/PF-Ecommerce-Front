@@ -221,9 +221,9 @@ export function updateProduct(id,payload){
 }
 
 
-export const getAllProductsAdmin = () => {
+export const getFiltersProductsAdmin = (filters) => {
    return async function (dispatch) {
-      const p = await axios('/celulares/panel');
+      const p = await axios(`/celulares/panel/?${filters}`);
       return dispatch({
          type: GET_ALL_PRODUCTS,
          payload: p.data
@@ -237,3 +237,13 @@ export function deleteItemFromCart(id) {
        payload: id
    }
 }
+
+export const getAllProductsAdmin = () => {
+   return async function (dispatch) {
+      const p = await axios(`/celulares/panel`);
+      return dispatch({
+         type: GET_ALL_PRODUCTS,
+         payload: p.data
+      });
+   };
+};

@@ -39,7 +39,7 @@ export  const cart = (id, brand, line, model, price, stock, capacity, image, mem
 
 export  const remove = () =>{
     
-    toast('Remove',
+    toast('Removed',
     {
         icon: '❌',
         duration: 1700,
@@ -72,7 +72,7 @@ export  const success = (msg) =>{
 export const error = (msg) =>{
     toast.error(msg,
         {
-            duration: 1700,
+            duration: 2100,
             style: {
             borderRadius: '10px',
             background: '#F4574A',
