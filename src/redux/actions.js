@@ -260,12 +260,12 @@ export const deleteFromCart = (email, id) => {
       try {
          const user = (await axios.get('/users/getByEmail/' + email)).data
          await axios.delete('/cart', { data: { userId: user.id, phoneId: id } })
-         let cart = (await axios.get('/cart/' + user.id)).data
-         console.log("dispatch cart", cart);
-         return dispatch({
-            type: GET_USER_CART,
-            payload: cart
-         });
+         // let cart = (await axios.get('/cart/' + user.id)).data
+         // console.log("dispatch cart", cart);
+         // return dispatch({
+         //    type: GET_USER_CART,
+         //    payload: cart
+         // });
 
       } catch (err) {
          console.log(err)

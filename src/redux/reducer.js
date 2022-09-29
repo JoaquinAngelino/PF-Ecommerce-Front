@@ -89,6 +89,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
             }
 
             case GET_USER_CART:
+              console.log("reducer cart", payload);
               return{
                 ...state,
                 cart: payload,

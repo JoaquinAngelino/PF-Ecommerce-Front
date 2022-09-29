@@ -14,29 +14,40 @@ export default function DbCart({ user }) {
     const [totalPrice, setTotalPrice] = useState(0);
     const cart = useSelector(state => state.cart);
     const isLoading = useSelector(state => state.isLoading);
-
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        dispatch(getUserCart(user.email))
-    }, [dispatch])
-
-    const updateQuantity = (id, quantity) => { 
-        let found = cart.find(e => e.id === id)
-        found.quantity = quantity
+    const setPrice = (idDeleted) =>{
         let total = 0
         cart.forEach(e => { total += e.price * (e.quantity ? e.quantity : 1) })
         setTotalPrice(total.toFixed(2))
     }
 
-    const deleteItem = async (id) => {
-        dispatch(deleteFromCart(user.email, id))
-        setTotalPrice(getPrice())
+    useEffect(() => {
+        dispatch(getUserCart(user.email))
+        setPrice()
+    }, [dispatch])
+
+
+    const updateQuantity = (id, quantity) => { 
+        let found = cart.find(e => e.id === id)
+        found.quantity = quantity
+        setPrice()
     }
-    
-    
-    if (isLoading) { return (<Loading />) }
+
+    const deleteItem = async (id) => {
+        // console.log("dispatch delete");
+        dispatch(deleteFromCart(user.email, id))
+        // console.log("dispatch getUserCart");
+        dispatch(getUserCart(user.email))
+        // console.log("setPrice");
+        setPrice()
+    }
+
+    console.log("before loading");
+    if (isLoading || !cart) { return (<Loading />) }
     if (!cart.length) { return (<NothingFound />) }    
+    console.log("before render");
+
     return (
         <div className="shoppingCart">
             <h2>Your Shopping Cart: {totalPrice}</h2>
