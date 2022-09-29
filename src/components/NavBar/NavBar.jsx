@@ -25,14 +25,9 @@ export default function NavBar() {
   const usuarios = allUsers
   const emailAuth0 = email()
   const gmail = filterEmail()
-  console.log(usuarios)
-  console.log(emailAuth0)
-  console.log(gmail)
-  const userRole = role()
-  console.log(userRole)
-  console.log(isAuthenticated)
 
-  //  console.log("a"+gmail)
+  const userRole = role()
+
   localStorage.setItem('user', JSON.stringify(emailAuth0))
 
   useEffect(() => {

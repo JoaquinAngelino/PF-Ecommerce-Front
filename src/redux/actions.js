@@ -13,11 +13,12 @@ export const PUT_QUESTION = "PUT_QUESTION";
 export const PUT_CELL = "PUT_CELL";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const PUT_USERS = "PUT_USERS";
-export const RUTA_USER="/users"
-export const POST_USER="POST USER"
-export const ALL_USER="ALL USER"
-export const RUTA_USER_ID="/users/id/"
-export const USER_ID="USER ID"
+export const RUTA_USER = "/users"
+export const POST_USER = "POST USER"
+export const ALL_USER = "ALL USER"
+export const RUTA_USER_ID = "/users/id/"
+export const USER_ID = "USER ID"
+export const GET_USER_CART = "GET_USER_CART"
 
 
 
@@ -74,25 +75,25 @@ export function cleanStatus(payload) {
 }
 //CELL_DETAIL
 //POST USER
-export function postUser(user){
-return async function(dispatch){
-   return await axios.post(RUTA_USER, user)
-   .then((response)=>{
-      dispatch({
-         type:POST_USER,
-         payload:response.data
-      })
-   })
-}
+export function postUser(user) {
+   return async function (dispatch) {
+      return await axios.post(RUTA_USER, user)
+         .then((response) => {
+            dispatch({
+               type: POST_USER,
+               payload: response.data
+            })
+         })
+   }
 }
 //POST USER
 //GET USER
-export function allUser(){
-   return async function(dispatch){
-      const allUser= await axios(RUTA_USER)
+export function allUser() {
+   return async function (dispatch) {
+      const allUser = await axios(RUTA_USER)
       return dispatch({
-         type:ALL_USER,
-         payload:allUser.data
+         type: ALL_USER,
+         payload: allUser.data
       })
    }
 
@@ -122,18 +123,18 @@ export function createPost(product) {
    };
 }
 //USER ID
-export function userId(id){
-   return async function(dispatch){
-      try{
-         var userId=await axios.get(RUTA_USER_ID +id)
+export function userId(id) {
+   return async function (dispatch) {
+      try {
+         var userId = await axios.get(RUTA_USER_ID + id)
          return dispatch({
-            type:USER_ID,
-            payload:userId.data
+            type: USER_ID,
+            payload: userId.data
          })
-      }catch(error){
+      } catch (error) {
          console.log(error)
       }
-   } 
+   }
 }
 //USER ID
 
@@ -213,9 +214,9 @@ export function putUser(a) {
    };
 }
 
-export function updateProduct(id,payload){
-   return  function(){
-       axios.put(`/celulares/${id}`,payload)
+export function updateProduct(id, payload) {
+   return function () {
+      axios.put(`/celulares/${id}`, payload)
    }
 }
 
@@ -227,6 +228,48 @@ export const getAllProductsAdmin = () => {
          type: GET_ALL_PRODUCTS,
          payload: p.data
       });
+   };
+};
+
+export const getUserCart = (email) => {
+   return async function (dispatch) {
+      try {
+         const user = (await axios.get('/users/getByEmail/' + email)).data
+         let localCart = JSON.parse(localStorage.getItem('cartList'))
+         if (localCart) {
+            await axios.post('/cart', { userId: user.id, phoneId: localCart.map(e => e.id) })
+            localStorage.removeItem('cartList');
+         }
+         let cart = (await axios.get('/cart/' + user.id)).data
+         return dispatch({
+            type: GET_USER_CART,
+            payload: cart
+         });
+      } catch (err) {
+         console.log(err)
+         return dispatch({
+            type: GET_USER_CART,
+            payload: []
+         });
+      }
+   };
+};
+
+export const deleteFromCart = (email, id) => {
+   return async function (dispatch) {
+      try {
+         const user = (await axios.get('/users/getByEmail/' + email)).data
+         await axios.delete('/cart', { data: { userId: user.id, phoneId: id } })
+         let cart = (await axios.get('/cart/' + user.id)).data
+         console.log("dispatch cart", cart);
+         return dispatch({
+            type: GET_USER_CART,
+            payload: cart
+         });
+
+      } catch (err) {
+         console.log(err)
+      }
    };
 };
 
