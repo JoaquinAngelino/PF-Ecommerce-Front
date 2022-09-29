@@ -9,16 +9,17 @@ export const ACTIVE_LOADING = "ACTIVE_LOADING";
 export const CELL_DETAIL = "CELL_DETAIL"
 export const POST_PRODUCT = "POST_PRODUCT";
 export const POST_QUESTION = "POST_QUESTION";
+export const CREATE_RATING = "CREATE_RATING";
 export const PUT_QUESTION = "PUT_QUESTION";
 export const PUT_CELL = "PUT_CELL";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const PUT_USERS = "PUT_USERS";
-export const RUTA_USER="/users"
-export const POST_USER="POST USER"
-export const ALL_USER="ALL USER"
-export const RUTA_USER_ID="/users/id/"
-export const USER_ID="USER ID"
-export const DELETE_FOR_CART="DELETE_FOR_CART"
+export const RUTA_USER = "/users"
+export const POST_USER = "POST USER"
+export const ALL_USER = "ALL USER"
+export const RUTA_USER_ID = "/users/id/"
+export const USER_ID = "USER ID"
+export const DELETE_FOR_CART = "DELETE_FOR_CART"
 
 
 
@@ -75,25 +76,33 @@ export function cleanStatus(payload) {
 }
 //CELL_DETAIL
 //POST USER
-export function postUser(user){
-return async function(dispatch){
-   return await axios.post(RUTA_USER, user)
-   .then((response)=>{
-      dispatch({
-         type:POST_USER,
-         payload:response.data
-      })
-   })
+export function postUser(user) {
+   return async function (dispatch) {
+      return await axios.post(RUTA_USER, user)
+         .then((response) => {
+            dispatch({
+               type: POST_USER,
+               payload: response.data
+            })
+         })
+   }
 }
+
+export const postRating = (rating) => {
+   // console.log(rating, 'soy lo que llega del front')
+   return async function (dispatch) {
+      const ratings = await axios.post(`/rating/${rating.id}`, rating);
+   }
 }
+
 //POST USER
 //GET USER
-export function allUser(){
-   return async function(dispatch){
-      const allUser= await axios(RUTA_USER)
+export function allUser() {
+   return async function (dispatch) {
+      const allUser = await axios(RUTA_USER)
       return dispatch({
-         type:ALL_USER,
-         payload:allUser.data
+         type: ALL_USER,
+         payload: allUser.data
       })
    }
 
@@ -123,25 +132,24 @@ export function createPost(product) {
    };
 }
 //USER ID
-export function userId(id){
-   return async function(dispatch){
-      try{
-         var userId=await axios.get(RUTA_USER_ID +id)
+export function userId(id) {
+   return async function (dispatch) {
+      try {
+         var userId = await axios.get(RUTA_USER_ID + id)
          return dispatch({
-            type:USER_ID,
-            payload:userId.data
+            type: USER_ID,
+            payload: userId.data
          })
-      }catch(error){
+      } catch (error) {
          console.log(error)
       }
-   } 
+   }
 }
 //USER ID
 
 export function createQuestion(question) {
    return async function (dispatch) {
-      return await axios
-         .post(`/questions/${question.id}`, question)
+      return await axios.post(`/questions/${question.id}`, question)
          .then((response) => {
             dispatch({
                type: POST_QUESTION,
@@ -214,9 +222,9 @@ export function putUser(a) {
    };
 }
 
-export function updateProduct(id,payload){
-   return  function(){
-       axios.put(`/celulares/${id}`,payload)
+export function updateProduct(id, payload) {
+   return function () {
+      axios.put(`/celulares/${id}`, payload)
    }
 }
 
@@ -233,8 +241,8 @@ export const getFiltersProductsAdmin = (filters) => {
 
 export function deleteItemFromCart(id) {
    return {
-       type: DELETE_FOR_CART,
-       payload: id
+      type: DELETE_FOR_CART,
+      payload: id
    }
 }
 

@@ -15,10 +15,11 @@ import {
 } from "reactstrap";
 
 
-const Questions = ({cellId, q, get}) => {
+const Questions = ({ cellId, q, get }) => {
 
    const dispatch = useDispatch();
    const admin = useSelector((state) => state.admin)
+
    const { user, isAuthenticated } = useAuth0();
    const [question, setQuestion] = useState({
       question: "",
@@ -64,7 +65,6 @@ const Questions = ({cellId, q, get}) => {
       }
    }
 
-
    const sendDataQuestions = (e, questionId, question) => {
       setAnswer({
          ...answer,
@@ -99,13 +99,11 @@ const Questions = ({cellId, q, get}) => {
       });
    }
 
-
-
    return (
       <div>
          <div >
             {isAuthenticated ?
-               <div >
+               <div>
                   <div className=''>
                      <h1>Ask your question</h1>
                      <h3>{user.name}:</h3>
@@ -133,10 +131,10 @@ const Questions = ({cellId, q, get}) => {
                                  {
                                     admin ?
                                        <div>
-                                          <h3>____________</h3>
-                                          {c.answer ?
-                                             <button type="button" className='btn btn-outline-primary' onClick={(e) => sendDataQuestions(e, c.id, c.question)}>Change Answer</button>
-                                             : <button type="button" className='btn btn-outline-primary' onClick={(e) => sendDataQuestions(e, c.id, c.question)}>Answer</button>
+                                          {
+                                             c.answer ?
+                                                <button type="button" className='btn btn-outline-primary' onClick={(e) => sendDataQuestions(e, c.id, c.question)}>Change Answer</button>
+                                                : <button type="button" className='btn btn-outline-primary' onClick={(e) => sendDataQuestions(e, c.id, c.question)}>Answer</button>
                                           }
                                        </div>
                                        : ""
@@ -147,7 +145,9 @@ const Questions = ({cellId, q, get}) => {
                      </div>
                   )
                })
-                  : <h2>No hay preguntas</h2>}
+                  :
+                  <h2>No hay preguntas</h2>
+               }
             </div>
          </div>
          <Modal isOpen={answer.modal}>

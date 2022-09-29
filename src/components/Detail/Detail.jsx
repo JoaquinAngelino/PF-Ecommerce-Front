@@ -31,6 +31,7 @@ export default function Detail(props) {
     const get = () => {
         dispatch(cellDetail(id))
     }
+
     return (
         <div className="container">
             {
@@ -81,7 +82,7 @@ export default function Detail(props) {
                                 <div>
                                     <Questions key={myCell.id} cellId={myCell.id} q={myCell.questions} get={get} />
                                 </div>
-                                <Ratings />
+                                <Ratings key={myCell.id} cellId={myCell.id} r={myCell.ratings} get={get} />
                             </div>
                         </div>
                     </div>

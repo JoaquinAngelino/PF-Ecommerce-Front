@@ -26,12 +26,12 @@ export default function NavBar() {
   const usuarios = allUsers
   const emailAuth0 = email()
   const gmail = filterEmail()
-  console.log(usuarios)
-  console.log(emailAuth0)
-  console.log(gmail)
+  // console.log(usuarios)
+  // console.log(emailAuth0)
+  // console.log(gmail)
   const userRole = role()
-  console.log(userRole)
-  console.log(isAuthenticated)
+  // console.log(userRole)
+  // console.log(isAuthenticated)
 
   //  user
   localStorage.setItem('user', JSON.stringify(usuarios))
@@ -93,11 +93,8 @@ export default function NavBar() {
 
   return (
     <nav className='NavBar mb-2 p-2 sticky-top bg-dark'>
-      <Link to='/home'>
-        <img src={Image} alt="#" width={"110px"} height={"85px"} />
-      </Link>
+
       <div className="navbar-nav hstack gap-3 NavBar-Item">
-        <SearchBar />
         <Link to='/home' className="nav-link"><BsFillPhoneFill className='NavBarIcon' /></Link>
         <Link to='/favorites' className="nav-link"><BsStarFill className='NavBarIcon' /></Link>
         <Link to='/cart' className="nav-link"><BsCartFill className='NavBarIcon' /></Link>
@@ -147,6 +144,10 @@ export default function NavBar() {
             : null
         }
       </div>
+      <SearchBar />
+      <Link to='/home'>
+        <img src={Image} alt="#" width={"110px"} height={"85px"} />
+      </Link>
     </nav>
   )
 }
