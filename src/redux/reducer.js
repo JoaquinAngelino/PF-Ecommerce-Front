@@ -20,7 +20,8 @@ const initialState = {
   admin: false,
   users: [],
   user: [],
-  allUser: []
+  allUser: [],
+  allRating: []
 }
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -32,6 +33,11 @@ export default function rootReducer(state = initialState, { type, payload }) {
         products: payload,
         isLoading: false
       }
+    case GET_ALL_RATING:
+      return ({
+        ...state,
+        allRating: payload
+      })
     case CELL_DETAIL:
       return ({
         ...state,

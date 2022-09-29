@@ -60,7 +60,6 @@ const Ratings = ({ cellId, r, get }) => {
 
    return (
       <div>
-
          <form style={styles.container} onSubmit={(e) => createRating(e)}>
             <h2>Rate the product!</h2>
             <div style={styles.stars}>

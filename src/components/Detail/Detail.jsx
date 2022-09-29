@@ -1,8 +1,9 @@
 import "./CellDetail.css"
 import React from "react";
+import ReactStars from 'react-stars';
 import { Link, useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import { cellDetail, cleanStatus } from "../../redux/actions";
+import { cellDetail, cleanStatus, getAllRating } from "../../redux/actions";
 import { useEffect } from "react";
 import Questions from "../Questions/Questions.jsx";
 import { fav, cart } from '../Toast/Toast'
@@ -17,7 +18,8 @@ export default function Detail(props) {
     const dispatch = useDispatch();
     // let id=props.match.params.id;
     const { id } = useParams()
-    const myCell = useSelector((state) => state.details)
+    const myCell = useSelector((state) => state.details);
+    const allRatings = useSelector((state) => state.allRating);
 
     function handleClearStatus(e) {
         dispatch(cleanStatus())
@@ -82,7 +84,27 @@ export default function Detail(props) {
                                 <div>
                                     <Questions key={myCell.id} cellId={myCell.id} q={myCell.questions} get={get} />
                                 </div>
-                                <Ratings key={myCell.id} cellId={myCell.id} r={myCell.ratings} get={get} />
+                                <Ratings key={myCell.id} cellId={myCell.id} r={myCell.ratings} />
+                                <div>
+                                    {
+                                        allRatings?.map((e) => {
+                                            return (
+                                                <div>
+                                                    <h2>Comment and Rating:</h2>
+                                                    <p>{e.comment}</p>
+                                                    <ReactStars
+                                                        count={5}
+                                                        value={e.rating}
+                                                        // half={false}
+                                                        // onChange={ratingChanged}
+                                                        size={24}
+                                                        edit={false}
+                                                        color2={'#ffd700'} />
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -5,6 +5,7 @@ export const GET_ADMIN = "GET_ADMIN";
 export const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS'
 export const GET_ALL_BRANDS = "GET_ALL_BRANDS";
 export const GET_ALL_QUESTION = "GET_ALL_QUESTION";
+export const GET_ALL_RATING = "GET_ALL_RATING";
 export const ACTIVE_LOADING = "ACTIVE_LOADING";
 export const CELL_DETAIL = "CELL_DETAIL"
 export const POST_PRODUCT = "POST_PRODUCT";
@@ -25,7 +26,6 @@ export const DELETE_FOR_CART = "DELETE_FOR_CART"
 
 
 
-
 export const getAllProducts = () => {
    return async function (dispatch) {
       const products = await axios('/celulares/home');
@@ -35,6 +35,7 @@ export const getAllProducts = () => {
       });
    };
 };
+
 export const getFilteredProducts = (payload) => {
    return async function (dispatch) {
       const products = await axios(`/celulares/home?${payload}`);
@@ -53,7 +54,6 @@ export const activeLoading = () => {
    };
 }
 
-
 //CELL_DETAIL
 export function cellDetail(id) {
    return async function (dispatch) {
@@ -68,6 +68,7 @@ export function cellDetail(id) {
       }
    }
 }
+
 export function cleanStatus(payload) {
    return {
       type: "clean estado",
@@ -88,17 +89,6 @@ export function postUser(user) {
    }
 }
 
-// export const postRating = (rating) => {
-//    console.log(rating, 'soy lo que llega del front')
-//    return async function (dispatch) {
-//       const ratings = await axios.post(`/rating/${rating.id}`, rating);
-//       return dispatch({
-//          type: CREATE_RATING,
-//          payload: ratings.data
-//       })
-//    }
-// }
-
 //POST USER
 //GET USER
 export function allUser() {
@@ -111,6 +101,20 @@ export function allUser() {
    }
 
 }
+
+//GET RATING 
+export const getAllRating = (cellId) => {
+   console.log(cellId,'soy lo que llega del front')
+   return async function (dispatch) {
+      const rating = await axios.get(`/rating/${cellId}`)
+      console.log(rating, 'soy lo que llega del back')
+      return dispatch({
+         type: GET_ALL_RATING,
+         payload: rating.data
+      })
+   }
+}
+
 //GET USER
 export const getAllBrands = () => {
    return async function (dispatch) {
