@@ -19,6 +19,7 @@ import ShoppingCart from './pages/Cart';
 
 import PanelAdminCells from './components/PanelAdminCells/PanelAdminCells';
 import PanelAdminUsers from './components/PanelAdminUsers/PanelAdminUsers';
+import PanelAdminOrders from './components/PanelAdminOrders/PanelAdminOrders';
 import PaymentForm from './pages/PaymentForm/PaymentForm'
 import CreateProduct from './pages/CreateProduct/CreateProduct';
 import PostUser from './components/PostUser/PostUser'
@@ -59,6 +60,7 @@ function App() {
         <Route path='/panelCells' element={<PanelAdminCells/>}/>
         <Route path='/panelCells/editProduct/:id' element={<EditProduct />} />
         <Route path='/panelUsers' element={<PanelAdminUsers/>}/>
+        <Route path='/panelOrders' element={<PanelAdminOrders/>}/>
         <Route path='/adminPanel' element={<AdminPanel/>}/>
         
 

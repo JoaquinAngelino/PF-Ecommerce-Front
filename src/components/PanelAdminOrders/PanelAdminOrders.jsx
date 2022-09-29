@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllUsers, putUser, getFiltersUsersAdmin } from "../../redux/actions";
-import "./PanelAdminUsers.css";
+import { getAllOrders, putOrder } from "../../redux/actions";
+import "./PanelAdminOrders.css";
 import 'bootstrap/dist/css/bootstrap.css';
 import {
   Table,
@@ -14,11 +14,10 @@ import {
 } from "reactstrap";
 import { error, success, remove } from "../Toast/Toast";
 import { Toaster } from "react-hot-toast";
-import iconSearch from '../SearchBar/search_FILL0.png'
 
 
-const PanelAdminUsers = () => {
-  const users = useSelector(state => state.users);
+const PanelAdminOrders = () => {
+  const orders = useSelector(state => state.orders);
   const dispatch = useDispatch();
   const [modals, setModals] = useState({
     modalEditar: false,
@@ -28,13 +27,12 @@ const PanelAdminUsers = () => {
   })
   const [state, setState] = useState({
     id: "",
-    name: "",
-    email: "",
-    image: "",
-    location: "",
-    direction: "",
-    disabled: "",
-    role: ""
+    userMail: "",
+    date: "",
+    payment: "",
+    subTotal: "",
+    paid: "",
+    status:""
   });
 
   const useSortableData = (items, config = null) => {
@@ -67,7 +65,7 @@ const PanelAdminUsers = () => {
     return { items: sortedItems, requestSort };
   }
   
-  const { items, requestSort, sortConfig } = useSortableData(users);
+  const { items, requestSort, sortConfig } = useSortableData(orders);
   
   const getClassNamesFor = (name) => {
     if (!sortConfig) {
@@ -80,7 +78,7 @@ const PanelAdminUsers = () => {
  
 
   useEffect(() => {
-    dispatch(getAllUsers());
+    dispatch(getAllOrders());
 
   },[dispatch])
 
@@ -99,13 +97,12 @@ const PanelAdminUsers = () => {
     setState({
       ...state,
       id: dato.id,
-      name: dato.name,
-      email: dato.email,
-      image: dato.image,
-      location: dato.location,
-      direction: dato.direction,
-      disabled: dato.disabled,
-      role: dato.role
+      userMail: dato.userMail,
+      date: dato.date,
+      payment: dato.payment,
+      subTotal: dato.subTotal,
+      paid: dato.paid,
+      status: dato.status
     });
 
     setModals({
@@ -119,13 +116,12 @@ const PanelAdminUsers = () => {
     setState({
       ...state,
       id: dato.id,
-      name: dato.name,
-      email: dato.email,
-      image: dato.image,
-      location: dato.location,
-      direction: dato.direction,   
-      role: dato.role,
-      disabled: dato.disabled
+      userMail: dato.userMail,
+      date: dato.date,
+      payment: dato.payment,
+      subTotal: dato.subTotal,
+      paid: dato.paid,
+      status: dato.status
     });
 
     setModals({
@@ -136,14 +132,14 @@ const PanelAdminUsers = () => {
   }
 
   const editarModal2 = () => {
-    if(state.name.length > 0 && state.email.length > 0 && state.image.length > 0 && state.location.length > 0 && state.direction.length > 0 
-      && state.role.length > 0 && ((state.role === "Administrador")||(state.role === "Vendedor")||(state.role === "Cliente"))){
+    if(state.userMail.length > 0 && state.date.length > 0 && state.payment.length > 0 && state.subTotal.length > 0 && state.paid.length > 0 
+      && state.status.length > 0 ){
 
 
-          dispatch(putUser(state))
+          dispatch(putOrder(state))
 
           .then(()=>{
-            dispatch(getAllUsers());
+            dispatch(getAllOrders());
           })
 
           cerrarModal();
@@ -170,13 +166,12 @@ const PanelAdminUsers = () => {
     setState({
       ...state,
       id: dato.id,
-      name: dato.name,
-      email: dato.email,
-      image: dato.image,
-      location: dato.location,
-      direction: dato.direction,   
-      role: dato.role,
-      disabled: true
+      userMail: dato.userMail,
+      date: dato.date,
+      payment: dato.payment,
+      subTotal: dato.subTotal,
+      paid: true,
+      status: dato.status
     });
 
     setModals({
@@ -187,10 +182,10 @@ const PanelAdminUsers = () => {
   };
 
   const eliminarModal = () => {
-    dispatch(putUser(state))
+    dispatch(putOrder(state))
 
     .then(()=>{
-      dispatch(getAllUsers());
+      dispatch(getAllOrders());
     })
 
     cerrarModal();
@@ -206,13 +201,12 @@ const PanelAdminUsers = () => {
     setState({
       ...state,
       id: dato.id,
-      name: dato.name,
-      email: dato.email,
-      image: dato.image,
-      location: dato.location,
-      direction: dato.direction,   
-      role: dato.role,
-      disabled: false
+      userMail: dato.userMail,
+      date: dato.date,
+      payment: dato.payment,
+      subTotal: dato.subTotal,
+      paid: false,
+      status: dato.status
     });
 
     setModals({
@@ -222,10 +216,10 @@ const PanelAdminUsers = () => {
   }
 
   const reestablecerModal = () => {
-    dispatch(putUser(state))
+    dispatch(putOrder(state))
 
     .then(()=>{
-      dispatch(getAllUsers());
+      dispatch(getAllOrders());
     })
 
     cerrarModal();
@@ -244,63 +238,19 @@ const PanelAdminUsers = () => {
   };
 
 
-     //filtrado
-     const [searchBar, setSearchBar] = useState('')
-     const [searchFor, setSearchFor] = useState('')
- 
-     const handleSelect = (e) => {
-       setSearchFor(e.target.value)
-       if(e.target.value === "disabled"){
-         dispatch(getFiltersUsersAdmin(`disabled=true`))
-       }
-     }
-     function handleInputChange(e) {
-         e.preventDefault();
-         setSearchBar(e.target.value);
-     }
-     function handleSubmit(e) {
-         e.preventDefault();
-         if ((searchBar && searchFor) && (searchFor !== "disabled")) {
-           dispatch(getFiltersUsersAdmin(`${searchFor}=${searchBar}`))
-         }
-     }
-
     
     return (
         <div>
-            <div className='divSearchBar'>
-              <select name="variable" onChange={(e) => handleSelect(e)} className="form-control me-2" >
-                <option>Search For...</option>
-                <option value="id">ID</option>
-                <option value="name">Name</option>
-                <option value="email">Email</option>
-                <option value="role">Role</option>
-                <option value="disabled">Disabled</option>
-              </select>
-              <form className="d-flex input-group" role="search" onSubmit={(e) => { handleSubmit(e) }}>
-                <button className="input-group-text" id="inputGroup-sizing-default" type='submit'>
-                  <img src={iconSearch} alt="search Icon" width="25" height="25" />
-                </button>
-                <input className="form-control me-2" value={searchBar} name={"searchBar"} onChange={(e) => { handleInputChange(e) }} placeholder='Type your search...'/>
-              </form>
-            </div>
-            <button className="updateButton input-group-text" onClick={() => dispatch(getAllUsers())}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="updateImg bi bi-bootstrap-reboot" viewBox="0 0 16 16">
-              <path d="M1.161 8a6.84 6.84 0 1 0 6.842-6.84.58.58 0 1 1 0-1.16 8 8 0 1 1-6.556 3.412l-.663-.577a.58.58 0 0 1 .227-.997l2.52-.69a.58.58 0 0 1 .728.633l-.332 2.592a.58.58 0 0 1-.956.364l-.643-.56A6.812 6.812 0 0 0 1.16 8z"/>
-              <path d="M6.641 11.671V8.843h1.57l1.498 2.828h1.314L9.377 8.665c.897-.3 1.427-1.106 1.427-2.1 0-1.37-.943-2.246-2.456-2.246H5.5v7.352h1.141zm0-3.75V5.277h1.57c.881 0 1.416.499 1.416 1.32 0 .84-.504 1.324-1.386 1.324h-1.6z"/>
-            </svg>  All
-            </button>
-
-
           <div className="tableContainer">
             <Table bordered size="sm">
                 <thead>
                 <tr>
                     <th><button type="button" onClick={() => requestSort('id')} className={getClassNamesFor('id')}>ID</button></th>
-                    <th><button type="button" >Image</button></th>
-                    <th><button type="button" onClick={() => requestSort('name')} className={getClassNamesFor('name')}>Name</button></th>
-                    <th><button type="button" onClick={() => requestSort('email')} className={getClassNamesFor('email')}>Email</button></th>
-                    <th><button type="button" onClick={() => requestSort('role')} className={getClassNamesFor('role')}>Role</button></th>
+                    <th><button type="button" onClick={() => requestSort('date')} className={getClassNamesFor('date')}>Date</button></th>
+                    <th><button type="button" onClick={() => requestSort('userMail')} className={getClassNamesFor('userMail')}>User Email</button></th>
+                    <th><button type="button" onClick={() => requestSort('subTotal')} className={getClassNamesFor('subTotal')}>Subtotal</button></th>
+                    <th><button type="button" onClick={() => requestSort('paid')} className={getClassNamesFor('paid')}>Paid</button></th>
+                    <th><button type="button" onClick={() => requestSort('status')} className={getClassNamesFor('status')}>Status</button></th>     
                     <th><button type="button" >Actions</button></th>                  
                   </tr>
                 </thead>
@@ -308,31 +258,34 @@ const PanelAdminUsers = () => {
                 <tbody>
                 {items.length> 0 && items? items.map((dato) => (
                     <tr key={dato.id}>
-                    {dato.disabled ? 
+                    {dato.paid ? 
                     <td class="table-danger"><p className="dato">{dato.id}</p></td>
                     :<td><p className="dato">{dato.id}</p></td>}
-                    {dato.disabled ? 
-                    <td class="table-danger"><img src={dato.image} alt="img" className="datoImg"></img></td>
-                    :<td><img src={dato.image} alt="img" className="datoImg"></img></td>}
-                    {dato.disabled ? 
-                    <td class="table-danger"><p className="dato">{dato.name}</p></td>
-                    :<td><p className="dato">{dato.name}</p></td>}
-                    {dato.disabled ? 
-                    <td class="table-danger"><p className="dato">{dato.email}</p></td>
-                    :<td><p className="dato">{dato.email}</p></td>}
-                    {dato.disabled ? 
-                    <td class="table-danger"><p className="dato">{dato.role}</p></td>
-                    :<td><p className="dato">{dato.role}</p></td>}
-                    {dato.disabled ? 
+                    {dato.paid ? 
+                    <td class="table-danger">{dato.date}</td>
+                    :<td>{dato.date}</td>}
+                    {dato.paid ? 
+                    <td class="table-danger"><p className="dato">{dato.userMail}</p></td>
+                    :<td><p className="dato">{dato.userMail}</p></td>}
+                    {dato.paid ? 
+                    <td class="table-danger"><p className="dato">{dato.subTotal}</p></td>
+                    :<td><p className="dato">{dato.subTotal}</p></td>}
+                    {dato.paid ? 
+                    <td class="table-danger"><p className="dato">{dato.paid}</p></td>
+                    :<td><p className="dato">{dato.paid}</p></td>}
+                    {dato.paid ? 
+                    <td class="table-danger"><p className="dato">{dato.status}</p></td>
+                    :<td><p className="dato">{dato.status}</p></td>}
+                    {dato.paid ? 
                     <td class="table-danger">
                         <Button color="primary" onClick={() => editar(dato)}>Edit</Button>
-                        {dato.disabled ? 
+                        {dato.paid ? 
                         <Button color="success" onClick={()=> reestablecer(dato)}>Restore</Button>
                         :<Button color="danger" onClick={()=> eliminar(dato)}>Remove</Button>}
                     </td>
                     :<td>
                         <Button color="primary" onClick={() => editar(dato)}>Edit</Button>
-                        {dato.disabled ? 
+                        {dato.paid ? 
                         <Button color="success" onClick={()=> reestablecer(dato)}>Restore</Button>
                         :<Button color="danger" onClick={()=> eliminar(dato)}>Remove</Button>}
                     </td>}                    
@@ -354,35 +307,33 @@ const PanelAdminUsers = () => {
                 </FormGroup>
                 
                 <FormGroup>
-                  <label>Name:</label>
-                  <input className="form-control" name="name" type="text" onChange={handleChange} value={state.name}/>
+                  <label>Date:</label>
+                  <input className="form-control" name="date" type="text" onChange={handleChange} value={state.date}/>
                 </FormGroup>
                 
                 <FormGroup>
-                  <label>Email:</label>
-                  <input className="form-control" readOnly  type="text"  value={state.email}/>
+                  <label>User email:</label>
+                  <input className="form-control" name="userMail" type="text" onChange={handleChange} value={state.userMail}/>
                 </FormGroup>
 
                 <FormGroup>
-                  <label>Location:</label>
-                  <input className="form-control" name="location" type="text" onChange={handleChange} value={state.location}/>
+                  <label>Subtotal:</label>
+                  <input className="form-control" name="subTotal" type="text" onChange={handleChange} value={state.subTotal}/>
                 </FormGroup>
 
                 <FormGroup>
-                  <label>Direction:</label>
-                  <input className="form-control" name="direction" type="text" onChange={handleChange} value={state.direction}/>
+                  <label>Paid:</label>
+                  <input className="form-control" name="paid" type="text" onChange={handleChange} value={state.paid}/>
                 </FormGroup>
 
                 <FormGroup>
-                  <label>Role:</label>
-                  <input className="form-control" name="role" type="text" onChange={handleChange} value={state.role}/>
-                  <label>(Administrador) - (Vendedor) - (Cliente)</label>
+                  <label>Payment:</label>
+                  <input className="form-control" name="payment" type="text" onChange={handleChange} value={state.payment}/>
                 </FormGroup>
-                
-                <img src={state.image} alt="img" className="datoImg"></img>  
-                <FormGroup>       
-                  <label>Image:</label>
-                  <input className="form-control" name="image" type="text" onChange={handleChange} value={state.image}/>
+
+                <FormGroup>
+                  <label>Status:</label>
+                  <input className="form-control" name="status" type="text" onChange={handleChange} value={state.status}/>
                 </FormGroup>
             </ModalBody>
 
@@ -414,18 +365,18 @@ const PanelAdminUsers = () => {
 
             <ModalBody>
                 <FormGroup>
-                <label>Id:</label>
-                <input className="form-control" readOnly type="text"  value={state.id} />
+                  <label>Id:</label>
+                  <input className="form-control" readOnly type="text"  value={state.id} />
                 </FormGroup>
                 
                 <FormGroup>
-                  <label>Name:</label>
-                  <input className="form-control" readOnly name="name" type="text" onChange={handleChange} value={state.name}/>
+                  <label>Date:</label>
+                  <input className="form-control"  readOnly type="text" value={state.date}/>
                 </FormGroup>
                 
                 <FormGroup>
-                  <label>Email:</label>
-                  <input className="form-control" readOnly name="email" type="text" onChange={handleChange} value={state.email}/>
+                  <label>User email:</label>
+                  <input className="form-control" readOnly  type="text"  value={state.userMail}/>
                 </FormGroup>
 
                 <FormGroup>
@@ -450,19 +401,20 @@ const PanelAdminUsers = () => {
 
             <ModalBody>
                 <FormGroup>
-                <label>Id:</label>
-                <input className="form-control" readOnly type="text"  value={state.id} />
+                  <label>Id:</label>
+                  <input className="form-control" readOnly type="text"  value={state.id} />
                 </FormGroup>
                 
                 <FormGroup>
-                  <label>Name:</label>
-                  <input className="form-control" readOnly name="name" type="text" onChange={handleChange} value={state.name}/>
+                  <label>Date:</label>
+                  <input className="form-control"  readOnly type="text" value={state.date}/>
                 </FormGroup>
                 
                 <FormGroup>
-                  <label>Email:</label>
-                  <input className="form-control" readOnly name="email" type="text" onChange={handleChange} value={state.email}/>
+                  <label>User email:</label>
+                  <input className="form-control" readOnly  type="text"  value={state.userMail}/>
                 </FormGroup>
+
 
                 <FormGroup>
                   <h4>Are you sure you want to restore this item?</h4>
@@ -480,4 +432,4 @@ const PanelAdminUsers = () => {
         </div>
     )
 }
-export default PanelAdminUsers;
+export default PanelAdminOrders;
