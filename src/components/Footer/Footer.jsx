@@ -55,12 +55,12 @@ export default function Footer() {
         <Navbar.Text className='Light-Font'>© CellPhones E-Commerce, 2022. All rights reserved.</Navbar.Text>
       <Navbar.Text >
         <Link to='/about'>
-          <button>About us</button>
+          <button className="aboutButton">About us</button>
         </Link>
       </Navbar.Text >
       <Navbar.Text>
       <Link to='/contact'>
-          <button>Contact us</button>
+          <button className="contactButton">Contact us</button>
         </Link>
       </Navbar.Text>
       <Navbar.Text>

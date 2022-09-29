@@ -113,7 +113,7 @@ export default function NavBar() {
             //  gmail===undefined && !gmail[0] 
             ? (gmail.length === 0 ?
               <Link to='/postUser'>
-                <button>Complete sus datos de usuario</button>
+                <button className="buttonData">Complete sus datos de usuario</button>
               </Link>
               : null
             )
