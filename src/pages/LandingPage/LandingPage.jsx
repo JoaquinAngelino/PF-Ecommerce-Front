@@ -1,6 +1,8 @@
 
-
-import React, { useState } from 'react'; 
+import { useAuth0 } from "@auth0/auth0-react";
+import React, { useState,useEffect } from 'react'; 
+import { postUser } from '../../redux/actions';
+import { useDispatch } from 'react-redux';
 import {
   Carousel,
   CarouselItem,
@@ -40,10 +42,13 @@ const items = [
 
 
 const LandingPage = () => {
-  
+  const {user, isAuthenticated}=useAuth0()
 
+  const dispatch = useDispatch();
+  const userdata = data()
 
-  
+  // console.log(userdata)
+
 
   const [activeIndex, setActiveIndex] = useState(0)
   const [animating, setAnimating] = useState(false)
@@ -77,6 +82,29 @@ const LandingPage = () => {
       </CarouselItem>
     )
   })
+  function data(){
+    let userData={
+      name:"",
+      email:"",
+      image:""
+    }
+    if(isAuthenticated){
+      userData={
+        name:user.name,
+        email:user.email,
+        image:user.email
+      }
+    }
+    return userData
+  }
+
+  // useEffect(() => {
+  // dispatch(postUser(userdata));
+
+  //   }, [dispatch])
+
+
+
   return (
     <div className='container'>
       <Carousel

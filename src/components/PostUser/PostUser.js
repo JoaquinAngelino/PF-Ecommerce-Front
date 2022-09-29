@@ -42,22 +42,35 @@ function handleSubmit(e){
 return(
     isAuthenticated &&(
         <div>
-        <img src={input.image}/>
-        <h4>{input.name}</h4>
-        <h4>{input.email}</h4>
-        <label>location</label>
+            <div>
+            <img src={input.image}/>
+              <h4>{input.name}</h4>
+             <h4>{input.email}</h4>
+            </div>
+
+<div>
+<label>Location </label>
         <input type="text"
         value={input.location}
         name="location"
         id="location"
         onChange={handleChange}/>
-         <label>direction</label>
+</div>
+<div>
+    <br></br>
+<label>Direction</label>
         <input type="text"
         value={input.direction}
         name="direction"
         id="direction"
         onChange={handleChange}/>
-        <button onClick={handleSubmit}>Update</button>
+</div>
+<br></br>
+<div>
+<button onClick={handleSubmit}>Update</button>
+</div>
+
+      
     </div>
     )
 

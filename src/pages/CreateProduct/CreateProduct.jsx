@@ -1,8 +1,14 @@
-import React, { useState, useEffect } from 'react';
+// protecter router
+import { useAuth0 } from '@auth0/auth0-react';
+import { allUser } from "../../redux/actions";
+import NotFound from '../NotFound/NotFound';
+//protecter router
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { createPost, getAllBrands } from '../../redux/actions';
 import './CreateProduct.css';
 import { Link } from 'react-router-dom';
+
 
 const validations = (input) => {
   const errors = {};
@@ -27,6 +33,24 @@ const validations = (input) => {
 export default function CreateProduct() {
   const dispatch = useDispatch();
   const allBrandData = useSelector((state) => state.brands);
+  //protecter router
+  const {user, isAuthenticated}=useAuth0()
+  const allUsers = useSelector(state => state.allUser);
+  const usuarios = allUsers
+  const emailAuth0 = email()
+  const userDb = filterUser()
+  function filterUser() {
+    if (isAuthenticated && usuarios.length) {
+      return usuarios.filter(e => e.email === emailAuth0)
+    }
+  }
+  function email() {
+    if (isAuthenticated) {
+      return user.email
+    }
+  }
+  console.log(userDb)
+  //protecter router
 
   const [errors, setErrors] = useState({});
   const [input, setInput] = useState({
@@ -101,10 +125,13 @@ export default function CreateProduct() {
 
   useEffect(() => {
     dispatch(getAllBrands())
+    dispatch(allUser());
   }, [dispatch])
 
   return (
-    <div className="container">
+    isAuthenticated && userDb!==undefined && userDb[0] && userDb[0].role!=="Cliente"
+    ?(
+      <div className="container">
       <h1 className="title text-center p-3">Create Product</h1>
       <div className="abs-center">
         <form onSubmit={(e) => handleSubmit(e)} className="shadow-lg mb-5 row g-3 needs-validation p-3 form border-info ">
@@ -175,6 +202,10 @@ export default function CreateProduct() {
         </form>
       </div>
     </div>
+
+    )
+    :<NotFound/>
+
   )
 }
 
