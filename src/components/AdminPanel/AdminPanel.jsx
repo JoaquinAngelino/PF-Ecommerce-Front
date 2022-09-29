@@ -14,10 +14,6 @@ const AdminPanel=()=>{
             <Link to='/panelCells'><button>Celss</button></Link>
         </div>
         </div>
-
-       
-
-        
     )
 }
 export default AdminPanel;

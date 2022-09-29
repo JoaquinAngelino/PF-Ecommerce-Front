@@ -56,9 +56,9 @@ function App() {
         <Route path='*' element={<NotFound />} />
 
         <Route path="/detail/:id" element={<Detail/>}/>
-        <Route path='/edit/:id' element={<EditProduct />} />
         <Route path='/Profile' element={<Profile/>}/>
         <Route path='/panelCells' element={<PanelAdminCells/>}/>
+        <Route path='/panelCells/editProduct/:id' element={<EditProduct />} />
         <Route path='/panelUsers' element={<PanelAdminUsers/>}/>
         <Route path='/panelOrders' element={<PanelAdminOrders/>}/>
         <Route path='/adminPanel' element={<AdminPanel/>}/>
