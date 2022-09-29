@@ -7,13 +7,14 @@ import { cellDetail, getAllBrands, updateProduct } from "../../redux/actions";
 import * as yup from "yup";
 import "./EditProduct.css"
 import CustomTextArea from "../../components/CustomInput/CustomTextArea";
+import { useParams } from "react-router-dom"
 
 export default function EditProduct(){
     const dispatch=useDispatch();
     const cell=useSelector((state)=>state.details);
     console.log(cell);
     const allBrandData = useSelector((state) => state.brands);
-    const id=2;
+    const { id } = useParams()
     const products={
     }
     useEffect(() => {

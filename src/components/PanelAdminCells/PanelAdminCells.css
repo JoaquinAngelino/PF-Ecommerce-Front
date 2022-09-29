@@ -18,6 +18,7 @@ td{
 .tableContainer{
     width: 50%;
     margin-left: 25%;
+    margin-top: 1em;
 }
 
 Button{
@@ -39,3 +40,40 @@ Button{
     padding: 0.5em;
     margin-bottom: 1px;
   }
+
+  .divSearchBar{
+    width: 50%;
+    margin-left: 25%;
+    flex-grow: 2;
+    display: flex;
+    justify-content: center;
+}
+
+.form-control{
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.updateImg {
+  margin-right: 4px;
+  margin-left: 5px;
+}
+
+.updateButton{
+  margin-left: 25%;
+  margin-top: 1em;
+  font-weight: bold;
+}
+
+.input-group-text:hover{
+  border: 1px solid #000;
+}
+
+th{
+  width: 2em;
+  height: 3.5em;
+}
+
+th button:hover{
+  border: 1px solid #000;
+}

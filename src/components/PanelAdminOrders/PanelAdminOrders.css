@@ -24,16 +24,3 @@ td{
 Button{
     width: 5em;
 }
-
-.divSearchBar{
-    width: 50%;
-    margin-left: 25%;
-    flex-grow: 2;
-    display: flex;
-    justify-content: center;
-}
-
-.form-control{
-    cursor: pointer;
-    font-weight: bold;
-}

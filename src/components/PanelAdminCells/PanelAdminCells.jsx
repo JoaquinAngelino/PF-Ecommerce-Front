@@ -15,6 +15,7 @@ import {
 import { success, remove, error } from "../Toast/Toast";
 import { Toaster } from "react-hot-toast";
 import iconSearch from '../SearchBar/search_FILL0.png'
+import { Link } from 'react-router-dom'
 
 
 
@@ -97,7 +98,7 @@ const PanelAdminCells = () => {
     });
   }
 
-
+/*
   const editar = (dato) => {
     
     setState({
@@ -152,20 +153,8 @@ const PanelAdminCells = () => {
       0   && state.description.length > 0 && state.spec.length > 0 && state.price > 0 && state.capacity > 0 &&
       state.memoryRAM > 0 && state.stock > 0){
 
-        let validationCell = products.filter((u) => {
-          return (u.model.toUpperCase() === state.model.toUpperCase() && u.line.toUpperCase() === state.line.toUpperCase() && 
-          u.brand.toUpperCase() === state.brand.toUpperCase())
-        })
 
-        if(validationCell.length>0){
-          setModals({
-            ...modals,
-            modalEditarSeguro: false
-          });
-  
-          error("Error. That cell already exists")
 
-        }else{
 
           dispatch(putCell(state)) 
 
@@ -176,7 +165,6 @@ const PanelAdminCells = () => {
           cerrarModal();
 
           success("Cell edited.")
-        }
 
     }else{
         setModals({
@@ -188,7 +176,7 @@ const PanelAdminCells = () => {
 
     }
   }
-
+*/
 
 
 
@@ -307,8 +295,8 @@ const PanelAdminCells = () => {
 
     return (
         <div>
-            <div className='containerSearchBar'>
-              <select name="variable" onChange={(e) => handleSelect(e)} className="form-control" >
+            <div className='divSearchBar'>
+              <select name="variable" onChange={(e) => handleSelect(e)} className="form-control me-2" >
                 <option>Search For...</option>
                 <option value="id">ID</option>
                 <option value="model">Model</option>
@@ -316,35 +304,30 @@ const PanelAdminCells = () => {
                 <option value="brand">Brand</option>
                 <option value="disabled">Disabled</option>
               </select>
-            <form className="d-flex input-group" role="search" onSubmit={(e) => { handleSubmit(e) }}>
-                <button
-                    className="input-group-text"
-                    id="inputGroup-sizing-default"
-                    type='submit'
-                >
+              <form className="d-flex input-group" role="search" onSubmit={(e) => { handleSubmit(e) }}>
+                <button className="input-group-text" id="inputGroup-sizing-default" type='submit'>
                     <img src={iconSearch} alt="search Icon" width="25" height="25" />
                 </button>
-                <input
-                    className="form-control me-2"
-                    value={searchBar}
-                    name={"searchBar"}
-                    onChange={(e) => { handleInputChange(e) }}
-                    placeholder='Type your search...'
-                />
-            </form>
+                <input className="form-control me-2" value={searchBar} name={"searchBar"} onChange={(e) => { handleInputChange(e) }} placeholder='Type your search...'/>
+              </form>
           </div>
-          <button onClick={() => dispatch(getAllProductsAdmin())}>All</button>
+          <button className="updateButton input-group-text" onClick={() => dispatch(getAllProductsAdmin())}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="updateImg bi bi-bootstrap-reboot" viewBox="0 0 16 16">
+              <path d="M1.161 8a6.84 6.84 0 1 0 6.842-6.84.58.58 0 1 1 0-1.16 8 8 0 1 1-6.556 3.412l-.663-.577a.58.58 0 0 1 .227-.997l2.52-.69a.58.58 0 0 1 .728.633l-.332 2.592a.58.58 0 0 1-.956.364l-.643-.56A6.812 6.812 0 0 0 1.16 8z"/>
+              <path d="M6.641 11.671V8.843h1.57l1.498 2.828h1.314L9.377 8.665c.897-.3 1.427-1.106 1.427-2.1 0-1.37-.943-2.246-2.456-2.246H5.5v7.352h1.141zm0-3.75V5.277h1.57c.881 0 1.416.499 1.416 1.32 0 .84-.504 1.324-1.386 1.324h-1.6z"/>
+            </svg>  All
+          </button>
           <div className="tableContainer">
             <Table bordered size="sm" >
                 <thead>
                 <tr>
-                    <th><button type="button" onClick={() => requestSort('id')} className={getClassNamesFor('id')}>ID</button></th>
-                    <th><button type="button" >Image</button></th>
-                    <th><button type="button" onClick={() => requestSort('model')} className={getClassNamesFor('model')}>Model</button></th>
-                    <th><button type="button" onClick={() => requestSort('line')} className={getClassNamesFor('line')}>Line</button></th>
-                    <th><button type="button" onClick={() => requestSort('stock')} className={getClassNamesFor('stock')}>Stock</button></th> 
-                    <th><button type="button" onClick={() => requestSort('brand')} className={getClassNamesFor('brand')}>Brand</button></th>
-                    <th><button type="button" >Actions</button></th>                   
+                    <th><button classname="thButton" type="button" onClick={() => requestSort('id')} className={getClassNamesFor('id')}>ID</button></th>
+                    <th><button classname="thButton" type="button" >Image</button></th>
+                    <th><button classname="thButton" type="button" onClick={() => requestSort('model')} className={getClassNamesFor('model')}>Model</button></th>
+                    <th><button classname="thButton" type="button" onClick={() => requestSort('line')} className={getClassNamesFor('line')}>Line</button></th>
+                    <th><button classname="thButton" type="button" onClick={() => requestSort('stock')} className={getClassNamesFor('stock')}>Stock</button></th> 
+                    <th><button classname="thButton" type="button" onClick={() => requestSort('brand')} className={getClassNamesFor('brand')}>Brand</button></th>
+                    <th><button classname="thButton" type="button" >Actions</button></th>                   
                   </tr>
                 </thead>
 
@@ -371,13 +354,13 @@ const PanelAdminCells = () => {
                     :<td><p className="dato">{dato.brand}</p></td>}
                     {dato.disabled ? 
                     <td class="table-danger">
-                        <Button color="primary" onClick={() => editar(dato)}>Edit</Button>
+                        <Link to={"/edit/" + dato.id}><Button color="primary" /*onClick={() => editar(dato)}*/>Edit</Button></Link>
                         {dato.disabled ? 
                         <Button color="success" onClick={()=> reestablecer(dato)}>Restore</Button>
                         :<Button color="danger" onClick={()=> eliminar(dato)}>Remove</Button>}
                     </td>
                     :<td>
-                        <Button color="primary" onClick={() => editar(dato)}>Edit</Button>
+                        <Link to={"/edit/" + dato.id}><Button color="primary" /*onClick={() => editar(dato)}*/>Edit</Button></Link>
                         {dato.disabled ? 
                         <Button color="success" onClick={()=> reestablecer(dato)}>Restore</Button>
                         :<Button color="danger" onClick={()=> eliminar(dato)}>Remove</Button>}
@@ -388,84 +371,6 @@ const PanelAdminCells = () => {
             </Table>
           </div>
 
-            <Modal isOpen={modals.modalEditar}>
-            <ModalHeader>
-              <div><h3>Edit Form</h3></div>
-            </ModalHeader>
-
-            <ModalBody>
-                <FormGroup>
-                <label>Id:</label>
-                <input className="form-control" readOnly type="text"  value={state.id} />
-                </FormGroup>
-                
-                <FormGroup>
-                  <label>Model:</label>
-                  <input className="form-control" name="model" type="text" onChange={handleChange} value={state.model}/>
-                </FormGroup>
-                
-                <FormGroup>
-                  <label>Line:</label>
-                  <input className="form-control" name="line" type="text" onChange={handleChange} value={state.line}/>
-                </FormGroup>
-
-                <FormGroup>
-                  <label>Brand:</label>
-                  <input className="form-control" name="brand" type="text" onChange={handleChange} value={state.brand}/>
-                </FormGroup>
-
-                <FormGroup>
-                  <label>Stock:</label>
-                  <input className="form-control" name="stock" type="number" onChange={handleChange} value={state.stock}/>
-                </FormGroup>
-
-                <FormGroup>
-                  <label>Price:</label>
-                  <input className="form-control" name="price" type="number" onChange={handleChange} value={state.price}/>
-                </FormGroup>
-
-                <FormGroup>
-                  <label>Capacity:</label>
-                  <input className="form-control" name="capacity" type="number" onChange={handleChange} value={state.capacity}/>
-                </FormGroup>
-
-                <FormGroup>
-                  <label>Memory RAM:</label>
-                  <input className="form-control" name="memoryRAM" type="number" onChange={handleChange} value={state.memoryRAM}/>
-                </FormGroup>
-
-                <FormGroup>
-                  <label>Image:</label>
-                  <input className="form-control" name="image" type="text" onChange={handleChange} value={state.image}/>
-                </FormGroup>
-
-                <FormGroup>
-                  <label>Description:</label>
-                  <input className="form-control" name="description" type="text" onChange={handleChange} value={state.description}/>
-                </FormGroup>
-
-                <FormGroup>
-                  <label>Spec:</label>
-                  <input className="form-control" name="spec" type="text" onChange={handleChange} value={state.spec}/>
-                </FormGroup>
-            </ModalBody>
-
-            
-                {!modals.modalEditarSeguro ?
-                <ModalFooter>
-                 <Button color="primary" onClick={() => editarModal1(state)}>Edit</Button>
-                 <Button color="danger" onClick={() => cerrarModal()}>Cancel</Button>
-                </ModalFooter> 
-                :
-                <ModalFooter>
-                  <label>Are you sure?</label>
-                  <Button color="primary" onClick={() => editarModal2()}>Yes</Button>
-                  <Button color="danger" onClick={() => cerrarModal()}>Cancel</Button>
-                </ModalFooter>     
-                }
-
-            
-            </Modal>
 
 
 
@@ -545,3 +450,84 @@ const PanelAdminCells = () => {
     )
 }
 export default PanelAdminCells;
+
+/*
+
+            <Modal isOpen={modals.modalEditar}>
+            <ModalHeader>
+              <div><h3>Edit Form</h3></div>
+            </ModalHeader>
+
+            <ModalBody>
+                <FormGroup>
+                <label>Id:</label>
+                <input className="form-control" readOnly type="text"  value={state.id} />
+                </FormGroup>
+                
+                <FormGroup>
+                  <label>Model:</label>
+                  <input className="form-control" name="model" type="text" onChange={handleChange} value={state.model}/>
+                </FormGroup>
+                
+                <FormGroup>
+                  <label>Line:</label>
+                  <input className="form-control" name="line" type="text" onChange={handleChange} value={state.line}/>
+                </FormGroup>
+
+                <FormGroup>
+                  <label>Brand:</label>
+                  <input className="form-control" name="brand" type="text" onChange={handleChange} value={state.brand}/>
+                </FormGroup>
+
+                <FormGroup>
+                  <label>Stock:</label>
+                  <input className="form-control" name="stock" type="number" onChange={handleChange} value={state.stock}/>
+                </FormGroup>
+
+                <FormGroup>
+                  <label>Price:</label>
+                  <input className="form-control" name="price" type="number" onChange={handleChange} value={state.price}/>
+                </FormGroup>
+
+                <FormGroup>
+                  <label>Capacity:</label>
+                  <input className="form-control" name="capacity" type="number" onChange={handleChange} value={state.capacity}/>
+                </FormGroup>
+
+                <FormGroup>
+                  <label>Memory RAM:</label>
+                  <input className="form-control" name="memoryRAM" type="number" onChange={handleChange} value={state.memoryRAM}/>
+                </FormGroup>
+
+                <FormGroup>
+                  <label>Image:</label>
+                  <input className="form-control" name="image" type="text" onChange={handleChange} value={state.image}/>
+                </FormGroup>
+
+                <FormGroup>
+                  <label>Description:</label>
+                  <input className="form-control" name="description" type="text" onChange={handleChange} value={state.description}/>
+                </FormGroup>
+
+                <FormGroup>
+                  <label>Spec:</label>
+                  <input className="form-control" name="spec" type="text" onChange={handleChange} value={state.spec}/>
+                </FormGroup>
+            </ModalBody>
+
+            
+                {!modals.modalEditarSeguro ?
+                <ModalFooter>
+                 <Button color="primary" onClick={() => editarModal1(state)}>Edit</Button>
+                 <Button color="danger" onClick={() => cerrarModal()}>Cancel</Button>
+                </ModalFooter> 
+                :
+                <ModalFooter>
+                  <label>Are you sure?</label>
+                  <Button color="primary" onClick={() => editarModal2()}>Yes</Button>
+                  <Button color="danger" onClick={() => cerrarModal()}>Cancel</Button>
+                </ModalFooter>     
+                }
+
+            
+            </Modal>*/
