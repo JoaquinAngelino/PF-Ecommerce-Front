@@ -27,7 +27,6 @@ export default function DbCart({ user }) {
         setPrice()
     }, [dispatch])
 
-
     const updateQuantity = (id, quantity) => { 
         let found = cart.find(e => e.id === id)
         found.quantity = quantity
@@ -47,7 +46,7 @@ export default function DbCart({ user }) {
     if (isLoading || !cart) { return (<Loading />) }
     if (!cart.length) { return (<NothingFound />) }    
     console.log("before render");
-
+    
     return (
         <div className="shoppingCart">
             <h2>Your Shopping Cart: {totalPrice}</h2>

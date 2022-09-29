@@ -9,11 +9,10 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { remove} from '../../components/Toast/Toast';
 
-export default function ShopCard({ id, line, model, stock, capacity, memoryRAM, price, brand, image, deleteItem, updateQuantity, quantity }) {
+export default function ShopCard({ id, model, stock, price, image, deleteItem, updateQuantity, quantity }) {
   const [qua, setQua] = useState(quantity);
 
   const plus = () => {
-    console.log("LOCAL update qua");
     if (qua < stock){
       const cartList = JSON.parse(localStorage.getItem('cartList'))
       let found = cartList.find(e => e.id === id)
@@ -24,7 +23,6 @@ export default function ShopCard({ id, line, model, stock, capacity, memoryRAM, 
     }
   }
   const minus = () => {
-    console.log("LOCAL update qua");
     if (qua > 1) {
       const cartList = JSON.parse(localStorage.getItem('cartList'))
       let found = cartList.find(e => e.id === id)

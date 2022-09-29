@@ -30,7 +30,7 @@ export const addToCart = async (id, brand, line, model, price, stock, capacity, 
   axios.post("/cart", { phoneId: id, userId: userId  })
 }
 
-export const getPrice = async () => {
+export const getPrice = () => {
   let total = 0
   if (localStorage.getItem('cartList')) {
     JSON.parse(localStorage.getItem('cartList')).forEach(e => {

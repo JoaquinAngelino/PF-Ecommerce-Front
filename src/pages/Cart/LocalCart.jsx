@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ShopCard from "./ShopCard";
 import './Card.css'
 import { getPrice } from "../../components/Card/favAndCart";
+import NothingFound from "../../components/NothingFound/NothingFound";
 
 export default function LocalCart() {
 
@@ -23,31 +24,25 @@ export default function LocalCart() {
         setTotalPrice(getPrice())
     }
 
-    let cartItemMap = null
-    if (cartItem) {
-        cartItemMap = cartItem.map((e) => <ShopCard
-            key={e.id}
-            id={e.id}
-            line={e.line}
-            model={e.model}
-            stock={e.stock}
-            capacity={e.capacity}
-            memoryRAM={e.memoryRAM}
-            price={e.price}
-            brand={e.brand}
-            image={e.image}
-            deleteItem={deleteItem}
-            updateQuantity={updateQuantity}
-            quantity={e.quantity}
-        />
-        )
-    }
+    if(!cartItem){return <NothingFound/>}
+    console.log("before render", totalPrice);
 
     return (
         <div className="shoppingCart">
             <h2>Your Shopping Cart: {totalPrice}</h2>
             <div className="principalSC">
-                {cartItemMap}
+                {cartItem.map(e => <ShopCard
+                    key={e.id}
+                    id={e.id}
+                    model={e.model}
+                    stock={e.stock}
+                    price={e.price}
+                    image={e.image}
+                    deleteItem={deleteItem}
+                    updateQuantity={updateQuantity}
+                    quantity={e.quantity}
+                />
+                )}
             </div>
             <hr />
             <p>Please Log in to continue shopping</p>
