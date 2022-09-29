@@ -88,12 +88,16 @@ export function postUser(user) {
    }
 }
 
-export const postRating = (rating) => {
-   // console.log(rating, 'soy lo que llega del front')
-   return async function (dispatch) {
-      const ratings = await axios.post(`/rating/${rating.id}`, rating);
-   }
-}
+// export const postRating = (rating) => {
+//    console.log(rating, 'soy lo que llega del front')
+//    return async function (dispatch) {
+//       const ratings = await axios.post(`/rating/${rating.id}`, rating);
+//       return dispatch({
+//          type: CREATE_RATING,
+//          payload: ratings.data
+//       })
+//    }
+// }
 
 //POST USER
 //GET USER

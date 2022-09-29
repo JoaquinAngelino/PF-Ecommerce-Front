@@ -1,28 +1,28 @@
+import axios from "axios";
+import ReactStars from 'react-stars';
 import { useEffect, useState } from "react";
-import { FaStar } from "react-icons/fa";
 import { useAuth0, user } from '@auth0/auth0-react';
 import { useDispatch } from "react-redux";
-import { postRating, getRole } from "../../redux/actions";
-
-const colors = {
-   orange: "#FFBA5A",
-   grey: "#a9a9a9"
-};
+import { getRole } from "../../redux/actions";
 
 const Ratings = ({ cellId, r, get }) => {
 
    const dispatch = useDispatch();
    const { user, isAuthenticated } = useAuth0();
 
-   const [currentValue, setCurrentValue] = useState(0);
-   const [hoverValue, setHoverValue] = useState(undefined);
-   const stars = Array(5).fill(0);
-
    const [rating, setRating] = useState({
       id: cellId,
-      rating: "",
-      comment: ""
+      rating: 0,
+      comment: "",
+      emailUser: ""
    });
+
+   const ratingChanged = (newRating) => {
+      setRating({
+         ...rating,
+         rating: newRating
+      });
+   }
 
    const handleChange = (e) => {
       e.preventDefault()
@@ -33,31 +33,19 @@ const Ratings = ({ cellId, r, get }) => {
       });
    }
 
-   const createRating = (e) => {
+   const createRating = async (e) => {
       e.preventDefault()
-      if (rating.rating.length > 0) {
-         dispatch(postRating(rating));
+      if (Object.keys(rating).length > 0) {
+         console.log(rating, 'soy el dato')
+         await axios.post(`/rating/${cellId}`, rating);
          window.alert("rating sent!");
          setRating({
-            rating: "",
+            rating: 0,
             comment: "",
-            emailUser: "",
-            id: cellId
+            emailUser: ""
          })
-         // get();
+         get();
       }
-   }
-
-   const handleClick = value => {
-      setCurrentValue(value)
-   }
-
-   const handleMouseOver = newHoverValue => {
-      setHoverValue(newHoverValue)
-   }
-
-   const handleMouseLeave = () => {
-      setHoverValue(undefined)
    }
 
    useEffect(() => {
@@ -72,30 +60,23 @@ const Ratings = ({ cellId, r, get }) => {
 
    return (
       <div>
+
          <form style={styles.container} onSubmit={(e) => createRating(e)}>
             <h2>Rate the product!</h2>
-            {/* <div style={styles.stars}>
-               {stars.map((_, index) => {
-                  return (
-                     <FaStar
-                        key={index}
-                        size={24}
-                        onClick={() => handleClick(index + 1)}
-                        onMouseOver={() => handleMouseOver(index + 1)}
-                        onMouseLeave={handleMouseLeave}
-                        color={(hoverValue || currentValue) > index ? colors.orange : colors.grey}
-                        style={{
-                           marginRight: 10,
-                           cursor: "pointer"
-                        }}
-                     />
-                  )
-               })}
-            </div> */}
+            <div style={styles.stars}>
+               <ReactStars
+                  count={5}
+                  value={rating.rating}
+                  half={false}
+                  onChange={ratingChanged}
+                  size={24}
+                  edit={true}
+                  color2={'#ffd700'} />
+            </div>
             <textarea
                type="text"
-               name="rating"
-               value={rating.rating}
+               name="comment"
+               value={rating.comment}
                onChange={(e) => handleChange(e)}
                placeholder="What's your experience?"
                style={styles.textarea}

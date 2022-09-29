@@ -67,13 +67,6 @@ export default function rootReducer(state = initialState, { type, payload }) {
         ...state,
         brands: payload
       }
-
-    // case GET_ALL_RATING:
-    //   return {
-    //     ...state,
-    //     rating: payload
-    //   }
-
     case GET_ALL_USERS:
       return {
         ...state,

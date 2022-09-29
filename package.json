@@ -28,6 +28,7 @@
     "react-router-dom": "^6.4.1",
     "react-scripts": "^4.0.1",
     "react-select": "^5.4.0",
+    "react-stars": "^2.2.5",
     "reactstrap": "^9.1.4",
     "redux": "^4.2.0",
     "redux-devtools-extension": "^2.13.9",
