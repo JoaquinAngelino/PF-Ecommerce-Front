@@ -5,6 +5,24 @@ const colors = {
    orange: "#FFBA5A",
    grey: "#a9a9a9"
 };
+// function HandleSubmit(){
+//    //se condiciona el usuario si está o no logueado
+   
+//    if(user!==null){	
+//    var x ={
+//    rating:rating,
+//    userId: filter[0].id,
+//    comentario: comentario,
+//    productId:id
+//    }
+//    dispatch(postRating(x))
+// dispatch(postComentario(x))
+// }else{ alert("Debe ser usuario registrado")}
+
+// function HandleSet(ratingScore){
+// if(user!== null){
+// setRating(RatingScore)
+// }else{ alert("Debe ser usuario registrado")}
 
 const Ratings = () => {
    const [currentValue, setCurrentValue] = useState(0);
@@ -15,6 +33,10 @@ const Ratings = () => {
       setCurrentValue(value)
    }
 
+  
+      
+    
+
    const handleMouseOver = newHoverValue => {
       setHoverValue(newHoverValue)
    };
@@ -22,6 +44,7 @@ const Ratings = () => {
    const handleMouseLeave = () => {
       setHoverValue(undefined)
    }
+
 
    return (
       <div style={styles.container}>
@@ -88,5 +111,4 @@ const styles = {
 
 
 export default Ratings;
-
 
