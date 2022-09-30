@@ -34,9 +34,8 @@ export default function NavBar() {
   // console.log(userdata)
   // console.log(isAuthenticated)
 
-  //  console.log("a"+gmail)
-  localStorage.setItem('user', JSON.stringify(emailAuth0))
-  // console.log(localStorage)
+  //  user
+  localStorage.setItem('user', JSON.stringify(usuarios))
 
   useEffect(() => {
     dispatch(allUser());
@@ -90,7 +89,9 @@ navigate('/panelCells')
 const userIr=()=>{
 navigate('/Profile')
 }
-
+//  function hola(){
+//   navigate('/postUser')
+//  }
 
 
   return (
@@ -146,6 +147,22 @@ navigate('/Profile')
               
               : null
             }
+            <br></br>
+             {
+                isAuthenticated && gmail!==undefined && gmail[0] && gmail[0].role==="Administrador"
+              ? <Dropdown isOpen={dropdown1} toggle={abrirCerrarDropdown1} size='sm'>
+              <DropdownToggle caret>
+              Admin Panel
+              </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem onClick={userlist}>User list</DropdownItem>
+                <DropdownItem onClick={celllist}>Cell list</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+               : null
+              }
+
+              {/* <button onClick={hola}>user</button> */}
 
 
             
@@ -160,32 +177,7 @@ navigate('/Profile')
         </div>
 
         <SearchBar/>
-        {
-                isAuthenticated && gmail!==undefined && gmail[0] && gmail[0].role==="Administrador"
-              //  ? <Link className="nav-link text-light fw-semibold `${}`" to="/adminPanel">Admin Panel</Link> 
-              // ?<select onChange={handleSelect}  id='select'>
-                
-              //   <option value='home'>
-              //     Admin Panel
-              //   </option>
-              //   <option value='userlist'>
-              //   User List
-              //   </option>
-              //   <option value='celllist'>
-              //   Cell Phone List
-              //   </option>
-              // </select>
-              ? <Dropdown isOpen={dropdown1} toggle={abrirCerrarDropdown1} size='sm'>
-              <DropdownToggle caret>
-              Admin Panel
-              </DropdownToggle>
-              <DropdownMenu>
-                <DropdownItem onClick={userlist}>User list</DropdownItem>
-                <DropdownItem onClick={celllist}>Cell list</DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-               : null
-              }
+       
         
         
      

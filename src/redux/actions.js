@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const RUTA_ID = "http://localhost:3001/celulares/home/"
+export const RUTA_ID = "/celulares/home/"
 export const GET_ADMIN = "GET_ADMIN";
 export const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS'
 export const GET_ALL_BRANDS = "GET_ALL_BRANDS";
@@ -13,11 +13,12 @@ export const PUT_QUESTION = "PUT_QUESTION";
 export const PUT_CELL = "PUT_CELL";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const PUT_USERS = "PUT_USERS";
-export const RUTA_USER="http://localhost:3001/users"
+export const RUTA_USER="/users"
 export const POST_USER="POST USER"
 export const ALL_USER="ALL USER"
-export const RUTA_USER_ID="http://localhost:3001/users/"
+export const RUTA_USER_ID="/users/id/"
 export const USER_ID="USER ID"
+export const DELETE_FOR_CART="DELETE_FOR_CART"
 
 
 
@@ -26,7 +27,7 @@ export const USER_ID="USER ID"
 
 export const getAllProducts = () => {
    return async function (dispatch) {
-      const products = await axios('http://localhost:3001/celulares/home');
+      const products = await axios('/celulares/home');
       return dispatch({
          type: GET_ALL_PRODUCTS,
          payload: products.data
@@ -35,7 +36,7 @@ export const getAllProducts = () => {
 };
 export const getFilteredProducts = (payload) => {
    return async function (dispatch) {
-      const products = await axios(`http://localhost:3001/celulares/home?${payload}`);
+      const products = await axios(`/celulares/home?${payload}`);
       return dispatch({
          type: GET_ALL_PRODUCTS,
          payload: products.data
@@ -100,7 +101,7 @@ export function allUser(){
 //GET USER
 export const getAllBrands = () => {
    return async function (dispatch) {
-      const products = await axios('http://localhost:3001/marcas');
+      const products = await axios('/marcas');
 
       return dispatch({
          type: GET_ALL_BRANDS,
@@ -112,7 +113,7 @@ export const getAllBrands = () => {
 export function createPost(product) {
    return async function (dispatch) {
       return await axios
-         .post("http://localhost:3001/celulares", product)
+         .post("/celulares", product)
          .then((response) => {
             dispatch({
                type: POST_PRODUCT,
@@ -140,7 +141,7 @@ export function userId(id){
 export function createQuestion(question) {
    return async function (dispatch) {
       return await axios
-         .post(`http://localhost:3001/questions/${question.id}`, question)
+         .post(`/questions/${question.id}`, question)
          .then((response) => {
             dispatch({
                type: POST_QUESTION,
@@ -153,7 +154,7 @@ export function createQuestion(question) {
 export function getRole(email) {
    return async function (dispatch) {
       try {
-         var admin = await axios.get(`http://localhost:3001/questions/role/${email}`)
+         var admin = await axios.get(`/questions/role/${email}`)
          return dispatch({
             type: GET_ADMIN,
             payload: admin.data
@@ -167,7 +168,7 @@ export function getRole(email) {
 export function createAnswer(a) {
    return async function (dispatch) {
       return await axios
-         .put(`http://localhost:3001/questions/${a.id}`, a)
+         .put(`/questions/${a.id}`, a)
          .then((response) => {
             dispatch({
                type: PUT_QUESTION,
@@ -180,7 +181,7 @@ export function createAnswer(a) {
 export function putCell(a) {
    return async function (dispatch) {
       return await axios
-         .put(`http://localhost:3001/celulares/${a.id}`, a)
+         .put(`/celulares/${a.id}`, a)
          .then((response) => {
             dispatch({
                type: PUT_CELL,
@@ -192,7 +193,7 @@ export function putCell(a) {
 
 export const getAllUsers = () => {
    return async function (dispatch) {
-      const users = await axios('http://localhost:3001/users');
+      const users = await axios('/users/admin');
       return dispatch({
          type: GET_ALL_USERS,
          payload: users.data
@@ -203,7 +204,7 @@ export const getAllUsers = () => {
 export function putUser(a) {
    return async function (dispatch) {
       return await axios
-         .put(`http://localhost:3001/users/${a.id}`, a)
+         .put(`/users/${a.id}`, a)
          .then((response) => {
             dispatch({
                type: PUT_USERS,
@@ -215,14 +216,14 @@ export function putUser(a) {
 
 export function updateProduct(id,payload){
    return  function(){
-       axios.put(`http://localhost:3001/celulares/${id}`,payload)
+       axios.put(`/celulares/${id}`,payload)
    }
 }
 
 
-export const getAllProductsAdmin = () => {
+export const getFiltersProductsAdmin = (filters) => {
    return async function (dispatch) {
-      const p = await axios('http://localhost:3001/celulares/panel');
+      const p = await axios(`/celulares/panel/?${filters}`);
       return dispatch({
          type: GET_ALL_PRODUCTS,
          payload: p.data
@@ -230,3 +231,19 @@ export const getAllProductsAdmin = () => {
    };
 };
 
+export function deleteItemFromCart(id) {
+   return {
+       type: DELETE_FOR_CART,
+       payload: id
+   }
+}
+
+export const getAllProductsAdmin = () => {
+   return async function (dispatch) {
+      const p = await axios(`/celulares/panel`);
+      return dispatch({
+         type: GET_ALL_PRODUCTS,
+         payload: p.data
+      });
+   };
+};

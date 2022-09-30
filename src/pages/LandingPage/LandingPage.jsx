@@ -1,8 +1,8 @@
 
 import { useAuth0 } from "@auth0/auth0-react";
 import React, { useState,useEffect } from 'react'; 
-import { postUser } from '../../redux/actions';
-import { useDispatch } from 'react-redux';
+import { getAllUsers } from "../../redux/actions";
+import { useDispatch,useSelector } from 'react-redux';
 import {
   Carousel,
   CarouselItem,
@@ -42,12 +42,16 @@ const items = [
 
 
 const LandingPage = () => {
-  const {user, isAuthenticated}=useAuth0()
-
+  const {user, isAuthenticated, logout}=useAuth0()
+  const allUsers = useSelector(state => state.users);
   const dispatch = useDispatch();
-  const userdata = data()
+  const todosUser = allUsers
+  const emailAuth0=email()
+  const userDb=filterEmail()
 
-  // console.log(userdata)
+console.log(todosUser)
+console.log(userDb)
+console.log(salir())
 
 
   const [activeIndex, setActiveIndex] = useState(0)
@@ -82,30 +86,38 @@ const LandingPage = () => {
       </CarouselItem>
     )
   })
-  function data(){
-    let userData={
-      name:"",
-      email:"",
-      image:""
-    }
-    if(isAuthenticated){
-      userData={
-        name:user.name,
-        email:user.email,
-        image:user.email
-      }
-    }
-    return userData
+
+  useEffect(()=>{
+    dispatch(getAllUsers())
+},[])
+
+// useEffect(()=>{
+//   if(userDb!==undefined && userDb[0].disabled===true){
+//     dispatch(logout())
+//   }
+  
+// },[])
+function salir(){
+  if(userDb!==undefined && userDb[0]&& userDb[0].disabled===true){
+// alert ("tu cuenta fue suspendida")
+    return logout()
   }
+}
 
-  // useEffect(() => {
-  // dispatch(postUser(userdata));
+ 
+function email() {
+  if (isAuthenticated) {
+    return user.email
+  }
+}
+function filterEmail() {
+  if (isAuthenticated && todosUser.length) {
+    return todosUser.filter(e => e.email === emailAuth0)
+  }
+}
+salir()
 
-  //   }, [dispatch])
-
-
-
-  return (
+  return ( 
     <div className='container'>
       <Carousel
         activeIndex={activeIndex}

@@ -3,9 +3,10 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { Link } from 'react-router-dom'
 import './Card.css'
-import { addToFav, addToCart } from './favAndCart'
+import {fav, cart} from '../Toast/Toast'
 
 export default function ProductCard({id, brand, line, model, price, stock, capacity, image, memoryRAM}) {
+
   
   return (
     <Card className="card" >
@@ -25,8 +26,8 @@ export default function ProductCard({id, brand, line, model, price, stock, capac
         </ListGroup>
       </Card.Body>
       <div className='containerButton'>
-        <BsStarFill className='CardIcon' onClick={() => addToFav(id, brand, line, model, price, stock, capacity, image, memoryRAM)} />
-        <BsCartFill className='CardIcon' onClick={() => addToCart(id, brand, line, model, price, stock, capacity, image, memoryRAM)} />
+        <BsStarFill className='CardIcon' onClick={() => fav(id, brand, line, model, price, stock, capacity, image, memoryRAM)} />
+        <BsCartFill className='CardIcon' onClick={() => cart(id, brand, line, model, price, stock, capacity, image, memoryRAM)} />
       </div>
     </Card>
   )

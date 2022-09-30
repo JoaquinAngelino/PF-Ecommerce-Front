@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import CardPayment from "../../components/Card/CardPayment/CardPayment";
 import "./PaymentForm.css";
+import { deleteItemFromCart } from "../../redux/actions";
 
 
 export  default function PaymentForm(){
@@ -21,11 +22,14 @@ export  default function PaymentForm(){
     var pricess=Number(totalPrice)
     console.log(pricess);
     const items = JSON.parse(localStorage.getItem("cartList"));
+    console.log(items);
     const user = JSON.parse(localStorage.getItem("user"))
     console.log(user);
     // const mai = user.user.mail
-    const mail=user
+    const mail=user[0].email
     // const userIdName = "a13189e3-541b-412d-ac5f-678f839a305d"
+    console.log(user[0].id);
+    const userIdName=user[0].id
 
     const arr = [items.map(e => e.line)]
     console.log(arr);
@@ -52,12 +56,13 @@ export  default function PaymentForm(){
                 id,
                 amount:Number(totalPrice),
                 mail,
-                arr,
-              
+                arr:items,
+                userIdName
       
               })
               console.log("Esta es la data"+data);
               alert(`You have pay $ ${totalPrice} successfully`)
+              // dispatch(deleteItemFromCart('All'))
               history("/")
       
             } catch (error) {
