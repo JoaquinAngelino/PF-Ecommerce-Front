@@ -367,15 +367,15 @@ const PanelAdminCells = () => {
                         {/* <Button color="primary" onClick={() => editar(dato)}>Edit</Button> */}
                         <Link to={`/panelCells/editProduct/${dato.id}`}><Button color="primary">Edit</Button></Link>
                         {dato.disabled ? 
-                        <Button color="success" onClick={()=> reestablecer(dato)}>Restore</Button>
-                        :<Button color="danger" onClick={()=> eliminar(dato)}>Remove</Button>}
+                        <Button className="Button" color="success" onClick={()=> reestablecer(dato)}>Restore</Button>
+                        :<Button className="Button" color="danger" onClick={()=> eliminar(dato)}>Remove</Button>}
                     </td>
                     :<td>
                         {/* <Button color="primary" onClick={() => editar(dato)}>Edit</Button> */}
                         <Link to={`/panelCells/editProduct/${dato.id}`}><Button color="primary">Edit</Button></Link>
                         {dato.disabled ? 
-                        <Button color="success" onClick={()=> reestablecer(dato)}>Restore</Button>
-                        :<Button color="danger" onClick={()=> eliminar(dato)}>Remove</Button>}
+                        <Button className="Button" color="success" onClick={()=> reestablecer(dato)}>Restore</Button>
+                        :<Button className="Button" color="danger" onClick={()=> eliminar(dato)}>Remove</Button>}
                     </td>}                    
                     </tr>        
                 )):<tr></tr>}

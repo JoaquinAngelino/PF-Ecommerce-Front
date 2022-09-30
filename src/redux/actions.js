@@ -269,7 +269,7 @@ export const getAllOrders = () => {
 export function putOrder(a) {
    return async function (dispatch) {
       return await axios
-         .put(`/orders/${a.id}`, a)
+         .put(`/orders/${a.id_Orders}`, a)
          .then((response) => {
             dispatch({
                type: PUT_ORDERS,
@@ -285,6 +285,16 @@ export const getFiltersUsersAdmin = (filters) => {
       return dispatch({
          type: GET_ALL_USERS,
          payload: u.data
+      });
+   };
+};
+
+export const getFiltersOrdersAdmin = (filters) => {
+   return async function (dispatch) {
+      const orders = await axios(`/orders/?${filters}`);
+      return dispatch({
+         type: GET_ALL_ORDERS,
+         payload: orders.data
       });
    };
 };

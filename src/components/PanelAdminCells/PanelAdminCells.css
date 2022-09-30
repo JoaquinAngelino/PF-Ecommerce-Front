@@ -1,5 +1,6 @@
 .datoImg {
     width: 60px;
+    margin-top: 1em;
   }
 
 th{
@@ -21,9 +22,7 @@ td{
     margin-top: 1em;
 }
 
-Button{
-    width: 5em;
-}
+
 
   
   thead th {
@@ -31,7 +30,7 @@ Button{
     border-bottom: 2px solid black;
   }
   
-  thead button {
+  thead Button {
     border: 0;
     border-radius: none;
     font-family: inherit;
@@ -76,4 +75,8 @@ th{
 
 th button:hover{
   border: 1px solid #000;
+}
+
+td button{
+  width: 5em;
 }

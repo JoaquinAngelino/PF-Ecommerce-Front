@@ -316,8 +316,6 @@ const ValidateInput=yup.object().shape({
                             <div className="d-grid gap-2 d-md-flex justify-content-md-center text-decoration-none">
                                 <input disabled={props.isSubmitting} type="submit" value="Edit" onClick={()=>onCLick(props.values)} className="btn btn-outline-dark"/>
                                 <input type="submit" value="Cancel" onClick={()=>onClickCancel()} className="btn btn-outline-dark"/>
-                                
-
                             </div>
                                </Form>
                                 </div>
