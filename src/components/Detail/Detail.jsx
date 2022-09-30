@@ -1,10 +1,10 @@
 import "./CellDetail.css"
 import React from "react";
 import ReactStars from 'react-stars';
+import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { cellDetail, cleanStatus, getAllRating } from "../../redux/actions";
-import { useEffect } from "react";
 import Questions from "../Questions/Questions.jsx";
 import { fav, cart } from '../Toast/Toast'
 import { BsCartFill, BsStarFill } from 'react-icons/bs';
@@ -21,21 +21,20 @@ export default function Detail(props) {
     const myCell = useSelector((state) => state.details);
     const allRatings = useSelector((state) => state.allRating);
     // console.log(allRatings, 'soy  lo que llega del back')
+    const get = () => {
+        dispatch(cellDetail(id))
+        dispatch(getAllRating(id))
+    }
 
-    function handleClearStatus(e) {
+    const handleClearStatus = (e) => {
         dispatch(cleanStatus())
     }
 
     useEffect(() => {
         dispatch(cleanStatus());
         dispatch(cellDetail(id))
-        dispatch(getAllRating(id))
+        // dispatch(getAllRating(id))
     }, [dispatch, id])
-
-    const get = () => {
-        dispatch(cellDetail(id))
-        dispatch(getAllRating(id))
-    }
 
     return (
         <div className="container">
@@ -99,7 +98,8 @@ export default function Detail(props) {
                                                         value={e.rating}
                                                         size={30}
                                                         edit={false}
-                                                        color2={'#ffd700'} />
+                                                        color2={'#ffd700'}
+                                                    />
                                                     <p>{e.comment}</p>
                                                 </div>
                                             )

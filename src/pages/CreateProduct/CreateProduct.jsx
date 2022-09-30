@@ -4,7 +4,7 @@ import { createPost, getAllBrands } from '../../redux/actions';
 import './CreateProduct.css';
 import { Link } from 'react-router-dom';
 import { error, success } from '../../components/Toast/Toast';
-import { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 
 const validations = (input) => {
   const errors = {};
@@ -64,7 +64,7 @@ export default function CreateProduct() {
         ...input,
         [name]: value
       }));
-      console.log(input);
+    console.log(input);
   }
   const handleSelect = (e) => {
     setInput({
@@ -83,7 +83,8 @@ export default function CreateProduct() {
     if (!input.model && !input.line && !input.image && !input.description && !input.brand && !input.capacity) return error("Does not contain fields");
     if (Object.keys(errors).length === 0) {
       dispatch(createPost(input))
-      success("Your cell was created")
+      toast.success('Your cell was created!')
+      // success("Your cell was created")
       setInput({
         line: "",
         image: "",
@@ -96,7 +97,8 @@ export default function CreateProduct() {
         price: "",
       })
     } else {
-      error("We could not create your cell");
+      toast.error("We could not create your cell")
+      // error("We could not create your cell");
     }
     // return ;
   }
@@ -176,7 +178,10 @@ export default function CreateProduct() {
           </div>
         </form>
       </div>
-      <Toaster position="bottom-right" reverseOrder={false}/>
+      <Toaster
+        position="bottom-center"
+        reverseOrder={false}
+      />
     </div>
   )
 }

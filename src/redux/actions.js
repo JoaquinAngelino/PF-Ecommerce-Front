@@ -24,17 +24,17 @@ export const DELETE_FOR_CART = "DELETE_FOR_CART"
 
 
 
-
-
 export const getAllProducts = () => {
    return async function (dispatch) {
       const products = await axios('/celulares/home');
       return dispatch({
          type: GET_ALL_PRODUCTS,
          payload: products.data
-      });
-   };
-};
+      })
+   }
+}
+
+
 export const getFilteredProducts = (payload) => {
    return async function (dispatch) {
       const products = await axios(`/celulares/home?${payload}`);
@@ -68,13 +68,16 @@ export function cellDetail(id) {
       }
    }
 }
+
+
 export function cleanStatus(payload) {
    return {
       type: "clean estado",
       payload
    }
 }
-//CELL_DETAIL
+
+
 //POST USER
 export function postUser(user) {
    return async function (dispatch) {
@@ -87,7 +90,7 @@ export function postUser(user) {
          })
    }
 }
-//POST USER
+
 //GET USER
 export function allUser() {
    return async function (dispatch) {
@@ -105,7 +108,7 @@ export const getAllRating = (id) => {
    // console.log(id, 'soy lo que llega del front')
    return async function (dispatch) {
       const allRating = await axios.get(`/rating/${id}`)
-      // console.log(rating, 'soy lo que llega del back')
+      // console.log(allRating, 'soy lo que llega del back')
       return dispatch({
          type: GET_ALL_RATING,
          payload: allRating.data

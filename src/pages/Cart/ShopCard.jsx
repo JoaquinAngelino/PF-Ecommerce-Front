@@ -7,13 +7,13 @@ import { Link } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import { remove} from '../../components/Toast/Toast';
+import { remove } from '../../components/Toast/Toast';
 
 export default function ShopCard({ id, line, model, stock, capacity, memoryRAM, price, brand, image, deleteItem, updateQuantity, quantity }) {
   const [qua, setQua] = useState(quantity);
 
   const plus = () => {
-    if (qua < stock){
+    if (qua < stock) {
       const cartList = JSON.parse(localStorage.getItem('cartList'))
       let found = cartList.find(e => e.id === id)
       found.quantity += 1
