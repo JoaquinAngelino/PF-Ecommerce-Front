@@ -325,16 +325,16 @@ const PanelAdminUsers = () => {
                     :<td><p className="dato">{dato.role}</p></td>}
                     {dato.disabled ? 
                     <td class="table-danger">
-                        <Button color="primary" onClick={() => editar(dato)}>Edit</Button>
+                        <Button className="Button" color="primary" onClick={() => editar(dato)}>Edit</Button>
                         {dato.disabled ? 
-                        <Button color="success" onClick={()=> reestablecer(dato)}>Restore</Button>
-                        :<Button color="danger" onClick={()=> eliminar(dato)}>Remove</Button>}
+                        <Button className="Button" color="success" onClick={()=> reestablecer(dato)}>Restore</Button>
+                        :<Button className="Button" color="danger" onClick={()=> eliminar(dato)}>Remove</Button>}
                     </td>
                     :<td>
-                        <Button color="primary" onClick={() => editar(dato)}>Edit</Button>
+                        <Button className="Button" color="primary" onClick={() => editar(dato)}>Edit</Button>
                         {dato.disabled ? 
-                        <Button color="success" onClick={()=> reestablecer(dato)}>Restore</Button>
-                        :<Button color="danger" onClick={()=> eliminar(dato)}>Remove</Button>}
+                        <Button className="Button" color="success" onClick={()=> reestablecer(dato)}>Restore</Button>
+                        :<Button className="Button" color="danger" onClick={()=> eliminar(dato)}>Remove</Button>}
                     </td>}                    
                     </tr>             
                 )):<tr></tr>}

@@ -1,6 +1,15 @@
+
+.tableContainer{
+    width: 50%;
+    margin-left: 25%;
+}
+
+.Button{
+    width: 5em;
+    margin-top: 0.5em;
+}
 .datoImg {
     width: 60px;
-    height: 60px;
   }
 
 th{
@@ -19,8 +28,75 @@ td{
 .tableContainer{
     width: 50%;
     margin-left: 25%;
+    margin-top: 1em;
 }
 
-Button{
-    width: 5em;
+
+
+  
+  thead th {
+    text-align: center;
+    border-bottom: 2px solid black;
+  }
+  
+  thead button {
+    border: 0;
+    border-radius: none;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: inherit;
+    padding: 0.5em;
+    margin-bottom: 1px;
+  }
+
+  .divSearchBar{
+    width: 50%;
+    margin-left: 25%;
+    flex-grow: 2;
+    display: flex;
+    justify-content: center;
+}
+
+.form-control{
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.updateImg {
+  margin-right: 4px;
+  margin-left: 5px;
+}
+
+.updateButton{
+  margin-left: 25%;
+  margin-top: 1em;
+  font-weight: bold;
+}
+
+.input-group-text:hover{
+  border: 1px solid #000;
+}
+
+th{
+  width: 2em;
+  height: 3.5em;
+}
+
+th button:hover{
+  border: 1px solid #000;
+}
+
+.datoPendiente{
+    margin-top: 2em;
+    background-color: rgb(250, 199, 209);
+    color: crimson;
+    font-weight: bold;
+}
+
+.datoTerminado{
+    margin-top: 2em;
+    background-color:rgb(159, 255, 159) ;
+    color:darkgreen;
+    font-weight: bold;
+
 }
