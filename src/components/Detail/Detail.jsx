@@ -20,6 +20,7 @@ export default function Detail(props) {
     const { id } = useParams()
     const myCell = useSelector((state) => state.details);
     const allRatings = useSelector((state) => state.allRating);
+    // console.log(allRatings, 'soy  lo que llega del back')
 
     function handleClearStatus(e) {
         dispatch(cleanStatus())
@@ -90,9 +91,9 @@ export default function Detail(props) {
                                 <div>
                                     <h4>Comment and Rating:</h4>
                                     {
-                                        allRatings?.reverse().map((e) => {
+                                        allRatings?.map((e, index) => {
                                             return (
-                                                <div>
+                                                <div key={index}>
                                                     <ReactStars
                                                         count={5}
                                                         value={e.rating}
