@@ -104,13 +104,13 @@ export function allUser() {
 
 //GET RATING 
 export const getAllRating = (cellId) => {
-   console.log(cellId,'soy lo que llega del front')
+   // console.log(cellId, 'soy lo que llega del front')
    return async function (dispatch) {
-      const rating = await axios.get(`/rating/${cellId}`)
-      console.log(rating, 'soy lo que llega del back')
+      const allRating = await axios.get(`/rating/${cellId}`)
+      // console.log(rating, 'soy lo que llega del back')
       return dispatch({
          type: GET_ALL_RATING,
-         payload: rating.data
+         payload: allRating.data
       })
    }
 }

@@ -28,6 +28,7 @@ export default function Detail(props) {
     useEffect(() => {
         dispatch(cleanStatus());
         dispatch(cellDetail(id))
+        dispatch(getAllRating(id))
     }, [dispatch, id])
 
     const get = () => {
@@ -86,20 +87,18 @@ export default function Detail(props) {
                                 </div>
                                 <Ratings key={myCell.id} cellId={myCell.id} r={myCell.ratings} />
                                 <div>
+                                    <h4>Comment and Rating:</h4>
                                     {
                                         allRatings?.map((e) => {
                                             return (
                                                 <div>
-                                                    <h2>Comment and Rating:</h2>
-                                                    <p>{e.comment}</p>
                                                     <ReactStars
                                                         count={5}
                                                         value={e.rating}
-                                                        // half={false}
-                                                        // onChange={ratingChanged}
-                                                        size={24}
+                                                        size={30}
                                                         edit={false}
                                                         color2={'#ffd700'} />
+                                                    <p>{e.comment}</p>
                                                 </div>
                                             )
                                         })
