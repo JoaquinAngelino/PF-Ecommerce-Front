@@ -1,6 +1,15 @@
+
+.tableContainer{
+    width: 50%;
+    margin-left: 25%;
+}
+
+.Button{
+    width: 5em;
+    margin-top: 0.5em;
+}
 .datoImg {
     width: 60px;
-    margin-top: 1em;
   }
 
 th{
@@ -30,7 +39,7 @@ td{
     border-bottom: 2px solid black;
   }
   
-  thead Button {
+  thead button {
     border: 0;
     border-radius: none;
     font-family: inherit;
@@ -77,6 +86,17 @@ th button:hover{
   border: 1px solid #000;
 }
 
-td button{
-  width: 5em;
+.datoPendiente{
+    margin-top: 2em;
+    background-color: rgb(250, 199, 209);
+    color: crimson;
+    font-weight: bold;
+}
+
+.datoTerminado{
+    margin-top: 2em;
+    background-color:rgb(159, 255, 159) ;
+    color:darkgreen;
+    font-weight: bold;
+
 }

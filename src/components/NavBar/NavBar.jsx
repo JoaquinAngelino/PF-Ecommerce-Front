@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import SearchBar from '../SearchBar/SearchBar'
 import 'bootstrap/dist/css/bootstrap.css';
 import './NavBar.css'
+import Image from '../../image/logoConectCell.png';
 //LOGIN
 import { useAuth0 } from '@auth0/auth0-react';
 import LoginButton from "../Login/LoginButton";
@@ -97,6 +98,10 @@ navigate('/Profile')
   return (
     <nav className='NavBar mb-2 p-2 sticky-top bg-dark'>
       <div className="containerNavBar container-fluid justify-content-around ">
+              <Link to='/home'>
+        <img src={Image} alt="#" width={"110px"} height={"85px"} />
+      </Link>
+
         <div className="navbar-nav hstack gap-3 NavBar-Item">
           <Link to='/home' className="nav-link"><BsFillPhoneFill className='NavBarIcon' /></Link>
           <Link to='/favorites' className="nav-link"><BsStarFill className='NavBarIcon' /></Link>
@@ -131,8 +136,9 @@ navigate('/Profile')
                 : null
               )
               : null
+           
 
-            }
+        }
 
 {
               isAuthenticated && gmail===undefined 

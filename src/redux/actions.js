@@ -19,6 +19,8 @@ export const ALL_USER="ALL USER"
 export const RUTA_USER_ID="/users/id/"
 export const USER_ID="USER ID"
 export const DELETE_FOR_CART="DELETE_FOR_CART"
+export const GET_ALL_ORDERS = "GET_ALL_ORDERS";
+export const PUT_ORDERS = "PUT_ORDERS";
 
 
 
@@ -244,6 +246,49 @@ export const getAllProductsAdmin = () => {
       return dispatch({
          type: GET_ALL_PRODUCTS,
          payload: p.data
+      });
+   };
+};
+
+export const getAllOrders = () => {
+   return async function (dispatch) {
+      const orders = await axios('/orders');
+      return dispatch({
+         type: GET_ALL_ORDERS,
+         payload: orders.data
+      });
+   };
+};
+
+export function putOrder(a) {
+   return async function (dispatch) {
+      return await axios
+         .put(`/orders/${a.id_Orders}`, a)
+         .then((response) => {
+            dispatch({
+               type: PUT_ORDERS,
+               payload: response.data,
+            });
+         });
+   };
+}
+
+export const getFiltersUsersAdmin = (filters) => {
+   return async function (dispatch) {
+      const u = await axios(`/users/admin/?${filters}`);
+      return dispatch({
+         type: GET_ALL_USERS,
+         payload: u.data
+      });
+   };
+};
+
+export const getFiltersOrdersAdmin = (filters) => {
+   return async function (dispatch) {
+      const orders = await axios(`/orders/?${filters}`);
+      return dispatch({
+         type: GET_ALL_ORDERS,
+         payload: orders.data
       });
    };
 };
