@@ -26,7 +26,7 @@ import PostUser from './components/PostUser/PostUser'
 //login
 import Profile from './components/Profile/Profile';
 //login
-import AdminPanel from './components/AdminPanel/AdminPanel'
+
 
 
 const stripePromise=loadStripe("pk_test_51LaZvGBnw8Rgt2NjQI3zwuWRhuXnnGKWZNCgHwz0UPBxh6t0l0SlRlMVMwTWvQUGfgyh9e4D0b7MD8sGiArVOQMg00JrfIx5p5")
@@ -61,7 +61,7 @@ function App() {
         <Route path='/panelCells/editProduct/:id' element={<EditProduct />} />
         <Route path='/panelUsers' element={<PanelAdminUsers/>}/>
         <Route path='/panelOrders' element={<PanelAdminOrders/>}/>
-        <Route path='/adminPanel' element={<AdminPanel/>}/>
+        
         
 
 

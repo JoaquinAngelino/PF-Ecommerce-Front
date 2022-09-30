@@ -115,14 +115,11 @@ const PanelAdminCells = () => {
       spec: dato.spec,
       disabled: dato.disabled
     });
-
     setModals({
       ...modals,
       modalEditar: true
     });
   };
-
-
   const editarModal1 = (dato) => {
     setState({
       ...state,
@@ -139,41 +136,27 @@ const PanelAdminCells = () => {
       spec: dato.spec,
       disabled: dato.disabled
     });
-
     setModals({
       ...modals,
       modalEditarSeguro: true
     });
     
   }
-
   const editarModal2 = () => {
     // if(state.line.length > 0 && state.model.length > 0 && state.brand.length > 0  && state.image.length > 
     //   0   && state.description.length > 0 && state.spec.length > 0 && state.price > 0 && state.capacity > 0 &&
     //   state.memoryRAM > 0 && state.stock > 0){
-
     //     dispatch(putCell(state)) 
-
     //     .then(()=>{
     //       dispatch(getAllProductsAdmin());
     //     })
-
     //     cerrarModal();
-
-
-
-
           dispatch(putCell(state)) 
-
           .then(()=>{
             dispatch(getAllProductsAdmin());
           })
-
           cerrarModal();
-
           success("Cell edited.")
-
-
     // }else{
     //     setModals({
     //       ...modals,
@@ -181,7 +164,6 @@ const PanelAdminCells = () => {
     //     });
         
     //    error("Error, check the fields.")   
-
     // }
     // history("/")
     
@@ -464,12 +446,10 @@ const PanelAdminCells = () => {
 export default PanelAdminCells;
 
 /*
-
             <Modal isOpen={modals.modalEditar}>
             <ModalHeader>
               <div><h3>Edit Form</h3></div>
             </ModalHeader>
-
             <ModalBody>
                 <FormGroup>
                 <label>Id:</label>
@@ -485,48 +465,39 @@ export default PanelAdminCells;
                   <label>Line:</label>
                   <input className="form-control" name="line" type="text" onChange={handleChange} value={state.line}/>
                 </FormGroup>
-
                 <FormGroup>
                   <label>Brand:</label>
                   <input className="form-control" name="brand" type="text" onChange={handleChange} value={state.brand}/>
                 </FormGroup>
-
                 <FormGroup>
                   <label>Stock:</label>
                   <input className="form-control" name="stock" type="number" onChange={handleChange} value={state.stock}/>
                 </FormGroup>
-
                 <FormGroup>
                   <label>Price:</label>
                   <input className="form-control" name="price" type="number" onChange={handleChange} value={state.price}/>
                 </FormGroup>
-
                 <FormGroup>
                   <label>Capacity:</label>
                   <input className="form-control" name="capacity" type="number" onChange={handleChange} value={state.capacity}/>
                 </FormGroup>
-
                 <FormGroup>
                   <label>Memory RAM:</label>
                   <input className="form-control" name="memoryRAM" type="number" onChange={handleChange} value={state.memoryRAM}/>
                 </FormGroup>
-
                 <FormGroup>
                   <label>Image:</label>
                   <input className="form-control" name="image" type="text" onChange={handleChange} value={state.image}/>
                 </FormGroup>
-
                 <FormGroup>
                   <label>Description:</label>
                   <input className="form-control" name="description" type="text" onChange={handleChange} value={state.description}/>
                 </FormGroup>
-
                 <FormGroup>
                   <label>Spec:</label>
                   <input className="form-control" name="spec" type="text" onChange={handleChange} value={state.spec}/>
                 </FormGroup>
             </ModalBody>
-
             
                 {!modals.modalEditarSeguro ?
                 <ModalFooter>
@@ -540,6 +511,5 @@ export default PanelAdminCells;
                   <Button color="danger" onClick={() => cerrarModal()}>Cancel</Button>
                 </ModalFooter>     
                 }
-
             
             </Modal>*/
