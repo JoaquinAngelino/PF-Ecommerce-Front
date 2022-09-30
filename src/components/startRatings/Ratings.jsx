@@ -1,4 +1,5 @@
 import axios from "axios";
+import toast, { Toaster } from 'react-hot-toast';
 import ReactStars from 'react-stars';
 import { useEffect, useState } from "react";
 import { useAuth0, user } from '@auth0/auth0-react';
@@ -36,9 +37,10 @@ const Ratings = ({ cellId, r, get }) => {
    const createRating = async (e) => {
       e.preventDefault()
       if (Object.keys(rating).length > 0) {
-         console.log(rating, 'soy el dato')
+         // console.log(rating, 'soy el dato')
          await axios.post(`/rating/${cellId}`, rating);
-         window.alert("rating sent!");
+         toast.success(`rating sent!!`);
+         // window.alert("rating sent!");
          setRating({
             rating: 0,
             comment: "",
@@ -68,7 +70,7 @@ const Ratings = ({ cellId, r, get }) => {
                   value={rating.rating}
                   half={false}
                   onChange={ratingChanged}
-                  size={24}
+                  size={40}
                   edit={true}
                   color2={'#ffd700'} />
             </div>
@@ -82,6 +84,28 @@ const Ratings = ({ cellId, r, get }) => {
             />
             <button type="submit" className="btn btn-outline-primary">Submit</button>
          </form>
+         <Toaster
+            position="button-right"
+            reverseOrder={false}
+            gutter={8}
+            containerClassName=""
+            containerStyle={{}}
+            toastOptions={{
+               className: '',
+               duration: 5000,
+               style: {
+                  background: '#363636',
+                  color: '#fff',
+               },
+               success: {
+                  duration: 3000,
+                  theme: {
+                     primary: 'green',
+                     secondary: 'black',
+                  },
+               },
+            }}
+         />
       </div>
    )
 }

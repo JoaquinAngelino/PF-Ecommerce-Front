@@ -33,6 +33,7 @@ export default function Detail(props) {
 
     const get = () => {
         dispatch(cellDetail(id))
+        dispatch(getAllRating(id))
     }
 
     return (
@@ -85,11 +86,11 @@ export default function Detail(props) {
                                 <div>
                                     <Questions key={myCell.id} cellId={myCell.id} q={myCell.questions} get={get} />
                                 </div>
-                                <Ratings key={myCell.id} cellId={myCell.id} r={myCell.ratings} />
+                                <Ratings key={myCell.id} cellId={myCell.id} r={myCell.ratings} get={get} />
                                 <div>
                                     <h4>Comment and Rating:</h4>
                                     {
-                                        allRatings?.map((e) => {
+                                        allRatings?.reverse().map((e) => {
                                             return (
                                                 <div>
                                                     <ReactStars
