@@ -99,10 +99,11 @@ console.log(salir())
 // },[])
 function salir(){
   if(userDb!==undefined && userDb[0]&& userDb[0].disabled===true){
-// alert ("tu cuenta fue suspendida")
-    return logout()
+//  alert ("tu cuenta fue suspendida")
+logout()
   }
 }
+
 
  
 function email() {
@@ -116,6 +117,9 @@ function filterEmail() {
   }
 }
 salir()
+
+
+
 
   return ( 
     <div className='container'>
@@ -131,6 +135,8 @@ salir()
       </Carousel>
     </div>
   )
+  
 }
+
 
 export default LandingPage

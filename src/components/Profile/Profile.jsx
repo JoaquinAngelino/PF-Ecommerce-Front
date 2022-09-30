@@ -17,7 +17,7 @@ const Profile=()=>{
 
  
     const {user, isAuthenticated}=useAuth0()
-    console.log(isAuthenticated)
+    console.log(user)
 
     return (
      

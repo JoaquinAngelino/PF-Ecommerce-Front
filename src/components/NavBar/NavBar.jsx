@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react";
-import { allUser } from "../../redux/actions";
+import {  getAllUsers } from "../../redux/actions";
 import { BsCartFill, BsStarFill, BsFillPhoneFill } from 'react-icons/bs';
 import { AiOutlineUpload } from 'react-icons/ai';
 import { AiOutlineUserAdd } from "react-icons/ai"
@@ -23,14 +23,14 @@ export default function NavBar() {
   const [dropdown, setDropdown]=useState(false)
   const [dropdown1, setDropdown1]=useState(false)
   const dispatch = useDispatch()
-  const allUsers = useSelector(state => state.allUser);
+  const allUsers = useSelector(state => state.users);
   const { user, isAuthenticated, logout } = useAuth0()
   const usuarios = allUsers
   const emailAuth0 = email()
   const gmail = filterEmail()
   // console.log(usuarios)
-  // console.log(emailAuth0)
-  // console.log(gmail)
+  console.log(emailAuth0)
+  console.log(gmail)
   // const userdata = data()
   // console.log(userdata)
   // console.log(isAuthenticated)
@@ -39,7 +39,7 @@ export default function NavBar() {
   localStorage.setItem('user', JSON.stringify(usuarios))
 
   useEffect(() => {
-    dispatch(allUser());
+    dispatch(getAllUsers());
 
     // dispatch(email());
     // dispatch(filterEmail());
@@ -90,6 +90,9 @@ navigate('/panelCells')
 const userIr=()=>{
 navigate('/Profile')
 }
+const orderList=()=>{
+  navigate('panelOrders')
+}
 //  function hola(){
 //   navigate('/postUser')
 //  }
@@ -129,7 +132,7 @@ navigate('/Profile')
           {
             isAuthenticated && gmail !== undefined
             
-              ? (gmail.length === 0 ?
+              ? (gmail[0]===null ?
                 <Link to='/postUser'>
                   <button type="button" className="btn btn-outline-danger">Complete your user information</button>
                 </Link>
@@ -163,6 +166,8 @@ navigate('/Profile')
               <DropdownMenu>
                 <DropdownItem onClick={userlist}>User list</DropdownItem>
                 <DropdownItem onClick={celllist}>Cell list</DropdownItem>
+                <DropdownItem onClick={orderList}>Order list</DropdownItem>
+
               </DropdownMenu>
             </Dropdown>
                : null
