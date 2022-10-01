@@ -1,5 +1,3 @@
-import axios from "axios"
-import { useSelector } from "react-redux"
 
 export const addToFav = (id, brand, line, model, price, stock, capacity, image, memoryRAM) => {
   let favs = JSON.parse(localStorage.getItem('favList'))
@@ -14,8 +12,7 @@ export const addToFav = (id, brand, line, model, price, stock, capacity, image, 
   // handleAdded()
 }
 
-export const addToCart = async (id, brand, line, model, price, stock, capacity, image, memoryRAM, userId) => {
-  if (!userId) {
+export const addToCart = async (id, brand, line, model, price, stock, capacity, image, memoryRAM) => {
     let cart = JSON.parse(localStorage.getItem('cartList'))
     if (cart) {
       if (!cart.some(item => item.id === id)) {
@@ -25,9 +22,6 @@ export const addToCart = async (id, brand, line, model, price, stock, capacity, 
       cart = [{ id, brand, line, model, price, stock, capacity, image, memoryRAM, quantity: 1 }]
     }
     localStorage.setItem('cartList', JSON.stringify(cart))
-    return
-  }
-  axios.post("/cart", { phoneId: id, userId: userId  })
 }
 
 export const getPrice = () => {

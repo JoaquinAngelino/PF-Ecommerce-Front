@@ -3,8 +3,9 @@ import ShopCard from "./ShopCard";
 import './Card.css'
 import { getPrice } from "../../components/Card/favAndCart";
 import NothingFound from "../../components/NothingFound/NothingFound";
+import { Link } from "react-router-dom";
 
-export default function LocalCart() {
+export default function LocalCart({registered}) {
 
     const [cartItem, setCartItem] = useState(JSON.parse(localStorage.getItem('cartList')))
     const [totalPrice, setTotalPrice] = useState(getPrice());
@@ -25,7 +26,6 @@ export default function LocalCart() {
     }
 
     if(!cartItem){return <NothingFound/>}
-    console.log("before render", totalPrice);
 
     return (
         <div className="shoppingCart">
@@ -45,7 +45,10 @@ export default function LocalCart() {
                 )}
             </div>
             <hr />
-            <p>Please Log in to continue shopping</p>
+            {
+                registered ? <Link to={"/postUser"}><p>Complete your profile to continue</p></Link>
+                : <p>Please Log in to continue shopping</p>
+            }
         </div>
     );
 }

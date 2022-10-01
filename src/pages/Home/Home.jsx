@@ -113,9 +113,7 @@ export default function Home() {
         <Pagination currentPage={currentPage} postPerPage={6} totalPosts={products.length} paginate={paginate} />
         <Toaster position="bottom-right" reverseOrder={false}/>
       </div>
-      
       }
-        
     </>
   )
 }
