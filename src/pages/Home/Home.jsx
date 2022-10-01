@@ -82,7 +82,7 @@ export default function Home() {
                     null :
                     (
                       <div key={filter[0]} className="activeFilter">
-                        {filter[0] === 'price' ? `Price range ${filter[1]}` : filter[1]}
+                        {filter[0] === 'price' || filter[0] === 'capacity' ? `${filter[0]} ${filter[1]}` : filter[1]}
                         <CloseButton onClick={() => clearFilter(filter[0])} />
                       </div>
                     )
