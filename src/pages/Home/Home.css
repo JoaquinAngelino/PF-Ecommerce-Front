@@ -23,6 +23,8 @@
     justify-content: flex-end;
     width: 72%;
     gap: 1em;
+    background-color: black;
+  
    
 }
 
@@ -46,6 +48,8 @@
     font-size: 1.2rem;
     color: #169E85;
 }
+
+
 
 .aditionalContent .MuiFormControl-root {
     display: flex !important;
