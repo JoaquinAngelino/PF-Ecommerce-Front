@@ -9,7 +9,8 @@ const {
   POST_USER,
   USER_ID,
   ALL_USER,
-  GET_ALL_ORDERS
+  GET_ALL_ORDERS,
+  GET_ORDER_ID
 } = require('./actions.js')
 
 const initialState = {
@@ -21,7 +22,8 @@ const initialState = {
   users: [],
   user:[],
   allUser:[],
-  orders:[]
+  orders:[],
+  order:{}
 }
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -93,6 +95,11 @@ export default function rootReducer(state = initialState, { type, payload }) {
                 ...state,
                 orders: payload
               }
+              case GET_ORDER_ID:
+                return {
+                  ...state,
+                  order: payload
+                }
 
     default:
       return state

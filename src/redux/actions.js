@@ -21,6 +21,7 @@ export const USER_ID="USER ID"
 export const DELETE_FOR_CART="DELETE_FOR_CART"
 export const GET_ALL_ORDERS = "GET_ALL_ORDERS";
 export const PUT_ORDERS = "PUT_ORDERS";
+export const GET_ORDER_ID = "GET_ORDER_ID";
 
 
 
@@ -292,3 +293,17 @@ export const getFiltersOrdersAdmin = (filters) => {
       });
    };
 };
+
+export function getOrderById(id) {
+   return async function (dispatch) {
+      try {
+         var orde = await axios.get("/orders/id/" + id)
+         return dispatch({
+            type: GET_ORDER_ID,
+            payload: orde.data
+         })
+      } catch (error) {
+         console.log(error)
+      }
+   }
+}
