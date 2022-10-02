@@ -68,9 +68,8 @@ td{
   border: 1px solid #000;
 }
 
-th{
-  width: 2em;
-  height: 3.5em;
+th button {
+  border: 1px solid transparent;
 }
 
 th button:hover{
