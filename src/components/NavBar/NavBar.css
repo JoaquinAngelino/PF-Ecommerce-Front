@@ -84,6 +84,17 @@ body.Dark .navbar {
       background-color: red;
       color:white;
       width:100px;
+      animation-name: mianimation;
+      animation-duration: 2s;
+      animation-delay: 2s;
+}
+
+@keyframes mianimation{
+  0% {background: #169E85
+  }
+  25%{background: yellow}
+  50%{background: green}
+  100%{background:blue}
 }
 .data{
   text-decoration: none;
