@@ -88,8 +88,8 @@ th button:hover{
 
 .datoPendiente{
     margin-top: 2em;
-    background-color: rgb(250, 199, 209);
-    color: crimson;
+    background-color: rgb(255, 221, 159);
+    color:orange;
     font-weight: bold;
 }
 
@@ -99,4 +99,15 @@ th button:hover{
     color:darkgreen;
     font-weight: bold;
 
+}
+
+.datoCancelado{
+  margin-top: 2em;
+  background-color: rgb(255, 182, 197);
+  color: crimson;
+  font-weight: bold;
+}
+
+.labelEdit{
+  font-weight: bold;
 }

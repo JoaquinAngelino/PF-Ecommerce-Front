@@ -26,6 +26,8 @@ import PostUser from './components/PostUser/PostUser'
 //login
 import Profile from './components/Profile/Profile';
 //login
+import AdminPanel from './components/AdminPanel/AdminPanel'
+import DetailOrder from './components/DetailOrder/DetailOrder.jsx';
 
 
 
@@ -61,7 +63,9 @@ function App() {
         <Route path='/panelCells/editProduct/:id' element={<EditProduct />} />
         <Route path='/panelUsers' element={<PanelAdminUsers/>}/>
         <Route path='/panelOrders' element={<PanelAdminOrders/>}/>
-        
+        <Route path='/panelOrders/detailOrder/:id' element={<DetailOrder/>}/>
+        <Route path='/adminPanel' element={<AdminPanel/>}/>
+
         
 
 

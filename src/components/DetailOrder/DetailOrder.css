@@ -1,0 +1,139 @@
+.conteiner-card-order{
+    background-color: #ffffffed;
+    margin: 5%;
+    width: 90%;
+    padding: 1%;
+    border-radius: 10px;
+    flex-wrap: nowrap;
+    display: flex;
+    transition: all ease .5s;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+.card-cell-order{
+    background-color: #ffffffed;
+
+}
+
+.subcontainer01-order{
+    width: 100%;
+    margin-left: 2%;
+}
+
+.wrapper{
+    background-color: rgb(168, 0, 0);
+    width: 100%;
+    height: 100%;
+  }
+  
+  .cell-card-order{
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 200px;
+    height: 290px;
+    float: left;
+    padding: 1%;
+    margin: 2%;
+    border-radius: 20px;
+  }
+  .card-order{
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+  }
+  .imgCard{
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    margin-top: 0.5em;
+  }
+  .imgCard img{
+    width: 150px;
+    height: 200px;
+  }
+  .name-cell-order{
+    background-color: #333;
+    color: white;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid white;
+  }
+  .price-cell-order{
+    border: 1px solid white;
+    background-color: #333;
+    color: white;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .container-cells-order{
+    width: 100%;
+  }
+  
+  .title-order-detail{
+    display: flex;
+    justify-content: center;
+    font-weight: bold;   
+  }
+  
+  .group-container-order{
+    align-items: center;
+    display: flex ;
+  }
+    
+  .variable-order{
+    font-size: 1.5em;
+    color: rgb(0, 0, 0);
+    
+  }
+    
+  .value-order{
+    margin-left: 1em;
+    margin-top: 0.3em;
+  }
+
+  .value-total-order{
+    margin-left: 1em;
+    color: rgb(41, 190, 78);
+    font-weight: bold;
+    font-size: 1.5em;
+  }
+
+  .datoPendiente-detail{
+    background-color: rgb(252, 228, 183);
+    color:orange;
+    font-weight: bold;
+    width: 6em;
+    margin-left: 1em;
+    margin-top: 1em;
+}
+
+.datoTerminado-detail{
+    background-color:rgb(159, 255, 159) ;
+    color:darkgreen;
+    font-weight: bold;
+    width: 6em;
+    margin-left: 1em;
+    margin-top: 1em;
+}
+
+.datoCancelado-detail{
+  background-color: rgb(255, 182, 197);
+  color: crimson;
+  font-weight: bold;
+  width: 6em;
+  margin-left: 1em;
+  margin-top: 1em;
+}

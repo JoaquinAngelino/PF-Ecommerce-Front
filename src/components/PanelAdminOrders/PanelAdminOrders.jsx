@@ -15,6 +15,7 @@ import {
 import { error, success, remove } from "../Toast/Toast";
 import { Toaster } from "react-hot-toast";
 import iconSearch from '../SearchBar/search_FILL0.png'
+import { Link } from "react-router-dom";
 
 
 const PanelAdminOrders = () => {
@@ -133,9 +134,6 @@ const PanelAdminOrders = () => {
   }
 
   const editarModal2 = () => {
-    if(state.userMail.length > 0 && state.date.length > 0 && state.payment.length > 0 && state.subTotal.length > 0 
-      && state.status.length > 0 ){
-
 
           dispatch(putOrder(state))
 
@@ -146,32 +144,22 @@ const PanelAdminOrders = () => {
           cerrarModal();
           
           success("Edited");          
-
-      }else{
-
-        setModals({
-          ...modals,
-          modalEditarSeguro: false
-        });
-
-        error("Error, check the fields.")
-      }
   }
 
 
-
-  
-  
-
-
-
-  
-  const handleChange = (e) => {
+  const handleSelectStatus = (e) => {
     setState({
         ...state,
-        [e.target.name]: e.target.value,
+        status: e.target.value,
     });
   };
+  
+  
+
+
+
+  
+
 
 
   const [searchBar, setSearchBar] = useState('')
@@ -238,11 +226,16 @@ const PanelAdminOrders = () => {
                     <tr key={dato.id_Orders}>
 
                     <td ><p className="dato">{dato.id_Orders}</p></td>
+                    
+                    {dato.status === "Realizado" ?
+                    <td><p className="datoTerminado">{dato.status}</p></td>
+                    :<td>
+                        {dato.status === "Pendiente" ? 
+                        <p className="datoPendiente">{dato.status}</p>
+                        :<p className="datoCancelado">{dato.status}</p>}
+                     </td>
+                    }
 
-                    {dato.status === "Pendiente" ? 
-                    <td><p className="datoPendiente">{dato.status}</p></td>
-                    :<td><p className="datoTerminado">{dato.status}</p></td>}
- 
                     <td><p className="dato">{dato.date}</p></td>
 
                     <td><p className="dato">{dato.userMail}</p></td>
@@ -255,7 +248,7 @@ const PanelAdminOrders = () => {
                     
                     <td>
                         <Button className="Button" color="primary" onClick={() => editar(dato)}>Edit</Button>
-                        <Button className="Button" color="success" >Detail</Button>
+                        <Link   to={`/panelOrders/detailOrder/${dato.id_Orders}`}><Button className="Button" color="success">Detail</Button></Link>
                     </td>
 
                     </tr>             
@@ -266,43 +259,49 @@ const PanelAdminOrders = () => {
 
             <Modal isOpen={modals.modalEditar}>
             <ModalHeader>
-              <div><h3>Edit Form</h3></div>
+              <div><h3>Change Status Order</h3></div>
             </ModalHeader>
 
             <ModalBody>
                 <FormGroup>
-                <label>Id:</label>
-                <input className="form-control" readOnly type="text"  value={state.id_Orders} />
+                  <label className="labelEdit">Id:</label>
+                  <p>{state.id_Orders}</p>
                 </FormGroup>
                 
                 <FormGroup>
-                  <label>Date:</label>
-                  <input className="form-control" name="date" type="text" onChange={handleChange} value={state.date}/>
-                </FormGroup>
-                
-                <FormGroup>
-                  <label>User email:</label>
-                  <input className="form-control" name="userMail" type="text" onChange={handleChange} value={state.userMail}/>
+                  <label className="labelEdit">Date:</label>
+                  <p>{state.date}</p>
                 </FormGroup>
 
                 <FormGroup>
-                  <label>Subtotal:</label>
-                  <input className="form-control" name="subTotal" type="text" onChange={handleChange} value={state.subTotal}/>
+                  <label className="labelEdit">User email:</label>
+                  <p>{state.userMail}</p>
                 </FormGroup>
 
                 <FormGroup>
-                  <label>Paid:</label>
-                  <input className="form-control" name="paid" type="text" onChange={handleChange} value={state.paid}/>
+                  <label className="labelEdit">Subtotal:</label>
+                  <p>{state.subTotal}</p>
                 </FormGroup>
 
                 <FormGroup>
-                  <label>Payment:</label>
-                  <input className="form-control" name="payment" type="text" onChange={handleChange} value={state.payment}/>
+                  <label className="labelEdit">Paid:</label>
+                  {state.paid? <p>True</p>
+                    :<p>False</p>
+                  }   
                 </FormGroup>
 
                 <FormGroup>
-                  <label>Status:</label>
-                  <input className="form-control" name="status" type="text" onChange={handleChange} value={state.status}/>
+                  <label className="labelEdit">Payment:</label>
+                  <p>{state.payment}</p>
+                </FormGroup>
+
+                <FormGroup>
+                  <label className="labelEdit">Status:</label>
+                  <select name="status" value={state.status} onChange={(e) => handleSelectStatus(e)} className="form-control me-2" >
+                    <option value="Realizado">Realizado</option>
+                    <option value="Pendiente">Pendiente</option>
+                    <option value="Cancelado">Cancelado</option>
+                  </select>
                 </FormGroup>
             </ModalBody>
 
