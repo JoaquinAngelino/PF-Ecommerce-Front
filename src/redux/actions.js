@@ -223,6 +223,12 @@ export function updateProduct(id,payload){
    }
 }
 
+// export function postRating(id){
+//    return function(){
+//       axios.post("/celulares",rating)
+//    }
+// }
+
 
 export const getFiltersProductsAdmin = (filters) => {
    return async function (dispatch) {

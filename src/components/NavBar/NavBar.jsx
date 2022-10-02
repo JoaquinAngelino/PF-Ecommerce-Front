@@ -102,6 +102,48 @@ navigate('/Profile')
         <img src={Image} alt="#" width={"110px"} height={"85px"} />
       </Link>
 
+      <div className="navbar-nav hstack gap-3 NavBar-Item">
+        <SearchBar />
+        <Link to='/home' className="nav-link"><BsFillPhoneFill className='NavBarIcon' /></Link>
+        <Link to='/favorites' className="nav-link"><BsStarFill className='NavBarIcon' /></Link>
+        <Link to='/cart' className="nav-link"><BsCartFill className='NavBarIcon' /></Link>
+        {
+          isAuthenticated && gmail !== undefined && gmail[0] && gmail[0].role !== "Cliente"
+            ? <Link to='/create' className="nav-link"><AiOutlineUpload className='NavBarIcon' /></Link>
+            : null
+        }
+        {isAuthenticated ? <Link to={'Profile/'} className='nav-link'><AiOutlineUserAdd className='NavBarIcon' /></Link> : null}
+        {
+          isAuthenticated && gmail !== undefined
+            // && !gmail===undefined && gmail.length!==1
+            //  gmail===undefined && !gmail[0] 
+            ? (gmail.length === 0 ?
+              <Link to='/postUser'>
+                <button >Complete sus datos de usuario</button>
+              </Link>
+              : null
+            )
+            : null
+
+        }
+
+        {
+          isAuthenticated && gmail === undefined
+            // && !gmail===undefined && gmail.length!==1
+            //  gmail===undefined && !gmail[0] 
+            ? (
+
+              <Link to='/postUser'>
+                <button className="btn btn-danger text-decoration-none" >Complete sus datos</button>
+              </Link>
+
+            )
+
+            : null
+        }
+       </div>
+
+
         <div className="navbar-nav hstack gap-3 NavBar-Item">
           <Link to='/home' className="nav-link"><BsFillPhoneFill className='NavBarIcon' /></Link>
           <Link to='/favorites' className="nav-link"><BsStarFill className='NavBarIcon' /></Link>
