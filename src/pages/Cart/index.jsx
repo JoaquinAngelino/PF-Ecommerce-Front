@@ -57,7 +57,7 @@ export default function ShoppingCart() {
                 {cartItemMap}
             </div>
             <hr />
-            <Link to={"/cart/paymentForm"}><button>Buy now !</button></Link>
+            <Link to={"/cart/paymentForm"}><button className="buttonPayment">Buy now !</button></Link>
             <Toaster position="bottom-right" reverseOrder={false}/>
         </div>
     );
