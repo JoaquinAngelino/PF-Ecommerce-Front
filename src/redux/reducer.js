@@ -25,10 +25,10 @@ const initialState = {
   users: [],
   user: [],
   allUser: [],
-  allRating: [],
+  rating: false,
   cart: [],
-  orders:[],
-  order:{}
+  orders: [],
+  order: {}
 }
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -43,7 +43,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
     case GET_ALL_RATING:
       return ({
         ...state,
-        allRating: payload
+        rating: payload
       })
     case CELL_DETAIL:
       return ({
@@ -96,22 +96,22 @@ export default function rootReducer(state = initialState, { type, payload }) {
         allUser: payload
       }
 
-            case GET_USER_CART:
-              return{
-                ...state,
-                cart: payload,
-                isLoading: false
-              }
-            case GET_ALL_ORDERS:
-              return {
-                ...state,
-                orders: payload
-              }
-              case GET_ORDER_ID:
-                return {
-                  ...state,
-                  orders: payload
-                }
+    case GET_USER_CART:
+      return {
+        ...state,
+        cart: payload,
+        isLoading: false
+      }
+    case GET_ALL_ORDERS:
+      return {
+        ...state,
+        orders: payload
+      }
+    case GET_ORDER_ID:
+      return {
+        ...state,
+        orders: payload
+      }
 
     default:
       return state

@@ -105,7 +105,7 @@ const Questions = ({ cellId, q, get }) => {
       <div>
          <div >
             {isAuthenticated ?
-               <div >
+               <div className='forumContainer'>
                   <div className=''>
                      <h1>Ask your question</h1>
                      <h3>{user.name}:</h3>

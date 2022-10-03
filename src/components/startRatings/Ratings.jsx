@@ -3,16 +3,19 @@ import toast, { Toaster } from 'react-hot-toast';
 import ReactStars from 'react-stars';
 import { useEffect, useState } from "react";
 import { useAuth0, user } from '@auth0/auth0-react';
-import { useDispatch } from "react-redux";
-import { getRole } from "../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { getRole, getRolesRating } from "../../redux/actions";
 
 const Ratings = ({ cellId, r, get }) => {
-   const colors = {
-      orange: "#FFBA5A",
-      grey: "#a9a9a9"
-   };
+
    const dispatch = useDispatch();
    const { user, isAuthenticated } = useAuth0();
+   const ratingRol = useSelector((state) => state.rating)
+
+   const [rolIdUsers, setRolIdUsers] = useState({
+      email: "",
+      cellId: cellId
+   });
 
    const [rating, setRating] = useState({
       id: cellId,
@@ -54,38 +57,40 @@ const Ratings = ({ cellId, r, get }) => {
 
    useEffect(() => {
       if (isAuthenticated) {
-         dispatch(getRole(user.email));
-         setRating({
-            ...rating,
-            emailUser: user.email
+         dispatch(getRolesRating(rolIdUsers));
+         setRolIdUsers({
+            ...rolIdUsers,
+            email: user.email
          })
       }
    }, [dispatch, r])
 
    return (
       <div>
-         <form style={styles.container} onSubmit={(e) => createRating(e)}>
-            <h2>Rate the product!</h2>
-            <div style={styles.stars}>
-               <ReactStars
-                  count={5}
-                  value={rating.rating}
-                  half={false}
-                  onChange={ratingChanged}
-                  size={40}
-                  edit={true}
-                  color2={'#ffd700'} />
-            </div>
-            <textarea
-               type="text"
-               name="comment"
-               value={rating.comment}
-               onChange={(e) => handleChange(e)}
-               placeholder="What's your experience?"
-               style={styles.textarea}
-            />
-            <button type="submit" className="btn btn-outline-primary">Submit</button>
-         </form>
+         {ratingRol && isAuthenticated ?
+            <form style={styles.container} onSubmit={(e) => createRating(e)}>
+               <h2>Rate the product!</h2>
+               <div style={styles.stars}>
+                  <ReactStars
+                     count={5}
+                     value={rating.rating}
+                     onChange={ratingChanged}
+                     size={40}
+                     edit={true}
+                     color2={'#ffd700'} />
+               </div>
+               <textarea
+                  type="text"
+                  name="comment"
+                  value={rating.comment}
+                  onChange={(e) => handleChange(e)}
+                  placeholder="What's your experience?"
+                  style={styles.textarea}
+               />
+               <button type="submit" className="btn btn-outline-primary">Submit</button>
+            </form>
+            : ""
+         }
          <Toaster
             position="button-right"
             reverseOrder={false}

@@ -16,12 +16,12 @@ export const PUT_CELL = "PUT_CELL";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const PUT_USERS = "PUT_USERS";
 export const GET_USER_CART = "GET_USER_CART"
-export const RUTA_USER="/users"
-export const POST_USER="POST USER"
-export const ALL_USER="ALL USER"
-export const RUTA_USER_ID="/users/id/"
-export const USER_ID="USER ID"
-export const DELETE_FOR_CART="DELETE_FOR_CART"
+export const RUTA_USER = "/users"
+export const POST_USER = "POST USER"
+export const ALL_USER = "ALL USER"
+export const RUTA_USER_ID = "/users/id/"
+export const USER_ID = "USER ID"
+export const DELETE_FOR_CART = "DELETE_FOR_CART"
 export const GET_ALL_ORDERS = "GET_ALL_ORDERS";
 export const PUT_ORDERS = "PUT_ORDERS";
 export const GET_ORDER_ID = "GET_ORDER_ID";
@@ -111,14 +111,12 @@ export function allUser() {
 }
 
 //GET RATING 
-export const getAllRating = (id) => {
-   // console.log(id, 'soy lo que llega del front')
+export const getRolesRating = (ratingRol) => {
    return async function (dispatch) {
-      const allRating = await axios.get(`/rating/${id}`)
-      // console.log(allRating, 'soy lo que llega del back')
+      const ratingRolId = await axios.get(`/rating/role/${ratingRol.email}`)
       return dispatch({
          type: GET_ALL_RATING,
-         payload: allRating.data
+         payload: ratingRolId.data
       })
    }
 }
@@ -243,12 +241,6 @@ export function updateProduct(id, payload) {
       axios.put(`/celulares/${id}`, payload)
    }
 }
-
-// export function postRating(id){
-//    return function(){
-//       axios.post("/celulares",rating)
-//    }
-// }
 
 
 export const getFiltersProductsAdmin = (filters) => {
