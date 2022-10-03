@@ -1,8 +1,8 @@
 
 import { useAuth0 } from "@auth0/auth0-react";
-import React, { useState,useEffect } from 'react'; 
+import React, { useState, useEffect } from 'react';
 import { getAllUsers } from "../../redux/actions";
-import { useDispatch,useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Carousel,
   CarouselItem,
@@ -42,16 +42,16 @@ const items = [
 
 
 const LandingPage = () => {
-  const {user, isAuthenticated, logout}=useAuth0()
+  const { user, isAuthenticated, logout } = useAuth0()
   const allUsers = useSelector(state => state.users);
   const dispatch = useDispatch();
   const todosUser = allUsers
-  const emailAuth0=email()
-  const userDb=filterEmail()
+  const emailAuth0 = email()
+  const userDb = filterEmail()
 
-console.log(todosUser)
-console.log(userDb)
-console.log(salir())
+  // console.log(todosUser)
+  // console.log(userDb)
+  // console.log(salir())
 
 
   const [activeIndex, setActiveIndex] = useState(0)
@@ -81,47 +81,46 @@ console.log(salir())
         onExited={() => setAnimating(false)}
         key={item.src}
       >
-        <img src={item.src} width="100%" height="460px" alt='landing_image' />
-        <CarouselCaption />
-      </CarouselItem>
+        <img className="imgLanding" src={item.src} width="" height="760px" alt='landing_image' />
+      </CarouselItem >
     )
   })
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(getAllUsers())
-},[])
+  }, [])
 
-// useEffect(()=>{
-//   if(userDb!==undefined && userDb[0].disabled===true){
-//     dispatch(logout())
-//   }
-  
-// },[])
-function salir(){
-  if(userDb!==undefined && userDb[0]&& userDb[0].disabled===true){
-//  alert ("tu cuenta fue suspendida")
-logout()
+  // useEffect(()=>{
+  //   if(userDb!==undefined && userDb[0].disabled===true){
+  //     dispatch(logout())
+  //   }
+
+  // },[])
+  function salir() {
+    if (userDb !== undefined && userDb[0] && userDb[0].disabled === true) {
+      //  alert ("tu cuenta fue suspendida")
+      logout()
+    }
   }
-}
 
 
- 
-function email() {
-  if (isAuthenticated) {
-    return user.email
+
+  function email() {
+    if (isAuthenticated) {
+      return user.email
+    }
   }
-}
-function filterEmail() {
-  if (isAuthenticated && todosUser.length) {
-    return todosUser.filter(e => e.email === emailAuth0)
+  function filterEmail() {
+    if (isAuthenticated && todosUser.length) {
+      return todosUser.filter(e => e.email === emailAuth0)
+    }
   }
-}
-salir()
+  salir()
 
 
 
 
-  return ( 
+  return (
     <div className='container'>
       <Carousel
         activeIndex={activeIndex}
@@ -135,7 +134,7 @@ salir()
       </Carousel>
     </div>
   )
-  
+
 }
 
 
