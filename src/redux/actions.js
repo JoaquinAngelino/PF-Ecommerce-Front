@@ -313,3 +313,18 @@ export function getOrderById(id) {
       }
    }
 }
+
+
+export function getOrdersUser(id) {
+   return async function (dispatch) {
+      try {
+         var orde = await axios.get("/orders/user/" + id)
+         return dispatch({
+            type: GET_ORDER_ID,
+            payload: orde.data
+         })
+      } catch (error) {
+         console.log(error)
+      }
+   }
+}

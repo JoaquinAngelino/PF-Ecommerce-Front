@@ -4,8 +4,12 @@ import './Card.css'
 import { getPrice } from "../../components/Card/favAndCart";
 import {Link} from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+import { useAuth0 } from '@auth0/auth0-react';
+import LoginButton from "../../components/Login/LoginButton";
 
 export default function ShoppingCart() {
+
+    const { user, isAuthenticated, logout } = useAuth0()
 
     const [cartItem, setCartItem] = useState(JSON.parse(localStorage.getItem('cartList')))
     const [totalPrice, setTotalPrice] = useState(getPrice());
@@ -57,7 +61,9 @@ export default function ShoppingCart() {
                 {cartItemMap}
             </div>
             <hr />
-            <Link to={"/cart/paymentForm"}><button className="buttonPayment">Buy now !</button></Link>
+            { isAuthenticated ?
+                <Link to={"/cart/paymentForm"}><button className="buttonPayment">Buy now !</button></Link>
+            : <h5>Login to continue</h5>}
             <Toaster position="bottom-right" reverseOrder={false}/>
         </div>
     );
