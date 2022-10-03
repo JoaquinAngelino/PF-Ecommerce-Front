@@ -4,7 +4,7 @@ import ReactStars from 'react-stars';
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import { cellDetail, cleanStatus, getAllRating } from "../../redux/actions";
+import { cellDetail, cleanStatus } from "../../redux/actions"; 
 import Questions from "../Questions/Questions.jsx";
 import { fav, cart } from '../Toast/Toast'
 import { BsCartFill, BsStarFill } from 'react-icons/bs';
@@ -23,7 +23,6 @@ export default function Detail(props) {
     // console.log(allRatings, 'soy  lo que llega del back')
     const get = () => {
         dispatch(cellDetail(id))
-        dispatch(getAllRating(id))
     }
 
     const handleClearStatus = (e) => {
@@ -33,7 +32,6 @@ export default function Detail(props) {
     useEffect(() => {
         dispatch(cleanStatus());
         dispatch(cellDetail(id))
-        // dispatch(getAllRating(id))
     }, [dispatch, id])
 
     return (
@@ -68,7 +66,6 @@ export default function Detail(props) {
                                         <div className="container-6 p-3 d-flex flex-column align-items-start justify-content-around border-start border-dark border-opacity-10">
                                             {/* <div className="d-flex flex-column align-items-start justify-content-around border-start border-dark border-opacity-10 ps-4" style={{ width: '35%' }}> */}
                                             <div className="d-flex flex-column align-items-start justify-content-around" >
-
                                                 <h1 className="d-flex flex-column align-items-start tx4">{`${myCell.brand} ${myCell.model} ${myCell.capacity}`}</h1>
                                                 <h6>Brand: {myCell.brand}</h6>
                                                 <h6>Model: {myCell.model}</h6>
@@ -90,7 +87,7 @@ export default function Detail(props) {
                                 <div>
                                     <h4>Comment and Rating:</h4>
                                     {
-                                        allRatings?.map((e, index) => {
+                                        myCell?.ratings?.map((e, index) => {
                                             return (
                                                 <div key={index}>
                                                     <ReactStars

@@ -40,7 +40,6 @@ const Ratings = ({ cellId, r, get }) => {
    const createRating = async (e) => {
       e.preventDefault()
       if (Object.keys(rating).length > 0) {
-         // console.log(rating, 'soy el dato')
          await axios.post(`/rating/${cellId}`, rating);
          toast.success(`rating sent!!`);
          // window.alert("rating sent!");
