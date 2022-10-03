@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createQuestion, getRole, createAnswer } from '../../redux/actions';
 import Accordion from 'react-bootstrap/Accordion';
 import 'bootstrap/dist/css/bootstrap.css';
-// import './Questions.css';
+import './Questions.css';
 
 import {
    Button,
@@ -106,12 +106,12 @@ const Questions = ({ cellId, q, get }) => {
          <div >
             {isAuthenticated ?
                <div className='forumContainer'>
-                  <div className=''>
+                  <div className='titulo'>
                      <h1>Ask your question</h1>
-                     <h3>{user.name}:</h3>
                   </div>
-                  <div className=''>
-                     <input type="text" className='' onChange={(e) => handleChange(e)} name="question" value={question.question}></input>
+                  <div>
+                     <p className="nameUsers ">{user.name}:</p>
+                     <input className='divInput' type="text" onChange={(e) => handleChange(e)} name="question" value={question.question}></input>
                      <button type="button" className="btn btn-outline-primary" onClick={() => createQ()}>Create Question</button>
                   </div>
                </div>
@@ -124,7 +124,7 @@ const Questions = ({ cellId, q, get }) => {
                         <Accordion>
                            <Accordion.Item eventKey="0" >
                               <Accordion.Header>
-                                 <p className="questions">{c.question}</p>
+                                 <p className="questions text-left">{c.question}</p>
                               </Accordion.Header>
                               <Accordion.Body className="answer">
                                  <p>{c.answer}</p>
