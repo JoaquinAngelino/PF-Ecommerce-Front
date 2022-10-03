@@ -3,6 +3,7 @@ import './Favorites.css';
 import FavCard from "./FavCard";
 import { Toaster } from "react-hot-toast";
 import { cart, remove} from '../../components/Toast/Toast'
+import NothingFound from "../../components/NothingFound/NothingFound";
 
 export default function Favorites() {
     const [favorites, setFavorites] = useState(JSON.parse(localStorage.getItem('favList')))
@@ -10,7 +11,7 @@ export default function Favorites() {
     if (!favorites || favorites.length === 0) {
         return (
             <div className="containerHome">
-                <h1>The favorites list is empty.</h1>
+                <NothingFound/>
             </div>
         );
     }
@@ -21,7 +22,7 @@ export default function Favorites() {
         setFavorites(arr)       
     }
 
-    let instrumentsMap = favorites.map((e) => <FavCard
+    let cellsMap = favorites.map((e) => <FavCard
         key={e.id}
         id={e.id}
         line={e.line}
@@ -38,7 +39,7 @@ export default function Favorites() {
         <div className="containerHome">
             <h1>Favorites</h1>
             <div className="favoriteCards">
-                {instrumentsMap}
+                { cellsMap }
             </div>
             <Toaster position="bottom-right" reverseOrder={false}/>            
         </div>

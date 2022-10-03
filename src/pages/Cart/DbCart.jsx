@@ -3,7 +3,7 @@ import './Card.css'
 import { Link } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteFromCart, getUserCart } from "../../redux/actions";
+import { deleteFromCart, getUserCart, changeQuantity } from "../../redux/actions";
 import NothingFound from "../../components/NothingFound/NothingFound";
 import DbShopCard from "./DbShopCard";
 import Loading from "../../components/Loading/Loading";
@@ -15,12 +15,14 @@ export default function DbCart({ user }) {
     const dispatch = useDispatch()
 
     useEffect(() => {
+        localStorage.setItem("carrrito",JSON.stringify(cart))
         setPrice()
     }, [cart])
 
     const setPrice = () => {
         let total = 0
         cart.forEach(e => { total += e.price * (e.quantity ? e.quantity : 1) })
+        localStorage.setItem("totalPrice",total)
         setTotalPrice(total.toFixed(2))
     }
 
@@ -32,6 +34,7 @@ export default function DbCart({ user }) {
     const updateQuantity = (id, quantity) => {
         let found = cart.find(e => e.id === id)
         found.quantity = quantity
+        dispatch(changeQuantity(id, quantity))
         setPrice()
     }
 
