@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { createQuestion, getRole, createAnswer } from '../../redux/actions';
 import Accordion from 'react-bootstrap/Accordion';
+import toast, { Toaster } from 'react-hot-toast';
 import 'bootstrap/dist/css/bootstrap.css';
 import './Questions.css';
 
@@ -54,7 +55,8 @@ const Questions = ({ cellId, q, get }) => {
    const createQ = () => {
       if (question.question.length > 0) {
          dispatch(createQuestion(question));
-         window.alert("Question sent!");
+         toast.success(`Question sent!`);
+         // window.alert("Question sent!");
          setQuestion({
             question: "",
             emailUser: "",
@@ -159,10 +161,32 @@ const Questions = ({ cellId, q, get }) => {
                </FormGroup>
             </ModalBody>
             <ModalFooter>
-               <Button color="primary" onClick={() => createA()}>Editar</Button>
-               <Button color="danger" onClick={() => closeModal()}>Cancelar</Button>
+               <Button color="primary" onClick={() => createA()}>Submit</Button>
+               <Button color="danger" onClick={() => closeModal()}>Cancel</Button>
             </ModalFooter>
          </Modal>
+         <Toaster
+            position="button-right"
+            reverseOrder={false}
+            gutter={8}
+            containerClassName=""
+            containerStyle={{}}
+            toastOptions={{
+               className: '',
+               duration: 5000,
+               style: {
+                  background: '#363636',
+                  color: '#fff',
+               },
+               success: {
+                  duration: 3000,
+                  theme: {
+                     primary: 'green',
+                     secondary: 'black',
+                  },
+               },
+            }}
+         />
       </div>
    )
 }
