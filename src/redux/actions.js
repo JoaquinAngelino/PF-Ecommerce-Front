@@ -14,15 +14,16 @@ export const PUT_CELL = "PUT_CELL";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const PUT_USERS = "PUT_USERS";
 export const GET_USER_CART = "GET_USER_CART"
-export const RUTA_USER="/users"
-export const POST_USER="POST USER"
-export const ALL_USER="ALL USER"
-export const RUTA_USER_ID="/users/id/"
-export const USER_ID="USER ID"
-export const DELETE_FOR_CART="DELETE_FOR_CART"
+export const RUTA_USER = "/users"
+export const POST_USER = "POST USER"
+export const ALL_USER = "ALL USER"
+export const RUTA_USER_ID = "/users/id/"
+export const USER_ID = "USER ID"
+export const DELETE_FOR_CART = "DELETE_FOR_CART"
 export const GET_ALL_ORDERS = "GET_ALL_ORDERS";
 export const PUT_ORDERS = "PUT_ORDERS";
 export const GET_ORDER_ID = "GET_ORDER_ID";
+export const UPDATE_QUANTITY = "UPDATE_QUANTITY";
 
 
 
@@ -94,10 +95,18 @@ export function postUser(user) {
 //GET USER
 export function allUser() {
    return async function (dispatch) {
-      const allUser = await axios(RUTA_USER)
+      const allUser = (await axios(RUTA_USER)).data
+      console.log("estoy en el dispatch", allUser);
+      if (allUser.message === "No users") {
+         return dispatch({
+            type: ALL_USER,
+            payload: []
+         })
+      }
+
       return dispatch({
          type: ALL_USER,
-         payload: allUser.data
+         payload: allUser
       })
    }
 
@@ -251,9 +260,10 @@ export const getUserCart = (email) => {
             localStorage.removeItem('cartList');
          }
          let cart = (await axios.get('/cart/' + user.id)).data
+
          return dispatch({
             type: GET_USER_CART,
-            payload: cart
+            payload: cart.map(e => { return { ...e, quantity: 1 } })
          });
       } catch (err) {
          console.log(err)
@@ -356,5 +366,13 @@ export function getOrdersUser(id) {
       } catch (error) {
          console.log(error)
       }
+   }
+}
+export function  changeQuantity(id, quantity) {
+   return async function (dispatch) {
+      return dispatch({
+         type: UPDATE_QUANTITY,
+         payload: {id, quantity}
+      })
    }
 }

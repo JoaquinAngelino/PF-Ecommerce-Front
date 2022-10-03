@@ -7,7 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import CardPayment from "../../components/Card/CardPayment/CardPayment";
 import "./PaymentForm.css";
-import { deleteItemFromCart } from "../../redux/actions";
+import { deleteItemFromCart, getUserCart } from "../../redux/actions";
+import { useAuth0 } from "@auth0/auth0-react";
+import Loading from "../../components/Loading/Loading";
 
 
 export  default function PaymentForm(){
@@ -19,20 +21,38 @@ export  default function PaymentForm(){
     // 
     
     const totalPrice = JSON.parse(localStorage.getItem("totalPrice"));
+    const items = JSON.parse(localStorage.getItem("carrrito"))
+    console.log("totalprice", totalPrice);
     var pricess=Number(totalPrice)
     console.log(pricess);
-    const items = JSON.parse(localStorage.getItem("cartList"));
-    console.log(items);
-    const user = JSON.parse(localStorage.getItem("user"))
+    console.log("ITEMS", items);
+    // const user = JSON.parse(localStorage.getItem("user"))
+    //------------------------
+    const { user } = useAuth0()
+    useEffect(()=>{
+      if(user){
+        dispatch(getUserCart(user.email))
+      }
+    },[user])
+    const users = useSelector(state => state.allUser);
+    let esteUsuario = {}
+    console.log(esteUsuario);
     console.log(user);
+    let userIdName
+    //------------------------
     // const mai = user.user.mail
-    const mail=user[0].email
     // const userIdName = "a13189e3-541b-412d-ac5f-678f839a305d"
-    console.log(user[0].id);
-    const userIdName=user[0].id
+    useEffect(()=>{
+      if(Object.keys(esteUsuario).length){
+      userIdName = esteUsuario.id
+      esteUsuario = users.find(e => e.email === user.email)
+      }
+    },[users])
 
-    const arr = [items.map(e => e.line)]
-    console.log(arr);
+
+
+    // const arr = [items.map(e => {return {line: e.line, quantity: e.quantity || 1}})]
+    // console.log(arr);
 
     let history = useNavigate();
     function handleRegresar(e){
@@ -52,12 +72,13 @@ export  default function PaymentForm(){
             const { id } = paymentMethod
             console.log(id)
             try {
+              
               const { data } = await axios.post(`http://localhost:3001/checkout`, {
                 id,
-                amount:Number(totalPrice),
-                mail,
+                amount:(Number(totalPrice)),
+                userIdName: esteUsuario.id,
+                mail: user.email,
                 arr:items,
-                userIdName
       
               })
               console.log("Esta es la data"+data);
@@ -71,6 +92,9 @@ export  default function PaymentForm(){
             }
             setLoading(false)
           }
+    }
+    if (!users.length || !items) {
+      return (<Loading />)
     }
 
     return(
@@ -112,7 +136,7 @@ export  default function PaymentForm(){
                 </div>
                 <div className="containerSubCard02">
                     <button onClick={(e) => handleSubmit(e)} disabled={loading ? true : false}>
-                      {loading ? <p>Loading</p> : <p>   { `$ ${totalPrice}.00`}</p>}  <p> 'Checkout'   </p>
+                      {loading ? <p>Loading</p> : <p>   { `$ ${totalPrice.toFixed(0)}.00`}</p>}  <p> 'Checkout'   </p>
                     </button>
                 </div>
               </div>
