@@ -1,0 +1,13 @@
+.questions {
+   align-items: center;
+   justify-content: center;
+   position: flex;
+   font-size: 16px;
+}
+
+.answer {
+   align-items: center;
+   justify-content: center;
+   position: flex;
+   font-size: 14px;
+}

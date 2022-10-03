@@ -5,8 +5,8 @@ import { createQuestion, getRole, createAnswer } from '../../redux/actions';
 import Accordion from 'react-bootstrap/Accordion';
 import 'bootstrap/dist/css/bootstrap.css';
 import toast, { Toaster } from 'react-hot-toast';
+import './Questions.css';
 
-// import './Questions.css';
 
 import {
    Button,
@@ -47,6 +47,7 @@ const Questions = ({ cellId, q, get }) => {
 
 
    const handleChange = (e) => {
+      e.preventDefault()
       const { name, value } = e.target;
       setQuestion({
          ...question,
@@ -54,7 +55,8 @@ const Questions = ({ cellId, q, get }) => {
       });
    }
 
-   const createQ = () => {
+   const createQ = (e) => {
+      e.preventDefault()
       if (question.question.length > 0) {
          dispatch(createQuestion(question));
          toast.success(`Question sent!`);
@@ -69,6 +71,7 @@ const Questions = ({ cellId, q, get }) => {
    }
 
    const sendDataQuestions = (e, questionId, question) => {
+      e.preventDefault();
       setAnswer({
          ...answer,
          id: questionId,
@@ -77,7 +80,8 @@ const Questions = ({ cellId, q, get }) => {
       });
    }
 
-   const createA = () => {
+   const createA = (e) => {
+      e.preventDefault();
       dispatch(createAnswer(answer))
       toast.success(`Answer sent!`);
       // window.alert("Answer sent!");
@@ -96,6 +100,7 @@ const Questions = ({ cellId, q, get }) => {
    }
 
    const handleChangeAnswer = (e) => {
+      e.preventDefault();
       const { value } = e.target;
       setAnswer({
          ...answer,
@@ -123,14 +128,12 @@ const Questions = ({ cellId, q, get }) => {
                {q && q.length >= 0 ? q.map((c, index) => {
                   return (
                      <div key={index}>
-                        <Accordion>
+                        <Accordion className="fixed-center">
                            <Accordion.Item eventKey="0" >
-                              <Accordion.Header>
-                                 <h5>Question:</h5>
+                              <Accordion.Header className="questions">
                                  <p>{c.question}</p>
                               </Accordion.Header>
-                              <Accordion.Body>
-                                 <h5>Answer:</h5>
+                              <Accordion.Body className="answer">
                                  <p>{c.answer}</p>
                                  {
                                     admin ?
