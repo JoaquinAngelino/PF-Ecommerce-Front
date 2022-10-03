@@ -18,7 +18,7 @@ export default function CreateUser(){
         name:user?user.name:"",
         email:user?user.email:"",
         password:"",
-        image:user?image:"",
+        image:user?image:"https://us.123rf.com/450wm/thesomeday123/thesomeday1231712/thesomeday123171200009/91087331-icono-de-perfil-de-avatar-predeterminado-para-hombre-marcador-de-posici%C3%B3n-de-foto-gris-vector-de-ilu.jpg?ver=6",
         location:"",
         direction:"",
         rol:""
@@ -34,8 +34,8 @@ function handleChange(e){
 function handleSubmit(e){
     e.preventDefault()
     dispatch(postUser(input))
-    
     .then(()=>{
+        
         dispatch(allUser())
     })
     .then(()=>{

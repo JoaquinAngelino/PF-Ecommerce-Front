@@ -29,21 +29,16 @@ export default function NavBar() {
   const emailAuth0 = email()
   const gmail = filterEmail()
   // console.log(usuarios)
-  // console.log(emailAuth0)
-  // console.log(gmail)
+  console.log(emailAuth0)
+  console.log(gmail)
   // const userdata = data()
-  // console.log(userdata)
+  console.log(usuarios)
   // console.log(isAuthenticated)
 
   //  user
   localStorage.setItem('user', JSON.stringify(usuarios))
 
-  useEffect(() => {
-    dispatch(allUser());
 
-    // dispatch(email());
-    // dispatch(filterEmail());
-  }, [dispatch])
 
   // const filterEmail=usuarios.filter(e=>e.email==="nahirarroyo@gmail.com")
   function filterEmail() {
@@ -93,10 +88,16 @@ const orderlist=()=>{
 const userIr=()=>{
 navigate('/Profile')
 }
+const orderList=()=>{
+  navigate('panelOrders')
+}
 //  function hola(){
 //   navigate('/postUser')
 //  }
 
+useEffect(()=>{
+  dispatch(allUser());
+},[dispatch])
 
   return (
     <nav className='NavBar mb-2 p-2 sticky-top bg-dark'>
@@ -118,7 +119,7 @@ navigate('/Profile')
         }
         {isAuthenticated ?  <Link to={'Profile/'} className='nav-link'><AiOutlineUserAdd className='NavBarIcon' /></Link> : null}
        
-        {isAuthenticated && gmail!== undefined ?  <Link to={`orders/${gmail[0].id}`} className='nav-link'><BsCardChecklist className='NavBarIcon' /></Link> : null}
+        {isAuthenticated && gmail!== undefined && gmail[0]?  <Link to={`orders/${gmail[0].id}`} className='nav-link'><BsCardChecklist className='NavBarIcon' /></Link> : null}
 
         <div className="navbar-nav hstack gap-3 NavBar-Item">
           {isAuthenticated 
@@ -139,7 +140,7 @@ navigate('/Profile')
           {
             isAuthenticated && gmail !== undefined
             
-              ? (gmail.length === 0 ?
+              ? (!gmail[0]?
                 <Link to='/postUser'>
                   <button type="button" className="btn btn-outline-danger">Complete your user information</button>
                 </Link>
@@ -147,8 +148,20 @@ navigate('/Profile')
               )
               : null
            
-
         }
+        {
+              isAuthenticated && gmail===undefined 
+             
+              ?(
+                    
+                    <Link to='/postUser'>
+                         <button type="button" className="btn btn-outline-danger">Complete sus datos de usuario</button>
+                    </Link>
+                    
+              ) 
+              
+              : null
+            }
 
 
             <br></br>
@@ -161,7 +174,8 @@ navigate('/Profile')
               <DropdownMenu>
                 <DropdownItem onClick={userlist}>User list</DropdownItem>
                 <DropdownItem onClick={celllist}>Cell list</DropdownItem>
-                <DropdownItem onClick={orderlist}>Order list</DropdownItem>
+                <DropdownItem onClick={orderList}>Order list</DropdownItem>
+
               </DropdownMenu>
             </Dropdown>
                : null
