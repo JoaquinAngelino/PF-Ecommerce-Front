@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getOrderById } from "../../redux/actions";
+import { getOrderById, getOrdersUser } from "../../redux/actions";
 import { useParams } from "react-router-dom";
 import "./DetailOrder.css";
 
@@ -8,18 +8,32 @@ const DetailOrder = () => {
     
     const dispatch = useDispatch();
 
-    const { id } = useParams()
-    const order = useSelector((state) => state.order)
+    const { id } = useParams();
+    const { id_User } = useParams();
+    const orders = useSelector((state) => state.orders)
     
     useEffect(() => {
-        dispatch(getOrderById(id))
+        if(id){
+            dispatch(getOrderById(id))
+            
+        }else{
+            dispatch(getOrdersUser(id_User))
+        }
+        
 
     }, [dispatch, id])
     
     return(
+        <div>
+        {orders && orders.length>=0 ? orders.map((order) => {
+            return(
         <div className="conteiner-card-order">
+
             <div className="subcontainer01-order">
                 <div className="title-order-detail"><h1>Order Detail</h1></div>
+                
+
+                
                 {order && order.user? 
                     <div>     
                         <br/><br/>
@@ -89,6 +103,9 @@ const DetailOrder = () => {
                         )
                     }) : <div>has no items selected!</div>}
             </div>
+
+        </div>
+        )}):<p>a</p>}
         </div>
     )
 }
