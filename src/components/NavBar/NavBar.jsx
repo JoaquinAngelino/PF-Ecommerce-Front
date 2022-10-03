@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react";
-import {  getAllUsers } from "../../redux/actions";
+import { allUser } from "../../redux/actions";
 import { BsCartFill, BsStarFill, BsFillPhoneFill } from 'react-icons/bs';
 import { AiOutlineUpload } from 'react-icons/ai';
 import { AiOutlineUserAdd } from "react-icons/ai"
@@ -23,7 +23,7 @@ export default function NavBar() {
   const [dropdown, setDropdown]=useState(false)
   const [dropdown1, setDropdown1]=useState(false)
   const dispatch = useDispatch()
-  const allUsers = useSelector(state => state.users);
+  const allUsers = useSelector(state => state.allUser);
   const { user, isAuthenticated, logout } = useAuth0()
   const usuarios = allUsers
   const emailAuth0 = email()
@@ -32,18 +32,13 @@ export default function NavBar() {
   console.log(emailAuth0)
   console.log(gmail)
   // const userdata = data()
-  // console.log(userdata)
+  console.log(usuarios)
   // console.log(isAuthenticated)
 
   //  user
   localStorage.setItem('user', JSON.stringify(usuarios))
 
-  useEffect(() => {
-    dispatch(getAllUsers());
 
-    // dispatch(email());
-    // dispatch(filterEmail());
-  }, [dispatch])
 
   // const filterEmail=usuarios.filter(e=>e.email==="nahirarroyo@gmail.com")
   function filterEmail() {
@@ -97,6 +92,9 @@ const orderList=()=>{
 //   navigate('/postUser')
 //  }
 
+useEffect(()=>{
+  dispatch(allUser());
+},[dispatch])
 
   return (
     <nav className='NavBar mb-2 p-2 sticky-top bg-dark'>
@@ -132,7 +130,7 @@ const orderList=()=>{
           {
             isAuthenticated && gmail !== undefined
             
-              ? (gmail[0]===null ?
+              ? (!gmail[0]?
                 <Link to='/postUser'>
                   <button type="button" className="btn btn-outline-danger">Complete your user information</button>
                 </Link>
