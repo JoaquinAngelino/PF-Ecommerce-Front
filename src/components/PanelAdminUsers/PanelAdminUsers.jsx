@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllUsers, putUser } from "../../redux/actions";
+import { getAllUsers, putUser, getFiltersUsersAdmin } from "../../redux/actions";
 import "./PanelAdminUsers.css";
 import 'bootstrap/dist/css/bootstrap.css';
 import {
@@ -14,6 +14,7 @@ import {
 } from "reactstrap";
 import { error, success, remove } from "../Toast/Toast";
 import { Toaster } from "react-hot-toast";
+import iconSearch from '../SearchBar/search_FILL0.png'
 
 
 const PanelAdminUsers = () => {
@@ -138,19 +139,6 @@ const PanelAdminUsers = () => {
     if(state.name.length > 0 && state.email.length > 0 && state.image.length > 0 && state.location.length > 0 && state.direction.length > 0 
       && state.role.length > 0 && ((state.role === "Administrador")||(state.role === "Vendedor")||(state.role === "Cliente"))){
 
-        let validationEmail = users.filter((u) => {
-          return (u.email.toUpperCase() === state.email.toUpperCase())
-        })
-
-        if(validationEmail.length>0){
-          setModals({
-            ...modals,
-            modalEditarSeguro: false
-          });
-  
-          error("Error. That email already exists")
-
-        }else{
 
           dispatch(putUser(state))
 
@@ -161,8 +149,6 @@ const PanelAdminUsers = () => {
           cerrarModal();
           
           success("Edited");          
-        }
-
 
       }else{
 
@@ -258,9 +244,54 @@ const PanelAdminUsers = () => {
   };
 
 
+     //filtrado
+     const [searchBar, setSearchBar] = useState('')
+     const [searchFor, setSearchFor] = useState('')
+ 
+     const handleSelect = (e) => {
+       setSearchFor(e.target.value)
+       if(e.target.value === "disabled"){
+         dispatch(getFiltersUsersAdmin(`disabled=true`))
+       }
+     }
+     function handleInputChange(e) {
+         e.preventDefault();
+         setSearchBar(e.target.value);
+     }
+     function handleSubmit(e) {
+         e.preventDefault();
+         if ((searchBar && searchFor) && (searchFor !== "disabled")) {
+           dispatch(getFiltersUsersAdmin(`${searchFor}=${searchBar}`))
+         }
+     }
+
     
     return (
         <div>
+            <div className='divSearchBar'>
+              <select name="variable" onChange={(e) => handleSelect(e)} className="form-control me-2" >
+                <option>Search For...</option>
+                <option value="id">ID</option>
+                <option value="name">Name</option>
+                <option value="email">Email</option>
+                <option value="role">Role</option>
+                <option value="disabled">Disabled</option>
+              </select>
+              <form className="d-flex input-group" role="search" onSubmit={(e) => { handleSubmit(e) }}>
+                <button className="input-group-text" id="inputGroup-sizing-default" type='submit'>
+                  <img src={iconSearch} alt="search Icon" width="25" height="25" />
+                </button>
+                <input className="form-control me-2" value={searchBar} name={"searchBar"} onChange={(e) => { handleInputChange(e) }} placeholder='Type your search...'/>
+              </form>
+            </div>
+            <button className="updateButton input-group-text" onClick={() => dispatch(getAllUsers())}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="updateImg bi bi-bootstrap-reboot" viewBox="0 0 16 16">
+              <path d="M1.161 8a6.84 6.84 0 1 0 6.842-6.84.58.58 0 1 1 0-1.16 8 8 0 1 1-6.556 3.412l-.663-.577a.58.58 0 0 1 .227-.997l2.52-.69a.58.58 0 0 1 .728.633l-.332 2.592a.58.58 0 0 1-.956.364l-.643-.56A6.812 6.812 0 0 0 1.16 8z"/>
+              <path d="M6.641 11.671V8.843h1.57l1.498 2.828h1.314L9.377 8.665c.897-.3 1.427-1.106 1.427-2.1 0-1.37-.943-2.246-2.456-2.246H5.5v7.352h1.141zm0-3.75V5.277h1.57c.881 0 1.416.499 1.416 1.32 0 .84-.504 1.324-1.386 1.324h-1.6z"/>
+            </svg>  All
+            </button>
+
+
           <div className="tableContainer">
             <Table bordered size="sm">
                 <thead>
@@ -294,16 +325,16 @@ const PanelAdminUsers = () => {
                     :<td><p className="dato">{dato.role}</p></td>}
                     {dato.disabled ? 
                     <td class="table-danger">
-                        <Button color="primary" onClick={() => editar(dato)}>Edit</Button>
+                        <Button className="Button" color="primary" onClick={() => editar(dato)}>Edit</Button>
                         {dato.disabled ? 
-                        <Button color="success" onClick={()=> reestablecer(dato)}>Restore</Button>
-                        :<Button color="danger" onClick={()=> eliminar(dato)}>Remove</Button>}
+                        <Button className="Button" color="success" onClick={()=> reestablecer(dato)}>Restore</Button>
+                        :<Button className="Button" color="danger" onClick={()=> eliminar(dato)}>Remove</Button>}
                     </td>
                     :<td>
-                        <Button color="primary" onClick={() => editar(dato)}>Edit</Button>
+                        <Button className="Button" color="primary" onClick={() => editar(dato)}>Edit</Button>
                         {dato.disabled ? 
-                        <Button color="success" onClick={()=> reestablecer(dato)}>Restore</Button>
-                        :<Button color="danger" onClick={()=> eliminar(dato)}>Remove</Button>}
+                        <Button className="Button" color="success" onClick={()=> reestablecer(dato)}>Restore</Button>
+                        :<Button className="Button" color="danger" onClick={()=> eliminar(dato)}>Remove</Button>}
                     </td>}                    
                     </tr>             
                 )):<tr></tr>}
@@ -313,7 +344,7 @@ const PanelAdminUsers = () => {
 
             <Modal isOpen={modals.modalEditar}>
             <ModalHeader>
-              <div><h3>Editar Registro</h3></div>
+              <div><h3>Edit Form</h3></div>
             </ModalHeader>
 
             <ModalBody>
@@ -329,7 +360,7 @@ const PanelAdminUsers = () => {
                 
                 <FormGroup>
                   <label>Email:</label>
-                  <input className="form-control" name="email" type="text" onChange={handleChange} value={state.email}/>
+                  <input className="form-control" readOnly  type="text"  value={state.email}/>
                 </FormGroup>
 
                 <FormGroup>
@@ -347,10 +378,11 @@ const PanelAdminUsers = () => {
                   <input className="form-control" name="role" type="text" onChange={handleChange} value={state.role}/>
                   <label>(Administrador) - (Vendedor) - (Cliente)</label>
                 </FormGroup>
-
-                <FormGroup>
+                
+                <img src={state.image} alt="img" className="datoImg"></img>  
+                <FormGroup>       
                   <label>Image:</label>
-                  <input className="form-control" name="image" type="image" onChange={handleChange} value={state.image}/>
+                  <input className="form-control" name="image" type="text" onChange={handleChange} value={state.image}/>
                 </FormGroup>
             </ModalBody>
 
@@ -377,7 +409,7 @@ const PanelAdminUsers = () => {
 
             <Modal isOpen={modals.modalEliminar}>
             <ModalHeader>
-              <div><h3>Edit record</h3></div>
+              <div><h3>Delete Form</h3></div>
             </ModalHeader>
 
             <ModalBody>
@@ -413,7 +445,7 @@ const PanelAdminUsers = () => {
 
             <Modal isOpen={modals.modalReestablecer}>
             <ModalHeader>
-              <div><h3>Reset record</h3></div>
+              <div><h3>Restore Form</h3></div>
             </ModalHeader>
 
             <ModalBody>

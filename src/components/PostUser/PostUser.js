@@ -3,18 +3,22 @@ import { useSelector, useDispatch } from 'react-redux';
 import { allUser, postUser } from '../../redux/actions';
 import { useAuth0 } from "@auth0/auth0-react";
 import{useNavigate}from "react-router-dom"
+import NotFound from '../../pages/NotFound/NotFound';
 
 export default function CreateUser(){
     const navigate=useNavigate()
     const dispatch = useDispatch();
     const {user, isAuthenticated}=useAuth0()
     console.log("Eston es: "+isAuthenticated)
+    console.log(user)
+    const image=user?user.picture:"https://us.123rf.com/450wm/thesomeday123/thesomeday1231712/thesomeday123171200009/91087331-icono-de-perfil-de-avatar-predeterminado-para-hombre-marcador-de-posici%C3%B3n-de-foto-gris-vector-de-ilu.jpg?ver=6"
+    console.log(image)
     
     const [input, setInput] = useState({
-        name:user.name,
-        email:user.email,
+        name:user?user.name:"",
+        email:user?user.email:"",
         password:"",
-        image:user.picture,
+        image:user?image:"https://us.123rf.com/450wm/thesomeday123/thesomeday1231712/thesomeday123171200009/91087331-icono-de-perfil-de-avatar-predeterminado-para-hombre-marcador-de-posici%C3%B3n-de-foto-gris-vector-de-ilu.jpg?ver=6",
         location:"",
         direction:"",
         rol:""
@@ -30,8 +34,8 @@ function handleChange(e){
 function handleSubmit(e){
     e.preventDefault()
     dispatch(postUser(input))
-    
     .then(()=>{
+        
         dispatch(allUser())
     })
     .then(()=>{
@@ -40,26 +44,39 @@ function handleSubmit(e){
 }
 
 return(
-    isAuthenticated &&(
+    isAuthenticated ?(
         <div>
-        <img src={input.image}/>
-        <h4>{input.name}</h4>
-        <h4>{input.email}</h4>
-        <label>location</label>
+            <div>
+            <img src={input.image}/>
+              <h4>{input.name}</h4>
+             <h4>{input.email}</h4>
+            </div>
+
+<div>
+<label>Location </label>
         <input type="text"
         value={input.location}
         name="location"
         id="location"
         onChange={handleChange}/>
-         <label>direction</label>
+</div>
+<div>
+    <br></br>
+<label>Direction</label>
         <input type="text"
         value={input.direction}
         name="direction"
         id="direction"
         onChange={handleChange}/>
-        <button onClick={handleSubmit}>Update</button>
+</div>
+<br></br>
+<div>
+<button onClick={handleSubmit}>Update</button>
+</div>
+
+      
     </div>
-    )
+    ):<NotFound/>
 
 )
 }

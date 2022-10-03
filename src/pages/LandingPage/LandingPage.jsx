@@ -1,6 +1,8 @@
 
-
-import React, { useState } from 'react'; 
+import { useAuth0 } from "@auth0/auth0-react";
+import React, { useState,useEffect } from 'react'; 
+import { getAllUsers } from "../../redux/actions";
+import { useDispatch,useSelector } from 'react-redux';
 import {
   Carousel,
   CarouselItem,
@@ -40,10 +42,17 @@ const items = [
 
 
 const LandingPage = () => {
-  
+  const {user, isAuthenticated, logout}=useAuth0()
+  const allUsers = useSelector(state => state.users);
+  const dispatch = useDispatch();
+  const todosUser = allUsers
+  const emailAuth0=email()
+  const userDb=filterEmail()
 
+console.log(todosUser)
+console.log(userDb)
+console.log(salir())
 
-  
 
   const [activeIndex, setActiveIndex] = useState(0)
   const [animating, setAnimating] = useState(false)
@@ -77,7 +86,42 @@ const LandingPage = () => {
       </CarouselItem>
     )
   })
-  return (
+
+  useEffect(()=>{
+    dispatch(getAllUsers())
+},[])
+
+// useEffect(()=>{
+//   if(userDb!==undefined && userDb[0].disabled===true){
+//     dispatch(logout())
+//   }
+  
+// },[])
+function salir(){
+  if(userDb!==undefined && userDb[0]&& userDb[0].disabled===true){
+//  alert ("tu cuenta fue suspendida")
+logout()
+  }
+}
+
+
+ 
+function email() {
+  if (isAuthenticated) {
+    return user.email
+  }
+}
+function filterEmail() {
+  if (isAuthenticated && todosUser.length) {
+    return todosUser.filter(e => e.email === emailAuth0)
+  }
+}
+salir()
+
+
+
+
+  return ( 
     <div className='container'>
       <Carousel
         activeIndex={activeIndex}
@@ -91,6 +135,8 @@ const LandingPage = () => {
       </Carousel>
     </div>
   )
+  
 }
+
 
 export default LandingPage

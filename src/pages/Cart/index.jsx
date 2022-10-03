@@ -1,64 +1,21 @@
-import React, { useEffect, useState } from "react";
-import ShopCard from "./ShopCard";
-import './Card.css'
-import { getPrice } from "../../components/Card/favAndCart";
-import {Link} from "react-router-dom";
-import { Toaster } from "react-hot-toast";
 
-export default function ShoppingCart() {
+import DbCart from "./DbCart";
+import LocalCart from "./LocalCart";
+import Loading from "../../components/Loading/Loading";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useSelector } from "react-redux";
 
-    const [cartItem, setCartItem] = useState(JSON.parse(localStorage.getItem('cartList')))
-    const [totalPrice, setTotalPrice] = useState(getPrice());
+export default function Cart() {
+  const { user, isLoading } = useAuth0()
+  const users = useSelector(state => state.allUser);
 
-    useEffect(()=>{
-        localStorage.setItem("totalPrice", JSON.stringify(totalPrice));
-    },[totalPrice])
+  function isRegistered() {
+    if (!user) { return false }
+    return users.some(e => e.email === user.email)
+  }
 
-    const deleteItem = (id) => {
-        let arr = cartItem.filter(e => e.id !== id)
-        localStorage.setItem('cartList', JSON.stringify(arr))
-        setCartItem(arr)
-        setTotalPrice(getPrice())
-    }
-
-    const updateQuantity = () => {
-        setTotalPrice(getPrice())
-    }
-
-
-    if (!cartItem) {
-        return (
-            <h4>
-                The CartItem list is empty.
-            </h4>
-        )
-    }
-    let cartItemMap = cartItem.map((e) => <ShopCard
-        key={e.id}
-        id={e.id}
-        line={e.line}
-        model={e.model}
-        stock={e.stock}
-        capacity={e.capacity}
-        memoryRAM={e.memoryRAM}
-        price={e.price}
-        brand={e.brand}
-        image={e.image}
-        deleteItem={deleteItem}
-        updateQuantity={updateQuantity}
-        quantity={e.quantity}
-    />
-    )
-
-    return (
-        <div className="shoppingCart">
-            <h2>Your Shopping Cart</h2>
-            <div className="principalSC">
-                {cartItemMap}
-            </div>
-            <hr />
-            <Link to={"/cart/paymentForm"}><button>Buy now !</button></Link>
-            <Toaster position="bottom-right" reverseOrder={false}/>
-        </div>
-    );
+  if (isLoading) {
+    return (<Loading />)
+  }
+  return (user && isRegistered()) ? <DbCart user={user} /> : <LocalCart registered={!!user} />
 }

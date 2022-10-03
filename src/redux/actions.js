@@ -15,12 +15,19 @@ export const PUT_QUESTION = "PUT_QUESTION";
 export const PUT_CELL = "PUT_CELL";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const PUT_USERS = "PUT_USERS";
-export const RUTA_USER = "/users"
-export const POST_USER = "POST USER"
-export const ALL_USER = "ALL USER"
-export const RUTA_USER_ID = "/users/id/"
-export const USER_ID = "USER ID"
-export const DELETE_FOR_CART = "DELETE_FOR_CART"
+export const GET_USER_CART = "GET_USER_CART"
+export const RUTA_USER="/users"
+export const POST_USER="POST USER"
+export const ALL_USER="ALL USER"
+export const RUTA_USER_ID="/users/id/"
+export const USER_ID="USER ID"
+export const DELETE_FOR_CART="DELETE_FOR_CART"
+export const GET_ALL_ORDERS = "GET_ALL_ORDERS";
+export const PUT_ORDERS = "PUT_ORDERS";
+export const GET_ORDER_ID = "GET_ORDER_ID";
+
+
+
 
 
 
@@ -90,7 +97,7 @@ export function postUser(user) {
          })
    }
 }
-
+//POST USER
 //GET USER
 export function allUser() {
    return async function (dispatch) {
@@ -237,6 +244,12 @@ export function updateProduct(id, payload) {
    }
 }
 
+// export function postRating(id){
+//    return function(){
+//       axios.post("/celulares",rating)
+//    }
+// }
+
 
 export const getFiltersProductsAdmin = (filters) => {
    return async function (dispatch) {
@@ -248,12 +261,41 @@ export const getFiltersProductsAdmin = (filters) => {
    };
 };
 
-export function deleteItemFromCart(id) {
-   return {
-      type: DELETE_FOR_CART,
-      payload: id
-   }
-}
+export const getUserCart = (email) => {
+   return async function (dispatch) {
+      try {
+         const user = (await axios.get('/users/getByEmail/' + email)).data
+         let localCart = JSON.parse(localStorage.getItem('cartList'))
+         if (localCart) {
+            await axios.post('/cart', { userId: user.id, phoneId: localCart.map(e => e.id) })
+            localStorage.removeItem('cartList');
+         }
+         let cart = (await axios.get('/cart/' + user.id)).data
+         return dispatch({
+            type: GET_USER_CART,
+            payload: cart
+         });
+      } catch (err) {
+         console.log(err)
+         return dispatch({
+            type: GET_USER_CART,
+            payload: []
+         });
+      }
+   };
+};
+
+export const deleteFromCart = (email, id) => {
+   return async function (dispatch) {
+      try {
+         const user = (await axios.get('/users/getByEmail/' + email)).data
+         await axios.delete('/cart', { data: { userId: user.id, phoneId: id } })
+      } catch (err) {
+         console.log(err)
+      }
+   };
+};
+
 
 export const getAllProductsAdmin = () => {
    return async function (dispatch) {
@@ -264,3 +306,75 @@ export const getAllProductsAdmin = () => {
       });
    };
 };
+
+export const getAllOrders = () => {
+   return async function (dispatch) {
+      const orders = await axios('/orders');
+      return dispatch({
+         type: GET_ALL_ORDERS,
+         payload: orders.data
+      });
+   };
+};
+
+export function putOrder(a) {
+   return async function (dispatch) {
+      return await axios
+         .put(`/orders/${a.id_Orders}`, a)
+         .then((response) => {
+            dispatch({
+               type: PUT_ORDERS,
+               payload: response.data,
+            });
+         });
+   };
+}
+
+export const getFiltersUsersAdmin = (filters) => {
+   return async function (dispatch) {
+      const u = await axios(`/users/admin/?${filters}`);
+      return dispatch({
+         type: GET_ALL_USERS,
+         payload: u.data
+      });
+   };
+};
+
+export const getFiltersOrdersAdmin = (filters) => {
+   return async function (dispatch) {
+      const orders = await axios(`/orders/?${filters}`);
+      return dispatch({
+         type: GET_ALL_ORDERS,
+         payload: orders.data
+      });
+   };
+};
+
+export function getOrderById(id) {
+   return async function (dispatch) {
+      try {
+         var orde = await axios.get("/orders/id/" + id)
+         return dispatch({
+            type: GET_ORDER_ID,
+            payload: orde.data
+         })
+      } catch (error) {
+         console.log(error)
+      }
+   }
+}
+
+
+export function getOrdersUser(id) {
+   return async function (dispatch) {
+      try {
+         var orde = await axios.get("/orders/user/" + id)
+         return dispatch({
+            type: GET_ORDER_ID,
+            payload: orde.data
+         })
+      } catch (error) {
+         console.log(error)
+      }
+   }
+}

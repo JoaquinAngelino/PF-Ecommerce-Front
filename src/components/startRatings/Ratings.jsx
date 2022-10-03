@@ -7,7 +7,10 @@ import { useDispatch } from "react-redux";
 import { getRole } from "../../redux/actions";
 
 const Ratings = ({ cellId, r, get }) => {
-
+   const colors = {
+      orange: "#FFBA5A",
+      grey: "#a9a9a9"
+   };
    const dispatch = useDispatch();
    const { user, isAuthenticated } = useAuth0();
 
@@ -137,5 +140,4 @@ const styles = {
 };
 
 export default Ratings;
-
 
