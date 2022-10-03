@@ -15,7 +15,7 @@ import Home from './pages/Home/Home';
 import LandingPage from './pages/LandingPage/LandingPage';
 import NotFound from './pages/NotFound/NotFound';
 import Detail from './components/Detail/Detail';
-import ShoppingCart from './pages/Cart';
+import Cart from './pages/Cart';
 
 import PanelAdminCells from './components/PanelAdminCells/PanelAdminCells';
 import PanelAdminUsers from './components/PanelAdminUsers/PanelAdminUsers';
@@ -44,7 +44,7 @@ function App() {
         <Route  path='/favorites' element={<Favorites />} />
         <Route  path='/contact' element={<ContactUs />} />
         <Route  path='/about' element={<AboutUs />} />
-        <Route  path='/cart' element={<ShoppingCart />} />
+        <Route  path='/cart' element={<Cart />} />
         <Route path="/detail/:id" element={<Detail/>}/>
         <Route path="/create" element={<CreateProduct/>}/>
         <Route path='*' element={<NotFound />} />
