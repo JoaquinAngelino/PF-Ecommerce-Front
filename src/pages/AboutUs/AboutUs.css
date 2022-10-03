@@ -82,17 +82,32 @@
  
 }
 
-.CardIcon {
-  margin: 20px;
+.CardIconG {
+  margin: 2px;
+  width: 2.5em;
+  height: 2.5em;
+  transition: all 0.3s;
+ color: black;
+}
+
+.CardIconL {
+  margin: 2px;
   width: 2.5em;
   height: 2.5em;
   transition: all 0.3s;
 }
 
-.CardIcon:hover {
+
+.CardIconG:hover {
   transform: scale(1.1);
-  color: #198754;
+  color: black;
 }
+
+.CardIconL:hover {
+  transform: scale(1.1);
+  color: blue;
+}
+
 
 .IconsDiv {
   display: flex;

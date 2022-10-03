@@ -9,7 +9,10 @@ const {
   POST_USER,
   USER_ID,
   ALL_USER,
-  GET_ALL_ORDERS
+  GET_USER_CART,
+  GET_ALL_ORDERS,
+  GET_ORDER_ID,
+  GET_ORDERS_USER,
 } = require('./actions.js')
 
 const initialState = {
@@ -21,7 +24,9 @@ const initialState = {
   users: [],
   user:[],
   allUser:[],
-  orders:[]
+  cart: [],
+  orders:[],
+  order:{}
 }
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -88,11 +93,22 @@ export default function rootReducer(state = initialState, { type, payload }) {
               allUser:payload
             }
 
+            case GET_USER_CART:
+              return{
+                ...state,
+                cart: payload,
+                isLoading: false
+              }
             case GET_ALL_ORDERS:
               return {
                 ...state,
                 orders: payload
               }
+              case GET_ORDER_ID:
+                return {
+                  ...state,
+                  orders: payload
+                }
 
     default:
       return state

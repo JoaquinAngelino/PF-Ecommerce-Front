@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react";
 import { allUser } from "../../redux/actions";
-import { BsCartFill, BsStarFill, BsFillPhoneFill } from 'react-icons/bs';
+import { BsCartFill, BsStarFill, BsFillPhoneFill, BsCardChecklist } from 'react-icons/bs';
 import { AiOutlineUpload } from 'react-icons/ai';
 import { AiOutlineUserAdd } from "react-icons/ai"
 import { Link } from 'react-router-dom';
@@ -82,6 +82,9 @@ const userlist=()=>{
 const celllist=()=>{
 navigate('/panelCells')
 }
+const orderlist=()=>{
+  navigate('/panelorders')
+}
 const userIr=()=>{
 navigate('/Profile')
 }
@@ -99,19 +102,26 @@ useEffect(()=>{
   return (
     <nav className='NavBar mb-2 p-2 sticky-top bg-dark'>
       <div className="containerNavBar container-fluid justify-content-around ">
-              <Link to='/home'>
-        <img src={Image} alt="#" width={"110px"} height={"85px"} />
-      </Link>
+  
+
+      <div className="navbar-nav hstack gap-3 NavBar-Item">
+        <Link to='/home'>
+          <img src={Image} alt="#" width={"110px"} height={"85px"} />
+        </Link>
+        <SearchBar />
+        <Link to='/home' className="nav-link"><BsFillPhoneFill className='NavBarIcon' /></Link>
+        <Link to='/favorites' className="nav-link"><BsStarFill className='NavBarIcon' /></Link>
+        <Link to='/cart' className="nav-link"><BsCartFill className='NavBarIcon' /></Link>
+        {
+          isAuthenticated && gmail !== undefined && gmail[0] && gmail[0].role !== "Cliente"
+            ? <Link to='/create' className="nav-link"><AiOutlineUpload className='NavBarIcon' /></Link>
+            : null
+        }
+        {isAuthenticated ?  <Link to={'Profile/'} className='nav-link'><AiOutlineUserAdd className='NavBarIcon' /></Link> : null}
+       
+        {isAuthenticated && gmail!== undefined && gmail[0]?  <Link to={`orders/${gmail[0].id}`} className='nav-link'><BsCardChecklist className='NavBarIcon' /></Link> : null}
 
         <div className="navbar-nav hstack gap-3 NavBar-Item">
-          <Link to='/home' className="nav-link"><BsFillPhoneFill className='NavBarIcon' /></Link>
-          <Link to='/favorites' className="nav-link"><BsStarFill className='NavBarIcon' /></Link>
-          <Link to='/cart' className="nav-link"><BsCartFill className='NavBarIcon' /></Link>
-          {
-            isAuthenticated && gmail !== undefined && gmail[0] && gmail[0].role !== "Cliente"
-              ? <Link to='/create' className="nav-link"><AiOutlineUpload className='NavBarIcon' /></Link>
-              : null
-          }
           {isAuthenticated 
           //  ? <Link to={'Profile/'} className='nav-link'><AiOutlineUserAdd className='NavBarIcon' /></Link> 
           ? <Dropdown isOpen={dropdown} toggle={abrirCerrarDropdown} size='sm'>
@@ -138,10 +148,8 @@ useEffect(()=>{
               )
               : null
            
-
         }
-
-{
+        {
               isAuthenticated && gmail===undefined 
              
               ?(
@@ -154,6 +162,8 @@ useEffect(()=>{
               
               : null
             }
+
+
             <br></br>
              {
                 isAuthenticated && gmail!==undefined && gmail[0] && gmail[0].role==="Administrador"
@@ -185,11 +195,10 @@ useEffect(()=>{
           </div>
         </div>
 
-        <SearchBar/>
        
         
         
-     
+        </div>
     </nav>
   )
 }

@@ -7,29 +7,21 @@ import { Link } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import { remove} from '../../components/Toast/Toast';
+import { remove } from '../../components/Toast/Toast';
 
-export default function ShopCard({ id, model, stock, price, image, deleteItem, updateQuantity, quantity }) {
+export default function DbShopCard({ id, model, stock, price, image, deleteItem, updateQuantity, quantity }) {
   const [qua, setQua] = useState(quantity);
 
   const plus = () => {
-    if (qua < stock){
-      const cartList = JSON.parse(localStorage.getItem('cartList'))
-      let found = cartList.find(e => e.id === id)
-      found.quantity += 1
-      localStorage.setItem('cartList', JSON.stringify(cartList))
+    if (qua < stock) {
       setQua(qua + 1)
-      updateQuantity()
+      updateQuantity(id, quantity + 1)
     }
   }
   const minus = () => {
     if (qua > 1) {
-      const cartList = JSON.parse(localStorage.getItem('cartList'))
-      let found = cartList.find(e => e.id === id)
-      found.quantity -= 1
-      localStorage.setItem('cartList', JSON.stringify(cartList))
       setQua(qua - 1)
-      updateQuantity()
+      updateQuantity(id, quantity - 1)
     }
   }
 

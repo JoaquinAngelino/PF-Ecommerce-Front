@@ -15,15 +15,15 @@
     gap: 2em;
     margin-bottom: 1em;
     color:grey;
+    padding: 50px;
 }
 
 .containerCards{
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    width: 72%;
-    gap: 1em;
-   
+    width: 52%;
+    gap: 2em; 
 }
 
 .cardRating {
@@ -33,19 +33,25 @@
     justify-content: center;
     height: 2.5em !important;
     width: 7.5em !important;
+   
 }
 
 .cardStar {
     margin: 0;
     font-size: 1.2rem;
     color: #888;
+   
+    
 }
 
 .cardStarActive {
     margin: 0;
     font-size: 1.2rem;
     color: #169E85;
+    
 }
+
+
 
 .aditionalContent .MuiFormControl-root {
     display: flex !important;
@@ -78,6 +84,7 @@
 .aditionalContent {
     display: flex;
     align-items: center;
+    
 }
 
 .numberOfResults {
