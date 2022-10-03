@@ -13,11 +13,11 @@ const AdminPanel=()=>{
             <h4>Cells</h4>
             <Link to='/panelCells'><button>Celss</button></Link>
         </div>
+        <div>
+            <h4>Orders</h4>
+            <Link to='/panelorders'><button>Orders</button></Link>
         </div>
-
-       
-
-        
+        </div>
     )
 }
 export default AdminPanel;

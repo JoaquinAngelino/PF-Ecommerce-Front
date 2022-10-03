@@ -80,6 +80,18 @@ body.Dark .navbar {
   background: linear-gradient(45deg, #0f7461, black, #0f7461);
 }
 
+.buttonData{
+      background-color: red;
+      color:white;
+      width:100px;
+      
+}
+
+
+.data{
+  text-decoration: none;
+}
+  
 
 
 .sellStyle {

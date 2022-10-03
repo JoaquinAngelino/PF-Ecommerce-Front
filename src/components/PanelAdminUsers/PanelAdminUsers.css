@@ -1,0 +1,35 @@
+.datoImg {
+    width: 60px;
+    height: 60px;
+  }
+
+th{
+    text-align: center;
+}
+
+td{
+
+    text-align: center;
+}
+
+.dato{
+    margin-top: 2em;
+}
+
+.tableContainer{
+    width: 50%;
+    margin-left: 25%;
+}
+
+.divSearchBar{
+    width: 50%;
+    margin-left: 25%;
+    flex-grow: 2;
+    display: flex;
+    justify-content: center;
+}
+
+.form-control{
+    cursor: pointer;
+    font-weight: bold;
+}

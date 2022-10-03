@@ -15,10 +15,10 @@ export default function AboutUs() {
           <p>Joaquín Angelino Corona</p>
           <div >
             <a rel="noreferrer" target="_blank" href="https://github.com/JoaquinAngelino">
-              <BsGithub className='CardIcon' />
+              <BsGithub className='CardIconG' />
             </a>
             <a rel="noreferrer" target="_blank" href="https://www.linkedin.com/in/joaquin-angelino-corona/">
-              <BsLinkedin className='CardIcon' />
+              <BsLinkedin className='CardIconL' />
             </a>
           </div>
         </div>
@@ -27,10 +27,10 @@ export default function AboutUs() {
           <p>Andres Sanchez de la Fuente</p>
           <div className='IconDiv'>
             <a rel="noreferrer" target="_blank" href="https://github.com/asdelaf  ">
-              <BsGithub className='CardIcon' />
+              <BsGithub className='CardIconG' />
             </a>
             <a rel="noreferrer" target="_blank" href="https://www.linkedin.com/in/andres-sanchez-de-la-fuente/">
-              <BsLinkedin className='CardIcon' />
+              <BsLinkedin className='CardIconL' />
             </a>
           </div>
         </div>
@@ -39,10 +39,10 @@ export default function AboutUs() {
           <p>Frank Smith</p>
           <div className='IconDiv'>
             <a rel="noreferrer" target="_blank" href="https://github.com/12frankporx">
-              <BsGithub className='CardIcon' />
+              <BsGithub className='CardIconG' />
             </a>
             <a rel="noreferrer" target="_blank" href="https://www.linkedin.com/in/frank-smith-bocangelino-rojas-351157168/">
-              <BsLinkedin className='CardIcon' />
+              <BsLinkedin className='CardIconL' />
             </a>
           </div>
         </div>
@@ -51,10 +51,10 @@ export default function AboutUs() {
           <p>Federico Valdez</p>
           <div className='IconDiv'>
             <a rel="noreferrer" target="_blank" href="https://github.com/fvaldezz96">
-              <BsGithub className='CardIcon' />
+              <BsGithub className='CardIconG' />
             </a>
             <a rel="noreferrer" target="_blank" href="https://www.linkedin.com/in/fede-valdez-205499211/">
-              <BsLinkedin className='CardIcon' />
+              <BsLinkedin className='CardIconL' />
             </a>
           </div>
         </div>
@@ -63,10 +63,10 @@ export default function AboutUs() {
           <p>Ayrton Acevedo</p>
           <div className='IconDiv'>
             <a rel="noreferrer" target="_blank" href="https://github.com/ayrtonacevedo">
-              <BsGithub className='CardIcon' />
+              <BsGithub className='CardIconG' />
             </a>
             <a rel="noreferrer" target="_blank" href="https://www.linkedin.com/in/ayrton-nahir-arroyo-acevedo-b795b0212">
-              <BsLinkedin className='CardIcon' />
+              <BsLinkedin className='CardIconL' />
             </a>
           </div>
         </div>
@@ -75,10 +75,10 @@ export default function AboutUs() {
           <p>Juan David Pabon</p>
           <div className='IconDiv'>
             <a rel="noreferrer" target="_blank" href="https://github.com/juandavid84">
-              <BsGithub className='CardIcon' />
+              <BsGithub className='CardIconG' />
             </a>
             <a rel="noreferrer" target="_blank" href="https://www.linkedin.com/in/juan-david-pabon-porras-4123b389/">
-              <BsLinkedin className='CardIcon' />
+              <BsLinkedin className='CardIconL' />
             </a>
           </div>
         </div>
