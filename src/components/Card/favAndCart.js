@@ -12,16 +12,16 @@ export const addToFav = (id, brand, line, model, price, stock, capacity, image, 
   // handleAdded()
 }
 
-export const addToCart = async (id, brand, line, model, price, stock, capacity, image, memoryRAM) => {
-    let cart = JSON.parse(localStorage.getItem('cartList'))
-    if (cart) {
-      if (!cart.some(item => item.id === id)) {
-        cart.push({ id, brand, line, model, price, stock, capacity, image, memoryRAM, quantity: 1 })
-      }
-    } else {
-      cart = [{ id, brand, line, model, price, stock, capacity, image, memoryRAM, quantity: 1 }]
+export const addToCart = (id, brand, line, model, price, stock, capacity, image, memoryRAM) => {
+  let cart = JSON.parse(localStorage.getItem('cartList'))
+  if (cart) {
+    if (!cart.some(item => item.id === id)) {
+      cart.push({ id, brand, line, model, price, stock, capacity, image, memoryRAM, quantity: 1 })
     }
-    localStorage.setItem('cartList', JSON.stringify(cart))
+  } else {
+    cart = [{ id, brand, line, model, price, stock, capacity, image, memoryRAM, quantity: 1 }]
+  }
+  localStorage.setItem('cartList', JSON.stringify(cart))
 }
 
 export const getPrice = () => {

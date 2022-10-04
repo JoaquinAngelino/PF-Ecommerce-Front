@@ -10,7 +10,7 @@ export default function Cart() {
   const users = useSelector(state => state.allUser);
 
   function isRegistered() {
-    if (!user) { return false }
+    if (!user || !users) { return false }
     return users.some(e => e.email === user.email)
   }
 

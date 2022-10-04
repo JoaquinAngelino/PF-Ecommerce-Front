@@ -45,17 +45,9 @@ function App() {
         <Route  path='/contact' element={<ContactUs />} />
         <Route  path='/about' element={<AboutUs />} />
         <Route  path='/cart' element={<Cart />} />
-        <Route path="/detail/:id" element={<Detail/>}/>
         <Route path="/create" element={<CreateProduct/>}/>
-        <Route path='*' element={<NotFound />} />
         <Route path='/postUser' element={<PostUser/>} />
-        <Route path='/Profile' element={<Profile/>}/>
         <Route path='/cart/paymentForm' element={<Elements stripe={stripePromise}><PaymentForm></PaymentForm></Elements>}/>
-        {/* <Route path="/paymentForm" element={<PaymentForm/>}/> */}
-        
-        <Route path="/create" element={<CreateProduct/>}/>
-        <Route path='*' element={<NotFound />} />
-
         <Route path="/detail/:id" element={<Detail/>}/>
         <Route path='/Profile' element={<Profile/>}/>
         <Route path='/panelCells' element={<PanelAdminCells/>}/>
@@ -67,6 +59,7 @@ function App() {
         <Route path='/orders/:id_User' element={<DetailOrder/>}/>
      
 
+        <Route path='*' element={<NotFound />} />
 
       </Routes>
       <Footer />
