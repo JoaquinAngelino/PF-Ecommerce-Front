@@ -10,8 +10,6 @@ import "./PaymentForm.css";
 import { allUser, getUserCart } from "../../redux/actions";
 import { useAuth0 } from "@auth0/auth0-react";
 import Loading from "../../components/Loading/Loading";
-import { LtePlusMobiledata } from "@mui/icons-material";
-
 
 export default function PaymentForm() {
 
@@ -20,53 +18,26 @@ export default function PaymentForm() {
   const elements = useElements();
   const [loading, setLoading] = useState(false)
   const users = useSelector(state => state.allUser);
-  // 
   const totalPrice = JSON.parse(localStorage.getItem("totalPrice"));
   const items = JSON.parse(localStorage.getItem("carrrito"))
-  // const user = JSON.parse(localStorage.getItem("user"))
-  //------------------------
-  let { user } = useAuth0()
-  
+  const { user } = useAuth0()
+
   useEffect(() => {
     if (user) {
       dispatch(getUserCart(user.email))
       dispatch(allUser());
     }
-  }, [user,dispatch])
-  
-  // console.log("sa",users);
-  // console.log("A",user);
+  }, [user, dispatch])
+
   var esteUsuario = {}
-  // let newA={}
-  // if(users.)
-  if(user!=undefined){
-    for(let i in users){
-      // console.log(users[i].email);
-      // console.log(user.email); 
-      if(users[i].email==user.email){
-        esteUsuario=users[i];
+  if (user != undefined) {
+    for (let i in users) {
+      if (users[i].email == user.email) {
+        esteUsuario = users[i];
       }
-      // if(users[i].email==user.email){
-      //   esteUsuario=users[i];
-      // }
     }
-}
-
-console.log(esteUsuario)
-  
-
-  
-
+  }
   //------------------------
-  // const mai = user.user.mail
-  // const userIdName = "a13189e3-541b-412d-ac5f-678f839a305d"
-  // useEffect(() => {
-  //   if (users.length && user) {
-  //     esteUsuario = users.find(e => e.email === user.email)
-  //   }
-  // }, [users, user])
-
-  console.log(esteUsuario);
 
   let history = useNavigate();
   function handleRegresar(e) {
@@ -84,7 +55,6 @@ console.log(esteUsuario)
     if (!error) {
       const { id } = paymentMethod
       try {
-        console.log("BEFORE postPayment, esteusuario.id", esteUsuario.id);
         const data = await axios.post(`http://localhost:3001/checkout`, {
           id,
           amount: (Number(totalPrice)),
@@ -93,13 +63,10 @@ console.log(esteUsuario)
           arr: items,
 
         })
-        console.log("!!!!! Esta es la data !!!!!!!", data);
         if (data.status === 200) {
           localStorage.removeItem("totalPrice")
           localStorage.removeItem("carrrito")
-          console.log("BEFORE DELETE, esteusuario.id", esteUsuario.id);
-          const res = await axios.delete('/cart', { data: { userId: esteUsuario.id } })
-          console.log(res);
+          await axios.delete('/cart', { data: { userId: esteUsuario.id } })
           alert(`You have pay $ ${totalPrice} successfully`)
         }
         setLoading(false)
