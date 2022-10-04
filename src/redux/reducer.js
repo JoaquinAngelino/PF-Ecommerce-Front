@@ -127,7 +127,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
                   case GET_REVIEW_BOOLEAN:
                     return {
                       ...state,
-                      admin: payload
+                      rating: payload
                     }
 
     default:

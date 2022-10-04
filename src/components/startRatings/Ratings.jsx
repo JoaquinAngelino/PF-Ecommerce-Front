@@ -54,15 +54,18 @@ const Ratings = ({ cellId, r, get }) => {
          get();
       }
    }
+   
 
    useEffect(() => {
+      
       if (isAuthenticated) {
          dispatch(getRolesRating(user.email, cellId));
       }
-   }, [dispatch])
+   }, [dispatch, r])
 
 return (
       <div>
+   
          {ratingRol && isAuthenticated ?
 
             <form style={styles.container} onSubmit={(e) => createRating(e)}>
@@ -87,7 +90,7 @@ return (
                <button type="submit" className="btn btn-outline-primary">Submit</button>
             </form>
 
-         : <p>no agarro el mail</p>
+         : <p></p>
             
          }
          <Toaster
