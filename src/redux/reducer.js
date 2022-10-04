@@ -15,6 +15,7 @@ const {
   GET_ORDER_ID,
   GET_ORDERS_USER,
   UPDATE_QUANTITY,
+  GET_REVIEW_BOOLEAN
 } = require('./actions.js')
 
 const initialState = {
@@ -26,10 +27,12 @@ const initialState = {
   users: [],
   user: [],
   allUser: [],
-  rating: false,
   cart: [],
   orders: [],
-  order: {}
+  order: {},
+  allUser: [],
+  allRating: [],
+  rating: false
 }
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -97,46 +100,52 @@ export default function rootReducer(state = initialState, { type, payload }) {
         allUser: payload
       }
 
-      case GET_ALL_USERS:
-        return {
-          ...state,
-          users: payload
-        }
-        case USER_ID:
-          return ({
-            ...state,
-            user:payload 
-          })
-          case ALL_USER:
-            return{
-              ...state,
-              allUser:payload
-            }
+    case GET_ALL_USERS:
+      return {
+        ...state,
+        users: payload
+      }
+    case USER_ID:
+      return ({
+        ...state,
+        user: payload
+      })
+    case ALL_USER:
+      return {
+        ...state,
+        allUser: payload
+      }
 
-            case GET_USER_CART:
-              return{
-                ...state,
-                cart: payload,
-                isLoading: false
-              }
-            case GET_ALL_ORDERS:
-              return {
-                ...state,
-                orders: payload
-              }
-              case GET_ORDER_ID:
-                return {
-                  ...state,
-                  orders: payload
-                }
-                case UPDATE_QUANTITY:
-                  let c = state.cart.map(e => e)
-                  let found = c.findIndex(e => e.id === payload.id)
-                  c[found].quantity = payload.quantity
-                  return{
-                    ...state,
-                    cart: c
-                  }
+    case GET_USER_CART:
+      return {
+        ...state,
+        cart: payload,
+        isLoading: false
+      }
+    case GET_ALL_ORDERS:
+      return {
+        ...state,
+        orders: payload
+      }
+    case GET_ORDER_ID:
+      return {
+        ...state,
+        orders: payload
+      }
+    case UPDATE_QUANTITY:
+      let c = state.cart.map(e => e)
+      let found = c.findIndex(e => e.id === payload.id)
+      c[found].quantity = payload.quantity
+      return {
+        ...state,
+        cart: c
+      }
+    case GET_REVIEW_BOOLEAN:
+      return {
+        ...state,
+        rating: payload
+      }
+
     default:
       return state
   }

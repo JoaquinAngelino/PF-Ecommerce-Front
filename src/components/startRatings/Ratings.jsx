@@ -68,27 +68,27 @@ const Ratings = ({ cellId, r, get }) => {
    return (
       <div>
          {ratingRol && isAuthenticated ?
-            <form style={styles.container} onSubmit={(e) => createRating(e)}>
-               <h2>Rate the product!</h2>
-               <div style={styles.stars}>
-                  <ReactStars
-                     count={5}
-                     value={rating.rating}
-                     onChange={ratingChanged}
-                     size={40}
-                     edit={true}
-                     color2={'#ffd700'} />
-               </div>
-               <textarea
-                  type="text"
-                  name="comment"
-                  value={rating.comment}
-                  onChange={(e) => handleChange(e)}
-                  placeholder="What's your experience?"
-                  style={styles.textarea}
-               />
-               <button type="submit" className="btn btn-outline-primary">Submit</button>
-            </form>
+         <form style={styles.container} onSubmit={(e) => createRating(e)}>
+            <h2>Rate the product!</h2>
+            <div style={styles.stars}>
+               <ReactStars
+                  count={5}
+                  value={rating.rating}
+                  onChange={ratingChanged}
+                  size={40}
+                  edit={true}
+                  color2={'#ffd700'} />
+            </div>
+            <textarea
+               type="text"
+               name="comment"
+               value={rating.comment}
+               onChange={(e) => handleChange(e)}
+               placeholder="What's your experience?"
+               style={styles.textarea}
+            />
+            <button type="submit" className="btn btn-outline-primary">Submit</button>
+         </form>
             : ""
          }
          <Toaster

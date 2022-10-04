@@ -59,7 +59,7 @@ export default function Footer() {
         </Link>
       </Navbar.Text >
       <Navbar.Text>
-      <Link to='/contact'>
+        <Link to='/contact'>
           <button className="btn btn-danger text-decoration-none">Contact us</button>
         </Link>
       </Navbar.Text>

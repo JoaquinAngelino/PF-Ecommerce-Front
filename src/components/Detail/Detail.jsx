@@ -4,7 +4,7 @@ import ReactStars from 'react-stars';
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import { cellDetail, cleanStatus } from "../../redux/actions"; 
+import { cellDetail, cleanStatus } from "../../redux/actions";
 import Questions from "../Questions/Questions.jsx";
 import { fav, cart } from '../Toast/Toast'
 import { BsCartFill, BsStarFill } from 'react-icons/bs';
@@ -87,7 +87,7 @@ export default function Detail(props) {
                                 <div>
                                     <h4>Comment and Rating:</h4>
                                     {
-                                        myCell?.ratings?.map((e, index) => {
+                                        myCell && myCell.ratings ? myCell.ratings.map((e, index) => {
                                             return (
                                                 <div key={index}>
                                                     <ReactStars
@@ -101,6 +101,7 @@ export default function Detail(props) {
                                                 </div>
                                             )
                                         })
+                                            : <p>No reviews</p>
                                     }
                                 </div>
                             </div>
