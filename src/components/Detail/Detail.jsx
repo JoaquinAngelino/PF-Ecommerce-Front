@@ -89,8 +89,9 @@ export default function Detail(props) {
                                 <Ratings key={myCell.id} cellId={myCell.id} r={myCell.ratings} get={get} />
                                 <div>
                                     <h4>Comment and Rating:</h4>
-                                    {
-                                        allRatings?.map((e, index) => {
+                                    { 
+                                        myCell && myCell.ratings ? myCell.ratings.map((e, index) => {
+                                          
                                             return (
                                                 <div key={index}>
                                                     <ReactStars
@@ -104,6 +105,7 @@ export default function Detail(props) {
                                                 </div>
                                             )
                                         })
+                                        :<p>No reviews</p>
                                     }
                                 </div>
                             </div>

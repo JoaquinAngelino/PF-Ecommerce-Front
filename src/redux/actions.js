@@ -26,6 +26,7 @@ export const GET_ALL_ORDERS = "GET_ALL_ORDERS";
 export const PUT_ORDERS = "PUT_ORDERS";
 export const GET_ORDER_ID = "GET_ORDER_ID";
 export const UPDATE_QUANTITY = "UPDATE_QUANTITY";
+export const GET_REVIEW_BOOLEAN = "GET_REVIEW_BOOLEAN"
 
 
 
@@ -121,7 +122,7 @@ export function allUser() {
 export const getAllRating = (id) => {
    // console.log(id, 'soy lo que llega del front')
    return async function (dispatch) {
-      const allRating = await axios.get(`/rating/${id}`)
+      const allRating = await axios.get(`/rating/k/${id}`)
       // console.log(allRating, 'soy lo que llega del back')
       return dispatch({
          type: GET_ALL_RATING,
@@ -398,5 +399,19 @@ export function  changeQuantity(id, quantity) {
          type: UPDATE_QUANTITY,
          payload: {id, quantity}
       })
+   }
+}
+
+export function getRolesRating(email, cellId) {
+   return async function (dispatch) {
+      try {
+         var rating = await axios.get(`/rating/role/?em=${email}&cellId=${cellId}`)
+         return dispatch({
+            type: GET_REVIEW_BOOLEAN,
+            payload: rating.data
+         })
+      } catch (error) {
+         console.log(error)
+      }
    }
 }

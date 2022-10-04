@@ -15,6 +15,7 @@ const {
   GET_ORDER_ID,
   GET_ORDERS_USER,
   UPDATE_QUANTITY,
+  GET_REVIEW_BOOLEAN
 } = require('./actions.js')
 
 const initialState = {
@@ -30,7 +31,8 @@ const initialState = {
   orders:[],
   order:{},
   allUser: [],
-  allRating: []
+  allRating: [],
+  rating: false
 }
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -122,6 +124,12 @@ export default function rootReducer(state = initialState, { type, payload }) {
                     ...state,
                     cart: c
                   }
+                  case GET_REVIEW_BOOLEAN:
+                    return {
+                      ...state,
+                      admin: payload
+                    }
+
     default:
       return state
   }
