@@ -7,9 +7,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import CardPayment from "../../components/Card/CardPayment/CardPayment";
 import "./PaymentForm.css";
-import { getUserCart } from "../../redux/actions";
+import { allUser, getUserCart } from "../../redux/actions";
 import { useAuth0 } from "@auth0/auth0-react";
 import Loading from "../../components/Loading/Loading";
+import { LtePlusMobiledata } from "@mui/icons-material";
 
 
 export default function PaymentForm() {
@@ -18,28 +19,54 @@ export default function PaymentForm() {
   const stripe = useStripe();
   const elements = useElements();
   const [loading, setLoading] = useState(false)
+  const users = useSelector(state => state.allUser);
   // 
   const totalPrice = JSON.parse(localStorage.getItem("totalPrice"));
   const items = JSON.parse(localStorage.getItem("carrrito"))
   // const user = JSON.parse(localStorage.getItem("user"))
   //------------------------
-  const { user } = useAuth0()
+  let { user } = useAuth0()
+  
   useEffect(() => {
     if (user) {
       dispatch(getUserCart(user.email))
+      dispatch(allUser());
     }
-  }, [user])
-  const users = useSelector(state => state.allUser);
-  let esteUsuario = {}
+  }, [user,dispatch])
+  
+  // console.log("sa",users);
+  // console.log("A",user);
+  var esteUsuario = {}
+  // let newA={}
+  // if(users.)
+  if(user!=undefined){
+    for(let i in users){
+      // console.log(users[i].email);
+      // console.log(user.email); 
+      if(users[i].email==user.email){
+        esteUsuario=users[i];
+      }
+      // if(users[i].email==user.email){
+      //   esteUsuario=users[i];
+      // }
+    }
+}
+
+console.log(esteUsuario)
+  
+
+  
 
   //------------------------
   // const mai = user.user.mail
   // const userIdName = "a13189e3-541b-412d-ac5f-678f839a305d"
-  useEffect(() => {
-    if (users.length && user) {
-      esteUsuario = users.find(e => e.email === user.email)
-    }
-  }, [users, user])
+  // useEffect(() => {
+  //   if (users.length && user) {
+  //     esteUsuario = users.find(e => e.email === user.email)
+  //   }
+  // }, [users, user])
+
+  console.log(esteUsuario);
 
   let history = useNavigate();
   function handleRegresar(e) {
@@ -67,13 +94,13 @@ export default function PaymentForm() {
 
         })
         console.log("!!!!! Esta es la data !!!!!!!", data);
-        if (data.status === 200) {
-          localStorage.removeItem("totalPrice")
-          localStorage.removeItem("carrrito")
+        // if (data.status === 200) {
+          // localStorage.removeItem("totalPrice")
+          // localStorage.removeItem("carrrito")
           console.log("BEFORE DELETE, esteusuario.id", esteUsuario.id);
           const res = await axios.delete('/cart', { data: { userId: esteUsuario.id } })
           console.log(res);
-        }
+        // }
         alert(`You have pay $ ${totalPrice} successfully`)
         // dispatch(deleteItemFromCart('All'))
         setLoading(false)
