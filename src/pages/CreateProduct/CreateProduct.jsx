@@ -4,6 +4,7 @@ import { createPost, getAllBrands } from '../../redux/actions';
 // import './CreateProduct.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { error, success } from '../../components/Toast/Toast';
+<<<<<<< HEAD
 import { Toaster } from 'react-hot-toast';
 import {Formik,Form} from "formik";
 import CustomInput from '../../components/CustomInput/CustomInput';
@@ -11,6 +12,9 @@ import * as yup from "yup";
 import CustomSelect from '../../components/CustomInput/CustomSelect';
 import CustomTextArea from '../../components/CustomInput/CustomTextArea';
 import swal from 'sweetalert';
+=======
+import toast, { Toaster } from 'react-hot-toast';
+>>>>>>> FedeValdezNuevaRama
 
 
 export default function CreateProduct() {
@@ -38,6 +42,7 @@ async function onChangeValue (ev,props){
         props.values.spec[0]=`Color: ${ev.target.value}`;
       }
   }
+<<<<<<< HEAD
   if(ev.target.name=="dualSim"){
         if(props.values['spec']==undefined){
           props.values.spec=[];
@@ -53,6 +58,21 @@ async function onChangeValue (ev,props){
       }else{
       props.values.spec[2]=`Operating system: ${ev.target.value}`;
       }
+=======
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setInput({
+      ...input,
+      [name]: value,
+    });
+    setErrors(
+      validations({
+        ...input,
+        [name]: value
+      }));
+    console.log(input);
+>>>>>>> FedeValdezNuevaRama
   }
   if(ev.target.name=="rearCamera"){
       if(props.values['spec']==undefined){
@@ -62,6 +82,7 @@ async function onChangeValue (ev,props){
       props.values.spec[3]=`Rear camera resolution: ${ev.target.value} Mpx`;
       }
   }
+<<<<<<< HEAD
   if(ev.target.name=="frontCamera"){
       if(props.values['spec']==undefined){
         props.values.spec=[];
@@ -69,6 +90,37 @@ async function onChangeValue (ev,props){
       }else{
       props.values.spec[4]=`Front camera resolution: ${ev.target.value} Mpx`;
       }
+=======
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setErrors(
+      validations({
+        ...input,
+        [e.target.name]: e.target.value
+      })
+    );
+    if (!input.model && !input.line && !input.image && !input.description && !input.brand && !input.capacity) return error("Does not contain fields");
+    if (Object.keys(errors).length === 0) {
+      dispatch(createPost(input))
+      toast.success('Your cell was created!')
+      // success("Your cell was created")
+      setInput({
+        line: "",
+        image: "",
+        description: "",
+        model: "",
+        spec: [],
+        brand: "",
+        capacity: "",
+        memoryRAM: "",
+        price: "",
+      })
+    } else {
+      toast.error("We could not create your cell")
+      // error("We could not create your cell");
+    }
+    // return ;
+>>>>>>> FedeValdezNuevaRama
   }
   if(ev.target.name=="launching"){
       if(props.values['spec']==undefined){
@@ -298,6 +350,10 @@ function onClickCancel(ev){
             }
           </Formik>
       </div>
+      <Toaster
+        position="bottom-center"
+        reverseOrder={false}
+      />
     </div>
   )
 }

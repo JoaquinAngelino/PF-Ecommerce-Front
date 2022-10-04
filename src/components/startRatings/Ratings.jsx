@@ -1,84 +1,114 @@
-import { useState } from "react";
-import { FaStar } from "react-icons/fa";
+import axios from "axios";
+import toast, { Toaster } from 'react-hot-toast';
+import ReactStars from 'react-stars';
+import { useEffect, useState } from "react";
+import { useAuth0, user } from '@auth0/auth0-react';
+import { useDispatch } from "react-redux";
+import { getRole } from "../../redux/actions";
 
-const colors = {
-   orange: "#FFBA5A",
-   grey: "#a9a9a9"
-};
-// function HandleSubmit(){
-//    //se condiciona el usuario si está o no logueado
-   
-//    if(user!==null){	
-//    var x ={
-//    rating:rating,
-//    userId: filter[0].id,
-//    comentario: comentario,
-//    productId:id
-//    }
-//    dispatch(postRating(x))
-// dispatch(postComentario(x))
-// }else{ alert("Debe ser usuario registrado")}
+const Ratings = ({ cellId, r, get }) => {
 
-// function HandleSet(ratingScore){
-// if(user!== null){
-// setRating(RatingScore)
-// }else{ alert("Debe ser usuario registrado")}
+   const dispatch = useDispatch();
+   const { user, isAuthenticated } = useAuth0();
 
-const Ratings = () => {
-   const [currentValue, setCurrentValue] = useState(0);
-   const [hoverValue, setHoverValue] = useState(undefined);
-   const stars = Array(5).fill(0)
-   // console.log(stars, 'soy la estrella')
-   const handleClick = value => {
-      setCurrentValue(value)
+   const [rating, setRating] = useState({
+      id: cellId,
+      rating: 0,
+      comment: "",
+      emailUser: ""
+   });
+
+   const ratingChanged = (newRating) => {
+      setRating({
+         ...rating,
+         rating: newRating
+      });
    }
 
-  
-      
-    
-
-   const handleMouseOver = newHoverValue => {
-      setHoverValue(newHoverValue)
-   };
-
-   const handleMouseLeave = () => {
-      setHoverValue(undefined)
+   const handleChange = (e) => {
+      e.preventDefault()
+      const { name, value } = e.target
+      setRating({
+         ...rating,
+         [name]: value
+      });
    }
 
+   const createRating = async (e) => {
+      e.preventDefault()
+      if (Object.keys(rating).length > 0) {
+         // console.log(rating, 'soy el dato')
+         await axios.post(`/rating/${cellId}`, rating);
+         toast.success(`rating sent!!`);
+         // window.alert("rating sent!");
+         setRating({
+            rating: 0,
+            comment: "",
+            emailUser: ""
+         })
+         get();
+      }
+   }
+
+   useEffect(() => {
+      if (isAuthenticated) {
+         dispatch(getRole(user.email));
+         setRating({
+            ...rating,
+            emailUser: user.email
+         })
+      }
+   }, [dispatch, r])
 
    return (
-      <div style={styles.container}>
-         <h2>Rate the product!</h2>
-         <div style={styles.stars}>
-            {stars.map((_, index) => {
-               return (
-                  <FaStar
-                     key={index}
-                     size={24}
-                     onClick={() => handleClick(index + 1)}
-                     onMouseOver={() => handleMouseOver(index + 1)}
-                     onMouseLeave={handleMouseLeave}
-                     color={(hoverValue || currentValue) > index ? colors.orange : colors.grey}
-                     style={{
-                        marginRight: 10,
-                        cursor: "pointer"
-                     }}
-                  />
-               )
-            })}
-         </div>
-         <textarea
-            placeholder="What's your experience?"
-            style={styles.textarea}
+      <div>
+         <form style={styles.container} onSubmit={(e) => createRating(e)}>
+            <h2>Rate the product!</h2>
+            <div style={styles.stars}>
+               <ReactStars
+                  count={5}
+                  value={rating.rating}
+                  half={false}
+                  onChange={ratingChanged}
+                  size={40}
+                  edit={true}
+                  color2={'#ffd700'} />
+            </div>
+            <textarea
+               type="text"
+               name="comment"
+               value={rating.comment}
+               onChange={(e) => handleChange(e)}
+               placeholder="What's your experience?"
+               style={styles.textarea}
+            />
+            <button type="submit" className="btn btn-outline-primary">Submit</button>
+         </form>
+         <Toaster
+            position="button-right"
+            reverseOrder={false}
+            gutter={8}
+            containerClassName=""
+            containerStyle={{}}
+            toastOptions={{
+               className: '',
+               duration: 5000,
+               style: {
+                  background: '#363636',
+                  color: '#fff',
+               },
+               success: {
+                  duration: 3000,
+                  theme: {
+                     primary: 'green',
+                     secondary: 'black',
+                  },
+               },
+            }}
          />
-         <button style={styles.button}>
-            Submit
-         </button>
-
       </div>
-   );
-};
-
+   )
+}
 
 const styles = {
    container: {
@@ -104,11 +134,7 @@ const styles = {
       width: 300,
       padding: 10,
    }
-
 };
-
-
-
 
 export default Ratings;
 

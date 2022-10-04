@@ -1,9 +1,10 @@
 import "./CellDetail.css"
 import React from "react";
+import ReactStars from 'react-stars';
+import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import { cellDetail, cleanStatus } from "../../redux/actions";
-import { useEffect } from "react";
+import { cellDetail, cleanStatus, getAllRating } from "../../redux/actions";
 import Questions from "../Questions/Questions.jsx";
 import { fav, cart } from '../Toast/Toast'
 import { BsCartFill, BsStarFill } from 'react-icons/bs';
@@ -17,20 +18,24 @@ export default function Detail(props) {
     const dispatch = useDispatch();
     // let id=props.match.params.id;
     const { id } = useParams()
-    const myCell = useSelector((state) => state.details)
+    const myCell = useSelector((state) => state.details);
+    const allRatings = useSelector((state) => state.allRating);
+    // console.log(allRatings, 'soy  lo que llega del back')
+    const get = () => {
+        dispatch(cellDetail(id))
+        dispatch(getAllRating(id))
+    }
 
-    function handleClearStatus(e) {
+    const handleClearStatus = (e) => {
         dispatch(cleanStatus())
     }
 
     useEffect(() => {
         dispatch(cleanStatus());
         dispatch(cellDetail(id))
+        // dispatch(getAllRating(id))
     }, [dispatch, id])
 
-    const get = () => {
-        dispatch(cellDetail(id))
-    }
     return (
         <div className="container">
             {
@@ -81,7 +86,26 @@ export default function Detail(props) {
                                 <div>
                                     <Questions key={myCell.id} cellId={myCell.id} q={myCell.questions} get={get} />
                                 </div>
-                                <Ratings />
+                                <Ratings key={myCell.id} cellId={myCell.id} r={myCell.ratings} get={get} />
+                                <div>
+                                    <h4>Comment and Rating:</h4>
+                                    {
+                                        allRatings?.map((e, index) => {
+                                            return (
+                                                <div key={index}>
+                                                    <ReactStars
+                                                        count={5}
+                                                        value={e.rating}
+                                                        size={30}
+                                                        edit={false}
+                                                        color2={'#ffd700'}
+                                                    />
+                                                    <p>{e.comment}</p>
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -8,59 +8,59 @@ import { Link } from "react-router-dom";
 export default function Footer() {
   const navigate = useNavigate();
 
-//   function handleAbout(){
-//     navigate("/about")
-//     window.scrollTo({ behavior: "smooth", top: "0px" })
-// }
+  //   function handleAbout(){
+  //     navigate("/about")
+  //     window.scrollTo({ behavior: "smooth", top: "0px" })
+  // }
   return (
-//     <footer className="footer">
-//        <div className="flexDiv"></div>
-//        <span className="spanFooterStyle">
-//          <span>
-//          <h3>Created by:</h3>
-//         <ul className="ul_members">
-//          <li>
-//           <a className="linkTo" href="  https://www.linkedin.com/in/andres-sanchez-de-la-fuente/" target="_blank" rel="noreferrer" >Andres Sanchez de La Fuente</a>
-//            </li>
+    //     <footer className="footer">
+    //        <div className="flexDiv"></div>
+    //        <span className="spanFooterStyle">
+    //          <span>
+    //          <h3>Created by:</h3>
+    //         <ul className="ul_members">
+    //          <li>
+    //           <a className="linkTo" href="  https://www.linkedin.com/in/andres-sanchez-de-la-fuente/" target="_blank" rel="noreferrer" >Andres Sanchez de La Fuente</a>
+    //            </li>
 
-//          <li>
-//           <a className="linkTo" href="https://www.linkedin.com/in/frank-smith-bocangelino-rojas-351157168/" target="_blank" rel="noreferrer" >Frank Smith</a>
-//             </li>
+    //          <li>
+    //           <a className="linkTo" href="https://www.linkedin.com/in/frank-smith-bocangelino-rojas-351157168/" target="_blank" rel="noreferrer" >Frank Smith</a>
+    //             </li>
 
-//              <li>
-//               <a className="linkTo" href="https://www.linkedin.com/in/joaquin-angelino-corona/" target="_blank" rel="noreferrer" >Joaquin Corona</a>
-//                </li>
+    //              <li>
+    //               <a className="linkTo" href="https://www.linkedin.com/in/joaquin-angelino-corona/" target="_blank" rel="noreferrer" >Joaquin Corona</a>
+    //                </li>
 
-//                <li>
-//               <a className="linkTo" href="https://www.linkedin.com/in/ayrton-nahir-arroyo-acevedo-b795b0212" target="_blank" rel="noreferrer" >Ayrton Acevedo</a>
-//                </li>
+    //                <li>
+    //               <a className="linkTo" href="https://www.linkedin.com/in/ayrton-nahir-arroyo-acevedo-b795b0212" target="_blank" rel="noreferrer" >Ayrton Acevedo</a>
+    //                </li>
 
-//               <li>
-//               <a className="linkTo" href="https://www.linkedin.com/in/fede-valdez-205499211/" target="_blank" rel="noreferrer" >Federico Valdez</a>
-//                </li> 
-//                    <li>
-//                    <a className="linkTo" href="https://www.linkedin.com/in/juan-david-pabon-porras-4123b389/" target="_blank" rel="noreferrer" >Juan David Pabon</a>
-//                    </li>
-//                    </ul>
-//                    <hr></hr>
-//                     </span>
-                    
-//                     </span>
-//                     </footer>
-       
-//   );
-// }
+    //               <li>
+    //               <a className="linkTo" href="https://www.linkedin.com/in/fede-valdez-205499211/" target="_blank" rel="noreferrer" >Federico Valdez</a>
+    //                </li> 
+    //                    <li>
+    //                    <a className="linkTo" href="https://www.linkedin.com/in/juan-david-pabon-porras-4123b389/" target="_blank" rel="noreferrer" >Juan David Pabon</a>
+    //                    </li>
+    //                    </ul>
+    //                    <hr></hr>
+    //                     </span>
 
- <Navbar className="footer" bg="dark" variant="dark">
-        <Navbar.Text className='Light-Font'>© CellPhones E-Commerce, 2022. All rights reserved.</Navbar.Text>
+    //                     </span>
+    //                     </footer>
+
+    //   );
+    // }
+
+    <Navbar className="footer" bg="dark" variant="dark">
+      <Navbar.Text className='Light-Font'>© CellPhones E-Commerce, 2022. All rights reserved.</Navbar.Text>
       <Navbar.Text >
         <Link to='/about'>
-          <button className="btn btn-danger text-decoration-none">About us</button>
+          <button className="btn btn-outline-dark">About us</button>
         </Link>
       </Navbar.Text >
       <Navbar.Text>
-      <Link to='/contact'>
-          <button className="btn btn-danger text-decoration-none">Contact us</button>
+        <Link to='/contact'>
+          <button className="btn btn-outline-dark">Contact us</button>
         </Link>
       </Navbar.Text>
       <Navbar.Text>

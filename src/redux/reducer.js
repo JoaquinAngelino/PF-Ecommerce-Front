@@ -6,6 +6,7 @@ const {
   POST_PRODUCT,
   GET_ADMIN,
   GET_ALL_USERS,
+  GET_ALL_RATING,
   POST_USER,
   USER_ID,
   ALL_USER,
@@ -26,7 +27,9 @@ const initialState = {
   allUser:[],
   cart: [],
   orders:[],
-  order:{}
+  order:{},
+  allUser: [],
+  allRating: []
 }
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -38,7 +41,11 @@ export default function rootReducer(state = initialState, { type, payload }) {
         products: payload,
         isLoading: false
       }
-
+    case GET_ALL_RATING:
+      return ({
+        ...state,
+        allRating: payload
+      })
     case CELL_DETAIL:
       return ({
         ...state,
@@ -58,12 +65,11 @@ export default function rootReducer(state = initialState, { type, payload }) {
         ...state,
         details: []
       })
-      case POST_USER:
-        return{
-          ...state,
-          
-        }
+    case POST_USER:
+      return {
+        ...state,
 
+      }
     case ACTIVE_LOADING:
       return {
         ...state,
@@ -75,23 +81,21 @@ export default function rootReducer(state = initialState, { type, payload }) {
         ...state,
         brands: payload
       }
-      
-
-      case GET_ALL_USERS:
-        return {
-          ...state,
-          users: payload
-        }
-        case USER_ID:
-          return ({
-            ...state,
-            user:payload 
-          })
-          case ALL_USER:
-            return{
-              ...state,
-              allUser:payload
-            }
+    case GET_ALL_USERS:
+      return {
+        ...state,
+        users: payload
+      }
+    case USER_ID:
+      return ({
+        ...state,
+        user: payload
+      })
+    case ALL_USER:
+      return {
+        ...state,
+        allUser: payload
+      }
 
             case GET_USER_CART:
               return{

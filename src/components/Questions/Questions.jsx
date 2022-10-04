@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { createQuestion, getRole, createAnswer } from '../../redux/actions';
 import Accordion from 'react-bootstrap/Accordion';
 import 'bootstrap/dist/css/bootstrap.css';
+import toast, { Toaster } from 'react-hot-toast';
+
 // import './Questions.css';
 
 import {
@@ -15,10 +17,11 @@ import {
 } from "reactstrap";
 
 
-const Questions = ({cellId, q, get}) => {
+const Questions = ({ cellId, q, get }) => {
 
    const dispatch = useDispatch();
    const admin = useSelector((state) => state.admin)
+
    const { user, isAuthenticated } = useAuth0();
    const [question, setQuestion] = useState({
       question: "",
@@ -54,7 +57,8 @@ const Questions = ({cellId, q, get}) => {
    const createQ = () => {
       if (question.question.length > 0) {
          dispatch(createQuestion(question));
-         window.alert("Question sent!");
+         toast.success(`Question sent!`);
+         // window.alert("Question sent!");
          setQuestion({
             question: "",
             emailUser: "",
@@ -63,7 +67,6 @@ const Questions = ({cellId, q, get}) => {
          get();
       }
    }
-
 
    const sendDataQuestions = (e, questionId, question) => {
       setAnswer({
@@ -76,7 +79,8 @@ const Questions = ({cellId, q, get}) => {
 
    const createA = () => {
       dispatch(createAnswer(answer))
-      window.alert("Answer sent!");
+      toast.success(`Answer sent!`);
+      // window.alert("Answer sent!");
       setAnswer({
          answer: "",
          id: ""
@@ -99,13 +103,11 @@ const Questions = ({cellId, q, get}) => {
       });
    }
 
-
-
    return (
       <div>
          <div >
             {isAuthenticated ?
-               <div >
+               <div>
                   <div className=''>
                      <h1>Ask your question</h1>
                      <h3>{user.name}:</h3>
@@ -133,10 +135,10 @@ const Questions = ({cellId, q, get}) => {
                                  {
                                     admin ?
                                        <div>
-                                          <h3>____________</h3>
-                                          {c.answer ?
-                                             <button type="button" className='btn btn-outline-primary' onClick={(e) => sendDataQuestions(e, c.id, c.question)}>Change Answer</button>
-                                             : <button type="button" className='btn btn-outline-primary' onClick={(e) => sendDataQuestions(e, c.id, c.question)}>Answer</button>
+                                          {
+                                             c.answer ?
+                                                <button type="button" className='btn btn-outline-primary' onClick={(e) => sendDataQuestions(e, c.id, c.question)}>Change Answer</button>
+                                                : <button type="button" className='btn btn-outline-primary' onClick={(e) => sendDataQuestions(e, c.id, c.question)}>Answer</button>
                                           }
                                        </div>
                                        : ""
@@ -147,7 +149,9 @@ const Questions = ({cellId, q, get}) => {
                      </div>
                   )
                })
-                  : <h2>No hay preguntas</h2>}
+                  :
+                  <h2>No hay preguntas</h2>
+               }
             </div>
          </div>
          <Modal isOpen={answer.modal}>
@@ -166,6 +170,28 @@ const Questions = ({cellId, q, get}) => {
                <Button color="danger" onClick={() => closeModal()}>Cancelar</Button>
             </ModalFooter>
          </Modal>
+         <Toaster
+            position="button-right"
+            reverseOrder={false}
+            gutter={8}
+            containerClassName=""
+            containerStyle={{}}
+            toastOptions={{
+               className: '',
+               duration: 5000,
+               style: {
+                  background: '#363636',
+                  color: '#fff',
+               },
+               success: {
+                  duration: 3000,
+                  theme: {
+                     primary: 'green',
+                     secondary: 'black',
+                  },
+               },
+            }}
+         />
       </div>
    )
 }
