@@ -94,15 +94,14 @@ console.log(esteUsuario)
 
         })
         console.log("!!!!! Esta es la data !!!!!!!", data);
-        // if (data.status === 200) {
-          // localStorage.removeItem("totalPrice")
-          // localStorage.removeItem("carrrito")
+        if (data.status === 200) {
+          localStorage.removeItem("totalPrice")
+          localStorage.removeItem("carrrito")
           console.log("BEFORE DELETE, esteusuario.id", esteUsuario.id);
           const res = await axios.delete('/cart', { data: { userId: esteUsuario.id } })
           console.log(res);
-        // }
-        alert(`You have pay $ ${totalPrice} successfully`)
-        // dispatch(deleteItemFromCart('All'))
+          alert(`You have pay $ ${totalPrice} successfully`)
+        }
         setLoading(false)
         history("/")
       } catch (error) {
