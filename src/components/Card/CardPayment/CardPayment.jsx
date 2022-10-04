@@ -3,9 +3,9 @@ import './CardPayment.css'
 
 export default function CardHover ({name, image, price}) {
     return (
-        <div class="wrapper">
-	        <div class="cards">
-		        <figure class="card">
+        <div className="wrapper">
+	        <div className="cards">
+		        <figure className="card">
 					<div className='imgCard'>
 					<img src={`${image}`} alt='imagen' 	/>
 					</div>
