@@ -4,15 +4,15 @@ import ReactStars from 'react-stars';
 import { useEffect, useState } from "react";
 import { useAuth0, user } from '@auth0/auth0-react';
 import { useDispatch, useSelector } from "react-redux";
-import { getRole, getRolesRating } from "../../redux/actions";
+import { getRolesRating } from "../../redux/actions";
+
 
 const Ratings = ({ cellId, r, get }) => {
 
    const dispatch = useDispatch();
    const { user, isAuthenticated } = useAuth0();
-   const ratingRol = useSelector((state) => state.rating)
-
-   const [rolIdUsers, setRolIdUsers] = useState({
+   const ratingRol = useSelector((state) => state.rating);
+   const [obj, setObj] = useState({
       email: "",
       cellId: cellId
    });
@@ -36,7 +36,7 @@ const Ratings = ({ cellId, r, get }) => {
       const { name, value } = e.target
       setRating({
          ...rating,
-         [name]: value
+         [name]:value
       });
    }
 
@@ -54,42 +54,44 @@ const Ratings = ({ cellId, r, get }) => {
          get();
       }
    }
+   
 
    useEffect(() => {
+      
       if (isAuthenticated) {
-         dispatch(getRolesRating(rolIdUsers));
-         setRolIdUsers({
-            ...rolIdUsers,
-            email: user.email
-         })
+         dispatch(getRolesRating(user.email, cellId));
       }
    }, [dispatch, r])
 
-   return (
+return (
       <div>
+   
          {ratingRol && isAuthenticated ?
-         <form style={styles.container} onSubmit={(e) => createRating(e)}>
-            <h2>Rate the product!</h2>
-            <div style={styles.stars}>
-               <ReactStars
-                  count={5}
-                  value={rating.rating}
-                  onChange={ratingChanged}
-                  size={40}
-                  edit={true}
-                  color2={'#ffd700'} />
-            </div>
-            <textarea
-               type="text"
-               name="comment"
-               value={rating.comment}
-               onChange={(e) => handleChange(e)}
-               placeholder="What's your experience?"
-               style={styles.textarea}
-            />
-            <button type="submit" className="btn btn-outline-primary">Submit</button>
-         </form>
-            : ""
+
+            <form style={styles.container} onSubmit={(e) => createRating(e)}>
+               <h2>Rate the product!</h2>
+               <div style={styles.stars}>
+                  <ReactStars
+                     count={5}
+                     value={rating.rating}
+                     onChange={ratingChanged}
+                     size={40}
+                     edit={true}
+                     color2={'#ffd700'} />
+               </div>
+               <textarea
+                  type="text"
+                  name="comment"
+                  value={rating.comment}
+                  onChange={(e) => handleChange(e)}
+                  placeholder="What's your experience?"
+                  style={styles.textarea}
+               />
+               <button type="submit" className="btn btn-outline-primary">Submit</button>
+            </form>
+
+         : <p></p>
+            
          }
          <Toaster
             position="button-right"
@@ -109,7 +111,7 @@ const Ratings = ({ cellId, r, get }) => {
                   theme: {
                      primary: 'green',
                      secondary: 'black',
-                  },
+},
                },
             }}
          />
@@ -144,4 +146,3 @@ const styles = {
 };
 
 export default Ratings;
-

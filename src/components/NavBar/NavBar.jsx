@@ -120,86 +120,68 @@ export default function NavBar() {
           {isAuthenticated && gmail !== undefined && gmail[0] ? <Link to={`orders/${gmail[0].id}`} className='nav-link'><BsCardChecklist className='NavBarIcon' /></Link> : null}
 
           <div className="navbar-nav hstack gap-3 NavBar-Item">
-            <Link to='/home'>
-              <img src={Image} alt="#" width={"110px"} height={"85px"} />
-            </Link>
-            <SearchBar />
-            <Link to='/home' className="nav-link"><BsFillPhoneFill className='NavBarIcon' /></Link>
-            <Link to='/favorites' className="nav-link"><BsStarFill className='NavBarIcon' /></Link>
-            <Link to='/cart' className="nav-link"><BsCartFill className='NavBarIcon' /></Link>
+            {isAuthenticated
+              //  ? <Link to={'Profile/'} className='nav-link'><AiOutlineUserAdd className='NavBarIcon' /></Link> 
+              ? <Dropdown isOpen={dropdown} toggle={abrirCerrarDropdown} size='sm'>
+                <DropdownToggle caret>
+                  <img className="ProfileImg" src={gmail !== undefined && gmail[0] ? gmail[0].image : "https://us.123rf.com/450wm/thesomeday123/thesomeday1231712/thesomeday123171200009/91087331-icono-de-perfil-de-avatar-predeterminado-para-hombre-marcador-de-posici%C3%B3n-de-foto-gris-vector-de-ilu.jpg?ver=6"} />
+                </DropdownToggle>
+                <DropdownMenu>
+                  <DropdownItem onClick={userIr}>Perfil</DropdownItem>
+                  <DropdownItem onClick={logout}>Logout</DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+
+              : <LoginButton />
+            }
+
             {
-              isAuthenticated && gmail !== undefined && gmail[0] && gmail[0].role !== "Cliente"
-                ? <Link to='/create' className="nav-link"><AiOutlineUpload className='NavBarIcon' /></Link>
+              isAuthenticated && gmail !== undefined
+
+                ? (!gmail[0] ?
+                  <Link to='/postUser'>
+                    <button type="button" className="btn btn-outline-danger">Complete your user information</button>
+                  </Link>
+                  : null
+                )
+                : null
+
+            }
+            {
+              isAuthenticated && gmail === undefined
+
+                ? (
+
+                  <Link to='/postUser'>
+                    <button type="button" className="btn btn-outline-danger">Complete sus datos de usuario</button>
+                  </Link>
+
+                )
+
                 : null
             }
-            {isAuthenticated ? <Link to={'Profile/'} className='nav-link'><AiOutlineUserAdd className='NavBarIcon' /></Link> : null}
 
-            {isAuthenticated && gmail !== undefined && gmail[0] ? <Link to={`orders/${gmail[0].id}`} className='nav-link'><BsCardChecklist className='NavBarIcon' /></Link> : null}
 
-            <div className="navbar-nav hstack gap-3 NavBar-Item">
-              {isAuthenticated
-                //  ? <Link to={'Profile/'} className='nav-link'><AiOutlineUserAdd className='NavBarIcon' /></Link> 
-                ? <Dropdown isOpen={dropdown} toggle={abrirCerrarDropdown} size='sm'>
+            <br></br>
+            {
+              isAuthenticated && gmail !== undefined && gmail[0] && gmail[0].role === "Administrador"
+                ? <Dropdown isOpen={dropdown1} toggle={abrirCerrarDropdown1} size='sm'>
                   <DropdownToggle caret>
-                    <img className="ProfileImg" src={gmail !== undefined && gmail[0] ? gmail[0].image : "https://us.123rf.com/450wm/thesomeday123/thesomeday1231712/thesomeday123171200009/91087331-icono-de-perfil-de-avatar-predeterminado-para-hombre-marcador-de-posici%C3%B3n-de-foto-gris-vector-de-ilu.jpg?ver=6"} />
+                    Admin Panel
                   </DropdownToggle>
                   <DropdownMenu>
-                    <DropdownItem onClick={userIr}>Perfil</DropdownItem>
-                    <DropdownItem onClick={logout}>Logout</DropdownItem>
+                    <DropdownItem onClick={userlist}>User list</DropdownItem>
+                    <DropdownItem onClick={celllist}>Cell list</DropdownItem>
+                    <DropdownItem onClick={orderList}>Order list</DropdownItem>
+
                   </DropdownMenu>
                 </Dropdown>
-
-                : <LoginButton />
-              }
-
-              {
-                isAuthenticated && gmail !== undefined
-
-                  ? (!gmail[0] ?
-                    <Link to='/postUser'>
-                      <button type="button" className="btn btn-outline-danger">Complete your user information</button>
-                    </Link>
-                    : null
-                  )
-                  : null
-
-              }
-              {
-                isAuthenticated && gmail === undefined
-
-                  ? (
-
-                    <Link to='/postUser'>
-                      <button type="button" className="btn btn-outline-danger">Complete sus datos de usuario</button>
-                    </Link>
-
-                  )
-
-                  : null
-              }
-
-
-              <br></br>
-              {
-                isAuthenticated && gmail !== undefined && gmail[0] && gmail[0].role === "Administrador"
-                  ? <Dropdown isOpen={dropdown1} toggle={abrirCerrarDropdown1} size='sm'>
-                    <DropdownToggle caret>
-                      Admin Panel
-                    </DropdownToggle>
-                    <DropdownMenu>
-                      <DropdownItem onClick={userlist}>User list</DropdownItem>
-                      <DropdownItem onClick={celllist}>Cell list</DropdownItem>
-                      <DropdownItem onClick={orderList}>Order list</DropdownItem>
-
-                    </DropdownMenu>
-                  </Dropdown>
-                  : null
-              }
-
-            </div>
+                : null
+            }
+            {/* <button onClick={hola}>user</button> */}
           </div>
         </div>
       </div>
-    </nav>
+    </nav >
   )
 }

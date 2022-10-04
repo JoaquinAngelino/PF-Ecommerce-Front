@@ -31,8 +31,6 @@ export const GET_REVIEW_BOOLEAN = "GET_REVIEW_BOOLEAN"
 
 
 
-
-
 export const getAllProducts = () => {
    return async function (dispatch) {
       const products = await axios('/celulares/home');
@@ -99,6 +97,7 @@ export function postUser(user) {
          })
    }
 }
+
 //GET USER
 export function allUser() {
    return async function (dispatch) {
@@ -120,13 +119,14 @@ export function allUser() {
 }
 
 //GET RATING 
-export const getRolesRating = (ratingRol) => {
+export const getAllRating = (id) => {
+   // console.log(id, 'soy lo que llega del front')
    return async function (dispatch) {
-      const ratingRolId = await axios.get(`/rating/k/${id}`)
+      const allRating = await axios.get(`/rating/k/${id}`)
       // console.log(allRating, 'soy lo que llega del back')
       return dispatch({
          type: GET_ALL_RATING,
-         payload: ratingRolId.data
+         payload: allRating.data
       })
    }
 }
@@ -251,6 +251,12 @@ export function updateProduct(id, payload) {
       axios.put(`/celulares/${id}`, payload)
    }
 }
+
+// export function postRating(id){
+//    return function(){
+//       axios.post("/celulares",rating)
+//    }
+// }
 
 
 export const getFiltersProductsAdmin = (filters) => {
