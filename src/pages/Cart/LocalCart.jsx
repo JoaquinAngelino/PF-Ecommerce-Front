@@ -46,7 +46,7 @@ export default function LocalCart({registered}) {
             </div>
             <hr />
             {
-                registered ? <Link to={"/postUser"}><p>Complete your profile to continue</p></Link>
+                registered ? <Link to={"/Profile"}><p>Complete your profile to continue</p></Link>
                 : <p>Please Log in to continue shopping</p>
             }
         </div>
