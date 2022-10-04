@@ -27,7 +27,8 @@ const Ratings = ({ cellId, r, get }) => {
    const ratingChanged = (newRating) => {
       setRating({
          ...rating,
-         rating: newRating
+         rating: newRating,
+         emailUser: user.email
       });
    }
 
