@@ -15,11 +15,18 @@ import {
 import { error, success, remove } from "../Toast/Toast";
 import { Toaster } from "react-hot-toast";
 import iconSearch from '../SearchBar/search_FILL0.png'
-
+import { useAuth0 } from '@auth0/auth0-react';
+import NotFound from '../../pages/NotFound/NotFound'
 
 const PanelAdminUsers = () => {
   const users = useSelector(state => state.users);
   const dispatch = useDispatch();
+  //
+  const { user, isAuthenticated } = useAuth0()
+  const usuarios = users
+  const emailAuth0=email()
+  const userLogin=filterEmail()
+  //
   const [modals, setModals] = useState({
     modalEditar: false,
     modalEliminar: false,
@@ -264,10 +271,23 @@ const PanelAdminUsers = () => {
            dispatch(getFiltersUsersAdmin(`${searchFor}=${searchBar}`))
          }
      }
-
+//proteger ruta
+function email() {
+  if (isAuthenticated) {
+    return user.email
+  }
+}
+function filterEmail() {
+  if (isAuthenticated && usuarios.length) {
+    return usuarios.filter(e => e.email === emailAuth0)
+  }
+}
+// proteger ruta
     
     return (
-        <div>
+      isAuthenticated && userLogin && userLogin[0] && userLogin[0].role==="Administrador"
+      ?(
+<div>
             <div className='divSearchBar'>
               <select name="variable" onChange={(e) => handleSelect(e)} className="form-control me-2" >
                 <option>Search For...</option>
@@ -478,6 +498,8 @@ const PanelAdminUsers = () => {
             <Toaster position="bottom-right" reverseOrder={false}/>
     
         </div>
+      ):<NotFound/>
+        
     )
 }
 export default PanelAdminUsers;
