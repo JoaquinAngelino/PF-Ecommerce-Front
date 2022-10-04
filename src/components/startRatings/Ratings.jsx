@@ -36,7 +36,7 @@ const Ratings = ({ cellId, r, get }) => {
       const { name, value } = e.target
       setRating({
          ...rating,
-         [name]:value
+         [name]: value
       });
    }
 
@@ -54,20 +54,17 @@ const Ratings = ({ cellId, r, get }) => {
          get();
       }
    }
-   
+
 
    useEffect(() => {
-      
       if (isAuthenticated) {
          dispatch(getRolesRating(user.email, cellId));
       }
    }, [dispatch, r])
 
-return (
+   return (
       <div>
-   
          {ratingRol && isAuthenticated ?
-
             <form style={styles.container} onSubmit={(e) => createRating(e)}>
                <h2>Rate the product!</h2>
                <div style={styles.stars}>
@@ -89,9 +86,7 @@ return (
                />
                <button type="submit" className="btn btn-outline-primary">Submit</button>
             </form>
-
-         : <p></p>
-            
+            : ""
          }
          <Toaster
             position="button-right"
@@ -111,7 +106,7 @@ return (
                   theme: {
                      primary: 'green',
                      secondary: 'black',
-},
+                  },
                },
             }}
          />

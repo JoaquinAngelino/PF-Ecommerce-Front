@@ -120,10 +120,8 @@ export function allUser() {
 
 //GET RATING 
 export const getAllRating = (id) => {
-   // console.log(id, 'soy lo que llega del front')
    return async function (dispatch) {
       const allRating = await axios.get(`/rating/k/${id}`)
-      // console.log(allRating, 'soy lo que llega del back')
       return dispatch({
          type: GET_ALL_RATING,
          payload: allRating.data
@@ -393,19 +391,21 @@ export function getOrdersUser(id) {
       }
    }
 }
-export function  changeQuantity(id, quantity) {
+export function changeQuantity(id, quantity) {
    return async function (dispatch) {
       return dispatch({
          type: UPDATE_QUANTITY,
-         payload: {id, quantity}
+         payload: { id, quantity }
       })
    }
 }
 
 export function getRolesRating(email, cellId) {
+   console.log(email,cellId, 'soy lo que llega a la action')
    return async function (dispatch) {
       try {
          var rating = await axios.get(`/rating/role/?em=${email}&cellId=${cellId}`)
+         console.log(rating,'soy lo que llega del back')
          return dispatch({
             type: GET_REVIEW_BOOLEAN,
             payload: rating.data
