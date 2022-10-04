@@ -30,9 +30,9 @@ export default function PaymentForm() {
   }, [user, dispatch])
 
   var esteUsuario = {}
-  if (user != undefined) {
+  if (user !== undefined) {
     for (let i in users) {
-      if (users[i].email == user.email) {
+      if (users[i].email === user.email) {
         esteUsuario = users[i];
       }
     }
