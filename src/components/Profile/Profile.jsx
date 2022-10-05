@@ -120,7 +120,7 @@ function handleChange2(){
             <div className="row">
               <div className="col-12 my-3 pt-3 shadow">
                 {/* {JSON.stringify(user)} */}
-                <img  className="ProfileImg" src={profile[0].image}  />
+                <img  className="ProfileImg" src={user.picture}  />
                 <h4>{user.name}</h4>
                 <h5>{user.email}</h5>
                 <br></br>
@@ -159,7 +159,7 @@ function handleChange2(){
 </div>
 
        
-      )     : isAuthenticated && profile[0]===undefined?(
+      )     : isAuthenticated ?(
         <div className="container">
             <div className="row">
               <div className="col-12 my-3 pt-3 shadow">
