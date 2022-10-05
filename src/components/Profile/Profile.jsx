@@ -15,7 +15,7 @@ const Profile=()=>{
   const dispatch=useDispatch();
   const {user, isAuthenticated}=useAuth0()
   const navigate=useNavigate()
- 
+  // const imagen=imagenn()
   const allUsers=useSelector(state=>state.allUser)
   const usuarios=allUsers
   const emailAuth0=email()
@@ -23,7 +23,7 @@ const Profile=()=>{
   console.log(usuarios)
   console.log(emailAuth0)
   console.log(profile)
-  
+  // console.log(imagen)
   const [input,setInput]=useState({
     id:profile!==undefined && profile[0]?profile[0].id:"",
     name:profile!==undefined && profile[0]?profile[0].name:"",
@@ -53,6 +53,11 @@ function filterEmail() {
       return user.email
     }
   }
+  // function imagenn(){
+  //   if(isAuthenticated){
+  //     return user.picture
+  //   }
+  // }
  
   function handleChange(e){
     setInput({
@@ -112,6 +117,9 @@ function handleChange2(){
 
 
 
+
+
+
     return (
       
      
@@ -120,7 +128,7 @@ function handleChange2(){
             <div className="row">
               <div className="col-12 my-3 pt-3 shadow">
                 {/* {JSON.stringify(user)} */}
-                <img  className="ProfileImg" src={user.picture}  />
+                <img  className="ProfileImg" src={user.picture?user.picture:"https://us.123rf.com/450wm/thesomeday123/thesomeday1231712/thesomeday123171200009/91087331-icono-de-perfil-de-avatar-predeterminado-para-hombre-marcador-de-posici%C3%B3n-de-foto-gris-vector-de-ilu.jpg?ver=6"}  />
                 <h4>{user.name}</h4>
                 <h5>{user.email}</h5>
                 <br></br>
