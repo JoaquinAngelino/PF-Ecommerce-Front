@@ -1,0 +1,50 @@
+.forumContainer {
+   margin: 2rem;
+   justify-content: center;
+   flex-direction: column;
+   align-items: center;
+   display: flex;
+}
+
+.titulo {
+   margin: 1rem;
+}
+
+.nameUsers {
+   font-size: 18px;
+   margin: 0;
+   font-weight: bold;
+}
+
+.divUsers {
+   margin: 1rem;
+   border: none;
+}
+
+.btn {
+   margin: 1rem;
+   align-items: center;
+   justify-content: center;
+
+}
+
+.divInput {
+   border: solid 1px black;
+   border-radius: 4px;
+   width: 18rem;
+   height: 2.4rem;
+}
+
+.questions {
+   align-items: center;
+   justify-content: center;
+   position: flex;
+   font-size: 16px;
+}
+
+.answer {
+   align-items: center;
+   justify-content: center;
+   position: flex;
+   font-size: 14px;
+}

@@ -5,10 +5,12 @@ export const GET_ADMIN = "GET_ADMIN";
 export const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS'
 export const GET_ALL_BRANDS = "GET_ALL_BRANDS";
 export const GET_ALL_QUESTION = "GET_ALL_QUESTION";
+export const GET_ALL_RATING = "GET_ALL_RATING";
 export const ACTIVE_LOADING = "ACTIVE_LOADING";
 export const CELL_DETAIL = "CELL_DETAIL"
 export const POST_PRODUCT = "POST_PRODUCT";
 export const POST_QUESTION = "POST_QUESTION";
+export const CREATE_RATING = "CREATE_RATING";
 export const PUT_QUESTION = "PUT_QUESTION";
 export const PUT_CELL = "PUT_CELL";
 export const GET_ALL_USERS = "GET_ALL_USERS";
@@ -24,8 +26,7 @@ export const GET_ALL_ORDERS = "GET_ALL_ORDERS";
 export const PUT_ORDERS = "PUT_ORDERS";
 export const GET_ORDER_ID = "GET_ORDER_ID";
 export const UPDATE_QUANTITY = "UPDATE_QUANTITY";
-
-
+export const GET_REVIEW_BOOLEAN = "GET_REVIEW_BOOLEAN"
 
 
 
@@ -36,9 +37,11 @@ export const getAllProducts = () => {
       return dispatch({
          type: GET_ALL_PRODUCTS,
          payload: products.data
-      });
-   };
-};
+      })
+   }
+}
+
+
 export const getFilteredProducts = (payload) => {
    return async function (dispatch) {
       const products = await axios(`/celulares/home?${payload}`);
@@ -72,13 +75,16 @@ export function cellDetail(id) {
       }
    }
 }
+
+
 export function cleanStatus(payload) {
    return {
       type: "clean estado",
       payload
    }
 }
-//CELL_DETAIL
+
+
 //POST USER
 export function postUser(user) {
    return async function (dispatch) {
@@ -91,7 +97,7 @@ export function postUser(user) {
          })
    }
 }
-//POST USER
+
 //GET USER
 export function allUser() {
    return async function (dispatch) {
@@ -111,6 +117,18 @@ export function allUser() {
    }
 
 }
+
+//GET RATING 
+export const getAllRating = (id) => {
+   return async function (dispatch) {
+      const allRating = await axios.get(`/rating/k/${id}`)
+      return dispatch({
+         type: GET_ALL_RATING,
+         payload: allRating.data
+      })
+   }
+}
+
 //GET USER
 export const getAllBrands = () => {
    return async function (dispatch) {
@@ -153,8 +171,7 @@ export function userId(id) {
 
 export function createQuestion(question) {
    return async function (dispatch) {
-      return await axios
-         .post(`/questions/${question.id}`, question)
+      return await axios.post(`/questions/${question.id}`, question)
          .then((response) => {
             dispatch({
                type: POST_QUESTION,
@@ -286,6 +303,12 @@ export const deleteFromCart = (email, id) => {
    };
 };
 
+export function deleteItemFromCart(id) {
+   return {
+      type: DELETE_FOR_CART,
+      payload: id
+   }
+}
 
 export const getAllProductsAdmin = () => {
    return async function (dispatch) {
@@ -368,11 +391,27 @@ export function getOrdersUser(id) {
       }
    }
 }
-export function  changeQuantity(id, quantity) {
+export function changeQuantity(id, quantity) {
    return async function (dispatch) {
       return dispatch({
          type: UPDATE_QUANTITY,
-         payload: {id, quantity}
+         payload: { id, quantity }
       })
+   }
+}
+
+export function getRolesRating(email, cellId) {
+   console.log(email,cellId, 'soy lo que llega a la action')
+   return async function (dispatch) {
+      try {
+         var rating = await axios.get(`/rating/role/?em=${email}&cellId=${cellId}`)
+         console.log(rating,'soy lo que llega del back')
+         return dispatch({
+            type: GET_REVIEW_BOOLEAN,
+            payload: rating.data
+         })
+      } catch (error) {
+         console.log(error)
+      }
    }
 }

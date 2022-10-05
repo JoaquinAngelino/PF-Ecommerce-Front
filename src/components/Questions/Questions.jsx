@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { createQuestion, getRole, createAnswer } from '../../redux/actions';
 import Accordion from 'react-bootstrap/Accordion';
+import toast, { Toaster } from 'react-hot-toast';
 import 'bootstrap/dist/css/bootstrap.css';
-// import './Questions.css';
+import './Questions.css';
 
 import {
    Button,
@@ -15,7 +16,7 @@ import {
 } from "reactstrap";
 
 
-const Questions = ({cellId, q, get}) => {
+const Questions = ({ cellId, q, get }) => {
 
    const dispatch = useDispatch();
    const admin = useSelector((state) => state.admin)
@@ -54,7 +55,8 @@ const Questions = ({cellId, q, get}) => {
    const createQ = () => {
       if (question.question.length > 0) {
          dispatch(createQuestion(question));
-         window.alert("Question sent!");
+         toast.success(`Question sent!`);
+         // window.alert("Question sent!");
          setQuestion({
             question: "",
             emailUser: "",
@@ -105,13 +107,13 @@ const Questions = ({cellId, q, get}) => {
       <div>
          <div >
             {isAuthenticated ?
-               <div >
-                  <div className=''>
+               <div className='forumContainer'>
+                  <div className='titulo'>
                      <h1>Ask your question</h1>
-                     <h3>{user.name}:</h3>
                   </div>
-                  <div className=''>
-                     <input type="text" className='' onChange={(e) => handleChange(e)} name="question" value={question.question}></input>
+                  <div>
+                     <p className="nameUsers ">{user.name}:</p>
+                     <input className='divInput' type="text" onChange={(e) => handleChange(e)} name="question" value={question.question}></input>
                      <button type="button" className="btn btn-outline-primary" onClick={() => createQ()}>Create Question</button>
                   </div>
                </div>
@@ -124,16 +126,13 @@ const Questions = ({cellId, q, get}) => {
                         <Accordion>
                            <Accordion.Item eventKey="0" >
                               <Accordion.Header>
-                                 <h5>Question:</h5>
-                                 <p>{c.question}</p>
+                                 <p className="questions text-left">{c.question}</p>
                               </Accordion.Header>
-                              <Accordion.Body>
-                                 <h5>Answer:</h5>
+                              <Accordion.Body className="answer">
                                  <p>{c.answer}</p>
                                  {
                                     admin ?
                                        <div>
-                                          <h3>____________</h3>
                                           {c.answer ?
                                              <button type="button" className='btn btn-outline-primary' onClick={(e) => sendDataQuestions(e, c.id, c.question)}>Change Answer</button>
                                              : <button type="button" className='btn btn-outline-primary' onClick={(e) => sendDataQuestions(e, c.id, c.question)}>Answer</button>
@@ -162,10 +161,32 @@ const Questions = ({cellId, q, get}) => {
                </FormGroup>
             </ModalBody>
             <ModalFooter>
-               <Button color="primary" onClick={() => createA()}>Editar</Button>
-               <Button color="danger" onClick={() => closeModal()}>Cancelar</Button>
+               <Button color="primary" onClick={() => createA()}>Submit</Button>
+               <Button color="danger" onClick={() => closeModal()}>Cancel</Button>
             </ModalFooter>
          </Modal>
+         <Toaster
+            position="button-right"
+            reverseOrder={false}
+            gutter={8}
+            containerClassName=""
+            containerStyle={{}}
+            toastOptions={{
+               className: '',
+               duration: 5000,
+               style: {
+                  background: '#363636',
+                  color: '#fff',
+               },
+               success: {
+                  duration: 3000,
+                  theme: {
+                     primary: 'green',
+                     secondary: 'black',
+                  },
+               },
+            }}
+         />
       </div>
    )
 }
