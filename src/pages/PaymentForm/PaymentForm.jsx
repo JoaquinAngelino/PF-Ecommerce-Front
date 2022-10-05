@@ -98,6 +98,7 @@ export default function PaymentForm() {
                 image={product.image}
                 name={product.model}
                 price={product.price}
+                quantity={product.quantity}
               />
             )
           }) : <div>has no items selected!</div>}
