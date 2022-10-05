@@ -85,7 +85,8 @@ export default function PaymentForm() {
     <div className="conteiner-card">
       <div className="subcontainer01">
         <div className="shopping_button">
-          <input type="submit" value={'Continue Shopping'} onClick={(e) => handleRegresar(e)} />
+          <button className="btn btn-secondary" type="submit" value={'Continue Shopping'} onClick={(e) => handleRegresar(e)}>Continue Shopping</button>
+          {/* <input type="submit" value={'Continue Shopping'} onClick={(e) => handleRegresar(e)} /> */}
         </div>
         <hr></hr>
         <div>
@@ -121,7 +122,7 @@ export default function PaymentForm() {
             <CardCvcElement className="cardCvc" />
           </div>
           <div className="containerSubCard02">
-            <button onClick={(e) => handleSubmit(e)} disabled={loading ? true : false}>
+            <button className="btn btn-success" onClick={(e) => handleSubmit(e)} disabled={loading ? true : false}>
               {loading ? <p>Loading</p> : <p>   {`$ ${totalPrice.toFixed(0)}.00`}</p>}  <p> 'Checkout'   </p>
             </button>
           </div>

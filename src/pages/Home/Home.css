@@ -1,4 +1,3 @@
-
 .containerHome {
     display: flex;
     flex-direction: column;
@@ -6,24 +5,32 @@
     width: 100%;
     min-height: 72vh;
     margin-bottom: 1em;
+    text-decoration: none;
+}
+
+.positionFilter {
+    margin-top: 3rem;
+    flex-direction: column;
+    position: fixed;
 }
 
 .containerContent {
     display: flex;
     align-items: flex-start;
+    /* flex-direction: column; */
     justify-content: center;
     gap: 2em;
     margin-bottom: 1em;
-    color:grey;
+    color: grey;
     padding: 50px;
 }
 
-.containerCards{
+.containerCards {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     width: 52%;
-    gap: 2em; 
+    gap: 2em;
 }
 
 .cardRating {
@@ -33,22 +40,22 @@
     justify-content: center;
     height: 2.5em !important;
     width: 7.5em !important;
-   
+
 }
 
 .cardStar {
     margin: 0;
     font-size: 1.2rem;
     color: #888;
-   
-    
+
+
 }
 
 .cardStarActive {
     margin: 0;
     font-size: 1.2rem;
     color: #169E85;
-    
+
 }
 
 
@@ -78,13 +85,13 @@
 }
 
 .css-1c2i806-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
-    color: rgba(0, 0, 0, 0.6) !important; 
+    color: rgba(0, 0, 0, 0.6) !important;
 }
 
 .aditionalContent {
     display: flex;
     align-items: center;
-    
+
 }
 
 .numberOfResults {
@@ -124,5 +131,5 @@
 
 .activeFilter:hover {
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
-    
+
 }

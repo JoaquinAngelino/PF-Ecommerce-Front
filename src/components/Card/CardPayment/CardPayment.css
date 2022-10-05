@@ -1,33 +1,32 @@
-.wrapper{
+.wrapper {
   background-color: darkgray;
   width: 100%;
   height: 100%;
 }
 
-.cards{
-  background-color: #0c1f1c;
+.cards {
+  background-color:#f8f8ff;
   width: 200px;
-  height: 290px;
+  height: auto;
   float: left;
   padding: 1%;
-  border:1px solid #323449ed;
-  border-radius: 20px;
+  border: 1px solid #323449ed;
+  border-radius: 10px;
 }
-.card{
-  width: 100%;
-  height: auto;
-}
-.imgCard{
+
+.imgCard {
   background-color: white;
   width: 100%;
   height: 100%;
   text-align: center;
 }
-.imgCard img{
+
+.imgCard img {
   width: 150px;
   height: 200px;
 }
-.capCard01{
+
+.capCard01 {
   background-color: #323449ed;
   color: white;
   height: 35px;
@@ -37,7 +36,8 @@
   align-items: center;
   text-align: center;
 }
-.capCard02{
+
+.capCard02 {
   border: 1px solid white;
   background-color: #323449ed;
   color: white;

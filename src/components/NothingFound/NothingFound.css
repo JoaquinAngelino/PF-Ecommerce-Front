@@ -1,9 +1,10 @@
 .containerNothingFound {
-    display: flex;
+    /* margin: 100%; */
     justify-content: center;
-    margin-left: auto;
-    margin-right: auto;
-    width: 60% ;
+    align-items: center;
+    display: flex;
+    width: 100%;
+    height: 100vh;
 }
 
 .cardNothingFound {
@@ -15,8 +16,9 @@
 
 .imgNothinFound {
     margin-left: 2.5em;
-    width: 10em;
-    height: 10em;
+    margin: 4px;
+    width: 12em;
+    height: 12em;
     color: #169E85;
 }
 
@@ -32,10 +34,15 @@
 .titleNothingFound {
     font-weight: bold !important;
     font-style: italic;
+    align-items: center;
+    text-align: center;
+    margin: 1rem;
+
 }
 
 .tryThis {
     margin-bottom: 0 !important;
+    list-style: none;
 }
 
 .linkToHome {

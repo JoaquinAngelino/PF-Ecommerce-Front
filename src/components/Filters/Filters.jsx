@@ -95,9 +95,9 @@ export default function Filters() {
             <div className='filtersContainer'>
                 {
                     !brand ? <>
-                        <b>brand: </b>
+                        <b>Brand: </b>
                         <FormControl className='brandFilter'>
-                            <Select name="brand" variant="filled" fullWidth size='small' onChange={(e) => handlerSubmit(e)}>
+                            <Select className="selectStyle" name="brand" variant="filled" fullWidth size='small' onChange={(e) => handlerSubmit(e)}>
                                 {
                                     brandAll.map((brand, i) => { return (<MenuItem key={i} value={brand}>{brand}</MenuItem>) })
                                 }
@@ -109,7 +109,7 @@ export default function Filters() {
                     !memory ? <>
                         <b>RAM: </b>
                         <FormControl className='brandFilter'>
-                            <Select name="memoryRAM" variant="filled" fullWidth size='small' onChange={(e) => handlerSubmit(e)}>
+                            <Select className="selectStyle" name="memoryRAM" variant="filled" fullWidth size='small' onChange={(e) => handlerSubmit(e)}>
                                 {
                                     memoryAll.map((brand, i) => { return (<MenuItem key={i} value={brand}>{brand}</MenuItem>) })
                                 }
@@ -119,7 +119,7 @@ export default function Filters() {
                 }
                 {
                     !price ? <>
-                        <b>price: </b>
+                        <b>Price: </b>
                         <FormControl className='filterPrice'>
                             <Slider
                                 min={Math.floor(Math.min(...pricesAll))}
@@ -138,7 +138,7 @@ export default function Filters() {
                 }
                 {
                     !capacity ? <>
-                        <b>capacity: </b>
+                        <b>Capacity: </b>
                         <FormControl className='filterPrice'>
                             <Slider
                                 min={Math.floor(Math.min(...capacityAll))}
@@ -157,9 +157,9 @@ export default function Filters() {
                 }
                 {
                     !line ? <>
-                        <b>line: </b>
+                        <b>Line: </b>
                         <FormControl className='categoryFilter'>
-                            <Select name="line" variant="filled" fullWidth size='small' onChange={(e) => handlerSubmit(e)}>
+                            <Select className="selectStyle" name="line" variant="filled" fullWidth size='small' onChange={(e) => handlerSubmit(e)}>
                                 {
                                     lineAll.map((line, i) => { return (<MenuItem key={i} value={line}>{line}</MenuItem>) })
                                 }

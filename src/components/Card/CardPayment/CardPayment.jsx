@@ -5,7 +5,7 @@ export default function CardHover ({name, image, price, quantity}) {
     return (
         <div className="wrapper">
 	        <div className="cards">
-		        <figure className="card">
+		        <figure>
 					<div className='imgCard'>
 					<img src={`${image}`} alt='imagen' 	/>
 					</div>
