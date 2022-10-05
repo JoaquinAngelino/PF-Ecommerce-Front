@@ -29,10 +29,10 @@ export default function NavBar() {
   const emailAuth0 = email()
   const gmail = filterEmail()
   // console.log(usuarios)
-  console.log(emailAuth0)
-  console.log(gmail)
+  // console.log(emailAuth0)
+  // console.log(gmail)
   // const userdata = data()
-  console.log(usuarios)
+  // console.log(usuarios)
   // console.log(isAuthenticated)
 
   //  user
