@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllOrders, putOrder, getFiltersOrdersAdmin } from "../../redux/actions";
+import { getAllOrders, putOrder, getFiltersOrdersAdmin, allUser } from "../../redux/actions";
 import "./PanelAdminOrders.css";
 import 'bootstrap/dist/css/bootstrap.css';
 import {
@@ -16,9 +16,19 @@ import { error, success, remove } from "../Toast/Toast";
 import { Toaster } from "react-hot-toast";
 import iconSearch from '../SearchBar/search_FILL0.png'
 import { Link } from "react-router-dom";
+import { useAuth0 } from '@auth0/auth0-react';
+import NotFound from '../../pages/NotFound/NotFound'
 
 
 const PanelAdminOrders = () => {
+    //proteger ruta
+    const allUsers=useSelector(state=>state.allUser)
+    const { user, isAuthenticated } = useAuth0()
+    const usuarios = allUsers
+    const emailAuth0=email()
+    const userLogin=filterEmail()
+    //console.log(userLogin)
+  // proteger ruta
   const orders = useSelector(state => state.orders);
   const dispatch = useDispatch();
   const [modals, setModals] = useState({
@@ -81,6 +91,7 @@ const PanelAdminOrders = () => {
 
   useEffect(() => {
     dispatch(getAllOrders());
+    dispatch(allUser())
 
   },[dispatch])
 
@@ -179,10 +190,23 @@ const PanelAdminOrders = () => {
         dispatch(getFiltersOrdersAdmin(`${searchFor}=${searchBar}`))
       }
   }
-
+ //proteger ruta
+function email() {
+  if (isAuthenticated) {
+    return user.email
+  }
+}
+function filterEmail() {
+  if (isAuthenticated && usuarios.length) {
+    return usuarios.filter(e => e.email === emailAuth0)
+  }
+}
+// proteger ruta
     
     return (
-        <div>
+      isAuthenticated && userLogin && userLogin[0] && userLogin[0].role==="Administrador"
+      ?(
+<div>
             <div className='divSearchBar'>
               <select name="variable" onChange={(e) => handleSelect(e)} className="form-control me-2" >
                 <option>Search For...</option>
@@ -240,7 +264,7 @@ const PanelAdminOrders = () => {
 
                     <td><p className="dato">{dato.userMail}</p></td>
 
-                    <td><p className="dato">{dato.subTotal}</p></td>
+                    <td><p className="dato">{parseFloat(dato.subTotal).toFixed(2)}</p></td>
 
                     {dato.paid ? 
                     <td><p className="dato">True</p></td>
@@ -329,6 +353,9 @@ const PanelAdminOrders = () => {
             <Toaster position="bottom-right" reverseOrder={false}/>
     
         </div>
+      )
+      :<NotFound/>
+        
     )
 }
 export default PanelAdminOrders;

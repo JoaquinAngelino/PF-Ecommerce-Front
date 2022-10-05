@@ -16,13 +16,13 @@ export default function EditProduct(){
     const history=useNavigate();
     const cell=useSelector((state)=>state.details);
     //Specification to cell
-    var sp1=cell?.spec[0].split(":");
-    var sp2=cell?.spec[1].split(":");
-    var sp3=cell?.spec[2].split(":");
-    var sp4=cell?.spec[3].split(":");
-    var sp5=cell?.spec[4].split(":");
-    var sp6=cell?.spec[5].split(":");
-    var sp7=cell?.spec[6].split(":");
+    var sp1=cell?.spec[0]?.split(":");
+    var sp2=cell?.spec[1]?.split(":");
+    var sp3=cell?.spec[2]?.split(":");
+    var sp4=cell?.spec[3]?.split(":");
+    var sp5=cell?.spec[4]?.split(":");
+    var sp6=cell?.spec[5]?.split(":");
+    var sp7=cell?.spec[6]?.split(":");
 
     const [state,setState]=useState({
     });

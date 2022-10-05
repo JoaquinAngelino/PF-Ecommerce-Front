@@ -30,7 +30,7 @@ export default function Detail(props) {
     }
 
     useEffect(() => {
-        dispatch(cleanStatus());
+        window.scrollTo({ top: '0px', behavior: 'smooth' });
         dispatch(cellDetail(id))
     }, [dispatch, id])
 
