@@ -1,4 +1,42 @@
-@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+ /* @import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+@media( max-width: 400px) {
+  .sticky-top {
+    margin-bottom: .5em;
+  }
+  .NavBarIcon {
+    cursor: pointer;
+    margin: 0.5em;
+    width: 1.9em;
+    height: 1.9em;
+    color: yellow;
+  }
+  .navbar-brand {
+    color: #169E85;
+    font-family: 'Satisfy', cursive;
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: none;
+  }
+  
+  
+
+}
+
+@media( max-width: 800px){
+  .navbar {
+    text-transform: none;
+  }
+  .ProfileImg {
+    height: 50px;
+    border-radius: 50%;
+    margin: 0 20px;
+  }
+  
+  .Loading {
+    color: red;
+  }
+}
+
 
 .sticky-top {
   margin-bottom: .5em;
@@ -105,4 +143,4 @@ body.Dark .navbar {
 .dropDown {
   font-size: 1.1rem;
   font-weight: 900;
-}
+}  */

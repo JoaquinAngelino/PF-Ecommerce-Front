@@ -102,8 +102,6 @@ useEffect(()=>{
   return (
     <nav className='NavBar mb-2 p-2 sticky-top bg-dark'>
       <div className="containerNavBar container-fluid justify-content-around ">
-  
-
       <div className="navbar-nav hstack gap-3 NavBar-Item">
         <Link to='/home'>
           <img src={Image} alt="#" width={"110px"} height={"85px"} />
