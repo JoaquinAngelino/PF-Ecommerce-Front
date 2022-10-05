@@ -240,7 +240,7 @@ const PanelAdminOrders = () => {
 
                     <td><p className="dato">{dato.userMail}</p></td>
 
-                    <td><p className="dato">{dato.subTotal}</p></td>
+                    <td><p className="dato">{parseFloat(dato.subTotal).toFixed(2)}</p></td>
 
                     {dato.paid ? 
                     <td><p className="dato">True</p></td>

@@ -250,6 +250,14 @@ const PanelAdminUsers = () => {
     });
   };
 
+  const handleSelectRole = (e) => {
+    setState({
+        ...state,
+        role: e.target.value,
+    });
+  };
+
+
 
      //filtrado
      const [searchBar, setSearchBar] = useState('')
@@ -395,8 +403,11 @@ function filterEmail() {
 
                 <FormGroup>
                   <label>Role:</label>
-                  <input className="form-control" name="role" type="text" onChange={handleChange} value={state.role}/>
-                  <label>(Administrador) - (Vendedor) - (Cliente)</label>
+                  <select name="role" value={state.role} onChange={(e) => handleSelectRole(e)} className="form-control me-2" >
+                    <option value="Administrador">Administrador</option>
+                    <option value="Vendedor">Vendedor</option>
+                    <option value="Cliente">Cliente</option>
+                  </select>
                 </FormGroup>
                 
                 <img src={state.image} alt="img" className="datoImg"></img>  
