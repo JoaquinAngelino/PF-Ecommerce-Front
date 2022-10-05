@@ -16,7 +16,7 @@ import LogoutButton from '../Logout/LogoutButton';
 import { useNavigate } from "react-router-dom"
 //LOGIN
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap'
-
+//import NavBar from "./NavBar.css"
 
 export default function NavBar() {
   const navigate = useNavigate()

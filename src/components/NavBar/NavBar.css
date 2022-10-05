@@ -1,4 +1,4 @@
- /* @import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
 @media( max-width: 400px) {
   .sticky-top {
     margin-bottom: .5em;
@@ -143,4 +143,4 @@ body.Dark .navbar {
 .dropDown {
   font-size: 1.1rem;
   font-weight: 900;
-}  */
+}  
