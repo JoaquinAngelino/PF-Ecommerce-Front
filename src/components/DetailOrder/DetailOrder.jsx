@@ -77,7 +77,7 @@ const DetailOrder = () => {
                         <br/>
                         <div className="group-container-order">
                             <p className="variable-order">Total:</p>
-                            <p className="value-total-order">$ {order.subTotal}</p>
+                            <p className="value-total-order">$ {parseFloat(order.subTotal).toFixed(2)}</p>
                         </div>
                     </div>
                 :<p>order not found</p>}
