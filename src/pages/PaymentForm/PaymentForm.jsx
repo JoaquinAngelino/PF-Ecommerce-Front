@@ -55,7 +55,7 @@ export default function PaymentForm() {
     if (!error) {
       const { id } = paymentMethod
       try {
-        const data = await axios.post(`http://localhost:3001/checkout`, {
+        const data = await axios.post(`/checkout`, {
           id,
           amount: (Number(totalPrice)),
           userIdName: esteUsuario.id,
