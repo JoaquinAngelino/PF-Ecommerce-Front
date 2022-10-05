@@ -126,6 +126,9 @@ const Questions = ({ cellId, q, get }) => {
                         <Accordion>
                            <Accordion.Item eventKey="0" >
                               <Accordion.Header>
+                                 {admin ?
+                                 <div><p className='question-mail-user'>{c.emailUser}: &nbsp; &nbsp;</p></div>:""
+                                 }
                                  <p className="questions text-left">{c.question}</p>
                               </Accordion.Header>
                               <Accordion.Body className="answer">

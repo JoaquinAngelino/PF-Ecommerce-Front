@@ -48,3 +48,7 @@
    position: flex;
    font-size: 14px;
 }
+
+.question-mail-user{
+   font-weight: bold;
+}
