@@ -1,3 +1,5 @@
+
+
 .containerAboutUs {
   display: flex;
   flex-direction: column;
@@ -13,7 +15,7 @@
   margin-bottom: 1.5rem;
   background-color: black;
   color: transparent;
-  
+
 }
 
 .containerAboutUs span {
@@ -21,26 +23,26 @@
 }
 
 .imageAboutUs {
- 
+
   margin-top: 10px;
   object-fit: cover;
   width: 120px;
-  height: 120px; 
+  height: 120px;
   border-radius: 50%;
-  
- 
-  
- 
+
+
+
+
 }
 
 
 
-.GridList{
-  display:grid;
+.GridList {
+  display: grid;
   grid-template-rows: 33% 33% 33%;
   grid-template-columns: 33% 33% 33%;
-  gap:40px;
- 
+  gap: 40px;
+
 }
 
 .TeamDiv {
@@ -52,7 +54,7 @@
   margin: 0 auto;
   column-gap: 70px;
   border-radius: 0.3em;
- 
+
 }
 
 .TeamCard {
@@ -66,20 +68,20 @@
   min-height: 350px;
   border-radius: 5%;
   transition: all 0.6s;
-  
- 
-  
- 
-  
+
+
+
+
+
 }
 
-.TeamCard:hover{
+.TeamCard:hover {
   height: 350px;
   width: 250px;
   transform: scale(1.05);
   border: ridge;
   border-color: #198754;
- 
+
 }
 
 .CardIconG {
@@ -87,7 +89,7 @@
   width: 2.5em;
   height: 2.5em;
   transition: all 0.3s;
- color: black;
+  color: black;
 }
 
 .CardIconL {
@@ -113,24 +115,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
- 
 
- 
-  
+
+
+
 }
 
-.TitleAbout{
-  display:flex;
+.TitleAbout {
+  display: flex;
   justify-content: center;
-  align-items:center;
+  align-items: center;
 }
 
 
 
-.Text{
-  display:flex;
+.Text {
+  display: flex;
   justify-content: center;
-  align-items:center;
+  align-items: center;
 }
 
 .PageTitle {
@@ -157,26 +159,28 @@ body.Dark .CardIcon:hover {
 }
 
 @media (max-width: 600px) {
-   
-  
+
+
   .TeamDiv {
     /* grid-template-columns: repeat(1, 0vw); */
     display: flex;
     flex-direction: column;
     margin: 0%;
     width: 100vw;
-   
+
   }
-  .TeamCard{
+
+  .TeamCard {
     width: 60vw;
     margin: 10% 0%
   }
-    
-  
+
+
 }
+
 @media (max-width: 1000px) {
-   
-  
+
+
   .TeamDiv {
     /* grid-template-columns: repeat(1, 0vw); */
     display: flex;
@@ -185,13 +189,14 @@ body.Dark .CardIcon:hover {
     width: 100vw;
     flex-wrap: wrap;
 
-   
+
   }
-  .TeamCard{
+
+  .TeamCard {
     width: 35vw;
     margin: 5vw;
-    
+
   }
-    
-  
+
+
 }
