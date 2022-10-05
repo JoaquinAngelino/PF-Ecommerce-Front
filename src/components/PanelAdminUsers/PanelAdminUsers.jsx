@@ -405,7 +405,6 @@ function filterEmail() {
                   <label>Role:</label>
                   <select name="role" value={state.role} onChange={(e) => handleSelectRole(e)} className="form-control me-2" >
                     <option value="Administrador">Administrador</option>
-                    <option value="Vendedor">Vendedor</option>
                     <option value="Cliente">Cliente</option>
                   </select>
                 </FormGroup>
