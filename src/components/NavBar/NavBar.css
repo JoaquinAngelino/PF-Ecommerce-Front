@@ -3,6 +3,9 @@
 .sticky-top {
   margin-bottom: .5em;
 }
+.logoStyle{
+   margin: 6px;
+}
 
 .NavBarIcon {
   cursor: pointer;

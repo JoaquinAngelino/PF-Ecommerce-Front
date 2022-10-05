@@ -100,12 +100,14 @@ export default function NavBar() {
   }, [dispatch])
 
   return (
-    <nav className='NavBar mb-2 p-2 sticky-top bg-dark'>
-      <div className="containerNavBar container-fluid justify-content-around ">
+    <nav className='NavBar m-0 p-0 sticky-top bg-dark'>
+      <div className="containerNavBar container-fluid justify-content-around m-0 p-0">
         <div className="navbar-nav hstack gap-3 NavBar-Item">
-          <Link to='/home'>
-            <img src={Image} alt="#" width={"110px"} height={"85px"} />
-          </Link>
+          <div className="logoStyle">
+            <Link to='/home'>
+              <img src={Image} alt="#" width={"110px"} height={"85px"} />
+            </Link>
+          </div>
           <SearchBar />
           <Link to='/home' className="nav-link"><BsFillPhoneFill className='NavBarIcon' /></Link>
           <Link to='/favorites' className="nav-link"><BsStarFill className='NavBarIcon' /></Link>

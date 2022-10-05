@@ -10,7 +10,7 @@ import {
   CarouselIndicators,
   CarouselCaption
 } from 'reactstrap';
-
+import './LandingPage.css'
 
 const items = [
   {
@@ -80,7 +80,9 @@ const LandingPage = () => {
         onExited={() => setAnimating(false)}
         key={item.src}
       >
-        <img src={item.src} width="100%" height="760px" alt='landing_image' />
+        <div className='containerLanding'>
+          <img className="imgLanding" src={item.src} alt='landing_image' />
+        </div>
         <CarouselCaption />
       </CarouselItem>
     )
@@ -88,14 +90,9 @@ const LandingPage = () => {
   useEffect(() => {
     dispatch(getAllUsers())
   }, [])
-  // useEffect(()=>{
-  //   if(userDb!==undefined && userDb[0].disabled===true){
-  //     dispatch(logout())
-  //   } 
-  // },[])
+
   function salir() {
     if (userDb !== undefined && userDb[0] && userDb[0].disabled === true) {
-      //  alert ("tu cuenta fue suspendida")
       logout()
     }
   }
@@ -114,18 +111,16 @@ const LandingPage = () => {
   salir()
 
   return (
-    <div className='container'>
-      <Carousel
-        activeIndex={activeIndex}
-        next={next}
-        previous={previous}
-      >
-        <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={goToIndex} />
-        {slides}
-        <CarouselControl direction="prev" directionText="Previous" onClickHandler={previous} />
-        <CarouselControl direction="next" directionText="Next" onClickHandler={next} />
-      </Carousel>
-    </div>
+    <Carousel className='containerLanding'
+      activeIndex={activeIndex}
+      next={next}
+      previous={previous}
+    >
+      <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={goToIndex} />
+      {slides}
+      <CarouselControl direction="prev" directionText="Previous" onClickHandler={previous} />
+      <CarouselControl direction="next" directionText="Next" onClickHandler={next} />
+    </Carousel>
   )
 }
 

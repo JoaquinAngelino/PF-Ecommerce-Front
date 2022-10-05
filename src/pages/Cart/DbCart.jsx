@@ -65,7 +65,7 @@ export default function DbCart({ user }) {
             </div>
             <hr />
             <>
-                <Link to={"/cart/paymentForm"}><button className="pay-btn">Buy now !</button></Link>
+                <Link to={"/cart/paymentForm"}><button className="btn btn-success text-decoration-none">Buy now !</button></Link>
                 <Toaster position="bottom-right" reverseOrder={false} />
             </>
         </div>
