@@ -95,6 +95,7 @@ export default function Detail(props) {
                                                         value={e.rating}
                                                         size={30}
                                                         edit={false}
+                                                        half={false}
                                                         color2={'#ffd700'}
                                                     />
                                                     <p>{e.comment}</p>

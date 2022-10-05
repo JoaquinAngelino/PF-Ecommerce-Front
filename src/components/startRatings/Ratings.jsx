@@ -74,6 +74,7 @@ const Ratings = ({ cellId, r, get }) => {
                      value={rating.rating}
                      onChange={ratingChanged}
                      size={40}
+                     half={false}
                      edit={true}
                      color2={'#ffd700'} />
                </div>
