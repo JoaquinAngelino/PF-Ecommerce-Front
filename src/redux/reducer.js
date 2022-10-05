@@ -6,6 +6,7 @@ const {
   POST_PRODUCT,
   GET_ADMIN,
   GET_ALL_USERS,
+  GET_ALL_RATING,
   POST_USER,
   USER_ID,
   ALL_USER,
@@ -14,6 +15,7 @@ const {
   GET_ORDER_ID,
   GET_ORDERS_USER,
   UPDATE_QUANTITY,
+  GET_REVIEW_BOOLEAN
 } = require('./actions.js')
 
 const initialState = {
@@ -23,11 +25,14 @@ const initialState = {
   brands: [],
   admin: false,
   users: [],
-  user:[],
-  allUser:[],
+  user: [],
+  allUser: [],
   cart: [],
-  orders:[],
-  order:{}
+  orders: [],
+  order: {},
+  allUser: [],
+  allRating: [],
+  rating: false
 }
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -39,7 +44,11 @@ export default function rootReducer(state = initialState, { type, payload }) {
         products: payload,
         isLoading: false
       }
-
+    case GET_ALL_RATING:
+      return ({
+        ...state,
+        rating: payload
+      })
     case CELL_DETAIL:
       return ({
         ...state,
@@ -59,12 +68,11 @@ export default function rootReducer(state = initialState, { type, payload }) {
         ...state,
         details: []
       })
-      case POST_USER:
-        return{
-          ...state,
-          
-        }
+    case POST_USER:
+      return {
+        ...state,
 
+      }
     case ACTIVE_LOADING:
       return {
         ...state,
@@ -76,48 +84,68 @@ export default function rootReducer(state = initialState, { type, payload }) {
         ...state,
         brands: payload
       }
-      
+    case GET_ALL_USERS:
+      return {
+        ...state,
+        users: payload
+      }
+    case USER_ID:
+      return ({
+        ...state,
+        user: payload
+      })
+    case ALL_USER:
+      return {
+        ...state,
+        allUser: payload
+      }
 
-      case GET_ALL_USERS:
-        return {
-          ...state,
-          users: payload
-        }
-        case USER_ID:
-          return ({
-            ...state,
-            user:payload 
-          })
-          case ALL_USER:
-            return{
-              ...state,
-              allUser:payload
-            }
+    case GET_ALL_USERS:
+      return {
+        ...state,
+        users: payload
+      }
+    case USER_ID:
+      return ({
+        ...state,
+        user: payload
+      })
+    case ALL_USER:
+      return {
+        ...state,
+        allUser: payload
+      }
 
-            case GET_USER_CART:
-              return{
-                ...state,
-                cart: payload,
-                isLoading: false
-              }
-            case GET_ALL_ORDERS:
-              return {
-                ...state,
-                orders: payload
-              }
-              case GET_ORDER_ID:
-                return {
-                  ...state,
-                  orders: payload
-                }
-                case UPDATE_QUANTITY:
-                  let c = state.cart.map(e => e)
-                  let found = c.findIndex(e => e.id === payload.id)
-                  c[found].quantity = payload.quantity
-                  return{
-                    ...state,
-                    cart: c
-                  }
+    case GET_USER_CART:
+      return {
+        ...state,
+        cart: payload,
+        isLoading: false
+      }
+    case GET_ALL_ORDERS:
+      return {
+        ...state,
+        orders: payload
+      }
+    case GET_ORDER_ID:
+      return {
+        ...state,
+        orders: payload
+      }
+    case UPDATE_QUANTITY:
+      let c = state.cart.map(e => e)
+      let found = c.findIndex(e => e.id === payload.id)
+      c[found].quantity = payload.quantity
+      return {
+        ...state,
+        cart: c
+      }
+    case GET_REVIEW_BOOLEAN:
+      return {
+        ...state,
+        rating: payload
+      }
+
     default:
       return state
   }

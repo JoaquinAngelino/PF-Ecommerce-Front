@@ -1,7 +1,7 @@
 import './CardPayment.css'
 
 
-export default function CardHover ({name, image, price}) {
+export default function CardHover ({name, image, price, quantity}) {
     return (
         <div className="wrapper">
 	        <div className="cards">
@@ -13,7 +13,10 @@ export default function CardHover ({name, image, price}) {
 						<figcaption>{name}</figcaption>
 					</div>
 					<div className='capCard02'>
-						<figcaption>{price ? `$ ${price}` : null}</figcaption>
+						<figcaption>Price {price ? `$ ${price}` : null}</figcaption>
+					</div>
+					<div className='capCard02'>
+						<figcaption>Qty {quantity}</figcaption>
 					</div>
 		        </figure>
 	        </div>
