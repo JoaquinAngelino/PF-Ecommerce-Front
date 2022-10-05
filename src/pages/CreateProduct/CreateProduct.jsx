@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { createPost, getAllBrands } from '../../redux/actions';
+import { allUser, createPost, getAllBrands } from '../../redux/actions';
 // import './CreateProduct.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { error, success } from '../../components/Toast/Toast';
@@ -11,14 +11,24 @@ import * as yup from "yup";
 import CustomSelect from '../../components/CustomInput/CustomSelect';
 import CustomTextArea from '../../components/CustomInput/CustomTextArea';
 import swal from 'sweetalert';
-
+import { useAuth0 } from '@auth0/auth0-react'; 
+import NotFound from '../NotFound/NotFound';
 
 export default function CreateProduct() {
+  //proteger ruta
+  const allUsers=useSelector(state=>state.allUser)
+  const { user, isAuthenticated } = useAuth0()
+  const usuarios = allUsers
+  const emailAuth0=email()
+  const userLogin=filterEmail()
+  //console.log(userLogin)
+// proteger ruta
   const dispatch = useDispatch();
   const allBrandData = useSelector((state) => state.brands);
   const history = useNavigate();
   useEffect(() => {
     dispatch(getAllBrands());
+    dispatch(allUser())
   }, [dispatch])
 
   async function onSubmit(values, actions) {
@@ -147,10 +157,24 @@ export default function CreateProduct() {
     swal({ title: `Has been canceled` })
     history("/")
   }
+  //proteger ruta
+function email() {
+  if (isAuthenticated) {
+    return user.email
+  }
+}
+function filterEmail() {
+  if (isAuthenticated && usuarios.length) {
+    return usuarios.filter(e => e.email === emailAuth0)
+  }
+}
+// proteger ruta
 
 
   return (
-    <div className="container">
+    isAuthenticated && userLogin && userLogin[0] && userLogin[0].role==="Administrador"
+    ?(
+<div className="container">
       <h1 className="title text-center p-3">Create Product</h1>
       <div className="abs-center">
         <Formik initialValues={products} onSubmit={onSubmit} validationSchema={ValidateInput}>
@@ -298,5 +322,7 @@ export default function CreateProduct() {
         </Formik>
       </div>
     </div>
+    ):<NotFound/>
+    
   )
 }
