@@ -35,7 +35,7 @@ export default function Detail(props) {
         dispatch(cellDetail(id))
     }, [dispatch, id])
 
-    if (!myCell || !Object.key(myCell).length) { return <Loading/>}
+    if (!myCell || !Object.keys(myCell).length) { return <Loading/>}
     return (
         <div className="container">
             {
