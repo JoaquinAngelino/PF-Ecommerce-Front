@@ -15,14 +15,14 @@ export default function DbCart({ user }) {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        localStorage.setItem("carrrito",JSON.stringify(cart))
+        localStorage.setItem("carrrito", JSON.stringify(cart))
         setPrice()
     }, [cart])
 
     const setPrice = () => {
         let total = 0
         cart.forEach(e => { total += e.price * (e.quantity ? e.quantity : 1) })
-        localStorage.setItem("totalPrice",total)
+        localStorage.setItem("totalPrice", total)
         setTotalPrice(total.toFixed(2))
     }
 
@@ -48,26 +48,28 @@ export default function DbCart({ user }) {
     if (!cart.length) { return (<NothingFound />) }
 
     return (
-        <div className="shoppingCart">
-            <h2>Your Shopping Cart: {totalPrice}</h2>
-            <div className="principalSC">
-                {cart?.map((e) => <DbShopCard
-                    key={e.id}
-                    id={e.id}
-                    model={e.model}
-                    stock={e.stock}
-                    price={e.price}
-                    image={e.image}
-                    deleteItem={deleteItem}
-                    updateQuantity={updateQuantity}
-                    quantity={e.quantity || 1}
-                />)}
+        <div className="containerGeneralLogin">
+            <div className="shoppingCart">
+                <h2>Your Shopping Cart: {totalPrice}</h2>
+                <div className="principalSC">
+                    {cart?.map((e) => <DbShopCard
+                        key={e.id}
+                        id={e.id}
+                        model={e.model}
+                        stock={e.stock}
+                        price={e.price}
+                        image={e.image}
+                        deleteItem={deleteItem}
+                        updateQuantity={updateQuantity}
+                        quantity={e.quantity || 1}
+                    />)}
+                </div>
+                <hr />
+                <>
+                    <Link to={"/cart/paymentForm"}><button className="btn btn-success text-decoration-none">Buy now !</button></Link>
+                    <Toaster position="bottom-right" reverseOrder={false} />
+                </>
             </div>
-            <hr />
-            <>
-                <Link to={"/cart/paymentForm"}><button className="btn btn-success text-decoration-none">Buy now !</button></Link>
-                <Toaster position="bottom-right" reverseOrder={false} />
-            </>
         </div>
     );
 }
