@@ -20,7 +20,7 @@ export default function ContactUs() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post('http://localhost:3001/send-claim', input)
+    await axios.post('/send-claim', input)
     setInput({
       subject: "product",
       name: "",
