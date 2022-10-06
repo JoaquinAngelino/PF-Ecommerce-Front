@@ -2,10 +2,11 @@ import { BsGithub, BsLinkedin } from 'react-icons/bs';
 import './AboutUs.css'
 import frank from "./frank.jpeg"
 
+
 export default function AboutUs() {
 
   return (
-    <div className="Flexing">
+    <div className="containerAboutUs">
       <h1 className="TitleAbout">OUR STAFF</h1>
       <hr />
       <span className="Text">We are a team of web developers that wants to make your dreams come true.</span>

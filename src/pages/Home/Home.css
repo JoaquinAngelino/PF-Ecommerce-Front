@@ -28,8 +28,8 @@
 .containerCards {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    width: 52%;
+    justify-content: center;
+    width: 50%;
     gap: 2em;
 }
 
@@ -72,6 +72,7 @@
     opacity: 0;
 }
 
+
 .css-a3l6o-MuiInputBase-root-MuiInput-root-MuiSelect-root:hover:not(.Mui-disabled)::before {
     border-bottom: none !important;
 }
@@ -88,9 +89,111 @@
     color: rgba(0, 0, 0, 0.6) !important;
 }
 
+@media(max-width: 900px){
+
+    .positionFilter {
+        margin-top: 3rem;
+        flex-direction: column;
+        position: fixed;
+        padding-left: 5px;
+    }
+
+    .containerCards {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        width: 100%;
+        height: 100vh;
+        gap: 2em;
+    }
+    
+    .cardRating {
+        display: flex ;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100%;
+    
+    }
+    
+    .cardStar {
+        margin: 0;
+        font-size: 1.2rem;
+        color: #888;
+    
+    
+    }
+    
+    .cardStarActive {
+        margin: 0;
+        font-size: 1.2rem;
+        color: #169E85;
+    
+    }
+    
+
+
+
+
+}
+
+@media(max-width:300px){
+
+    .positionFilter {
+        margin-top: 3rem;
+        flex-direction: column;
+        position: relative;
+        padding-left: 5px;
+        width: 100%;
+        height: 100vh;
+    }
+
+    .containerCards {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 10px ;
+        width: 70%;
+        height:100vh;
+        gap: 2em;
+
+    }
+    
+    .cardRating {
+        display: flex ;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100%;
+    
+    }
+    
+    .cardStar {
+        margin: 0;
+        font-size: 1.2rem;
+        color: #888;
+    
+    
+    }
+    
+    .cardStarActive {
+        margin: 0;
+        font-size: 1.2rem;
+        color: #169E85;
+    
+    }
+    
+
+
+
+}
+
 .aditionalContent {
     display: flex;
     align-items: center;
+  
 
 }
 
