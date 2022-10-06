@@ -15,7 +15,7 @@ import { Toaster } from "react-hot-toast";
 
 export default function Home() {
 
- 
+
   const location = useLocation();
   const [searchParams] = useSearchParams();
   const isLoading = useSelector(state => state.isLoading);
@@ -91,28 +91,30 @@ export default function Home() {
             </div>
             : null}
           <Pagination currentPage={currentPage} postPerPage={6} totalPosts={products.length} paginate={paginate} />
-            <div className="containerContent">
-          <Filters />
-          <div className="containerCards" >
-          {(!products || !products.length) ? (<NothingFound />) :
-            pageProducts.map(e => <ProductCard
-              key={e.id}
-              id={e.id}
-              line={e.line}
-              model={e.model}
-              capacity={e.capacity}
-              price={e.price}
-              stock={e.stock}
-              image={e.image}
-              brand={e.brand}
-              memoryRAM={e.memoryRAM}
-              />)
-            }
+          <div className="positionFilter">
+            <Filters />
+          </div>
+          <div className="containerContent">
+            <div className="containerCards" >
+              {(!products || !products.length) ? (<NothingFound />) :
+                pageProducts.map(e => <ProductCard
+                  key={e.id}
+                  id={e.id}
+                  line={e.line}
+                  model={e.model}
+                  capacity={e.capacity}
+                  price={e.price}
+                  stock={e.stock}
+                  image={e.image}
+                  brand={e.brand}
+                  memoryRAM={e.memoryRAM}
+                />)
+              }
             </div>
+          </div>
+          <Pagination currentPage={currentPage} postPerPage={6} totalPosts={products.length} paginate={paginate} />
+          <Toaster position="bottom-right" reverseOrder={false} />
         </div>
-        <Pagination currentPage={currentPage} postPerPage={6} totalPosts={products.length} paginate={paginate} />
-        <Toaster position="bottom-right" reverseOrder={false}/>
-      </div>
       }
     </>
   )

@@ -28,7 +28,7 @@ import Profile from './components/Profile/Profile';
 //login
 import AdminPanel from './components/AdminPanel/AdminPanel'
 import DetailOrder from './components/DetailOrder/DetailOrder.jsx';
-
+// import EditUser from './components/EditUser/EditUser';
 
 const stripePromise=loadStripe("pk_test_51LaZvGBnw8Rgt2NjQI3zwuWRhuXnnGKWZNCgHwz0UPBxh6t0l0SlRlMVMwTWvQUGfgyh9e4D0b7MD8sGiArVOQMg00JrfIx5p5")
 
@@ -55,8 +55,9 @@ function App() {
         <Route path='/panelUsers' element={<PanelAdminUsers/>}/>
         <Route path='/panelOrders' element={<PanelAdminOrders/>}/>
         <Route path='/panelOrders/detailOrder/:id' element={<DetailOrder/>}/>
-        <Route path='/adminPanel' element={<AdminPanel/>}/>
+        <Route path='/adminPanel' element={<AdminPanel/>}/> 
         <Route path='/orders/:id_User' element={<DetailOrder/>}/>
+        {/* <Route path='/edit' element={<EditUser/>}/> */}
      
 
         <Route path='*' element={<NotFound />} />

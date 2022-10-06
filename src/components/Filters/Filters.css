@@ -1,10 +1,19 @@
 .filtersContainer {
     width: 280px;
     background-color: white;
+    margin-top: 30px;
     padding: 1.5em;
     display: flex;
     flex-direction: column;
     gap: 1em;
+    border-radius: 8px;
+    height: auto;
+}
+
+.selectStyle {
+    opacity: 0.5;
+    border: none;
+    border-radius: 8px;
 }
 
 .filtersContainer .MuiInputBase-root {
@@ -22,7 +31,7 @@
 
 .filtersContainer .MuiInputAdornment-root {
     position: relative;
-    top: -.5em ;
+    top: -.5em;
     left: -.3em;
 }
 
@@ -43,7 +52,8 @@
     transform: translateX(.3em);
 }
 
-.filtersContainer .css-12005ah-MuiInputBase-root-MuiFilledInput-root-MuiSelect-root::after, .css-1xab92c-MuiInputBase-root-MuiFilledInput-root::after {
+.filtersContainer .css-12005ah-MuiInputBase-root-MuiFilledInput-root-MuiSelect-root::after,
+.css-1xab92c-MuiInputBase-root-MuiFilledInput-root::after {
     border-bottom: 0 !important;
 }
 
@@ -58,8 +68,11 @@
     margin-left: .4em !important;
     align-items: center;
 }
-body.Dark .filtersContainer, body.Dark .filterPrice, body.Dark .MuiSlider-root{
-    background-color:#0f7461 !important;
+
+body.Dark .filtersContainer,
+body.Dark .filterPrice,
+body.Dark .MuiSlider-root {
+    background-color: #0f7461 !important;
     color: white !important;
     font-family: serif !important;
 }

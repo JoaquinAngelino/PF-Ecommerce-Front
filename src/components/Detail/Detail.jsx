@@ -10,6 +10,7 @@ import { fav, cart } from '../Toast/Toast'
 import { BsCartFill, BsStarFill } from 'react-icons/bs';
 import { Toaster } from 'react-hot-toast'
 import Ratings from "../startRatings/Ratings";
+import Loading from "../Loading/Loading";
 
 
 
@@ -30,10 +31,11 @@ export default function Detail(props) {
     }
 
     useEffect(() => {
-        dispatch(cleanStatus());
+        window.scrollTo({ top: '0px', behavior: 'smooth' });
         dispatch(cellDetail(id))
     }, [dispatch, id])
 
+    if (!myCell) { return <Loading/>}
     return (
         <div className="container">
             {

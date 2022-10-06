@@ -14,7 +14,7 @@ export default function ProductCard({id, brand, line, model, price, stock, capac
         <img className='cardImage' src={image} alt="" />
       </Link>
       <Card.Body className='containCardBody'>
-        <Link to={"/detail/" + id}>
+        <Link to={"/detail/" + id} className="linkStyle">
           <Card.Title className='containerName'>{model}</Card.Title>
         </Link>
         <ListGroup className='containerListDescription' variant="flush">
