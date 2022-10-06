@@ -32,7 +32,8 @@ const initialState = {
   order: {},
   allUser: [],
   allRating: [],
-  rating: false
+  rating: false,
+  details: {},
 }
 
 export default function rootReducer(state = initialState, { type, payload }) {
@@ -66,7 +67,7 @@ export default function rootReducer(state = initialState, { type, payload }) {
     case "clean estado":
       return ({
         ...state,
-        details: []
+        details: {}
       })
     case POST_USER:
       return {
