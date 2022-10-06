@@ -9,6 +9,7 @@ import "./EditProduct.css"
 import CustomTextArea from "../../components/CustomInput/CustomTextArea";
 import { useNavigate, useParams } from "react-router-dom";
 import swal from 'sweetalert';
+import Loading from "../../components/Loading/Loading";
 
 
 export default function EditProduct(){
@@ -169,7 +170,7 @@ const ValidateInput=yup.object().shape({
     .required("Required description"),
 })
 
-
+ if(!cell || !Object.keys(cell).length){ return <Loading/>}
 
     return (
         <div className="container-fluid">
