@@ -70,19 +70,6 @@ export default function AboutUs() {
             </a>
           </div>
         </div>
-        <div className='TeamCard'>
-          <img className='imageAboutUs' src="https://avatars.githubusercontent.com/u/72768487?v=4" alt="Juan David Pabon" />
-          <p>Juan David Pabon</p>
-          <div className='IconDiv'>
-            <a rel="noreferrer" target="_blank" href="https://github.com/juandavid84">
-              <BsGithub className='CardIconG' />
-            </a>
-            <a rel="noreferrer" target="_blank" href="https://www.linkedin.com/in/juan-david-pabon-porras-4123b389/">
-              <BsLinkedin className='CardIconL' />
-            </a>
-          </div>
-        </div>
-
       </div>
     </div>
 
