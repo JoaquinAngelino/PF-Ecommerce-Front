@@ -6,7 +6,7 @@ import App from './App';
 //LOGIN
 import { Auth0Provider } from '@auth0/auth0-react';
 //LOGIN
-
+import { authCredentials } from './auth';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import dotenv from 'dotenv';
@@ -15,17 +15,15 @@ import axios from 'axios';
 dotenv.config();
 axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001"
 
-
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
     <Auth0Provider
-    domain={process.env.DOMAIN}
-    clientId={process.env.CLIENT_ID}
+    domain={authCredentials.domain}
+    clientId={authCredentials.clientId}
     redirectUri={window.location.origin}
-    //{`${window.location.origin}/home`}
+    audience={authCredentials.audience}
     >
       <App />
       </Auth0Provider>
