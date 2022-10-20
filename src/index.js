@@ -15,11 +15,6 @@ import axios from 'axios';
 dotenv.config();
 axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001"
 
-//TODO LO DE LOGIN
-const DOMAIN="dev-69fdataa.us.auth0.com"
-const CLIENT_ID="sEIus98bsCYv3quIfDWYFoWEAftmkeGe"
-// TODO LO DE LOGIN
-
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -27,8 +22,8 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
     <Auth0Provider
-    domain={DOMAIN}
-    clientId={CLIENT_ID}
+    domain={process.env.DOMAIN}
+    clientId={process.env.CLIENT_ID}
     redirectUri={window.location.origin}
     //{`${window.location.origin}/home`}
     >
